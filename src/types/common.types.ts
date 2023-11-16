@@ -4,7 +4,7 @@ import type { IconBaseProps } from "react-icons";
 export const infoTypes = ["info", "success", "warning", "error", "pending"] as const;
 export type TInfoTypes = typeof infoTypes[number];
 
-export type TButtonVariant = "action" | "action-inactive" | "primary" | "secondary" | "tertiary" | "danger" | "disabled";
+export type TButtonVariant = "primary" | "secondary" | "danger";
 
 export interface INotification {
   uuid: string;

@@ -6,8 +6,6 @@ import {
   GlssryDispatchContext,
   GlssryStateContext,
 } from "~/context/context/context";
-import { AnimatePresence, motion } from "framer-motion";
-import { modalBGTransitions, modalTransitions } from "./modal-hub.transitions";
 import { Button } from "~/components/atoms/button/button";
 import { IconCancel } from "~/components/icons/cancel/cancel";
 import { IconConfirm } from "~/components/icons/confirm/confirm";
@@ -39,7 +37,7 @@ export const ModalHub: FC = () => {
     text: confirmText = "Yep",
     loading: confirmLoading = false,
     icon: confirmIcon = <IconConfirm size={type === "small" ? 20 : 23} />,
-    variant: confirmVariant = "action",
+    variant: confirmVariant = "primary",
   } = confirm ?? {};
 
   const handleCloseModal = () => {
@@ -70,6 +68,18 @@ export const ModalHub: FC = () => {
     };
   }, [type]);
 
+  const getHeaderBackgroundClasses = () => {
+    switch (background) {
+      case "dark": {
+        return "bg-background-light text-copy";
+      }
+
+      default: {
+        return "bg-background-inverse-dark";
+      }
+    }
+  };
+
   const getBackgroundClasses = () => {
     switch (background) {
       case "dark": {
@@ -77,7 +87,7 @@ export const ModalHub: FC = () => {
       }
 
       default: {
-        return "bg-white text-copy-inverse";
+        return "bg-background-inverse";
       }
     }
   };
@@ -85,11 +95,11 @@ export const ModalHub: FC = () => {
   const getFooterBackgroundClasses = () => {
     switch (background) {
       case "dark": {
-        return "bg-background";
+        return "bg-background-light";
       }
 
       default: {
-        return "bg-gray-50";
+        return "bg-background-inverse";
       }
     }
   };
@@ -110,9 +120,23 @@ export const ModalHub: FC = () => {
     }
   };
 
+  const getCloseButtonClasses = () => {
+    switch (background) {
+      case "dark": {
+        return "hover:bg-background text-copy";
+      }
+
+      default: {
+        return "hover:bg-background-inverse text-copy";
+      }
+    }
+  };
+
   const modalClasses = getModalClasses();
+  const headerBackgroundClasses = getHeaderBackgroundClasses();
   const backgroundClasses = getBackgroundClasses();
   const footerBackgroundClasses = getFooterBackgroundClasses();
+  const closeButtonClasses = `absolute right-2 top-[20px] flex h-6 w-6 p-1 -translate-y-1/2 flex-col items-center justify-center rounded-full transition-colors ${getCloseButtonClasses()}}`;
 
   const handleKeyDown = (event: KeyboardEvent) => {
     event.stopPropagation();
@@ -122,95 +146,91 @@ export const ModalHub: FC = () => {
   };
 
   return (
-    <AnimatePresence>
-      {type !== null && (
-        <FocusTrap>
-          <motion.section
-            data-cy="modal-bg"
-            className="fixed bottom-0 left-0 right-0 top-0 z-modal grid place-items-center bg-black bg-opacity-50 backdrop-blur-xl"
-            role="button"
+    type !== null && (
+      <FocusTrap>
+        <section
+          data-cy="modal-bg"
+          className="fixed bottom-0 left-0 right-0 top-0 z-modal grid place-items-center bg-black bg-opacity-50 backdrop-blur-xl"
+          role="button"
+          tabIndex={0}
+          onClick={handleCloseModal}
+          onKeyDown={handleKeyDown}
+        >
+          <div
+            className={`relative grid w-full cursor-auto place-items-center shadow-lg bg-clip-padding ${modalClasses}`}
             tabIndex={0}
-            onClick={handleCloseModal}
+            role="button"
+            onClick={(event) => event.stopPropagation()}
             onKeyDown={handleKeyDown}
-            {...modalBGTransitions}
           >
-            <div
-              className={`relative grid w-full cursor-auto place-items-center shadow-lg ${modalClasses}`}
-              tabIndex={0}
-              role="button"
-              onClick={(event) => event.stopPropagation()}
-              onKeyDown={handleKeyDown}
-            >
-              {showDialog && (
-                <motion.dialog
-                  open
-                  data-cy="modal"
-                  className="relative w-full overflow-hidden rounded-md bg-primary p-0 text-copy-inverse"
-                  {...modalTransitions}
+            {showDialog && (
+              <dialog
+                open
+                data-cy="modal"
+                className="relative w-full overflow-hidden rounded-md bg-primary p-0 bg-clip-padding"
+              >
+                <header
+                  data-cy="modal-header"
+                  className={`relative px-5 py-0 text-center font-semibold ${headerBackgroundClasses}`}
                 >
-                  <header
-                    data-cy="modal-header"
-                    className="relative px-5 py-0 text-center font-semibold"
-                  >
-                    {title && (
-                      <ContentWellHeader
-                        span={preTitle ?? undefined}
-                        text={title}
-                      />
-                    )}
-                    <button
-                      type="button"
-                      title="Close modal"
-                      className="absolute right-5 top-1/2 flex h-6 w-6 -translate-y-1/2 flex-col items-center justify-center rounded-full transition-colors hover:bg-action"
-                      onClick={handleCloseModal}
-                    >
-                      <IconCancel size={20} />
-                    </button>
-                  </header>
-                  <div
-                    className={`modal-content p-8 font-medium ${backgroundClasses}`}
-                  >
-                    {content}
-                  </div>
-                  {footer && (
-                    <footer
-                      data-cy="modal-footer"
-                      className={`flex justify-end gap-4 p-2 ${footerBackgroundClasses}`}
-                    >
-                      {cancel && (
-                        <Button
-                          variant={cancelVariant}
-                          loading={cancelLoading}
-                          size={type === "small" ? "small" : "medium"}
-                          onClick={onCancel}
-                        >
-                          {cancelIcon && (
-                            <span className="pr-0">{cancelIcon}</span>
-                          )}
-                          {cancelText}
-                        </Button>
-                      )}
-                      {confirm && (
-                        <Button
-                          variant={confirmVariant}
-                          size={type === "small" ? "small" : "medium"}
-                          loading={confirmLoading}
-                          onClick={onConfirm}
-                        >
-                          {confirmIcon && (
-                            <span className="pr-1">{confirmIcon}</span>
-                          )}
-                          {confirmText}
-                        </Button>
-                      )}
-                    </footer>
+                  {title && (
+                    <ContentWellHeader
+                      span={preTitle ?? undefined}
+                      text={title}
+                    />
                   )}
-                </motion.dialog>
-              )}
-            </div>
-          </motion.section>
-        </FocusTrap>
-      )}
-    </AnimatePresence>
+                  <button
+                    type="button"
+                    title="Close modal"
+                    className={closeButtonClasses}
+                    onClick={handleCloseModal}
+                  >
+                    <IconCancel size={20} />
+                  </button>
+                </header>
+                <div
+                  className={`modal-content p-8 font-medium ${backgroundClasses}`}
+                >
+                  {content}
+                </div>
+                {footer && (
+                  <footer
+                    data-cy="modal-footer"
+                    className={`flex justify-end gap-4 p-2 ${footerBackgroundClasses}`}
+                  >
+                    {cancel && (
+                      <Button
+                        variant={cancelVariant}
+                        loading={cancelLoading}
+                        size={type === "small" ? "small" : "medium"}
+                        onClick={onCancel}
+                      >
+                        {cancelIcon && (
+                          <span className="pr-0">{cancelIcon}</span>
+                        )}
+                        {cancelText}
+                      </Button>
+                    )}
+                    {confirm && (
+                      <Button
+                        variant={confirmVariant}
+                        size={type === "small" ? "small" : "medium"}
+                        loading={confirmLoading}
+                        onClick={onConfirm}
+                      >
+                        {confirmIcon && (
+                          <span className="pr-1">{confirmIcon}</span>
+                        )}
+                        {confirmText}
+                      </Button>
+                    )}
+                  </footer>
+                )}
+              </dialog>
+            )}
+          </div>
+        </section>
+      </FocusTrap>
+    )
   );
 };

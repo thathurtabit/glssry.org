@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import type { IconBaseProps } from "react-icons/lib";
-import { LuTimerReset } from "react-icons/lu";
+import { GrPowerReset } from "react-icons/gr";
 
 export const IconReset: FC<IconBaseProps> = (properties) => (
-  <LuTimerReset {...properties} />
+  <GrPowerReset {...properties} />
 );

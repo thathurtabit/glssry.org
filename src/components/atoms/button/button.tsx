@@ -9,67 +9,34 @@ import { IconPlay } from "~/components/icons/play/play";
 import { IconStop } from "~/components/icons/stop/stop";
 import { IconReset } from "~/components/icons/reset/reset";
 
-export const getButtonSizeClasses = (
-  size: TButtonSize,
-  isButtonRounded = false
-) => {
+export const getButtonSizeClasses = (size: TButtonSize) => {
   switch (size) {
     case "large": {
-      return `${
-        isButtonRounded
-          ? "p-[1rem] sm:p-[1.25rem] md:p-[1.75rem] lg:p-[2rem] text-xl"
-          : "p-2.5 px-5 text-md"
-      }  font-semibold gap-3`;
+      return `p-2.5 px-5 text-md font-semibold gap-3`;
     }
 
     case "small": {
-      return `${
-        isButtonRounded
-          ? "p-[0.75rem] sm:p-[1rem] md:p-[1.25rem] lg:p-[1.5rem]"
-          : "p-1.5 px-2.5 text-xs"
-      } font-semibold gap-1`;
+      return `p-1.5 px-2.5 text-xs font-semibold gap-1`;
     }
 
     default: {
-      return `${
-        isButtonRounded
-          ? "p-[0.75rem] sm:p-[1rem] md:p-[1.5rem] lg:p-[1.75rem]"
-          : "p-1.5 px-3.5 text-sm"
-      } font-semibold gap-1.5`;
+      return `p-1.5 px-3.5 text-sm font-semibold gap-1.5`;
     }
   }
 };
 
-export const getButtonVariantClasses = (
-  variant: TButtonVariant | "disabled"
-) => {
+export const getButtonVariantClasses = (variant: TButtonVariant) => {
   switch (variant) {
-    case "action": {
-      return "text-white bg-action border-2 border-action text-copy-inverse [&:not(:disabled)]:hover:border-action-dark [&:not(:disabled)]:hover:bg-action-dark";
-    }
-
-    case "action-inactive": {
-      return "bg-background border-2 border-action text-copy [&:not(:disabled)]:hover:bg-action-light [&:not(:disabled)]:hover:border-action-light [&:not(:disabled)]:hover:text-white";
-    }
-
     case "primary": {
-      return "bg-primary text-copy [&:not(:disabled)]:hover:bg-primary-dark";
+      return "border-2 bg-primary text-copy-inverse [&:not(:disabled)]:hover:bg-primary-dark disabled:opacity-50";
     }
 
     case "secondary": {
-      return "bg-secondary text-copy text-white [&:not(:disabled)]:hover:bg-secondary-dark";
-    }
-
-    case "tertiary": {
-      return "bg-tertiary text-copy [&:not(:disabled)]:hover:bg-tertiary-dark";
+      return "border-2 bg-secondary text-copy border-copy [&:not(:disabled)]:hover:bg-secondary-light disabled:opacity-50";
     }
 
     case "danger": {
       return "bg-error text-white [&:not(:disabled)]:hover:bg-error-dark";
-    }
-
-    case "disabled": {
-      return "bg-white/25 text-white/50 cursor-not-allowed";
     }
 
     default: {
@@ -97,9 +64,9 @@ export const getStopIconSize = (size: TButtonSize) =>
 
 export const Button: FC<IButton> = ({
   title,
-  variant = "action",
+  variant = "primary",
   size = "medium",
-  shape = "rounded",
+  shape = "lozenge",
   loading = false,
   type = "button",
   control,
@@ -117,13 +84,10 @@ export const Button: FC<IButton> = ({
     shape === "round" ? "aspect-square" : "aspect-auto";
   const dropShadowClasses =
     shape === "round"
-      ? "drop-shadow-timer [&:not(:disabled)]:active:drop-shadow-timer-active [&:not(:disabled)]:active:translate-x-2 [&:not(:disabled)]:active:translate-y-2"
+      ? "drop-shadow-timer [&:not(:disabled)]:active:drop-shadow-timer-active [&:not(:disabled)]:active:translate-x-1 [&:not(:disabled)]:active:translate-y-1"
       : "drop-shadow-button [&:not(:disabled)]:active:drop-shadow-button-active [&:not(:disabled)]:active:translate-x-1 [&:not(:disabled)]:active:translate-y-1";
-  const isButtonRounded = shape === "round";
-  const buttonSizeClasses = getButtonSizeClasses(size, isButtonRounded);
-  const variantClasses = getButtonVariantClasses(
-    disabled ? "disabled" : variant
-  );
+  const buttonSizeClasses = getButtonSizeClasses(size);
+  const variantClasses = getButtonVariantClasses(variant);
   const content = hasError ? iconOnly ? <IconError /> : errorText : children;
   const isPreviousButton = direction === "prev";
   const isNextButton = direction === "next";
@@ -142,9 +106,11 @@ export const Button: FC<IButton> = ({
       // eslint-disable-next-line react/button-has-type
       type={type}
       className={`transition-all ${dropShadowClasses} ${
-        hasError || controlsStop ? errorClasses : variantClasses
-      } ${buttonSizeClasses} ${className} ${buttonShapeClasses} ${coreButtonStyles} ${
-        loading ? "cursor-not-allowed" : ""
+        hasError ? errorClasses : variantClasses
+      } ${buttonSizeClasses} ${
+        className ? className : ""
+      } ${buttonShapeClasses} ${coreButtonStyles} ${
+        loading || disabled ? "cursor-not-allowed" : ""
       }`}
       {...(title && {
         title: hasError ? errorText ?? "Ugh, there's been a problem" : title,

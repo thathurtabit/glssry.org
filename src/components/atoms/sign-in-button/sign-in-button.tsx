@@ -40,7 +40,7 @@ export const SignInOrOutButton: FC<ISignInOrOutButton> = ({
 
   return (
     <Button size="small" onClick={handleSignInOrOut}>
-      {shouldShowSignOut ? "Sign out" : "Join in"}
+      {shouldShowSignOut ? "Sign out" : "Sign in"}
       {shouldShowSignOut ? <IconExit /> : <IconPlay />}
     </Button>
   );

@@ -1,8 +1,7 @@
 import type { FC } from "react";
 import type { IEphemeralInfoPanels } from "./ephemeral-notifications.types";
 import type { TInfoTypes } from "~/types/common.types";
-import { useContext, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { clearOldestNotification } from "~/context/actions/notifications/notifications.actions";
 import {
   GlssryDispatchContext,
@@ -121,7 +120,7 @@ export const EphemeralNotifications: FC<IEphemeralInfoPanels> = ({
   }
 
   return (
-    <AnimatePresence>
+    <Fragment>
       {notifications.map(({ uuid, type, title, message, Icon }) => {
         const isActive = alwaysActive ? true : notifications.at(-1);
         const iconWrapperClasses = `w-5 h-5 flex items-center text-sm justify-center rounded-full p-1 mr-2 ${getIconBGClasses(
@@ -131,12 +130,9 @@ export const EphemeralNotifications: FC<IEphemeralInfoPanels> = ({
 
         return (
           isActive && (
-            <motion.dialog
+            <dialog
               key={uuid}
               open
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
               className="fixed bottom-10 z-notification flex items-center justify-center rounded-full bg-white px-2 py-1.5 text-left leading-tight text-black shadow-md transition-all duration-500 ease-in-out"
             >
               {Icon ? (
@@ -159,10 +155,10 @@ export const EphemeralNotifications: FC<IEphemeralInfoPanels> = ({
                 </h3>
                 <p className="m-0 text-[0.675rem]">{message}</p>
               </div>
-            </motion.dialog>
+            </dialog>
           )
         );
       })}
-    </AnimatePresence>
+    </Fragment>
   );
 };
