@@ -1,13 +1,8 @@
 import type { FormEvent } from "react";
 import { ESignInMessage } from "~/types/sign-in.types";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
-import { useState, useRef } from "react";
-import {
-  type ClientSafeProvider,
-  type LiteralUnion,
-  getProviders,
-  signIn,
-} from "next-auth/react";
+import { ReCaptcha, ReCaptchaProvider } from "next-recaptcha-v3";
+import { useEffect, useState } from "react";
+import { getProviders, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { ErrorMessage } from "~/components/atoms/error-message/error-message";
 import { appURL, EURLS } from "~/settings/constants";
@@ -21,44 +16,48 @@ import { PageIntro } from "~/components/atoms/page-intro/page-intro";
 import { AccountPageWrapper } from "~/components/organisms/account-page-wrapper/account-page-wrapper";
 import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
 import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-signed-in";
-import { useVerifyHCaptchaMutation } from "~/hooks/auth/h-captcha-verify.hook";
-import { LoadingSpinner } from "~/components/atoms/loading-spinner/loading-spinner";
 import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
-import { env } from "~/env.mjs";
 import { IconGoogle } from "~/components/icons/google/google";
 import { IconGithub } from "~/components/icons/github/github";
 import { IconEmail } from "~/components/icons/email/email";
 import { IconDiscord } from "~/components/icons/discord/discord";
-import { type BuiltInProviderType } from "next-auth/providers";
-import {
-  type InferGetServerSidePropsType,
-  type GetServerSideProps,
-} from "next";
-
-type Providers = Record<
-  LiteralUnion<BuiltInProviderType>,
-  ClientSafeProvider
-> | null;
-
-const hCaptchaSiteKey = env.NEXT_PUBLIC_HCAPTCHA_SITEKEY;
+import { type InferGetServerSidePropsType } from "next";
+import { useVerifyRecaptchaMutation } from "~/hooks/auth/recaptcha-verify.hook";
+import { env } from "~/env.mjs";
 
 export const SignIn = ({
   providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [isHCaptchaLoading, setIsHCaptchaLoading] = useState(true);
   const [isHuman, setIsHuman] = useState(false);
-  const captchaReference = useRef<HCaptcha>(null);
+  const [token, setToken] = useState<string>("");
+  const { mutateVerifyRecaptchaAsync, mutateVerifyRecaptchaLoading } =
+    useVerifyRecaptchaMutation();
+  const [recaptchaError, setRecaptchaError] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { query } = useRouter();
   const isAuthenticated = useIsAuthenticated();
+  const action = "LOGIN";
 
-  const {
-    mutateVerifyHCaptchaAsync,
-    mutateVerifyHCaptchaError,
-    mutateVerifyHCaptchaLoading,
-  } = useVerifyHCaptchaMutation();
+  useEffect(() => {
+    if (token) {
+      (async () => {
+        const { success, reasons } = await mutateVerifyRecaptchaAsync({
+          token,
+        });
+
+        if (success) {
+          setIsHuman(true);
+          return;
+        }
+
+        setRecaptchaError(reasons ?? "Unknown error");
+      })().catch(() => {
+        setRecaptchaError("Unknown error");
+      });
+    }
+  }, [token, action, mutateVerifyRecaptchaAsync]);
 
   if (!providers) {
     return (
@@ -86,6 +85,8 @@ export const SignIn = ({
   const errorMessage = errorFiltered
     ? getSignInErrorMessage(errorFiltered satisfies ESignInMessage)
     : null;
+
+  const recaptchaIsLoading = mutateVerifyRecaptchaLoading && !recaptchaError;
 
   const showError = typeof errorMessage === "string" && errorExists;
 
@@ -158,77 +159,38 @@ export const SignIn = ({
     });
   };
 
-  const handleHCaptchaVerification = async (token: string) => {
-    const { statusCode, message } = await mutateVerifyHCaptchaAsync({ token });
-    const isVerified = statusCode === 200;
-    setIsHuman(isVerified);
-    setIsHCaptchaLoading(false);
-    if (!isVerified) {
-      // eslint-disable-next-line no-console
-      console.error(message); // TODO: Add error logging
-    }
-  };
-
-  const onHCaptchaLoad = () => {
-    if (errorMessage) {
-      return;
-    }
-
-    setIsHCaptchaLoading(false);
-  };
-
-  const HCaptchaInfo = () => {
-    if (mutateVerifyHCaptchaError === null) {
-      return null;
-    }
-
-    if (mutateVerifyHCaptchaLoading) {
-      return null;
-    }
-
-    return (
-      <InfoPanel title="Not human?">
-        Seems there was a problem trying to verify you as not being a bot...
-      </InfoPanel>
-    );
-  };
-
   if (!isHuman) {
     return (
-      <AccountPageWrapper>
-        <PageStructure title="Join In" width="narrow">
-          <PageIntro
-            textList={[
-              "Please verify that you're human",
-              "Bots on ships can cause mischief, much like Ash did on the Nostromo",
-            ]}
-          />
-          {isHCaptchaLoading && errorMessage === null && (
-            <InfoPanel title="Hold tight..." type="pending">
-              Currently loading the <strong>are you human</strong> check...
-            </InfoPanel>
-          )}
-          {hCaptchaSiteKey ? (
-            <form>
-              {mutateVerifyHCaptchaLoading && (
-                <LoadingSpinner className="mb-4" />
-              )}
-              <HCaptchaInfo />
-              <HCaptcha
-                ref={captchaReference}
-                id="hcaptcha-input"
-                sitekey={hCaptchaSiteKey}
-                onLoad={onHCaptchaLoad}
-                onVerify={(token) => handleHCaptchaVerification(token)}
-              />
-            </form>
-          ) : (
-            <InfoPanel title="Uh oh" type="error">
-              No hCaptcha sitekey provided
-            </InfoPanel>
-          )}
-        </PageStructure>
-      </AccountPageWrapper>
+      <ReCaptchaProvider
+        useEnterprise
+        reCaptchaKey={env.NEXT_PUBLIC_RECAPTCHA_SITEKEY}
+      >
+        <AccountPageWrapper>
+          <PageStructure title="Bot check" width="narrow">
+            <PageIntro
+              textList={[
+                "Verifying that you're human...",
+                "Bots on ships can cause mischief, much like Ash did on the Nostromo",
+              ]}
+            />
+
+            {recaptchaError ? (
+              <InfoPanel title="reCaptcha failed" type="error">
+                Failed with: &ldquo;{recaptchaError}&rdquo;
+              </InfoPanel>
+            ) : null}
+            {recaptchaIsLoading ? (
+              <div>
+                <InfoPanel title="Hold tight..." type="pending">
+                  Currently loading the <strong>are you human</strong> check...
+                </InfoPanel>
+              </div>
+            ) : (
+              <ReCaptcha action={action} onValidate={setToken} />
+            )}
+          </PageStructure>
+        </AccountPageWrapper>
+      </ReCaptchaProvider>
     );
   }
 
@@ -279,7 +241,7 @@ export const SignIn = ({
                 <li key={name} className="m-2">
                   <Button
                     size="large"
-                    variant="tertiary"
+                    variant="secondary"
                     className="min-w-fit"
                     onClick={() => handleSignIn(id)}
                   >
@@ -297,9 +259,7 @@ export const SignIn = ({
 
 export default SignIn;
 
-export const getServerSideProps = (async () => {
-  const providers: Providers = await getProviders();
+export const getServerSideProps = async () => {
+  const providers = await getProviders();
   return { props: { providers } };
-}) satisfies GetServerSideProps<{
-  providers: Providers;
-}>;
+};

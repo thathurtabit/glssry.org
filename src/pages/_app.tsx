@@ -6,6 +6,7 @@ import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 import { GlssryAppProvider } from "~/context/context/context";
+import { AppWrapper } from "~/components/templates/app-wrapper/app-wrapper";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -13,7 +14,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => (
   <SessionProvider session={session}>
     <GlssryAppProvider>
-      <Component {...pageProps} />
+      <AppWrapper>
+        <Component {...pageProps} />
+      </AppWrapper>
     </GlssryAppProvider>
   </SessionProvider>
 );
