@@ -12,14 +12,15 @@ export const deleteUser = protectedProcedure.mutation(async ({ ctx }) => {
     });
   } catch (error) {
     if (error instanceof TRPCError) {
+      const { message } = error;
       const httpCode = getHTTPStatusCodeFromError(error);
       throw new TRPCError({
         code: error.code,
-        message: errorMessage.deleteUser(httpCode),
+        message: errorMessage.deleteUser(httpCode, message),
         cause: error,
       });
     }
 
-    throw new Error(errorMessage.deleteUser(500));
+    throw new Error(errorMessage.deleteUser(500, error as string));
   }
 });

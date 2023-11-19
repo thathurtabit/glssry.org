@@ -8,6 +8,6 @@ export const sharedReadUserData = async (userId: string, prisma: PrismaClient): 
     });
     return user;
   } catch {
-    throw new Error(errorMessage.readUserData(404));
+    throw new Error(errorMessage.readUserData(404, "user not found"));
   }
 };

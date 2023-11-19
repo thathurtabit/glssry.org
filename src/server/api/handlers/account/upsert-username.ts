@@ -19,7 +19,7 @@ export const upsertUsername = protectedProcedure
       const isUsernameTaken = await sharedReadIsUsernameTaken(sanitizedUsername, ctx.db);
 
       if (isUsernameTaken) {
-        throw new TRPCError({ code: "FORBIDDEN", message: errorMessage.usernameIsTaken(403) });
+        throw new TRPCError({ code: "FORBIDDEN", message: errorMessage.usernameIsTaken(403, "username is taken") });
       }
 
       return ctx.db.user.update({
@@ -29,13 +29,14 @@ export const upsertUsername = protectedProcedure
     } catch (error) {
       if (error instanceof TRPCError) {
         const httpCode = getHTTPStatusCodeFromError(error);
+        const { message } = error;
         throw new TRPCError({
           code: error.code,
-          message: errorMessage.upsertUsername(httpCode),
+          message: errorMessage.upsertUsername(httpCode, message),
           cause: error,
         });
       }
 
-      throw new Error(errorMessage.upsertUsername(500));
+      throw new Error(errorMessage.upsertUsername(500, error as string));
     }
   });

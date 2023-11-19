@@ -12,18 +12,52 @@ datasource db {
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
+    // https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode#how-to-set-the-relation-mode-in-your-prisma-schema
+    relationMode = "prisma" 
+}
+
+enum UserRole {
+    ADMIN
+    EDITOR
+    CONTRIBUTOR
 }
 
 model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id           String        @id @default(cuid())
+    createdAt    DateTime      @default(now())
+    title        String
+    body         String
+    abbreviation String        @db.VarChar(30)
+    acronym      String        @db.VarChar(20)
+    initialism   String        @db.VarChar(10)
+    published    Boolean       @default(false)
+    author       User          @relation(fields: [authorId], references: [id])
+    authorId     String
+    categories   Category[]
+    versions     PostVersion[]
+}
 
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
+model PostVersion {
+    id           String     @id @default(cuid())
+    postId       String
+    post         Post       @relation(fields: [postId], references: [id])
+    createdAt    DateTime   @default(now())
+    title        String
+    body         String
+    abbreviation String     @db.VarChar(30)
+    acronym      String     @db.VarChar(20)
+    initialism   String     @db.VarChar(10)
+    published    Boolean    @default(false)
+    author       User       @relation(fields: [authorId], references: [id])
+    authorId     String
+    categories   Category[]
+}
 
-    @@index([name])
+model Category {
+    id           Int           @id @default(autoincrement())
+    name         String
+    posts        Post[]
+    postVersions PostVersion[]
 }
 
 // Necessary for Next auth
@@ -33,12 +67,12 @@ model Account {
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String? // @db.Text
-    access_token      String? // @db.Text
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String? // @db.Text
+    id_token          String? @db.Text
     session_state     String?
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -54,16 +88,18 @@ model Session {
 }
 
 model User {
-    id                      String    @id @default(cuid())
+    id                      String        @id @default(cuid())
     name                    String?
-    username                String?   @unique
-    hasPersonalizedUsername Boolean   @default(false)
-    email                   String?   @unique
+    username                String?       @unique
+    hasPersonalizedUsername Boolean       @default(false)
+    email                   String?       @unique
     emailVerified           DateTime?
     image                   String?
     accounts                Account[]
     sessions                Session[]
     posts                   Post[]
+    role                    UserRole      @default(CONTRIBUTOR)
+    PostVersion             PostVersion[]
 }
 
 model VerificationToken {

@@ -13,7 +13,7 @@ import { IconGoForward } from "~/components/icons/go-forward/go-forward";
 export const Link: FC<ILink> = ({
   href,
   title,
-  variant = "action",
+  variant = "primary",
   size = "medium",
   direction,
   className,
@@ -38,11 +38,11 @@ export const Link: FC<ILink> = ({
     >
       {isPreviousButton ? (
         <IconGoBack size={nextPreviousIconSize} />
-      ) : (isNextButton ? (
+      ) : isNextButton ? (
         <IconGoForward size={nextPreviousIconSize} />
       ) : (
         content
-      ))}
+      )}
     </NextLink>
   );
 };

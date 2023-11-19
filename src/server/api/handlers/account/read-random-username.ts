@@ -21,13 +21,14 @@ export const readRandomUsername = protectedProcedure.query(async ({ ctx }) => {
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);
+      const { message } = error;
       throw new TRPCError({
         code: error.code,
-        message: errorMessage.readRandomUsername(httpCode),
+        message: errorMessage.readRandomUsername(httpCode, message),
         cause: error,
       });
     }
 
-    throw new Error(errorMessage.readRandomUsername(500));
+    throw new Error(errorMessage.readRandomUsername(500, error as string));
   }
 });

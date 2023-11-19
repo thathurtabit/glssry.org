@@ -15,13 +15,14 @@ export const readDoesUsernameExist = protectedProcedure.input(
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);
+      const { message } = error;
       throw new TRPCError({
         code: error.code,
-        message: errorMessage.readDoesUsernameExist(httpCode),
+        message: errorMessage.readDoesUsernameExist(httpCode, message),
         cause: error,
       });
     }
 
-    throw new Error(`readDoesUsernameExist`);
+    throw new Error(errorMessage.readDoesUsernameExist(500, error as string));
   }
 });

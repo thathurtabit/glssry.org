@@ -11,13 +11,14 @@ export const readUser = protectedProcedure.query(async ({ ctx }) => {
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);
+      const { message } = error;
       throw new TRPCError({
         code: error.code,
-        message: errorMessage.readUserData(httpCode),
+        message: errorMessage.readUserData(httpCode, message),
         cause: error,
       });
     }
 
-    throw new Error(errorMessage.readUserData(404));
+    throw new Error(errorMessage.readUserData(500, error as string));
   }
 });

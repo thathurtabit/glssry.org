@@ -2,8 +2,8 @@ import { publicProcedure } from "~/server/api/trpc";
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 import { z } from "zod";
-import { errorMessages } from "../shared/user/error-messages";
 import { env } from "~/env.mjs";
+import { errorMessage } from "../../utils/error-message";
 
 type TRecaptchaResponse = {
   "success": boolean
@@ -62,11 +62,12 @@ export const verifyRecaptcha = publicProcedure
         message: data["error-codes"]?.join(", "),
       });
     } catch (error) {
+      const message = error as string;
       if (error instanceof TRPCError) {
         const httpCode = getHTTPStatusCodeFromError(error);
         throw new TRPCError({
           code: error.code,
-          message: errorMessages.verifyCaptcha(httpCode, error as unknown as string),
+          message: errorMessage.verifyCaptcha(httpCode, message),
           cause: error,
         });
       }
@@ -74,7 +75,7 @@ export const verifyRecaptcha = publicProcedure
       return {
         statusCode: 500,
         success: false,
-        message: error,
+        message,
       };
     }
   });

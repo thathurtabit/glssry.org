@@ -1,11 +1,11 @@
 import { UserRole } from "@prisma/client";
 import { useSession } from "next-auth/react";
 
-export const useIsAdmin = (): boolean => {
+export const useIsEditor = (): boolean => {
   const { data: sessionData, status } = useSession();
-  const isAuthenticatedAsAdmin =
+  const isAuthenticatedAsEditor =
     status === "authenticated" &&
     sessionData !== null &&
-    sessionData.user?.role === UserRole.ADMIN;
-  return isAuthenticatedAsAdmin;
+    sessionData.user?.role === UserRole.EDITOR;
+  return isAuthenticatedAsEditor;
 };
