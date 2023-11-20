@@ -4,10 +4,10 @@ import { PageStructure } from "~/components/molecules/page-structure/page-struct
 import { Button } from "~/components/atoms/button/button";
 import { signIn } from "next-auth/react";
 import { EURLS } from "~/settings/constants";
-import { AccountPageWrapper } from "~/components/organisms/account-page-wrapper/account-page-wrapper";
 import { useIsAuthenticated } from "../../hooks/auth/is-authenticated.hook";
 import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-signed-in";
 import { IconPlay } from "~/components/icons/play/play";
+import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
 
 const SignedOut: NextPage = () => {
   const isAuthenticated = useIsAuthenticated();

@@ -1,4 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react";
+import { Button } from "~/components/atoms/button/button";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 import { EURLS, appDescription, appTitle } from "~/settings/constants";
 
@@ -8,7 +9,7 @@ export default function Home() {
       <SharedHead />
       <main className=" flex min-h-screen flex-col items-center justify-center">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
+          <h1 className="text-5xl font-heading tracking-tight text-white sm:text-[5rem]">
             {appTitle}
           </h1>
           <p className="text-copy">{appDescription}</p>
@@ -48,13 +49,9 @@ function AuthShowcase() {
       <p className="text-center text-2xl text-white">
         {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
       </p>
-      <button
-        type="button"
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={handleSignInOrOut}
-      >
+      <Button type="button" onClick={handleSignInOrOut}>
         {sessionData ? "Sign out" : "Sign in"}
-      </button>
+      </Button>
     </div>
   );
 }

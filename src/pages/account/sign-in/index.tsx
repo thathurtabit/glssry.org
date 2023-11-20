@@ -13,7 +13,6 @@ import { FormInput } from "~/components/atoms/form-input/form-input";
 import { emailSchema } from "~/schemas/account/email.schema";
 import { HorizontalRule } from "~/components/atoms/hr/hr";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
-import { AccountPageWrapper } from "~/components/organisms/account-page-wrapper/account-page-wrapper";
 import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
 import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-signed-in";
 import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
@@ -24,6 +23,7 @@ import { IconDiscord } from "~/components/icons/discord/discord";
 import { type InferGetServerSidePropsType } from "next";
 import { useVerifyRecaptchaMutation } from "~/hooks/auth/recaptcha-verify.hook";
 import { env } from "~/env.mjs";
+import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
 
 export const SignIn = ({
   providers,

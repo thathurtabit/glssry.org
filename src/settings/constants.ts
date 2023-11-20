@@ -1,5 +1,5 @@
-export const appTitle = "Glssry";
-export const appDescription = "Glssry.org is an open-source glossary, dictionary, and encyclopedia of acronyms, initialisms, terms and definitions.";
+export const appTitle = "glssry";
+export const appDescription = "glssry.org is an open-source glossary, dictionary, and encyclopedia of acronyms, initialisms, terms and definitions.";
 export const appURL = "https://glssry.org";
 
 export enum EURLS {

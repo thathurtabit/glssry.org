@@ -1,14 +1,22 @@
 import { Fragment } from "react";
-import {
-  Nunito_Sans as nunitoSansFont,
-  Roboto_Serif as robotoSerifFont,
-} from "next/font/google";
 import type { FCC } from "~/types/react.types";
+import {
+  Abril_Fatface as abrilFont,
+  Comfortaa as comfortaaFont,
+  Nunito_Sans as nunitoSansFont,
+} from "next/font/google";
+import { HeaderStrip } from "~/components/organisms/header-strip/header-strip";
 
-const heading = robotoSerifFont({
+const heading = abrilFont({
   subsets: ["latin"],
-  weight: ["300"],
+  weight: ["400"],
   variable: "--font-heading",
+});
+
+const subHeading = comfortaaFont({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-sub-heading",
 });
 
 const body = nunitoSansFont({
@@ -25,13 +33,15 @@ export const AppWrapper: FCC = ({ children }) => (
       {`
         :root {
           --font-heading: ${heading.style.fontFamily};
+          --font-subheading: ${subHeading.style.fontFamily};
           --font-body: ${body.style.fontFamily};
         }
       `}
     </style>
     <div
-      className={`flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background font-body ${body.variable} ${heading.variable}`}
+      className={`flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background ${heading.variable} ${subHeading.variable} ${body.variable} `}
     >
+      <HeaderStrip />
       {children}
     </div>
   </Fragment>
