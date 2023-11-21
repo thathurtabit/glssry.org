@@ -22,3 +22,15 @@ export const Default: Story = {
     href: "/",
   },
 };
+
+export const Inverse: Story = {
+  ...meta,
+  args: {
+    children: "Link text",
+    href: "/",
+    inverse: true,
+  },
+  parameters: {
+    inverse: true,
+  },
+};

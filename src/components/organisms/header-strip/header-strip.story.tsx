@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { HeaderStrip } from "./header-strip";
 
 const meta: Meta<typeof HeaderStrip> = {
-  title: "Molecules/Header Strip",
+  title: "Organisms/Header Strip",
   component: HeaderStrip,
   parameters: {
     backgrounds: {

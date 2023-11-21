@@ -2,7 +2,6 @@ import React from "react";
 import type { Preview } from "@storybook/react";
 import { ComponentType } from "react";
 import { GlssryAppProvider } from "../src/context/context/context";
-import { themes } from "@storybook/theming";
 import "../src/styles/globals.css";
 import {
   Abril_Fatface as abrilFont,
@@ -37,35 +36,30 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-    darkMode: {
-      // Override the default dark theme
-      dark: { ...themes.dark, appBg: "black" },
-    },
   },
   decorators: [
-    (Story: ComponentType<object>, context) =>
-      context.args.isToken ? (
-        <Story />
-      ) : (
-        <GlssryAppProvider>
-          {/* https://nextjs.org/blog/styling-next-with-styled-jsx#adding-global-styles */}
-          {/* eslint-disable-next-line react/no-unknown-property */}
-          <style>
-            {`
+    (Story: ComponentType<object>, context) => (
+      <GlssryAppProvider>
+        {/* https://nextjs.org/blog/styling-next-with-styled-jsx#adding-global-styles */}
+        {/* eslint-disable-next-line react/no-unknown-property */}
+        <style>
+          {`
                 :root {
                   --font-heading: ${heading.style.fontFamily};
                   --font-subheading: ${subHeading.style.fontFamily};
                   --font-body: ${body.style.fontFamily};
                 }
               `}
-          </style>
-          <div
-            className={`flex h-screen flex-col text-white items-center justify-center overflow-x-hidden bg-background`}
-          >
-            <Story />
-          </div>
-        </GlssryAppProvider>
-      ),
+        </style>
+        <div
+          className={`flex h-screen flex-col text-white items-center justify-center overflow-x-hidden ${
+            context.parameters.inverse ? "bg-white" : "bg-background"
+          }`}
+        >
+          <Story />
+        </div>
+      </GlssryAppProvider>
+    ),
   ],
 };
 

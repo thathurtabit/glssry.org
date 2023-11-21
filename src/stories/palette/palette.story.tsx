@@ -9,9 +9,7 @@ const meta: Meta<typeof Palette> = {
     backgrounds: {
       default: "dark",
     },
-  },
-  args: {
-    isToken: true,
+    inverse: true,
   },
 };
 

@@ -9,7 +9,6 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
-    "storybook-dark-mode",
     '@tomfreudenberg/next-auth-mock/storybook'
   ],
   async webpackFinal(config) {
