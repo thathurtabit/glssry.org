@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         heading: ["var(--font-heading)", ...fontFamily.sans],
+        "sub-heading": ["var(--font-sub-heading)", ...fontFamily.sans],
         body: ["var(--font-body)", ...fontFamily.sans],
       },
       colors: {

@@ -46,7 +46,7 @@ const preview: Preview = {
           {`
                 :root {
                   --font-heading: ${heading.style.fontFamily};
-                  --font-subheading: ${subHeading.style.fontFamily};
+                  --font-sub-heading: ${subHeading.style.fontFamily};
                   --font-body: ${body.style.fontFamily};
                 }
               `}

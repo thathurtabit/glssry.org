@@ -33,13 +33,13 @@ export const AppWrapper: FCC = ({ children }) => (
       {`
         :root {
           --font-heading: ${heading.style.fontFamily};
-          --font-subheading: ${subHeading.style.fontFamily};
+          --font-sub-heading: ${subHeading.style.fontFamily};
           --font-body: ${body.style.fontFamily};
         }
       `}
     </style>
     <div
-      className={`flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background ${heading.variable} ${subHeading.variable} ${body.variable} `}
+      className={`flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background ${heading.variable} ${subHeading.variable} ${body.variable}`}
     >
       <HeaderStrip />
       {children}

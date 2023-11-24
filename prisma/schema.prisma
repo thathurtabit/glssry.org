@@ -26,15 +26,11 @@ model Post {
     id           String        @id @default(cuid())
     createdAt    DateTime      @default(now())
     title        String
-    body         String
-    abbreviation String        @db.VarChar(30)
-    acronym      String        @db.VarChar(20)
-    initialism   String        @db.VarChar(10)
-    published    Boolean       @default(false)
     author       User          @relation(fields: [authorId], references: [id])
     authorId     String
-    categories   Category[]
     versions     PostVersion[]
+
+    @@index([authorId])
 }
 
 model PostVersion {
@@ -48,15 +44,18 @@ model PostVersion {
     acronym      String     @db.VarChar(20)
     initialism   String     @db.VarChar(10)
     published    Boolean    @default(false)
+    link         String     @db.VarChar(300)
     author       User       @relation(fields: [authorId], references: [id])
     authorId     String
     categories   Category[]
+
+    @@index([authorId])
+    @@index([postId])
 }
 
 model Category {
     id           Int           @id @default(autoincrement())
     name         String
-    posts        Post[]
     postVersions PostVersion[]
 }
 

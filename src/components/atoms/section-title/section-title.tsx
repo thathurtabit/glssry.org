@@ -7,7 +7,7 @@ export const SectionTitle: FCC<ISectionTitle> = ({
   className,
 }) => (
   <h3
-    className={`${noMargin ? "" : "mb-4"} font-semibold uppercase ${
+    className={`${noMargin ? "" : "mb-4"} text-3xl lowercase ${
       className ?? ""
     }`}
   >

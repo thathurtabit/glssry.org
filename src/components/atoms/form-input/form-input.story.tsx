@@ -21,8 +21,47 @@ export const Default: Story = {
   args: {
     id: "default",
     label: "Default",
+    placeholder: "Placeholder",
     hasError: false,
     errorText: "Error text",
+  },
+};
+
+export const DefaultWithError: Story = {
+  ...meta,
+  args: {
+    id: "default",
+    label: "Default",
+    hasError: true,
+    errorText: "Error text",
+  },
+};
+
+export const Inverse: Story = {
+  ...meta,
+  args: {
+    id: "inverse",
+    label: "Inverse",
+    hasError: false,
+    inverse: true,
+    errorText: "Error text",
+  },
+  parameters: {
+    inverse: true,
+  },
+};
+
+export const InverseWithError: Story = {
+  ...meta,
+  args: {
+    id: "inverse-with-error",
+    label: "Inverse with error",
+    hasError: true,
+    inverse: true,
+    errorText: "Error text",
+  },
+  parameters: {
+    inverse: true,
   },
 };
 
@@ -36,6 +75,23 @@ export const WithButton: Story = {
     submitButtonData: {
       type: "submit",
     },
+  },
+};
+
+export const InverseWithButton: Story = {
+  ...meta,
+  args: {
+    id: "inverse-with-button",
+    label: "With button",
+    hasError: false,
+    inverse: true,
+    errorText: "Error text",
+    submitButtonData: {
+      type: "submit",
+    },
+  },
+  parameters: {
+    inverse: true,
   },
 };
 

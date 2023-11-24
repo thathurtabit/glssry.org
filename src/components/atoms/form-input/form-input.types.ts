@@ -13,7 +13,7 @@ export interface IFormInput extends InputHTMLAttributes<HTMLInputElement> {
   prefix?: string;
   inputSize?: TInputSize;
   errorText?: string | string[];
-  isTypeaheadOpen?: boolean;
+  isTypeAheadOpen?: boolean;
   submitButtonData?: IButton;
   Icon?: ComponentType<IconBaseProps>;
 }
