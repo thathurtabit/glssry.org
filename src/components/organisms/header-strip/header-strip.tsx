@@ -8,8 +8,8 @@ export const HeaderStrip: FC = () => (
     <LinkText href={EURLS.Home} className="font-heading text-lg">
       {appTitle}
     </LinkText>
-    <div>
-      <IconMenu />
+    <div className="">
+      <IconMenu size={20} />
     </div>
   </section>
 );

@@ -10,12 +10,12 @@ export const PageHeader: FC<IPageHeader> = ({
 }) => (
   <Fragment>
     {preText && (
-      <p className="text-xs uppercase tracking-widest font-semibold text-copy m-0">
+      <p className="text-xs uppercase tracking-widest text-copy m-0">
         {preText}
       </p>
     )}
     <h1
-      className={`font-body drop-shadow-headers leading-7 flex gap-2 text-4xl md:text-5xl font-extrabold uppercase ${
+      className={`font-heading drop-shadow-headers leading-7 flex gap-2 text-4xl md:text-5xl ${
         removeMargin ? "m-0" : "mb-3"
       } ${preText ? "mt-1" : "mt-4"}`}
     >

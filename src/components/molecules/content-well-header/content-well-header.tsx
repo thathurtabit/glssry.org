@@ -5,7 +5,7 @@ export const preTitleStyles = "font-medium opacity-70";
 export const titleStyles = "font-semibold uppercase tracking-wide";
 
 export const ContentWellHeader: FC<IContentWellHeader> = ({ text, span }) => (
-  <h2 className="px-5 py-3 text-center text-sm">
+  <h2 className="px-5 py-3 font-sub-heading text-center text-sm">
     {span && <span className={preTitleStyles}>{span} </span>}
     <span className={titleStyles}>{text}</span>
   </h2>

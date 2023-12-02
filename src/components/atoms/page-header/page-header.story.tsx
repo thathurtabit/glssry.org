@@ -15,4 +15,10 @@ export default meta;
 
 type Story = StoryObj<typeof PageHeader>;
 
-export const Default: Story = { ...meta };
+export const Default: Story = {
+  ...meta,
+  args: {
+    preText: "Pre text",
+    text: "Page Header",
+  },
+};

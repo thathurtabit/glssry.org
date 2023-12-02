@@ -8,7 +8,7 @@ export const PageIntro: FC<IPageIntro> = ({ textList, hrProps, showHR = true }) 
       <p
         key={text?.toString()}
         className={`mb-2 ${
-          index === 0 ? "text-md font-sub-heading" : "text-sm"
+          index === 0 ? "text-md font-sub-heading" : "text-sm font-body"
         }`}
       >
         {text}

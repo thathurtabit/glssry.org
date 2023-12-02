@@ -15,4 +15,4 @@ export default meta;
 
 type Story = StoryObj<typeof SectionTitle>;
 
-export const Default: Story = { ...meta, args: { children: "Section Title" } };
+export const Default: Story = { ...meta, args: { children: "Section title" } };

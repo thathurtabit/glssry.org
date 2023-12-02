@@ -18,7 +18,7 @@ export const AlreadySignedIn: FC<IAlreadySignedIn> = ({
     return (
       <PageStructure title="You're signed in">
         <p className="mb-4">{message}</p>
-        <Link href="/">Start stoppin&apos;</Link>
+        <Link href="/">Home</Link>
       </PageStructure>
     );
   }

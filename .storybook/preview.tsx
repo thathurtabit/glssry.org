@@ -30,6 +30,7 @@ const body = nunitoSansFont({
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
+    layout: "fullscreen",
     controls: {
       matchers: {
         color: /(background|color)$/i,
