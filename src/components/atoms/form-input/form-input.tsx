@@ -2,13 +2,19 @@ import type { FC } from "react";
 import type { IFormInput } from "./form-input.types";
 import { Fragment } from "react";
 import { Button } from "../button/button";
+import {
+  errorMessageClasses,
+  getInputCoreClasses,
+  getSizeClasses,
+  inputDescriptionClasses,
+  inputLabelClasses,
+  inputSizeWrapperDefaultClasses,
+  inputSizeWrapperSmallClasses,
+  inputWrapperClasses,
+} from "~/styles/shared";
 
 export const minInputWidth = "w-48";
 export const maxInputWidth = "w-72";
-export const inputSizeWrapperDefaultClasses = "text-base";
-export const inputSizeWrapperSmallClasses = "text-sm";
-export const inputSizeDefaultClasses = "rounded-xs p-3";
-export const inputSizeSmallClasses = "rounded-xs p-1";
 
 export const FormInput: FC<IFormInput> = ({
   id,
@@ -25,30 +31,6 @@ export const FormInput: FC<IFormInput> = ({
   inputSize = "default",
   ...inputProperties
 }) => {
-  const errorMessageClasses =
-    "mt-1 mb-0 inline py-1 text-xs font-medium text-error";
-
-  const getSizeClasses = (size: string) => {
-    switch (size) {
-      case "small":
-        return inputSizeSmallClasses;
-      default:
-        return inputSizeDefaultClasses;
-    }
-  };
-
-  const getInputCoreClasses = (inverse = false, hasError: boolean) => {
-    if (inverse) {
-      return hasError
-        ? "bg-background-inverse text-error border-l-4 border-l-error"
-        : "bg-background-inverse text-copy-inverse-light border-l-2 border-background-light";
-    }
-
-    return hasError
-      ? "bg-background-light text-error border-l-4 border-l-error"
-      : "bg-background-light text-copy-dark border-l-2 border-background-inverse-dark";
-  };
-
   const inputSizeClasses = getSizeClasses(inputSize);
   const inputCoreClasses = getInputCoreClasses(inverse, hasError);
   return (
@@ -57,18 +39,18 @@ export const FormInput: FC<IFormInput> = ({
         inputSize === "small"
           ? inputSizeWrapperSmallClasses
           : inputSizeWrapperDefaultClasses
-      } mb-4 flex w-full flex-col`}
+      } ${inputWrapperClasses}`}
     >
       <label
         htmlFor={id}
-        className={`${description ? "" : "mb-1"} font-medium ${
+        className={`${description ? "" : "mb-1"} ${
           inverse ? "text-copy-inverse" : ""
-        }`}
+        } ${inputLabelClasses}`}
       >
         {label}
       </label>
       {description && (
-        <p className="line mb-3 max-w-sm">
+        <p className={inputDescriptionClasses}>
           <small>{description}</small>
         </p>
       )}

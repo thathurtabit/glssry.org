@@ -13,3 +13,6 @@ export enum EURLS {
   SetUsername = "/account/set-username",
   SetName = "/account/set-name",
 }
+
+// Form validation
+export const summaryMaxCharacterCount = 500;

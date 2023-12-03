@@ -53,7 +53,7 @@ const preview: Preview = {
               `}
         </style>
         <div
-          className={`flex h-screen flex-col text-white items-center justify-center overflow-x-hidden ${
+          className={`flex flex-col text-white items-center justify-center overflow-x-hidden ${
             context.parameters.inverse ? "bg-white" : "bg-background"
           }`}
         >

@@ -1,4 +1,6 @@
 export const errorMessage = {
+  // Post
+  readPost: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to read this post. Message: ${message}.`,
   // User
   deleteUser: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to delete this user. Message: ${message}.`,
   readUserData: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to read user data. Message: ${message}.`,

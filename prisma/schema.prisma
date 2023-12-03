@@ -22,6 +22,38 @@ enum UserRole {
     CONTRIBUTOR
 }
 
+enum TagName {
+    Art
+    Astronomy
+    Biology
+    Chemistry
+    Computing
+    Cryptography
+    Economics
+    Entertainment
+    Games
+    Geography
+    Hardware
+    History
+    Law
+    Linguistics
+    Literature
+    Mathematics
+    Medicine
+    Music
+    Mythology
+    Networking
+    Philosophy
+    Physics
+    Politics
+    Programming
+    Psychology
+    Religion
+    Security
+    Software
+    Sports
+}
+
 model Post {
     id           String        @id @default(cuid())
     createdAt    DateTime      @default(now())
@@ -39,7 +71,7 @@ model PostVersion {
     post         Post       @relation(fields: [postId], references: [id])
     createdAt    DateTime   @default(now())
     title        String
-    body         String
+    body         String     @db.VarChar(500) // NOTE: check constants.ts, i.e. summaryMaxCharacterCount
     abbreviation String     @db.VarChar(30)
     acronym      String     @db.VarChar(20)
     initialism   String     @db.VarChar(10)
@@ -48,9 +80,16 @@ model PostVersion {
     author       User       @relation(fields: [authorId], references: [id])
     authorId     String
     categories   Category[]
+    tags         Tags[]
 
     @@index([authorId])
     @@index([postId])
+}
+
+model Tags {
+    id           Int           @id @default(autoincrement())
+    name         TagName
+    postVersions PostVersion[]
 }
 
 model Category {
@@ -76,6 +115,7 @@ model Account {
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
+    @@index([userId])
 }
 
 model Session {
@@ -84,6 +124,8 @@ model Session {
     userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
 }
 
 model User {
