@@ -20,7 +20,17 @@ export const readPost = publicProcedure.input(
             image: true,
           },
         },
-        versions: true,
+        versions: {
+          include: {
+            author: {
+              select: {
+                id: true,
+                username: true,
+                image: true,
+              },
+            },
+          },
+        },
       },
     });
     return post;

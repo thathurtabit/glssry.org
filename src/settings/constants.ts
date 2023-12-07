@@ -16,3 +16,5 @@ export enum EURLS {
 
 // Form validation
 export const summaryMaxCharacterCount = 500;
+export const maxPostLinkLength = 2048;
+export const maxTagsForPost = 5;

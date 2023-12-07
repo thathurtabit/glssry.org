@@ -56,11 +56,16 @@ export const useFormValidation = <
       return true;
     }
 
-    const errors = Object.fromEntries(zodValidationResult?.error);
+    const errors = Object.fromEntries(
+      zodValidationResult.error.issues.map(({ path, message }) => [
+        path.at(0) ?? "",
+        message,
+      ])
+    );
 
-    const newErrorData: TFormState = setErrorState({
+    setErrorState({
       hasError: true,
-      errorData: newErrorData,
+      errorData: errors as { [P in keyof TFormState]?: string },
     });
 
     // This should allow live validation for the user after the initial explicit 'click' for validation
