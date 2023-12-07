@@ -63,12 +63,13 @@ export const FormInput: FC<IFormInput> = ({
         <input
           id={id}
           {...inputProperties}
-          className={`shadow-inner ${inputSizeClasses}  ${
+          className={`shadow-inner ${inputSizeClasses} ${
             prefix ? "rounded-l-none" : ""
-          } ${inputCoreClasses}
-          } ${isTypeAheadOpen ? "rounded-bl-none rounded-br-none" : ""} ${
-            submitButtonData ? "rounded-br-none rounded-tr-none" : ""
-          } ${width === "small" ? minInputWidth : maxInputWidth}`}
+          } ${inputCoreClasses} ${
+            isTypeAheadOpen ? "rounded-bl-none rounded-br-none" : ""
+          } ${submitButtonData ? "rounded-br-none rounded-tr-none" : ""} ${
+            width === "small" ? minInputWidth : maxInputWidth
+          }`}
         />
         {submitButtonData && (
           <Button

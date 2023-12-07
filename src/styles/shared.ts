@@ -9,7 +9,7 @@ export const inputLabelClasses = "font-medium";
 export const inputDescriptionClasses = "inline mb-3 max-w-sm";
 export const inputSizeWrapperDefaultClasses = "text-base";
 export const inputSizeWrapperSmallClasses = "text-sm";
-export const inputSizeDefaultClasses = "rounded-xs p-3";
+export const inputSizeDefaultClasses = "rounded-xs p-2";
 export const inputSizeSmallClasses = "rounded-xs p-1";
 
 export const errorMessageClasses =
