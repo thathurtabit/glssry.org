@@ -1,7 +1,7 @@
-import Image from "next/image";
 import type { FC } from "react";
-import React from "react";
 import type { TTRPCReadPost } from "~/types/prisma.types";
+import Image from "next/image";
+import React from "react";
 
 export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   author: originalAuthor,

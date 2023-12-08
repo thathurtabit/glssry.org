@@ -1,6 +1,7 @@
 import type { ChangeEvent } from "react";
-import { useReducer, type FC } from "react";
+import type { TPostKeys } from "~/schemas/post/post.schema";
 import type { IPostEntryForm } from "./post-entry-form.types";
+import { useReducer, type FC } from "react";
 import { SectionTitle } from "~/components/atoms/section-title/section-title";
 import { FormInput } from "~/components/atoms/form-input/form-input";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
@@ -9,10 +10,11 @@ import { Button } from "~/components/atoms/button/button";
 import { FormTextarea } from "~/components/atoms/form-textarea/form-textarea";
 import { postReducer } from "./reducer/form.reducer";
 import { initState } from "./reducer/init-state";
-import type { TPostKeys } from "~/schemas/post/post.schema";
+import { Post } from "~/components/molecules/post/post";
 
-export const PostEntryForm: FC<IPostEntryForm> = ({ mode }) => {
-  const [state, dispatch] = useReducer(postReducer, initState);
+export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
+  const reducerState = postData ?? initState;
+  const [state, dispatch] = useReducer(postReducer, reducerState);
   const sectionTitle = mode === "create" ? "Create Post" : "Edit Post";
 
   const handleOnChange = (
@@ -88,12 +90,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode }) => {
       </div>
       <div>
         <SectionTitle>Preview</SectionTitle>
-        <div className="bg-white rounded-lg p-5">
-          <h1 className="text-2xl font-semibold">Cascading Style Sheets</h1>
-          <p className="text-sm text-gray-500">CSS</p>
-          <p className="text-sm text-gray-500">CSS</p>
-          <p className="text-sm text-gray-500">CSS</p>
-        </div>
+        <Post />
       </div>
     </section>
   );

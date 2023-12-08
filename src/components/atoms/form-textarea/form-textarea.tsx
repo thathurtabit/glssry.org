@@ -29,12 +29,16 @@ export const FormTextarea: FC<IFormTextarea> = ({
   maxCharacterCount = summaryMaxCharacterCount,
   ...inputProperties
 }) => {
-  const { value: valueFromProps, onChange } = inputProperties;
+  const {
+    value: valueFromProps,
+    onChange,
+    ...otherInputProperties
+  } = inputProperties;
+  const value = valueFromProps ? String(valueFromProps) : "";
 
-  const [value, setValue] = useState<string>(
-    valueFromProps ? String(valueFromProps) : ""
+  const [characterCount, setCharacterCount] = useState<number>(
+    value?.length ?? 0
   );
-  const [characterCount, setCharacterCount] = useState<number>(0);
   const inputSizeClasses = getSizeClasses(inputSize);
   const isCharacterCountExceedingMaxCount = characterCount > maxCharacterCount;
   const hasTextAreaError = isCharacterCountExceedingMaxCount || hasError;
@@ -43,8 +47,6 @@ export const FormTextarea: FC<IFormTextarea> = ({
   const handleOnChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.currentTarget;
     const characterCount = [...value].length;
-
-    setValue(value);
     setCharacterCount(characterCount);
 
     if (onChange) {
@@ -81,7 +83,7 @@ export const FormTextarea: FC<IFormTextarea> = ({
           } ${width === "small" ? minInputWidth : maxInputWidth}`}
           value={value}
           onChange={handleOnChange}
-          {...inputProperties}
+          {...otherInputProperties}
         />
       </div>
       <p

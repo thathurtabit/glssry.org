@@ -1,8 +1,8 @@
-import { initState } from "./init-state";
 import type { TPostAction } from "./form.reducer.types";
 import type { TPost } from "~/schemas/post/post.schema";
 
-export const postReducer = (state = initState, { type, payload }: TPostAction): TPost => {
+export const postReducer = (state: TPost, { type, payload }: TPostAction): TPost => {
+  console.log({ type, payload });
   switch (type) {
     case "title":
       return { ...state, title: payload as TPost["title"] };
