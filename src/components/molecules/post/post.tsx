@@ -2,6 +2,9 @@ import type { FC } from "react";
 import type { TTRPCReadPost } from "~/types/prisma.types";
 import Image from "next/image";
 import React from "react";
+import { SectionTitle } from "~/components/atoms/section-title/section-title";
+import { getFormattedDate } from "~/utils/get-formatted-date";
+import { Link } from "~/components/atoms/link/link";
 
 export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   author: originalAuthor,
@@ -15,17 +18,13 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   }
 
   const {
-    id,
     abbreviation,
     acronym,
-    authorId,
     author: latestAuthor,
     body,
     fileUnder,
     initialism,
     link,
-    postId,
-    published,
     title,
   } = latestVersion;
 
@@ -36,39 +35,52 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
     latestAuthor;
 
   return (
-    <section>
-      <ul>
-        <li>{id}</li>
-        <li>{title}</li>
-        <li>Original authorId: {authorId}</li>
-        <li>{abbreviation}</li>
-        <li>{initialism}</li>
-        <li>{link}</li>
-        <li>{acronym}</li>
-        <li>{body}</li>
-        <li>{postId}</li>
-        <li>{published}</li>
-        <li>{fileUnder}</li>
-        <li>{originalAuthorUsername}</li>
-        <li>
-          {latestAuthorImage && (
-            <Image
-              src={latestAuthorImage}
-              alt={latestAuthorUsername ?? "Latest author"}
-            />
-          )}
-        </li>
-        <li>
-          {originalAuthorImage && (
-            <Image
-              src={originalAuthorImage}
-              alt={originalAuthorUsername ?? "Original author"}
-            />
-          )}
-        </li>
-        <li>Created at: {new Date(createdAt).getUTCDate()}</li>
-        <li>{versions.length}</li>
-      </ul>
+    <section className="border-2 border-copy p-4">
+      <SectionTitle>{title}</SectionTitle>
+
+      <p>{body}</p>
+
+      <dl className="flex gap-2 my-4">
+        <dt>Abbreviation:</dt>
+        <dd>{abbreviation}</dd>
+        <dt>Acronym:</dt>
+        <dd>{acronym}</dd>
+        <dt>Initialism:</dt>
+        <dd>{initialism}</dd>
+      </dl>
+
+      <p className="flex gap-2 text-xs items-center mb-5">
+        {originalAuthorImage && (
+          <Image
+            src={originalAuthorImage}
+            alt={originalAuthorUsername ?? "Original author"}
+            width={15}
+            height={15}
+            className="rounded-full inline-block"
+          />
+        )}
+        <span>{originalAuthorUsername}</span> |{" "}
+        <span>{getFormattedDate({ date: createdAt })}</span>
+      </p>
+
+      <p className="flex gap-2 text-xs items-center mb-5">
+        {latestAuthorImage && (
+          <Image
+            src={latestAuthorImage}
+            alt={latestAuthorUsername ?? "Original author"}
+            width={15}
+            height={15}
+            className="rounded-full inline-block"
+          />
+        )}
+        <span>{latestAuthorUsername}</span> |{" "}
+        <span>{getFormattedDate({ date: createdAt })}</span>
+      </p>
+
+      <Link href={link}>Learn more</Link>
+
+      <p>File under: {fileUnder}</p>
+      <p>Versions: {versions.length}</p>
     </section>
   );
 };

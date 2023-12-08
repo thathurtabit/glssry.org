@@ -11,6 +11,8 @@ import { FormTextarea } from "~/components/atoms/form-textarea/form-textarea";
 import { postReducer } from "./reducer/form.reducer";
 import { initState } from "./reducer/init-state";
 import { Post } from "~/components/molecules/post/post";
+import { getTRPCPostFormat } from "~/utils/get-trpc-post-format";
+import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 
 export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
   const reducerState = postData ?? initState;
@@ -24,8 +26,10 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
     dispatch({ type, payload: event.target.value });
   };
 
+  const postPreviewData = getTRPCPostFormat(state);
+
   return (
-    <section className="flex my-10 gap-10">
+    <section className="flex my-10 gap-10 container">
       <div className="flex-1">
         <SectionTitle>{sectionTitle}</SectionTitle>
         <PageIntro
@@ -88,9 +92,9 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
           Submit
         </Button>
       </div>
-      <div>
-        <SectionTitle>Preview</SectionTitle>
-        <Post />
+      <div className="flex-1">
+        <SectionSubtitle>Preview</SectionSubtitle>
+        {postPreviewData ? <Post {...postPreviewData} /> : null}
       </div>
     </section>
   );
