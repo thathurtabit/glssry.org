@@ -81,16 +81,10 @@ model PostVersion {
     author       User     @relation(fields: [authorId], references: [id])
     authorId     String
     fileUnder    TagName
-    tags         Tags[]
+    tags         Json     @db.Json
 
     @@index([authorId])
     @@index([postId])
-}
-
-model Tags {
-    id           Int           @id @default(autoincrement())
-    name         TagName
-    postVersions PostVersion[]
 }
 
 // Necessary for Next auth

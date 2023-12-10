@@ -1,14 +1,14 @@
 import { postSchema } from "~/schemas/post/post.schema";
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
-import { publicProcedure } from "~/server/api/trpc";
+import { protectedProcedure } from "~/server/api/trpc";
 import { errorMessage } from "../../utils/error-message";
 import { sharedReadUserData } from "../shared/user/shared-read-user-data";
 import type { TagName } from "@prisma/client";
 
-export const createPost = publicProcedure.input(
+export const createPost = protectedProcedure.input(
   postSchema
-).query(async ({ input, ctx }) => {
+).mutation(async ({ input, ctx }) => {
   const userId = ctx.session?.user.id;
 
   if (!userId) {
@@ -24,6 +24,11 @@ export const createPost = publicProcedure.input(
     const post = await ctx.db.post.create({
       data: {
         title: input.title,
+        author: {
+          connect: {
+            id: userData?.id,
+          },
+        },
         versions: {
           create: {
             title: input.title,
@@ -38,20 +43,8 @@ export const createPost = publicProcedure.input(
                 id: userData?.id,
               },
             },
-            published: false,
-            tags: {
-              create: {
-                data: input.tags.map((tag) => ({
-                  name: tag,
-                })),
-              },
-            },
-
-          },
-        },
-        author: {
-          connect: {
-            id: userData?.id,
+            published: false, // This needs to be manually published by editors/admins
+            tags: JSON.stringify(input.tags),
           },
         },
       },

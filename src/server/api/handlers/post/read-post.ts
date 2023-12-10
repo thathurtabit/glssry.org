@@ -29,7 +29,6 @@ export const readPost = publicProcedure.input(
                 image: true,
               },
             },
-            tags: true,
           },
         },
       },
