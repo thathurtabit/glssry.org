@@ -5,10 +5,12 @@ import { protectedProcedure } from "~/server/api/trpc";
 import { errorMessage } from "../../utils/error-message";
 import { sharedReadUserData } from "../shared/user/shared-read-user-data";
 import { getPostData } from "../shared/post/get-post-data.util";
+import z from "zod";
 
-export const createPost = protectedProcedure.input(
-  postSchema
-).mutation(async ({ input, ctx }) => {
+export const updatePost = protectedProcedure.input(z.object({
+  postId: z.string().min(1),
+  data: postSchema,
+})).mutation(async ({ input, ctx }) => {
   const userId = ctx.session?.user.id;
 
   if (!userId) {
@@ -27,10 +29,13 @@ export const createPost = protectedProcedure.input(
     });
   }
 
-  const postData = getPostData(input, userData);
+  const postData = getPostData(input.data, userData);
 
   try {
-    const post = await ctx.db.post.create({
+    const post = await ctx.db.post.update({
+      where: {
+        id: input.postId,
+      },
       data: {
         ...postData,
       },
