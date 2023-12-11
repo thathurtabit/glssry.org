@@ -28,7 +28,7 @@ export const getInputCoreClasses = (inverse = false, hasError: boolean) => {
   if (inverse) {
     return hasError
       ? "bg-background-inverse text-error border-l-4 border-l-error"
-      : "bg-background-inverse text-copy-inverse-light border-l-2 border-background-light";
+      : "bg-background-inverse text-copy-inverse border-l-2 border-background-light";
   }
 
   return hasError

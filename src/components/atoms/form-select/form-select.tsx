@@ -1,7 +1,6 @@
 import type { FC } from "react";
-import type { IFormInput } from "./form-input.types";
+import type { IFormSelect } from "./form-select.types";
 import { Fragment } from "react";
-import { Button } from "../button/button";
 import {
   errorMessageClasses,
   getInputCoreClasses,
@@ -16,7 +15,7 @@ import {
 export const minInputWidth = "w-48";
 export const maxInputWidth = "w-72";
 
-export const FormInput: FC<IFormInput> = ({
+export const FormSelect: FC<IFormSelect> = ({
   id,
   label,
   description,
@@ -24,12 +23,10 @@ export const FormInput: FC<IFormInput> = ({
   errorText,
   width = "full",
   prefix,
-  submitButtonData,
   inverse,
-  isTypeAheadOpen = false,
-  Icon,
   inputSize = "default",
-  ...inputProperties
+  optionList,
+  ...selectProperties
 }) => {
   const inputSizeClasses = getSizeClasses(inputSize);
   const inputCoreClasses = getInputCoreClasses(inverse, hasError);
@@ -60,27 +57,21 @@ export const FormInput: FC<IFormInput> = ({
             {prefix}
           </span>
         )}
-        <input
+        <select
           id={id}
           className={`shadow-inner ${inputSizeClasses} ${
             prefix ? "rounded-l-none" : ""
           } ${inputCoreClasses} ${
-            isTypeAheadOpen ? "rounded-bl-none rounded-br-none" : ""
-          } ${submitButtonData ? "rounded-br-none rounded-tr-none" : ""} ${
             width === "small" ? minInputWidth : maxInputWidth
           }`}
-          {...inputProperties}
-        />
-        {submitButtonData && (
-          <Button
-            className={`rounded-bl-none rounded-tl-none border-0 ${submitButtonData.className}`}
-            type={submitButtonData.type ?? "submit"}
-            {...submitButtonData}
-          >
-            {submitButtonData.children ?? "Submit"}
-          </Button>
-        )}
-        {Icon && <Icon />}
+          {...selectProperties}
+        >
+          {optionList.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
       </div>
       {hasError &&
         (Array.isArray(errorText) ? (

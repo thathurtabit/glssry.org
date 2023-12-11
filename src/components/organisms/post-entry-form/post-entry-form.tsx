@@ -1,5 +1,5 @@
 import type { ChangeEvent } from "react";
-import type { TPostKeys } from "~/schemas/post/post.schema";
+import { tagKeys, type TPostKeys } from "~/schemas/post/post.schema";
 import type { IPostEntryForm } from "./post-entry-form.types";
 import { useReducer, type FC } from "react";
 import { SectionTitle } from "~/components/atoms/section-title/section-title";
@@ -13,6 +13,7 @@ import { initState } from "./reducer/init-state";
 import { Post } from "~/components/molecules/post/post";
 import { getTRPCPostFormat } from "~/utils/get-trpc-post-format";
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
+import { FormSelect } from "~/components/atoms/form-select/form-select";
 
 export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
   const reducerState = postData ?? initState;
@@ -20,7 +21,9 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
   const sectionTitle = mode === "create" ? "Create Post" : "Edit Post";
 
   const handleOnChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
     type: TPostKeys
   ) => {
     dispatch({ type, payload: event.target.value });
@@ -79,6 +82,22 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
           placeholder="i.e.  https://reputable-source.com"
           value={state.link}
           onChange={(event) => handleOnChange(event, "link")}
+        />
+        <FormSelect
+          id="post-input-file-under"
+          label="File Under"
+          hasError={false}
+          value={state.fileUnder}
+          optionList={tagKeys}
+          onChange={(event) => handleOnChange(event, "fileUnder")}
+        />
+        <FormSelect
+          id="post-input-tags"
+          label="Tags"
+          hasError={false}
+          value={state.tags}
+          optionList={tagKeys}
+          onChange={(event) => handleOnChange(event, "tags")}
         />
         <FormTextarea
           id="post-input-body"

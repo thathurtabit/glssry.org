@@ -7,7 +7,7 @@ export type TNativeTagEnum = z.infer<typeof ZNativeTagEnum>;
 
 // Note: Prisma generates TagName as an overloaded type so we can't use it directly
 // Also: zod enums are a pain to work with so we're using a workaround
-const tagKeys = Object.values(TagName as Record<string, string>);
+export const tagKeys = Object.values(TagName as Record<string, string>);
 
 export const postSchema = z.object({
   title: z.string().min(1).max(100),
