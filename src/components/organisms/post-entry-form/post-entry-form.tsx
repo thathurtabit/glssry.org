@@ -1,6 +1,6 @@
-import type { ChangeEvent } from "react";
-import { tagKeys, type TPostKeys } from "~/schemas/post/post.schema";
-import type { IPostEntryForm } from "./post-entry-form.types";
+import type { TPostKeys } from "~/schemas/post/post.schema";
+import type { IPostEntryForm, TPostEntryEvent } from "./post-entry-form.types";
+import { tagKeys } from "~/schemas/post/post.schema";
 import { useReducer, type FC } from "react";
 import { SectionTitle } from "~/components/atoms/section-title/section-title";
 import { FormInput } from "~/components/atoms/form-input/form-input";
@@ -14,19 +14,19 @@ import { Post } from "~/components/molecules/post/post";
 import { getTRPCPostFormat } from "~/utils/get-trpc-post-format";
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 import { FormSelect } from "~/components/atoms/form-select/form-select";
+import { TagsList } from "./children/tags-list/tags-list";
 
 export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
   const reducerState = postData ?? initState;
   const [state, dispatch] = useReducer(postReducer, reducerState);
   const sectionTitle = mode === "create" ? "Create Post" : "Edit Post";
 
-  const handleOnChange = (
-    event: ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-    type: TPostKeys
-  ) => {
+  const handleOnChange = (event: TPostEntryEvent, type: TPostKeys) => {
     dispatch({ type, payload: event.target.value });
+  };
+
+  const handleOnTagsChange = (tags: string[]) => {
+    dispatch({ type: "tags", payload: tags });
   };
 
   const postPreviewData = getTRPCPostFormat(state);
@@ -91,14 +91,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
           optionList={tagKeys}
           onChange={(event) => handleOnChange(event, "fileUnder")}
         />
-        <FormSelect
-          id="post-input-tags"
-          label="Tags"
-          hasError={false}
-          value={state.tags}
-          optionList={tagKeys}
-          onChange={(event) => handleOnChange(event, "tags")}
-        />
+        <TagsList tags={state.tags} handleOnTagsChange={handleOnTagsChange} />
         <FormTextarea
           id="post-input-body"
           label="Body"
