@@ -53,37 +53,40 @@ export const TagsList: FC<ITagsListProps> = ({ tags, handleOnTagsChange }) => {
             <FormSelect
               id={`post-input-tag-${index}`}
               label={`Tag ${index + 1}`}
+              {...(index === 0 && { description: "You can add up to 5 tags" })}
               hasError={false}
               value={tags.at(index) ?? ""}
               optionList={tagKeys}
               onChange={(event) => handleOnSelect(event, index)}
             />
-            <Button
-              variant="secondary"
-              size="small"
-              disabled={showDisableAddTagButton}
-              title={
-                showDisableAddTagButton
-                  ? `${maxTagsForPost} tags is the maximum`
-                  : "Add tag"
-              }
-              onClick={() => handleAddRemoveTag("add", index)}
-            >
-              <IconPlus />
-            </Button>
-            <Button
-              variant="secondary"
-              size="small"
-              disabled={showDisableRemoveTagButton}
-              title={
-                showDisableRemoveTagButton
-                  ? "You must have at least one tag"
-                  : "Remove tag"
-              }
-              onClick={() => handleAddRemoveTag("remove", index)}
-            >
-              <IconMinus />
-            </Button>
+            <div className="flex flex-row gap-2 mt-auto mb-6">
+              <Button
+                variant="secondary"
+                size="small"
+                disabled={showDisableAddTagButton}
+                title={
+                  showDisableAddTagButton
+                    ? `${maxTagsForPost} tags is the maximum`
+                    : "Add tag"
+                }
+                onClick={() => handleAddRemoveTag("add", index)}
+              >
+                <IconPlus />
+              </Button>
+              <Button
+                variant="secondary"
+                size="small"
+                disabled={showDisableRemoveTagButton}
+                title={
+                  showDisableRemoveTagButton
+                    ? "You must have at least one tag"
+                    : "Remove tag"
+                }
+                onClick={() => handleAddRemoveTag("remove", index)}
+              >
+                <IconMinus />
+              </Button>
+            </div>
           </div>
         );
       })}

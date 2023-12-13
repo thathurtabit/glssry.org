@@ -35,5 +35,7 @@ export const getTRPCPostFormat = (postData: TPost): TTRPCReadPost => ({
       id: index,
       name: tag as unknown as TagName,
     })),
+    relatedPostId1: postData.relatedPostId1 ?? null,
+    relatedPostId2: postData.relatedPostId2 ?? null,
   }],
 });

@@ -67,21 +67,23 @@ model Post {
 }
 
 model PostVersion {
-    id           String   @id @default(cuid())
-    postId       String
-    post         Post     @relation(fields: [postId], references: [id])
-    updatedAt    DateTime @default(now())
-    title        String
-    body         String   @db.VarChar(500) // NOTE: check constants.ts
-    abbreviation String   @db.VarChar(30)
-    acronym      String   @db.VarChar(20)
-    initialism   String   @db.VarChar(10)
-    published    Boolean  @default(false)
-    link         String   @db.VarChar(2048) // NOTE: check constants.ts
-    author       User     @relation(fields: [authorId], references: [id])
-    authorId     String
-    fileUnder    TagName
-    tags         Json     @db.Json
+    id             String   @id @default(cuid())
+    postId         String
+    post           Post     @relation(fields: [postId], references: [id])
+    updatedAt      DateTime @default(now())
+    title          String
+    body           String   @db.VarChar(500) // NOTE: check constants.ts
+    abbreviation   String   @db.VarChar(30)
+    acronym        String   @db.VarChar(20)
+    initialism     String   @db.VarChar(10)
+    published      Boolean  @default(false)
+    link           String   @db.VarChar(2048) // NOTE: check constants.ts
+    author         User     @relation(fields: [authorId], references: [id])
+    authorId       String
+    fileUnder      TagName
+    tags           Json     @db.Json
+    relatedPostId1 String?  @db.VarChar(100)
+    relatedPostId2 String?  @db.VarChar(100)
 
     @@index([authorId])
     @@index([postId])

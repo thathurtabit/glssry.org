@@ -2,7 +2,7 @@ import type { FC } from "react";
 import type { IHR } from "./hr.types";
 
 export const HorizontalRule: FC<IHR> = ({ className, inverse, position }) => {
-  const hrColor = inverse ? "bg-copy-inverse" : "bg-copy";
+  const hrColor = inverse ? "bg-copy-inverse/50" : "bg-copy/50";
   const getPositionStyles = () => {
     switch (position) {
       case "right": {
@@ -22,7 +22,7 @@ export const HorizontalRule: FC<IHR> = ({ className, inverse, position }) => {
   const positionStyles = getPositionStyles();
   return (
     <hr
-      className={`${positionStyles} my-4 h-0 w-full max-w-[100px] border-copy border-2 bg-primary-dark ${hrColor} ${className}`}
+      className={`${positionStyles} my-6 h-[1px] w-full border-copy border-none bg-primary-dark ${hrColor} ${className}`}
     />
   );
 };

@@ -3,11 +3,11 @@ import { z } from "zod";
 import { maxPostLinkLength, maxTagsForPost, summaryMaxCharacterCount } from "~/settings/constants";
 
 export const ZNativeTagEnum = z.nativeEnum(TagName);
-export type TNativeTagEnum = z.infer<typeof ZNativeTagEnum>;
+export type TNativeTag = z.infer<typeof ZNativeTagEnum>;
 
 // Note: Prisma generates TagName as an overloaded type so we can't use it directly
 // Also: zod enums are a pain to work with so we're using a workaround
-export const tagKeys = Object.values(TagName as Record<string, string>);
+export const tagKeys: TNativeTag[] = Object.values<TNativeTag>(TagName);
 
 export const postSchema = z.object({
   title: z.string().min(1).max(100),
@@ -17,7 +17,9 @@ export const postSchema = z.object({
   link: z.string().min(5).url().max(maxPostLinkLength),
   body: z.string().min(1).max(summaryMaxCharacterCount), // Check schema.prisma
   tags: z.array(ZNativeTagEnum).min(1).max(maxTagsForPost),
-  fileUnder: z.string().min(1).max(100).refine((val) => tagKeys.includes(val)),
+  fileUnder: z.string().min(1).max(100).refine((val) => tagKeys.includes(val as TagName)),
+  relatedPostId1: z.string().optional(),
+  relatedPostId2: z.string().optional(),
 });
 
 export type TPostKeys = keyof z.infer<typeof postSchema>;

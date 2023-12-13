@@ -15,8 +15,6 @@ interface IValidationState<TFormState> {
 }
 
 interface IUseFormValidationReturnTypes<TFormStateTypes> {
-  /** This will live check to see if form fields have values set */
-  allFieldsHaveValues: boolean;
   /** This is used so the user can explicitly choose when to initially validate the form section, and when progress to the next section */
   getIsFormDataValid: () => boolean;
   /** This is the error state for the form section, uses generics to type return data */
@@ -50,6 +48,8 @@ export const useFormValidation = <
   const validateForm = useCallback((): boolean => {
     const zodValidationResult = currentFormSchema.safeParse(currentFormState);
 
+    console.log({ zodValidationResult });
+
     if (zodValidationResult.success) {
       setErrorState(defaultValidationState);
       setPerformLiveValidation(true); // We still need to validate this as the user can edit at any time
@@ -62,6 +62,8 @@ export const useFormValidation = <
         message,
       ])
     );
+
+    console.log({ errors });
 
     setErrorState({
       hasError: true,
@@ -95,10 +97,5 @@ export const useFormValidation = <
     validateForm,
   ]);
 
-  // NOTE: empty fields '' will pass a check for string fields, so we need to check for a minimum of 1 character, etc.
-  const allFieldsHaveValues = Object.values(currentFormState).every(
-    (value) => value !== null || ""
-  );
-
-  return { allFieldsHaveValues, getIsFormDataValid, errorState };
+  return { getIsFormDataValid, errorState };
 };

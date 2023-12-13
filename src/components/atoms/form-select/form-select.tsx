@@ -30,6 +30,8 @@ export const FormSelect: FC<IFormSelect> = ({
 }) => {
   const inputSizeClasses = getSizeClasses(inputSize);
   const inputCoreClasses = getInputCoreClasses(inverse, hasError);
+
+  const optionsListWithEmptyOption = ["Choose an option", ...optionList];
   return (
     <div
       className={`${
@@ -66,11 +68,18 @@ export const FormSelect: FC<IFormSelect> = ({
           }`}
           {...selectProperties}
         >
-          {optionList.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
+          {optionsListWithEmptyOption.map((tag, index) => {
+            const isFirstOption = index === 0;
+            return (
+              <option
+                key={tag}
+                disabled={isFirstOption}
+                value={isFirstOption ? "" : tag}
+              >
+                {tag}
+              </option>
+            );
+          })}
         </select>
       </div>
       {hasError &&
