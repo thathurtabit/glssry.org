@@ -6,8 +6,8 @@ import { signIn } from "next-auth/react";
 import { EURLS } from "~/settings/constants";
 import { useIsAuthenticated } from "../../hooks/auth/is-authenticated.hook";
 import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-signed-in";
-import { IconPlay } from "~/components/icons/play/play";
 import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
+import { IconAccount } from "~/components/icons/account/account";
 
 const SignedOut: NextPage = () => {
   const isAuthenticated = useIsAuthenticated();
@@ -35,14 +35,13 @@ const SignedOut: NextPage = () => {
       <PageStructure title="Signed out" width="narrow">
         <PageIntro
           textList={[
-            "You are now free",
-            "Free to do whatever you want. Any ol' time.",
+            "You are now signed out",
             "You can click the link below to sign in again if you wanted. No pressure.",
           ]}
           hrProps={{ position: "left" }}
         />
         <Button onClick={handleSignInAgain}>
-          Join in <IconPlay />
+          Sign in <IconAccount />
         </Button>
       </PageStructure>
     </AccountPageWrapper>

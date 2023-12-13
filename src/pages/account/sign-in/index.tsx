@@ -1,17 +1,13 @@
-import type { FormEvent } from "react";
 import { ESignInMessage } from "~/types/sign-in.types";
 import { ReCaptcha, ReCaptchaProvider } from "next-recaptcha-v3";
 import { useEffect, useState } from "react";
 import { getProviders, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { ErrorMessage } from "~/components/atoms/error-message/error-message";
-import { appURL, EURLS } from "~/settings/constants";
+import { appURL } from "~/settings/constants";
 import { getSignInErrorMessage } from "~/utils/sign-in.utils";
 import { PageStructure } from "~/components/molecules/page-structure/page-structure";
 import { Button } from "~/components/atoms/button/button";
-import { FormInput } from "~/components/atoms/form-input/form-input";
-import { emailSchema } from "~/schemas/account/email.schema";
-import { HorizontalRule } from "~/components/atoms/hr/hr";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
 import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
 import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-signed-in";
@@ -33,9 +29,6 @@ export const SignIn = ({
   const { mutateVerifyRecaptchaAsync, mutateVerifyRecaptchaLoading } =
     useVerifyRecaptchaMutation();
   const [recaptchaError, setRecaptchaError] = useState("");
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const { query } = useRouter();
   const isAuthenticated = useIsAuthenticated();
   const action = "LOGIN";
@@ -61,7 +54,7 @@ export const SignIn = ({
 
   if (!providers) {
     return (
-      <PageStructure title="Join In">
+      <PageStructure title="Sign in">
         <p>There are currently no providers to sign up/in with.</p>
       </PageStructure>
     );
@@ -89,38 +82,6 @@ export const SignIn = ({
   const recaptchaIsLoading = mutateVerifyRecaptchaLoading && !recaptchaError;
 
   const showError = typeof errorMessage === "string" && errorExists;
-
-  const handleEmailSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!email) {
-      setEmailError("Please enter your email address");
-      return;
-    }
-
-    const emailSchemaValidation = emailSchema.safeParse({ email });
-    if (!emailSchemaValidation.success) {
-      const errorMessage = emailSchemaValidation.error.issues.at(0)?.message;
-      if (errorMessage) {
-        setEmailError(errorMessage);
-      }
-
-      setIsLoading(false);
-      return;
-    }
-
-    (async () => {
-      // SEND TO /api/auth/signin
-      setIsLoading(true);
-      await signIn("email", {
-        email,
-        callbackUrl: EURLS.SignInSuccess,
-      });
-    })().catch((error) => {
-      // eslint-disable-next-line no-console
-      console.error(error); // TODO: Add error logging
-      setIsLoading(false);
-    });
-  };
 
   const getProviderIconByID = (id: string) => {
     switch (id) {
@@ -165,7 +126,7 @@ export const SignIn = ({
         useEnterprise
         reCaptchaKey={env.NEXT_PUBLIC_RECAPTCHA_SITEKEY}
       >
-        <AccountPageWrapper>
+        <AccountPageWrapper skipAuthCheck>
           <PageStructure title="Bot check" width="narrow">
             <PageIntro
               textList={[
@@ -195,8 +156,8 @@ export const SignIn = ({
   }
 
   return (
-    <AccountPageWrapper>
-      <PageStructure title="Sign In">
+    <AccountPageWrapper skipAuthCheck>
+      <PageStructure title="Sign in">
         <PageIntro
           textList={[
             "Pick your sign in method",
@@ -208,48 +169,18 @@ export const SignIn = ({
         {showError && <ErrorMessage title="Uh oh" text={errorMessage} />}
         {providersList && (
           <ul className="my-3">
-            {providersList.map(({ name, id, type }) => {
-              if (type === "email") {
-                return (
-                  <li key={`sign-in-${id}`} className="mb-4 pb-4">
-                    <form className="mb-5 pb-5" onSubmit={handleEmailSubmit}>
-                      <FormInput
-                        id="sign-in-with-email"
-                        label="Sign in with email"
-                        description="We'll email you a magic link to sign in with"
-                        type="email"
-                        value={email}
-                        placeholder="your@nice-email.com"
-                        hasError={Boolean(emailError)}
-                        errorText={emailError}
-                        submitButtonData={{
-                          children: "Submit",
-                          loading: isLoading,
-                        }}
-                        onChange={(event) => setEmail(event.target.value)}
-                      />
-                    </form>
-                    <HorizontalRule position="left" />
-                    <p className="text-sm">
-                      Or if you think email is for suckers...
-                    </p>
-                  </li>
-                );
-              }
-
-              return (
-                <li key={name} className="m-2">
-                  <Button
-                    size="large"
-                    variant="secondary"
-                    className="min-w-fit"
-                    onClick={() => handleSignIn(id)}
-                  >
-                    <span>{getProviderIconByID(id)}</span>Sign in with {name}
-                  </Button>
-                </li>
-              );
-            })}
+            {providersList.map(({ name, id }) => (
+              <li key={name} className="m-2">
+                <Button
+                  size="medium"
+                  variant="primary"
+                  className="min-w-fit"
+                  onClick={() => handleSignIn(id)}
+                >
+                  <span>{getProviderIconByID(id)}</span>Sign in with {name}
+                </Button>
+              </li>
+            ))}
           </ul>
         )}
       </PageStructure>

@@ -5,7 +5,7 @@ import { EURLS } from "~/settings/constants";
 import { Button } from "../button/button";
 import { LoadingSpinner } from "../loading-spinner/loading-spinner";
 import { IconExit } from "~/components/icons/exit/exit";
-import { IconPlay } from "~/components/icons/play/play";
+import { IconAccount } from "~/components/icons/account/account";
 
 export const SignInOrOutButton: FC<ISignInOrOutButton> = ({
   allowSignOut = false,
@@ -41,7 +41,7 @@ export const SignInOrOutButton: FC<ISignInOrOutButton> = ({
   return (
     <Button size="small" onClick={handleSignInOrOut}>
       {shouldShowSignOut ? "Sign out" : "Sign in"}
-      {shouldShowSignOut ? <IconExit /> : <IconPlay />}
+      {shouldShowSignOut ? <IconExit /> : <IconAccount />}
     </Button>
   );
 };

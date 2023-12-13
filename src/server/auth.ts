@@ -10,6 +10,7 @@ import githubProvider from "next-auth/providers/github";
 
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
+import { EURLS } from "~/settings/constants";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -48,12 +49,18 @@ export const authOptions: NextAuthOptions = {
     }),
   },
   adapter: prismaAdapter(db),
+  pages: {
+    signIn: EURLS.SignIn,
+    verifyRequest: EURLS.SignInMagicLink,
+    error: EURLS.SignInError, // Error code passed in query string as ?error=
+  },
   providers: [
     // NOTE: Github only allows an app to have one callback URL, so there needs to be a Dev and Prod app
     githubProvider({
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
-      checks: ["pkce", "state"], // Required here: https://github.com/nextauthjs/next-auth/issues/4190#issuecomment-1326519901
+
+      // Checks: ["pkce", "state"], // Required here: https://github.com/nextauthjs/next-auth/issues/4190#issuecomment-1326519901
     }),
     /**
      * ...add more providers here.

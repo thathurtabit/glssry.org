@@ -18,7 +18,6 @@ const SignInMagicLink: NextPage = () => {
       <PageStructure title="Check your email" width="narrow">
         <PageIntro
           textList={[
-            "Something wicked your way comes.",
             "Please check your email for a link to sign-in",
             "You've got 24 hours to use the link - make sure you check that spam folder!",
           ]}
@@ -27,7 +26,7 @@ const SignInMagicLink: NextPage = () => {
         <div className="flex gap-4">
           <Link href="/">Home</Link>
           <Link href={EURLS.SignIn} variant="secondary">
-            Join in options
+            Sign in options
           </Link>
         </div>
       </PageStructure>

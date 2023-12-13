@@ -21,12 +21,11 @@ const SignInSuccess: NextPage = () => {
         <PageIntro
           textList={[
             "You are now signed in!",
-            "Everyone doubted you, but you proved them wrong. You are a hero.",
             "Click the link below to get started",
           ]}
           hrProps={{ position: "left" }}
         />
-        <Link href="/">Start&apos;</Link>
+        <Link href="/">Home&apos;</Link>
       </PageStructure>
     </AccountPageWrapper>
   );

@@ -10,3 +10,19 @@ html {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
 }
+
+.grecaptcha-badge { visibility: hidden!important; }
+
+*:focus, *:focus-visible {
+  outline-width: 2px;
+  outline-color: theme(colors.focus.DEFAULT);
+  outline-offset: 0.1rem;
+  outline-style: dashed;
+}
+
+*:focus:not(:focus-visible) { outline: none }
+
+*::selection {
+  background-color: theme(colors.link.light);
+  color: theme(colors.white);
+}
