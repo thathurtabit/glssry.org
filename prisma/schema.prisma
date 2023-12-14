@@ -71,6 +71,7 @@ model PostVersion {
     postId         String
     post           Post     @relation(fields: [postId], references: [id])
     updatedAt      DateTime @default(now())
+    slug           String   @unique
     title          String
     body           String   @db.VarChar(500) // NOTE: check constants.ts
     abbreviation   String   @db.VarChar(30)

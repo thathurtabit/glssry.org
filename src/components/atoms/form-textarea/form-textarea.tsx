@@ -27,6 +27,7 @@ export const FormTextarea: FC<IFormTextarea> = ({
   inputSize = "default",
   rows = 10,
   maxCharacterCount = summaryMaxCharacterCount,
+  required,
   ...inputProperties
 }) => {
   const {
@@ -68,7 +69,7 @@ export const FormTextarea: FC<IFormTextarea> = ({
           inverse ? "text-copy-inverse" : ""
         } ${inputLabelClasses}`}
       >
-        {label}
+        {label} {required && <span className="text-error">*</span>}
       </label>
       {description && (
         <p className={inputDescriptionClasses}>

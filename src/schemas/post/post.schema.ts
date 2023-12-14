@@ -11,13 +11,15 @@ export const tagKeys: TNativeTag[] = Object.values<TNativeTag>(TagName);
 
 export const postSchema = z.object({
   title: z.string().min(1).max(100),
+  slug: z.string().min(1).max(150),
   acronym: z.string().min(1).max(10),
   abbreviation: z.string().min(1).max(15),
   initialism: z.string().min(1).max(10),
   link: z.string().min(5).url().max(maxPostLinkLength),
   body: z.string().min(1).max(summaryMaxCharacterCount), // Check schema.prisma
   tags: z.array(ZNativeTagEnum).min(1).max(maxTagsForPost),
-  fileUnder: z.string().min(1).max(100).refine((val) => tagKeys.includes(val as TagName)),
+  // FileUnder: z.string().min(1).max(100).refine((val) => tagKeys.includes(val as TagName)),
+  fileUnder: ZNativeTagEnum,
   relatedPostId1: z.string().optional(),
   relatedPostId2: z.string().optional(),
 });

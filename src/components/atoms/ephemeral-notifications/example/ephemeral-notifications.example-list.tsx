@@ -10,8 +10,10 @@ interface IEphemeralNotificationsExample {
   customIcon: boolean | undefined;
 }
 
-const getCapitalizedFirstLetter = (word: string) =>
-  word.at(0)?.toUpperCase() ?? String(word.slice(1));
+const getCapitalizedFirstLetter = (word: string) => {
+  const firstLetter = word.at(0)?.toUpperCase() ?? "?";
+  return firstLetter + String(word.slice(1));
+};
 
 export const EphemeralNotificationsListExample: FC<
   IEphemeralNotificationsExample

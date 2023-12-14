@@ -12,6 +12,7 @@ export const getPostData = (input: TPost, userData: User): Prisma.PostCreateInpu
   versions: {
     create: {
       title: input.title,
+      slug: input.slug,
       abbreviation: input.abbreviation,
       acronym: input.acronym,
       initialism: input.initialism,

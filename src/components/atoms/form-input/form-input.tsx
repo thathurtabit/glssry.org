@@ -29,6 +29,7 @@ export const FormInput: FC<IFormInput> = ({
   isTypeAheadOpen = false,
   Icon,
   inputSize = "default",
+  required,
   ...inputProperties
 }) => {
   const inputSizeClasses = getSizeClasses(inputSize);
@@ -47,7 +48,7 @@ export const FormInput: FC<IFormInput> = ({
           inverse ? "text-copy-inverse" : ""
         } ${inputLabelClasses}`}
       >
-        {label}
+        {label} {required && <span className="text-error">*</span>}
       </label>
       {description && (
         <p className={inputDescriptionClasses}>

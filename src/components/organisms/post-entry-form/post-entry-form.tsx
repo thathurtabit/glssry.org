@@ -6,7 +6,7 @@ import { useReducer, type FC } from "react";
 import { SectionTitle } from "~/components/atoms/section-title/section-title";
 import { FormInput } from "~/components/atoms/form-input/form-input";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
-import { appTitle } from "~/settings/constants";
+import { appTitle, appURL } from "~/settings/constants";
 import { Button } from "~/components/atoms/button/button";
 import { FormTextarea } from "~/components/atoms/form-textarea/form-textarea";
 import { postReducer } from "./reducer/form.reducer";
@@ -61,9 +61,13 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
             `${
               mode === "create" ? "Create" : "Edit"
             } a ${appTitle} post to help kill off confusion.`,
+            <p key="">
+              Required fields marked with <span className="text-error">*</span>
+            </p>,
           ]}
         />
         <FormInput
+          required
           id="post-input-title"
           label="Post title"
           placeholder="i.e. Cascading Style Sheets"
@@ -73,6 +77,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
           onChange={(event) => handleOnChange(event, "title")}
         />
         <FormInput
+          required
           id="post-input-acronym"
           label="Acronym"
           placeholder="i.e. CSS"
@@ -82,6 +87,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
           onChange={(event) => handleOnChange(event, "acronym")}
         />
         <FormInput
+          required
           id="post-input-abbreviation"
           label="Abbreviation"
           placeholder="i.e. CSS"
@@ -91,6 +97,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
           onChange={(event) => handleOnChange(event, "abbreviation")}
         />
         <FormInput
+          required
           id="post-input-initialism"
           label="Initialism"
           placeholder="i.e. CSS"
@@ -100,6 +107,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
           onChange={(event) => handleOnChange(event, "initialism")}
         />
         <FormInput
+          required
           id="post-input-link"
           label="Link"
           description="The source of this post"
@@ -111,6 +119,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
           onChange={(event) => handleOnChange(event, "link")}
         />
         <FormSelect
+          required
           id="post-input-file-under"
           label="File Under"
           description="The category this post will be filed under"
@@ -121,10 +130,14 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
           onChange={(event) => handleOnChange(event, "fileUnder")}
         />
         <HorizontalRule position="left" />
-        <SectionSubtitle>Tags</SectionSubtitle>
+        <SectionSubtitle noMargin>Tags</SectionSubtitle>
+        <p className="mb-5">
+          <small>Other categories this post is related to</small>
+        </p>
         <TagsList tags={state.tags} handleOnTagsChange={handleOnTagsChange} />
         <HorizontalRule position="left" />
         <FormTextarea
+          required
           id="post-input-body"
           label="Body"
           placeholder="i.e. A summary of what this post is about..."
@@ -162,6 +175,12 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
       <div className="flex-1">
         <SectionSubtitle>Preview</SectionSubtitle>
         {postPreviewData ? <Post {...postPreviewData} /> : null}
+        <div className="mt-5">
+          <SectionSubtitle>Slug</SectionSubtitle>
+          <p>
+            {appURL}/{state.slug}
+          </p>
+        </div>
       </div>
     </form>
   );

@@ -28,11 +28,12 @@ export const Edit: Story = {
     mode: "edit",
     postData: {
       title: "Cascading Style Sheets",
+      slug: "cascading-style-sheets",
       acronym: "CSS",
       abbreviation: "CSS",
       initialism: "CSS",
       link: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-      fileUnder: "",
+      fileUnder: "Programming",
       body: "A style sheet language used for describing the presentation of a document written in a markup language such as HTML.",
       tags: ["Computing", "Programming"],
     },

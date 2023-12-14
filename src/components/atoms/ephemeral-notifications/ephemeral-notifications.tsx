@@ -150,7 +150,7 @@ export const EphemeralNotifications: FC<IEphemeralInfoPanels> = ({
                 </span>
               )}
               <div className="flex-1 pr-3">
-                <h3 className="flex items-center justify-items-start text-[0.7rem] font-semibold">
+                <h3 className="flex items-center font-body justify-items-start text-[0.7rem] font-semibold">
                   {title}
                 </h3>
                 <p className="m-0 text-[0.675rem]">{message}</p>

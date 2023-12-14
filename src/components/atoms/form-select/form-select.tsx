@@ -26,6 +26,7 @@ export const FormSelect: FC<IFormSelect> = ({
   inverse,
   inputSize = "default",
   optionList,
+  required,
   ...selectProperties
 }) => {
   const inputSizeClasses = getSizeClasses(inputSize);
@@ -46,7 +47,7 @@ export const FormSelect: FC<IFormSelect> = ({
           inverse ? "text-copy-inverse" : ""
         } ${inputLabelClasses}`}
       >
-        {label}
+        {label} {required && <span className="text-error">*</span>}
       </label>
       {description && (
         <p className={inputDescriptionClasses}>

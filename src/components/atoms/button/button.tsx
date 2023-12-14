@@ -28,11 +28,11 @@ export const getButtonSizeClasses = (size: TButtonSize) => {
 export const getButtonVariantClasses = (variant: TButtonVariant) => {
   switch (variant) {
     case "primary": {
-      return "border-2 bg-primary text-copy-inverse [&:not(:disabled)]:hover:bg-primary-dark disabled:opacity-50";
+      return "border-2 border-primary bg-primary text-copy-inverse [&:not(:disabled)]:hover:bg-primary-dark [&:not(:disabled)]:hover:border-primary-dark disabled:opacity-50";
     }
 
     case "secondary": {
-      return "border-2 bg-secondary text-copy border-copy [&:not(:disabled)]:hover:bg-secondary-light disabled:opacity-50";
+      return "border-2 border-primary bg-secondary text-copy border-copy [&:not(:disabled)]:hover:bg-secondary-light [&:not(:disabled)]:hover:border-primary disabled:opacity-50";
     }
 
     case "danger": {
