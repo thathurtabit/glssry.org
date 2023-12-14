@@ -17,7 +17,7 @@ const heading = abrilFont({
 
 const subHeading = comfortaaFont({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "500"],
   variable: "--font-sub-heading",
 });
 

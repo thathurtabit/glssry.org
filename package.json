@@ -33,6 +33,7 @@
     "@trpc/next": "^10.43.3",
     "@trpc/react-query": "^10.43.3",
     "@trpc/server": "^10.43.3",
+    "@uidotdev/usehooks": "^2.4.1",
     "@vercel/postgres": "^0.5.1",
     "focus-trap-react": "^10.2.3",
     "next": "^14.0.2",

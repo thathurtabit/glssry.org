@@ -1,4 +1,0 @@
-export enum GameActions {
-  RESET_GAME_STATE = "RESET_GAME_STATE",
-  SET_ACTIVE_GAME_VIEW = "SET_ACTIVE_GAME_VIEW",
-}

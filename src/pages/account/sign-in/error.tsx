@@ -7,6 +7,7 @@ import { EURLS } from "~/settings/constants";
 import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
 import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-signed-in";
 import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
+import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 
 const getSignInError = (error: string) => {
   switch (error) {
@@ -42,6 +43,7 @@ const SignInError: NextPage = () => {
 
   return (
     <AccountPageWrapper>
+      <SharedHead title="Sign In Error" />
       <PageStructure title="Sign in error" width="narrow">
         <PageIntro
           textList={["Oh heck no.", `${signInError} 😢`]}

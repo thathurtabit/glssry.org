@@ -2,8 +2,7 @@ import type { TPost, TPostKeys } from "~/schemas/post/post.schema";
 import type { IPostEntryForm, TPostEntryEvent } from "./post-entry-form.types";
 import { postSchema, tagKeys } from "~/schemas/post/post.schema";
 import type { FormEvent } from "react";
-import { useReducer, type FC } from "react";
-import { SectionTitle } from "~/components/atoms/section-title/section-title";
+import { useReducer, type FC, Fragment } from "react";
 import { FormInput } from "~/components/atoms/form-input/form-input";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
 import { appTitle, appURL } from "~/settings/constants";
@@ -22,7 +21,6 @@ import { useFormValidation } from "~/hooks/post/form-validation.hook";
 export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
   const reducerState = postData ?? initState;
   const [state, dispatch] = useReducer(postReducer, reducerState);
-  const sectionTitle = mode === "create" ? "Create Post" : "Edit Post";
 
   const handleOnChange = (event: TPostEntryEvent, type: TPostKeys) => {
     dispatch({ type, payload: event.target.value });
@@ -50,20 +48,16 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
   };
 
   return (
-    <form
-      className="flex my-10 gap-10 p-10 container"
-      onSubmit={handleFormSubmit}
-    >
+    <form className="flex my-10 gap-10 w-full" onSubmit={handleFormSubmit}>
       <div className="flex-1">
-        <SectionTitle>{sectionTitle}</SectionTitle>
         <PageIntro
           textList={[
             `${
               mode === "create" ? "Create" : "Edit"
             } a ${appTitle} post to help kill off confusion.`,
-            <p key="">
+            <Fragment key="">
               Required fields marked with <span className="text-error">*</span>
-            </p>,
+            </Fragment>,
           ]}
         />
         <FormInput

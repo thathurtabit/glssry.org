@@ -1,10 +1,11 @@
 import type { FC } from "react";
 import type { TTRPCReadPost } from "~/types/prisma.types";
-import Image from "next/image";
 import React from "react";
 import { SectionTitle } from "~/components/atoms/section-title/section-title";
 import { getFormattedDate } from "~/utils/get-formatted-date";
 import { Link } from "~/components/atoms/link/link";
+import { IconAccount } from "~/components/icons/account/account";
+import { IconExternalLink } from "~/components/icons/external-link/external-link";
 
 export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   author: originalAuthor,
@@ -28,11 +29,9 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
     title,
   } = latestVersion;
 
-  const { image: originalAuthorImage, username: originalAuthorUsername } =
-    originalAuthor;
+  const { username: originalAuthorUsername } = originalAuthor;
 
-  const { image: latestAuthorImage, username: latestAuthorUsername } =
-    latestAuthor;
+  const { username: latestAuthorUsername } = latestAuthor;
 
   return (
     <section className="border-2 border-copy p-4">
@@ -50,34 +49,20 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
       </dl>
 
       <p className="flex gap-2 text-xs items-center mb-5">
-        {originalAuthorImage && (
-          <Image
-            src={originalAuthorImage}
-            alt={originalAuthorUsername ?? "Original author"}
-            width={15}
-            height={15}
-            className="rounded-full inline-block"
-          />
-        )}
+        <IconAccount />
         <span>{originalAuthorUsername}</span> |{" "}
         <span>{getFormattedDate({ date: createdAt })}</span>
       </p>
 
       <p className="flex gap-2 text-xs items-center mb-5">
-        {latestAuthorImage && (
-          <Image
-            src={latestAuthorImage}
-            alt={latestAuthorUsername ?? "Original author"}
-            width={15}
-            height={15}
-            className="rounded-full inline-block"
-          />
-        )}
+        <IconAccount />
         <span>{latestAuthorUsername}</span> |{" "}
         <span>{getFormattedDate({ date: createdAt })}</span>
       </p>
 
-      <Link href={link}>Learn more</Link>
+      <Link href={link}>
+        Learn more <IconExternalLink />
+      </Link>
 
       <p>File under: {fileUnder}</p>
       <p>Versions: {versions.length}</p>

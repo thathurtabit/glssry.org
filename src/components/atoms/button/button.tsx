@@ -12,15 +12,15 @@ import { IconReset } from "~/components/icons/reset/reset";
 export const getButtonSizeClasses = (size: TButtonSize) => {
   switch (size) {
     case "large": {
-      return `p-2.5 px-5 text-md font-semibold gap-3`;
+      return `p-2.5 px-5 text-md font-medium gap-3`;
     }
 
     case "small": {
-      return `p-1.5 px-2.5 text-xs font-semibold gap-1`;
+      return `p-1.5 px-2.5 text-xs font-medium gap-1`;
     }
 
     default: {
-      return `p-1.5 px-3.5 text-sm font-semibold gap-1.5`;
+      return `p-1.5 px-3.5 text-sm font-medium gap-1.5`;
     }
   }
 };
@@ -46,7 +46,7 @@ export const getButtonVariantClasses = (variant: TButtonVariant) => {
 };
 
 export const coreButtonStyles =
-  "font-body inline-flex items-center rounded-full transition whitespace-nowrap drop-shadow-button";
+  "font-sub-heading inline-flex items-center rounded-full transition whitespace-nowrap drop-shadow-button";
 
 export const getLoadingIconSize = (size: TButtonSize) =>
   size === "small" ? 13 : size === "medium" ? 14 : 16;

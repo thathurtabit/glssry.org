@@ -6,9 +6,9 @@ import { EURLS, appDescription, appTitle } from "~/settings/constants";
 export default function Home() {
   return (
     <>
-      <SharedHead />
+      <SharedHead title={`Welcome to ${appTitle}`} />
       <main className=" flex min-h-screen flex-col items-center justify-center">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+        <div className="flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <h1 className="text-5xl font-heading tracking-tight text-white sm:text-[5rem]">
             {appTitle}
           </h1>

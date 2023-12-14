@@ -6,6 +6,7 @@ import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
 import { PleaseSignIn } from "~/components/atoms/please-sign-in/please-sign-in";
 import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
 import { useGenerateAndSetRandomUsernameOnLoad } from "~/hooks/account/generate-and-set-random-username-on-load.hook";
+import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 
 const SignInSuccess: NextPage = () => {
   const isAuthenticated = useIsAuthenticated();
@@ -17,6 +18,7 @@ const SignInSuccess: NextPage = () => {
 
   return (
     <AccountPageWrapper>
+      <SharedHead title="Signed In" />
       <PageStructure title="Sign in success!" width="narrow">
         <PageIntro
           textList={[

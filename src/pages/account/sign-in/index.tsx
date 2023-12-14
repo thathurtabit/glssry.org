@@ -20,6 +20,7 @@ import { type InferGetServerSidePropsType } from "next";
 import { useVerifyRecaptchaMutation } from "~/hooks/auth/recaptcha-verify.hook";
 import { env } from "~/env.mjs";
 import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
+import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 
 export const SignIn = ({
   providers,
@@ -127,6 +128,7 @@ export const SignIn = ({
         reCaptchaKey={env.NEXT_PUBLIC_RECAPTCHA_SITEKEY}
       >
         <AccountPageWrapper skipAuthCheck>
+          <SharedHead title="Bot Check" />
           <PageStructure title="Bot check" width="narrow">
             <PageIntro
               textList={[
@@ -157,6 +159,7 @@ export const SignIn = ({
 
   return (
     <AccountPageWrapper skipAuthCheck>
+      <SharedHead title="Sign In" />
       <PageStructure title="Sign in">
         <PageIntro
           textList={[

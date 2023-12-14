@@ -37,7 +37,7 @@ export const PageMain: FCC<IPageMain> = ({
   const justifiedContent = getJustifyContent();
   return (
     <main
-      className={`relative z-1 h-screen p-7 sm:px-20 flex flex-1 flex-col items-center self-stretch text-copy ${justifiedContent} ${
+      className={`relative z-1 h-screen p-7 sm:px-20 flex flex-1 flex-col mt-10 items-center self-stretch text-copy ${justifiedContent} ${
         className ?? ""
       }`}
     >

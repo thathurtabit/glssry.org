@@ -3,6 +3,7 @@ import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-si
 import { Link } from "~/components/atoms/link/link";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
 import { PageStructure } from "~/components/molecules/page-structure/page-structure";
+import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
 import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
 import { EURLS } from "~/settings/constants";
@@ -15,6 +16,7 @@ const SignInMagicLink: NextPage = () => {
 
   return (
     <AccountPageWrapper>
+      <SharedHead title="Magic Link" />
       <PageStructure title="Check your email" width="narrow">
         <PageIntro
           textList={[

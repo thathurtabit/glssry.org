@@ -25,6 +25,7 @@ export const pageReducer = (
     case PageActions.SET_CLOSE_MODAL: {
       return {
         ...state,
+        isMenuOpen: initState.page.isMenuOpen,
         modal: initState.page.modal,
       };
     }

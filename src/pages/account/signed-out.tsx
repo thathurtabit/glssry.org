@@ -8,6 +8,7 @@ import { useIsAuthenticated } from "../../hooks/auth/is-authenticated.hook";
 import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-signed-in";
 import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
 import { IconAccount } from "~/components/icons/account/account";
+import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 
 const SignedOut: NextPage = () => {
   const isAuthenticated = useIsAuthenticated();
@@ -32,6 +33,7 @@ const SignedOut: NextPage = () => {
 
   return (
     <AccountPageWrapper>
+      <SharedHead title="Signed Out" />
       <PageStructure title="Signed out" width="narrow">
         <PageIntro
           textList={[

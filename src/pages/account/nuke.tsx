@@ -12,6 +12,7 @@ import {
 import { useDeleteUser } from "~/hooks/account/delete-user.hook";
 import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
+import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 
 const Nuke: NextPage = () => {
   const dispatch = useContext(GlssryDispatchContext);
@@ -48,6 +49,7 @@ const Nuke: NextPage = () => {
 
   return (
     <AccountPageWrapper>
+      <SharedHead title="Nuke" />
       <PageStructure title="Nuke" width="narrow">
         <PageIntro
           textList={[
