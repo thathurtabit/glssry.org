@@ -16,6 +16,8 @@ export enum EURLS {
   SetName = "/account/set-name",
   CreatePost = "/post/create",
   EditPost = "/post/edit",
+  PostList = "/post/list",
+  PostPending = "/post/pending",
 }
 
 // Form validation

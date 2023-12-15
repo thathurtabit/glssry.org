@@ -6,6 +6,7 @@ export const useIsEditor = (): boolean => {
   const isAuthenticatedAsEditor =
     status === "authenticated" &&
     sessionData !== null &&
-    sessionData.user?.role === UserRole.EDITOR;
+    (sessionData.user?.role === UserRole.EDITOR ||
+      sessionData.user?.role === UserRole.ADMIN);
   return isAuthenticatedAsEditor;
 };

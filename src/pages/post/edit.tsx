@@ -8,9 +8,12 @@ import { useReadPost } from "~/hooks/post/read-post.hook";
 import { LoadingSpinner } from "~/components/atoms/loading-spinner/loading-spinner";
 import { getPostFormatFromTRPC } from "~/utils/get-post-format-from-trpc";
 import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
+import { useIsEditor } from "~/hooks/auth/is-editor.hook";
+import { IconInfo } from "~/components/icons/info/info";
 
 export const EditPost: FC = () => {
   const hash = useURLHash();
+  const isEditor = useIsEditor();
 
   const { postData, postDataIsFetching, postDataHasError } = useReadPost({
     id: hash ?? "",
@@ -21,18 +24,22 @@ export const EditPost: FC = () => {
   return (
     <AccountPageWrapper>
       <SharedHead title="Edit Post" />
-      <PageStructure title="Edit post" width="full">
+      <PageStructure title="Edit post" width="full" justifyContent="start">
         {postDataIsFetching ? <LoadingSpinner /> : null}
         {postDataHasError ? (
           <InfoPanel title="Post not found" type="info" />
         ) : null}
-        {postData ? (
+        {postData && isEditor ? (
           <PostEntryForm
             mode="edit"
             postData={postDataFromTRPC}
             postId={hash ?? undefined}
           />
-        ) : null}
+        ) : (
+          <p className="flex gap-2 items-center">
+            <IconInfo /> You need to be an editor to edit
+          </p>
+        )}
       </PageStructure>
     </AccountPageWrapper>
   );

@@ -24,6 +24,8 @@ export const HeaderMenu: FC = () => {
             <ul className="flex flex-col gap-2 mb-auto">
               <Link href={EURLS.Home}>Home</Link>
               <Link href={EURLS.CreatePost}>Create</Link>
+              <Link href={EURLS.SetUsername}>Username</Link>
+              <Link href={EURLS.PostPending}>Pending Posts</Link>
               <Link href={EURLS.EditPost}>Edit</Link>
             </ul>
             <SignInOrOutButton allowSignOut />

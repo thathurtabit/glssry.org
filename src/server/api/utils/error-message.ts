@@ -2,6 +2,7 @@ export const errorMessage = {
   // Post
   readPost: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to read this post. Message: ${message}.`,
   readAllPosts: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to read all posts. Message: ${message}.`,
+  readAllPendingPosts: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to read all pending posts. Message: ${message}.`,
   // User
   deleteUser: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to delete this user. Message: ${message}.`,
   readUserData: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to read user data. Message: ${message}.`,

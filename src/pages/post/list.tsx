@@ -12,7 +12,7 @@ export const ListAllPosts: FC = () => {
   return (
     <AccountPageWrapper>
       <SharedHead title="List All Posts" />
-      <PageStructure title="List all posts" width="full">
+      <PageStructure title="List all posts" width="full" justifyContent="start">
         {postsDataIsFetching ? <LoadingSpinner /> : null}
         {postsData ? (
           <ul>
