@@ -32,10 +32,10 @@ export const getTRPCPostFormat = (postData: TPost): TTRPCReadPost => ({
     published: true,
     updatedAt: new Date(),
     fileUnder: postData.fileUnder as unknown as TagName,
-    tags: postData.tags.map((tag, index) => ({
+    tags: postData.tags?.map((tag, index) => ({
       id: index,
       name: tag as unknown as TagName,
-    })),
+    })) ?? null,
     relatedPostId1: postData.relatedPostId1 ?? null,
     relatedPostId2: postData.relatedPostId2 ?? null,
   }],

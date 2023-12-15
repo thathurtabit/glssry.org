@@ -5,9 +5,14 @@ export interface IReadPost {
 }
 
 export const useReadPost = ({ id }: IReadPost) => {
-  const { data, isFetching, error, isError } = api.post.readPost.useQuery({
-    id,
-  });
+  const { data, isFetching, error, isError } = api.post.readPost.useQuery(
+    {
+      id,
+    },
+    {
+      enabled: Boolean(id),
+    }
+  );
 
   return {
     postData: data,

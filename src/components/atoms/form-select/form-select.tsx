@@ -32,7 +32,6 @@ export const FormSelect: FC<IFormSelect> = ({
   const inputSizeClasses = getSizeClasses(inputSize);
   const inputCoreClasses = getInputCoreClasses(inverse, hasError);
 
-  const optionsListWithEmptyOption = ["Choose an option", ...optionList];
   return (
     <div
       className={`${
@@ -69,7 +68,7 @@ export const FormSelect: FC<IFormSelect> = ({
           }`}
           {...selectProperties}
         >
-          {optionsListWithEmptyOption.map((tag, index) => {
+          {optionList.map((tag, index) => {
             const isFirstOption = index === 0;
             return (
               <option

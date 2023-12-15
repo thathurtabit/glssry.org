@@ -48,8 +48,6 @@ export const useFormValidation = <
   const validateForm = useCallback((): boolean => {
     const zodValidationResult = currentFormSchema.safeParse(currentFormState);
 
-    console.log({ zodValidationResult });
-
     if (zodValidationResult.success) {
       setErrorState(defaultValidationState);
       setPerformLiveValidation(true); // We still need to validate this as the user can edit at any time
@@ -62,8 +60,6 @@ export const useFormValidation = <
         message,
       ])
     );
-
-    console.log({ errors });
 
     setErrorState({
       hasError: true,

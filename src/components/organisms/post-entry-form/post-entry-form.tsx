@@ -1,7 +1,10 @@
 import type { TPost, TPostKeys } from "~/schemas/post/post.schema";
 import type { IPostEntryForm, TPostEntryEvent } from "./post-entry-form.types";
-import { postSchema, tagKeys } from "~/schemas/post/post.schema";
 import type { FormEvent } from "react";
+import {
+  postSchema,
+  tagsKeysWithSelectInstruction,
+} from "~/schemas/post/post.schema";
 import { useReducer, type FC, Fragment } from "react";
 import { FormInput } from "~/components/atoms/form-input/form-input";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
@@ -17,12 +20,25 @@ import { FormSelect } from "~/components/atoms/form-select/form-select";
 import { TagsList } from "./children/tags-list/tags-list";
 import { HorizontalRule } from "~/components/atoms/hr/hr";
 import { useFormValidation } from "~/hooks/post/form-validation.hook";
+import { useCreatePost } from "~/hooks/post/create-post.hook";
+import { useUpdatePost } from "~/hooks/post/update-post.hook";
 
-export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
+export const PostEntryForm: FC<IPostEntryForm> = ({
+  postId,
+  mode,
+  postData,
+}) => {
   const reducerState = postData ?? initState;
   const [state, dispatch] = useReducer(postReducer, reducerState);
 
+  const { createPostMutation } = useCreatePost();
+  const { updatePostMutation } = useUpdatePost();
+
   const handleOnChange = (event: TPostEntryEvent, type: TPostKeys) => {
+    if (!event.target) {
+      return;
+    }
+
     dispatch({ type, payload: event.target.value });
   };
 
@@ -44,7 +60,21 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
 
     const isDataValid = getIsFormDataValid();
 
-    console.log({ errorState, isDataValid });
+    if (!isDataValid) {
+      return;
+    }
+
+    if (mode === "create") {
+      createPostMutation(state);
+      return;
+    }
+
+    if (mode === "edit" && postId) {
+      updatePostMutation({
+        postId,
+        data: state,
+      });
+    }
   };
 
   return (
@@ -120,7 +150,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
           hasError={Boolean(errorData?.fileUnder)}
           value={state.fileUnder}
           errorText={errorData?.fileUnder}
-          optionList={tagKeys}
+          optionList={tagsKeysWithSelectInstruction}
           onChange={(event) => handleOnChange(event, "fileUnder")}
         />
         <HorizontalRule position="left" />
@@ -128,7 +158,13 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
         <p className="mb-5">
           <small>Other categories this post is related to</small>
         </p>
-        <TagsList tags={state.tags} handleOnTagsChange={handleOnTagsChange} />
+        {state.tags ? (
+          <TagsList
+            tags={state.tags}
+            handleOnTagsChange={handleOnTagsChange}
+            errorText={errorData?.tags}
+          />
+        ) : null}
         <HorizontalRule position="left" />
         <FormTextarea
           required
@@ -163,7 +199,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({ mode, postData }) => {
           variant={hasError ? "danger" : "primary"}
           className="mt-4"
         >
-          Submit
+          {mode === "create" ? "Submit" : "Update"}
         </Button>
       </div>
       <div className="flex-1">

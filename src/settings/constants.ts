@@ -22,3 +22,4 @@ export enum EURLS {
 export const summaryMaxCharacterCount = 500;
 export const maxPostLinkLength = 2048;
 export const maxTagsForPost = 5;
+export const emptySelectOption = "Select an option";

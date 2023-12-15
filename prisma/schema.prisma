@@ -23,42 +23,63 @@ enum UserRole {
 }
 
 enum TagName {
-    Uncategorized
+    Animals
     Art
     Astronomy
+    Aviation
     Biology
+    Business
     Chemistry
+    Civics
     Computing
+    Construction
+    Crafts
     Cryptography
+    Cultural
     Economics
+    Engineering
     Entertainment
+    Environment
+    Finance
     Games
     Geography
+    Geology
     Hardware
+    Health
     History
+    Internet
+    Journalism
     Law
     Linguistics
     Literature
     Mathematics
     Medicine
+    Military
     Music
     Mythology
     Networking
+    Oceanography
+    Performance
     Philosophy
     Physics
     Politics
     Programming
     Psychology
     Religion
+    Science
     Security
+    Sex
     Software
     Sports
+    Teaching
+    Technology
+    Uncategorized
 }
 
 model Post {
     id        String        @id @default(cuid())
     createdAt DateTime      @default(now())
-    title     String
+    title     String        @unique
     author    User          @relation(fields: [authorId], references: [id])
     authorId  String
     versions  PostVersion[]
@@ -71,7 +92,7 @@ model PostVersion {
     postId         String
     post           Post     @relation(fields: [postId], references: [id])
     updatedAt      DateTime @default(now())
-    slug           String   @unique
+    slug           String
     title          String
     body           String   @db.VarChar(500) // NOTE: check constants.ts
     abbreviation   String   @db.VarChar(30)

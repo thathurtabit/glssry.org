@@ -4,14 +4,17 @@ import { Fragment, useState } from "react";
 import { Button } from "~/components/atoms/button/button";
 import { FormSelect } from "~/components/atoms/form-select/form-select";
 import { IconPlus } from "~/components/icons/plus/plus";
-import { tagKeys } from "~/schemas/post/post.schema";
+import { tagsKeysWithSelectInstruction } from "~/schemas/post/post.schema";
 import { maxTagsForPost } from "~/settings/constants";
 import { IconMinus } from "~/components/icons/minus/minus";
 import { removeItemFromArrayAtIndex } from "~/utils/remove-item-from-array-at-index";
 
-export const TagsList: FC<ITagsListProps> = ({ tags, handleOnTagsChange }) => {
+export const TagsList: FC<ITagsListProps> = ({
+  tags,
+  errorText,
+  handleOnTagsChange,
+}) => {
   const [tagsCount, setTagsCount] = useState<number>(tags.length);
-
   const handleOnSelect = (
     event: ChangeEvent<HTMLSelectElement>,
     changedIndex: number
@@ -54,9 +57,10 @@ export const TagsList: FC<ITagsListProps> = ({ tags, handleOnTagsChange }) => {
               id={`post-input-tag-${index}`}
               label={`Tag ${index + 1}`}
               {...(index === 0 && { description: "You can add up to 5 tags" })}
-              hasError={false}
+              hasError={Boolean(errorText)}
+              errorText={errorText}
               value={tags.at(index) ?? ""}
-              optionList={tagKeys}
+              optionList={tagsKeysWithSelectInstruction}
               onChange={(event) => handleOnSelect(event, index)}
             />
             <div className="flex flex-row gap-2 mt-auto mb-6">
