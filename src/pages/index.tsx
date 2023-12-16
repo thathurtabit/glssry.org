@@ -1,9 +1,10 @@
-import { signIn, signOut, useSession } from "next-auth/react";
-import { Button } from "~/components/atoms/button/button";
+import { PostRowsLinks } from "~/components/molecules/post-rows-links/post-rows-links";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
-import { EURLS, appDescription, appTitle } from "~/settings/constants";
+import { useReadLatestPosts } from "~/hooks/post/read-latest-posts.hook";
+import { appDescription, appTitle } from "~/settings/constants";
 
 export default function Home() {
+  const { latestPostsData, latestPostsDataIsFetching } = useReadLatestPosts();
   return (
     <>
       <SharedHead title={`Welcome to ${appTitle}`} />
@@ -13,45 +14,12 @@ export default function Home() {
             {appTitle}
           </h1>
           <p className="text-copy">{appDescription}</p>
-
-          <div className="flex flex-col items-center gap-2">
-            <AuthShowcase />
-          </div>
+          <PostRowsLinks
+            isLoading={latestPostsDataIsFetching}
+            postsData={latestPostsData}
+          />
         </div>
       </main>
     </>
-  );
-}
-
-function AuthShowcase() {
-  const { data: sessionData } = useSession();
-
-  const handleSignInOrOut = () => {
-    if (sessionData) {
-      (async () => {
-        await signOut({ callbackUrl: EURLS.SignedOut });
-      })().catch((error) => {
-        // eslint-disable-next-line no-console
-        console.error(error);
-      });
-    }
-
-    (async () => {
-      await signIn("sign-in-button", { callbackUrl: EURLS.SignInSuccess });
-    })().catch((error) => {
-      // eslint-disable-next-line no-console
-      console.error(error);
-    });
-  };
-
-  return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-      </p>
-      <Button type="button" onClick={handleSignInOrOut}>
-        {sessionData ? "Sign out" : "Sign in"}
-      </Button>
-    </div>
   );
 }

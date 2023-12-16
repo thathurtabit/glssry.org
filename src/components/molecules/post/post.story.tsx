@@ -6,13 +6,7 @@ const meta: Meta<typeof Post> = {
   component: Post,
   parameters: {
     backgrounds: {
-      default: "light",
-      values: [
-        {
-          name: "light",
-          value: "hsl(43deg 100% 85%)",
-        },
-      ],
+      default: "dark",
     },
   },
 };

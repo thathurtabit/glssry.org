@@ -1,0 +1,93 @@
+import type { TTRPCReadLatestPosts, TTRPCReadPost } from "~/types/prisma.types";
+
+export const postsFullMockData: NonNullable<TTRPCReadPost>[] = [{
+  id: "1",
+  title: "Cascading Style Sheets",
+  authorId: "1",
+  createdAt: new Date(),
+  author: {
+    id: "1",
+    username: "test-user",
+    image: "https://www.google.com",
+  },
+  versions: [{
+    id: "1",
+    postId: "1",
+    authorId: "1",
+    author: {
+      id: "1",
+      username: "test-user",
+      image: "https://www.google.com",
+    },
+    published: true,
+    title: "Cascading Style Sheets",
+    slug: "programming/cascading-style-sheets",
+    acronym: "CSS",
+    abbreviation: "CSS",
+    initialism: "CSS",
+    link: "https://www.google.com",
+    body: "Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a document written in HTML or XML (including XML dialects such as SVG, MathML or XHTML). CSS describes how elements should be rendered on screen, on paper, in speech, or on other media.",
+    tags: ["Test", "Uncategorized"],
+    fileUnder: "Computing",
+    relatedPostId1: "2",
+    relatedPostId2: "3",
+    updatedAt: new Date(),
+  }],
+}, {
+  id: "2",
+  title: "HyperText Markup Language",
+  authorId: "2",
+  createdAt: new Date(),
+  author: {
+    id: "2",
+    username: "test-user",
+    image: "https://www.google.com",
+  },
+  versions: [{
+    id: "2",
+    postId: "2",
+    authorId: "2",
+    author: {
+      id: "2",
+      username: "test-user",
+      image: "https://www.google.com",
+    },
+    published: true,
+    title: "HyperText Markup Language",
+    slug: "programming/hypertext-markup-language",
+    acronym: "HTML",
+    abbreviation: "HTML",
+    initialism: "HTML",
+    link: "https://www.google.com",
+    body: "HTML (HyperText Markup Language) is the most basic building block of the Web. It defines the meaning and structure of web content. Other technologies besides HTML are generally used to describe a web page's appearance/presentation (CSS) or functionality/behavior (JavaScript).",
+    tags: ["Test", "Uncategorized"],
+    fileUnder: "Computing",
+    relatedPostId1: "2",
+    relatedPostId2: "3",
+    updatedAt: new Date(),
+  }],
+}];
+
+export const postsLinksMockData: NonNullable<TTRPCReadLatestPosts> = [{
+  id: "1",
+  title: "Cascading Style Sheets",
+  versions: [{
+    id: "1",
+    title: "Cascading Style Sheets",
+    fileUnder: "Computing",
+    slug: "programming/cascading-style-sheets",
+    tags: ["Test", "Uncategorized"],
+    updatedAt: new Date(),
+  }],
+}, {
+  id: "2",
+  title: "HyperText Markup Language",
+  versions: [{
+    id: "2",
+    title: "HyperText Markup Language",
+    fileUnder: "Computing",
+    slug: "programming/hypertext-markup-language",
+    tags: ["Test", "Uncategorized"],
+    updatedAt: new Date(),
+  }],
+}];

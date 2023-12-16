@@ -202,7 +202,7 @@ export const ModalHub: FC = () => {
                       <Button
                         variant={cancelVariant}
                         loading={cancelLoading}
-                        size={type === "small" ? "small" : "medium"}
+                        size="small"
                         onClick={onCancel}
                       >
                         {cancelIcon && (
@@ -214,7 +214,7 @@ export const ModalHub: FC = () => {
                     {confirm && (
                       <Button
                         variant={confirmVariant}
-                        size={type === "small" ? "small" : "medium"}
+                        size="small"
                         loading={confirmLoading}
                         onClick={onConfirm}
                       >

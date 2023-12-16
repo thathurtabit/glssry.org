@@ -35,3 +35,11 @@ export const getInputCoreClasses = (inverse = false, hasError: boolean) => {
     ? "bg-background-light text-error border-l-4 border-l-error"
     : "bg-background-light text-copy-dark border-l-2 border-background-inverse-dark";
 };
+
+// POST ROWS
+export const postRowWrapperStyles = `w-full`;
+export const postRowItemStyles = `border-b-[1px] border-dotted border-white/10`;
+export const postRowItemClickStyles = `flex flex-row items-center gap-4 w-full py-1 px-2 hover:bg-background-light transition-colors`;
+export const postRowTitleStyles = `flex flex-1 items-start`;
+export const postRowItemMetaStyles = `ml-auto flex items-center gap-1 uppercase opacity-50 text-xs`;
+export const postRowNoItemsStyles = `flex gap-2 items-center`;

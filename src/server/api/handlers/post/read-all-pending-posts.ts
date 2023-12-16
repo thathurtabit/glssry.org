@@ -13,6 +13,26 @@ export const readAllPendingPosts = editorProcedure.query(async ({ ctx }) => {
           },
         },
       },
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            image: true,
+          },
+        },
+        versions: {
+          include: {
+            author: {
+              select: {
+                id: true,
+                username: true,
+                image: true,
+              },
+            },
+          },
+        },
+      },
       orderBy: {
         createdAt: "desc",
       },
