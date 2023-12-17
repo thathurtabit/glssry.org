@@ -31,13 +31,24 @@ export const readAllPendingPosts = editorProcedure.query(async ({ ctx }) => {
               },
             },
           },
+          orderBy: {
+            updatedAt: "asc",
+          },
+          take: -1, // Take last item
         },
       },
+      take: 100,
       orderBy: {
-        createdAt: "desc",
+        createdAt: "asc",
       },
     });
-    return posts;
+
+    const filteredPosts = posts.filter((post) => {
+      const latestVersion = post.versions.at(-1);
+      return !latestVersion?.published;
+    });
+
+    return filteredPosts;
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);

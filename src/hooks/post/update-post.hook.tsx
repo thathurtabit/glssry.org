@@ -3,7 +3,11 @@ import { setNewNotification } from "~/context/actions/notifications/notification
 import { GlssryDispatchContext } from "~/context/context/context";
 import { api } from "~/utils/api";
 
-export const useUpdatePost = () => {
+export interface IUseUpdatePost {
+  onSuccessCallback?: () => void;
+}
+
+export const useUpdatePost = ({ onSuccessCallback }: IUseUpdatePost) => {
   const dispatch = useContext(GlssryDispatchContext);
   const updatePostMutationId = useId();
   const updatePostErrorId = useId();
@@ -41,6 +45,7 @@ export const useUpdatePost = () => {
             message: "Post updated!",
           })
         );
+        onSuccessCallback?.();
       },
       async onSettled() {
         await trpcContext.post.readAllPosts.invalidate();

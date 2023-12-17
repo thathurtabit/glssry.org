@@ -15,7 +15,7 @@ export const readAllPosts = publicProcedure.query(async ({ ctx }) => {
       },
       take: 100, // NOTE: This is a temporary limit
       orderBy: {
-        createdAt: "desc",
+        createdAt: "asc",
       },
     });
     return posts;

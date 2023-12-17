@@ -5,10 +5,10 @@ import {
   postSchema,
   tagsKeysWithSelectInstruction,
 } from "~/schemas/post/post.schema";
-import { useReducer, type FC, Fragment } from "react";
+import { useReducer, type FC, Fragment, useState } from "react";
 import { FormInput } from "~/components/atoms/form-input/form-input";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
-import { appTitle, appURL } from "~/settings/constants";
+import { EURLS, appTitle, appURL } from "~/settings/constants";
 import { Button } from "~/components/atoms/button/button";
 import { FormTextarea } from "~/components/atoms/form-textarea/form-textarea";
 import { postReducer } from "./reducer/form.reducer";
@@ -22,6 +22,8 @@ import { HorizontalRule } from "~/components/atoms/hr/hr";
 import { useFormValidation } from "~/hooks/post/form-validation.hook";
 import { useCreatePost } from "~/hooks/post/create-post.hook";
 import { useUpdatePost } from "~/hooks/post/update-post.hook";
+import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
+import Link from "next/link";
 
 export const PostEntryForm: FC<IPostEntryForm> = ({
   postId,
@@ -30,9 +32,14 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
 }) => {
   const reducerState = postData ?? initState;
   const [state, dispatch] = useReducer(postReducer, reducerState);
+  const [postSuccessful, setPostSuccessful] = useState(false);
 
-  const { createPostMutation } = useCreatePost();
-  const { updatePostMutation } = useUpdatePost();
+  const { createPostMutation } = useCreatePost({
+    onSuccessCallback: () => setPostSuccessful(true),
+  });
+  const { updatePostMutation } = useUpdatePost({
+    onSuccessCallback: () => setPostSuccessful(true),
+  });
 
   const handleOnChange = (event: TPostEntryEvent, type: TPostKeys) => {
     if (!event.target) {
@@ -76,6 +83,23 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
       });
     }
   };
+
+  if (postSuccessful) {
+    return (
+      <InfoPanel
+        type="success"
+        title={mode === "create" ? "Post created" : "Post updated"}
+      >
+        <p>
+          <strong>{state.title}</strong> has been successfully submitted and is
+          pending approval. Thank you!
+        </p>
+        <p>
+          <Link href={EURLS.Home}>Home</Link>
+        </p>
+      </InfoPanel>
+    );
+  }
 
   return (
     <form className="flex my-10 gap-10 w-full" onSubmit={handleFormSubmit}>

@@ -10,6 +10,7 @@ import { Button } from "~/components/atoms/button/button";
 import { IconCancel } from "~/components/icons/cancel/cancel";
 import { IconConfirm } from "~/components/icons/confirm/confirm";
 import { ContentWellHeader } from "../content-well-header/content-well-header";
+import { Link } from "~/components/atoms/link/link";
 
 export const ModalHub: FC = () => {
   const [showDialog, setShowDialog] = useState(false);
@@ -31,6 +32,7 @@ export const ModalHub: FC = () => {
     loading: cancelLoading = false,
     icon: cancelIcon = <IconCancel size={type === "small" ? 19 : 21} />,
     variant: cancelVariant = "secondary",
+    href: cancelHref = undefined,
   } = cancel ?? {};
   const {
     onClick: passedConfirmOnClick,
@@ -38,6 +40,7 @@ export const ModalHub: FC = () => {
     loading: confirmLoading = false,
     icon: confirmIcon = <IconConfirm size={type === "small" ? 20 : 23} />,
     variant: confirmVariant = "primary",
+    href: confirmHref = undefined,
   } = confirm ?? {};
 
   const handleCloseModal = () => {
@@ -198,32 +201,60 @@ export const ModalHub: FC = () => {
                     data-cy="modal-footer"
                     className={`flex justify-end gap-4 p-2 ${footerBackgroundClasses}`}
                   >
-                    {cancel && (
-                      <Button
-                        variant={cancelVariant}
-                        loading={cancelLoading}
-                        size="small"
-                        onClick={onCancel}
-                      >
-                        {cancelIcon && (
-                          <span className="pr-0">{cancelIcon}</span>
-                        )}
-                        {cancelText}
-                      </Button>
-                    )}
-                    {confirm && (
-                      <Button
-                        variant={confirmVariant}
-                        size="small"
-                        loading={confirmLoading}
-                        onClick={onConfirm}
-                      >
-                        {confirmIcon && (
-                          <span className="pr-1">{confirmIcon}</span>
-                        )}
-                        {confirmText}
-                      </Button>
-                    )}
+                    {cancel ? (
+                      cancelHref ? (
+                        <Link
+                          variant={cancelVariant}
+                          href={cancelHref}
+                          size="small"
+                          onClick={onCancel}
+                        >
+                          {cancelIcon && (
+                            <span className="pr-0">{cancelIcon}</span>
+                          )}
+                          {cancelText}
+                        </Link>
+                      ) : (
+                        <Button
+                          variant={cancelVariant}
+                          loading={cancelLoading}
+                          size="small"
+                          onClick={onCancel}
+                        >
+                          {cancelIcon && (
+                            <span className="pr-0">{cancelIcon}</span>
+                          )}
+                          {cancelText}
+                        </Button>
+                      )
+                    ) : null}
+                    {confirm ? (
+                      confirmHref ? (
+                        <Link
+                          variant={confirmVariant}
+                          size="small"
+                          href={confirmHref}
+                          onClick={onConfirm}
+                        >
+                          {confirmIcon && (
+                            <span className="pr-1">{confirmIcon}</span>
+                          )}
+                          {confirmText}
+                        </Link>
+                      ) : (
+                        <Button
+                          variant={confirmVariant}
+                          size="small"
+                          loading={confirmLoading}
+                          onClick={onConfirm}
+                        >
+                          {confirmIcon && (
+                            <span className="pr-1">{confirmIcon}</span>
+                          )}
+                          {confirmText}
+                        </Button>
+                      )
+                    ) : null}
                   </footer>
                 )}
               </dialog>

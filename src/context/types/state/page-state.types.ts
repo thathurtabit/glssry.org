@@ -7,11 +7,13 @@ export interface IPageState {
 }
 
 export interface IModalFooterAction {
-  onClick: () => void;
+  onClick?: () => void;
   loading?: boolean;
   text?: string;
   icon?: ReactElement;
   variant?: TButtonVariant;
+  /** This changes the default Button to Link component */
+  href?: string;
 }
 
 export interface IModalFooter {

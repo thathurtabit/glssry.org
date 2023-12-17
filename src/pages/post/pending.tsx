@@ -12,14 +12,23 @@ import { Post } from "~/components/molecules/post/post";
 import { IconEdit } from "~/components/icons/edit/edit";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
 import { PostRowsButtons } from "~/components/molecules/post-rows-buttons/post-rows-buttons";
+import { usePublishPost } from "~/hooks/post/publish-post.hook";
 
 export const ListPendingPosts: FC = () => {
   const { pendingPostsData, pendingPostsDataIsFetching } =
     useReadAllPendingPosts();
   const isEditor = useIsEditor();
   const dispatch = useContext(GlssryDispatchContext);
+  const { publishPostMutation, publishPostMutationIsLoading } =
+    usePublishPost();
 
   const handleViewPost = (postData: NonNullable<TTRPCReadPost>) => {
+    const lastVersion = postData.versions.at(-1);
+    if (!lastVersion) {
+      return;
+    }
+
+    const { id: postVersionId } = lastVersion;
     dispatch(
       setModal({
         title: postData.title,
@@ -28,16 +37,15 @@ export const ListPendingPosts: FC = () => {
         footer: {
           confirm: {
             text: "Approve",
+            loading: publishPostMutationIsLoading,
             onClick() {
-              console.log("Approve");
+              publishPostMutation({ postId: postVersionId });
             },
           },
           cancel: {
             text: "Edit",
             icon: <IconEdit />,
-            onClick() {
-              console.log("Edit");
-            },
+            href: `/post/edit#${postVersionId}`,
           },
         },
       })
