@@ -8,7 +8,7 @@ export const postReducer = (state: TPost, { type, payload }: TPostAction): TPost
       return {
         ...state,
         title: payload as TPost["title"],
-        slug: getKebabCaseFromSentenceCase(`${state.fileUnder}/${payload as TPost["title"]}`),
+        slug: getKebabCaseFromSentenceCase(payload as TPost["title"]),
       };
     case "acronym":
       return { ...state, acronym: payload as TPost["acronym"] };
@@ -23,7 +23,6 @@ export const postReducer = (state: TPost, { type, payload }: TPostAction): TPost
     case "fileUnder":
       return {
         ...state, fileUnder: payload as TPost["fileUnder"],
-        slug: getKebabCaseFromSentenceCase(`${payload as TPost["fileUnder"]}/${state.title}`),
       };
     case "tags":
       return { ...state, tags: payload as TPost["tags"] };

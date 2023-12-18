@@ -32,14 +32,14 @@ export const readAllPendingPosts = editorProcedure.query(async ({ ctx }) => {
             },
           },
           orderBy: {
-            updatedAt: "asc",
+            updatedAt: "desc",
           },
-          take: -1, // Take last item
+          take: 1, // Take last item
         },
       },
       take: 100,
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
     });
 
