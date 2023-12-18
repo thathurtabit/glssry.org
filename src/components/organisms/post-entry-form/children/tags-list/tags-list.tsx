@@ -12,6 +12,7 @@ import { removeItemFromArrayAtIndex } from "~/utils/remove-item-from-array-at-in
 export const TagsList: FC<ITagsListProps> = ({
   tags,
   errorText,
+  disabled,
   handleOnTagsChange,
 }) => {
   const [tagsCount, setTagsCount] = useState<number>(tags.length);
@@ -46,7 +47,8 @@ export const TagsList: FC<ITagsListProps> = ({
   return (
     <Fragment>
       {Array.from({ length: tagsCount }, (_, index) => {
-        const showDisableAddTagButton = index === maxTagsForPost - 1;
+        const showDisableAddTagButton =
+          index === maxTagsForPost - 1 || disabled;
         const showDisableRemoveTagButton = index === 0;
         return (
           <div
@@ -61,6 +63,7 @@ export const TagsList: FC<ITagsListProps> = ({
               errorText={errorText}
               value={tags.at(index) ?? ""}
               optionList={tagsKeysWithSelectInstruction}
+              disabled={disabled}
               onChange={(event) => handleOnSelect(event, index)}
             />
             <div className="flex flex-row gap-2 mt-auto mb-6">

@@ -22,8 +22,8 @@ import { HorizontalRule } from "~/components/atoms/hr/hr";
 import { useFormValidation } from "~/hooks/post/form-validation.hook";
 import { useCreatePost } from "~/hooks/post/create-post.hook";
 import { useUpdatePost } from "~/hooks/post/update-post.hook";
-import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
-import Link from "next/link";
+import { IconThumb } from "~/components/icons/thumb/thumb";
+import { Link } from "~/components/atoms/link/link";
 
 export const PostEntryForm: FC<IPostEntryForm> = ({
   postId,
@@ -34,10 +34,10 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
   const [state, dispatch] = useReducer(postReducer, reducerState);
   const [postSuccessful, setPostSuccessful] = useState(false);
 
-  const { createPostMutation } = useCreatePost({
+  const { createPostMutation, createPostMutationIsLoading } = useCreatePost({
     onSuccessCallback: () => setPostSuccessful(true),
   });
-  const { updatePostMutation } = useUpdatePost({
+  const { updatePostMutation, updatePostMutationIsLoading } = useUpdatePost({
     onSuccessCallback: () => setPostSuccessful(true),
   });
 
@@ -59,6 +59,9 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
   });
 
   const { hasError, errorData } = errorState ?? {};
+
+  const shouldDisableInputs =
+    createPostMutationIsLoading || updatePostMutationIsLoading;
 
   const postPreviewData = getTRPCPostFormat(state);
 
@@ -86,18 +89,21 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
 
   if (postSuccessful) {
     return (
-      <InfoPanel
-        type="success"
-        title={mode === "create" ? "Post created" : "Post updated"}
-      >
+      <Fragment>
+        <SectionSubtitle className="flex items-center gap-1">
+          {mode === "create" ? "Post created" : "Post updated"} <IconThumb />
+        </SectionSubtitle>
         <p>
-          <strong>{state.title}</strong> has been successfully submitted and is
-          pending approval. Thank you!
+          &ldquo;<strong>{state.title}</strong>&ldquo; has been successfully
+          submitted and is pending approval.
         </p>
+        <p>Thank you!</p>
         <p>
-          <Link href={EURLS.Home}>Home</Link>
+          <Link size="small" href={EURLS.Home}>
+            Go home
+          </Link>
         </p>
-      </InfoPanel>
+      </Fragment>
     );
   }
 
@@ -122,6 +128,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           hasError={Boolean(errorData?.title)}
           errorText={errorData?.title}
           value={state.title}
+          disabled={shouldDisableInputs}
           onChange={(event) => handleOnChange(event, "title")}
         />
         <FormInput
@@ -132,6 +139,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           hasError={Boolean(errorData?.acronym)}
           errorText={errorData?.acronym}
           value={state.acronym}
+          disabled={shouldDisableInputs}
           onChange={(event) => handleOnChange(event, "acronym")}
         />
         <FormInput
@@ -142,6 +150,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           hasError={Boolean(errorData?.abbreviation)}
           errorText={errorData?.abbreviation}
           value={state.abbreviation}
+          disabled={shouldDisableInputs}
           onChange={(event) => handleOnChange(event, "abbreviation")}
         />
         <FormInput
@@ -152,6 +161,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           hasError={Boolean(errorData?.initialism)}
           errorText={errorData?.initialism}
           value={state.initialism}
+          disabled={shouldDisableInputs}
           onChange={(event) => handleOnChange(event, "initialism")}
         />
         <FormInput
@@ -164,6 +174,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           hasError={Boolean(errorData?.link)}
           placeholder="i.e.  https://reputable-source.com"
           value={state.link}
+          disabled={shouldDisableInputs}
           onChange={(event) => handleOnChange(event, "link")}
         />
         <FormSelect
@@ -175,6 +186,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           value={state.fileUnder}
           errorText={errorData?.fileUnder}
           optionList={tagsKeysWithSelectInstruction}
+          disabled={shouldDisableInputs}
           onChange={(event) => handleOnChange(event, "fileUnder")}
         />
         <HorizontalRule position="left" />
@@ -187,6 +199,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
             tags={state.tags}
             handleOnTagsChange={handleOnTagsChange}
             errorText={errorData?.tags}
+            disabled={shouldDisableInputs}
           />
         ) : null}
         <HorizontalRule position="left" />
@@ -198,6 +211,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           hasError={Boolean(errorData?.body)}
           errorText={errorData?.body}
           value={state.body}
+          disabled={shouldDisableInputs}
           onChange={(event) => handleOnChange(event, "body")}
         />
         <FormInput
@@ -207,6 +221,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           type="string"
           hasError={Boolean(errorData?.relatedPostId1)}
           value={state.relatedPostId1}
+          disabled={shouldDisableInputs}
           onChange={(event) => handleOnChange(event, "relatedPostId1")}
         />
         <FormInput
@@ -216,12 +231,14 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           type="string"
           hasError={Boolean(errorData?.relatedPostId2)}
           value={state.relatedPostId2}
+          disabled={shouldDisableInputs}
           onChange={(event) => handleOnChange(event, "relatedPostId2")}
         />
         <Button
           type="submit"
           variant={hasError ? "danger" : "primary"}
           className="mt-4"
+          disabled={shouldDisableInputs}
         >
           {mode === "create" ? "Submit" : "Update"}
         </Button>

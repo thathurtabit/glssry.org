@@ -7,7 +7,7 @@ import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 export const CreatePost: FC = () => (
   <AccountPageWrapper>
     <SharedHead title="Create Post" />
-    <PageStructure title="Create post" width="full">
+    <PageStructure title="Create post" width="full" justifyContent="start">
       <PostEntryForm mode="create" />
     </PageStructure>
   </AccountPageWrapper>

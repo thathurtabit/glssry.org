@@ -43,7 +43,7 @@ export const usePublishPost = () => {
         );
       },
       async onSettled() {
-        await trpcContext.post.readAllPosts.invalidate();
+        await trpcContext.post.readAllPendingPosts.invalidate();
       },
     });
 

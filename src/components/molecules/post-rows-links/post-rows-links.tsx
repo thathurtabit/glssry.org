@@ -13,7 +13,7 @@ import {
   postRowWrapperStyles,
 } from "~/styles/shared";
 import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
-import { Link } from "~/components/atoms/link/link";
+import { LinkText } from "~/components/atoms/link-text/link-text";
 
 export const PostRowsLinks: FC<IPostRowsLinks> = ({
   isLoading,
@@ -42,7 +42,7 @@ export const PostRowsLinks: FC<IPostRowsLinks> = ({
 
         return slug ? (
           <li key={id} className={postRowItemStyles}>
-            <Link
+            <LinkText
               href={slug}
               className={postRowItemClickStyles}
               onClick={handleLinkClick}
@@ -59,7 +59,7 @@ export const PostRowsLinks: FC<IPostRowsLinks> = ({
                 <IconCalendar />
                 {date}
               </small>
-            </Link>
+            </LinkText>
           </li>
         ) : null;
       })}
