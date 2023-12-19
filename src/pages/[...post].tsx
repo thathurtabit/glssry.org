@@ -18,7 +18,10 @@ import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-senten
 export default function PostViewPage({
   slug,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const postQuery = api.post.readPost.useQuery({ slug });
+  const postQuery = api.post.readPost.useQuery(
+    { slug },
+    { refetchOnMount: false, refetchOnWindowFocus: false }
+  );
 
   if (postQuery.status !== "success") {
     // Won't happen since we're using `fallback: "blocking"`
@@ -95,7 +98,7 @@ export async function getStaticProps(
   const uniqueSlug = context.params?.post.at(1);
 
   if (!uniqueSlug) {
-    throw new Error("No id provided");
+    throw new Error("No uniqueSlug provided");
   }
 
   await helpers.post.readPost.prefetch({ slug: uniqueSlug });
