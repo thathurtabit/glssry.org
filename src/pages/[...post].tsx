@@ -15,11 +15,12 @@ import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-senten
 export default function PostViewPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
-  const { id, trpcState } = props;
+  const { slug, trpcState } = props;
 
-  console.log({ trpcState });
+  console.log({ trpcState: trpcState?.queries?.at(0)?.state.data });
 
-  const postQuery = api.post.readPost.useQuery({ id });
+  const postQuery = api.post.readPost.useQuery({ slug });
+
   if (postQuery.status !== "success") {
     // Won't happen since we're using `fallback: "blocking"`
     return <>Loading...</>;
@@ -31,13 +32,18 @@ export default function PostViewPage(
     return <InfoPanel title="Post not found" type="info" />;
   }
 
-  return <Post {...data} />;
+  return (
+    <article className="container">
+      <Post {...data} />
+    </article>
+  );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await db.post.findMany({
     select: {
       id: true,
+      slug: true,
       versions: {
         select: {
           fileUnder: true,
@@ -54,9 +60,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     },
   });
   return {
-    paths: posts.map(({ id, versions }) => {
-      const { fileUnder, slug } = versions.at(0) ?? {};
-      console.log({ id, fileUnder, slug });
+    paths: posts.map(({ slug, versions }) => {
+      const { fileUnder } = versions.at(0) ?? {};
       return {
         params: {
           post: [
@@ -82,19 +87,17 @@ export async function getStaticProps(
     },
     transformer: superjson, // Optional - adds superjson serialization
   });
-  const id = context.params?.post.at(0);
+  const uniqueSlug = context.params?.post.at(1);
 
-  console.log({ context: context.params });
-
-  if (!id) {
+  if (!uniqueSlug) {
     throw new Error("No id provided");
   }
 
-  await helpers.post.readPost.prefetch({ id });
+  await helpers.post.readPost.prefetch({ slug: uniqueSlug });
   return {
     props: {
       trpcState: helpers.dehydrate(),
-      id,
+      slug: uniqueSlug,
     },
     revalidate: 1,
   };

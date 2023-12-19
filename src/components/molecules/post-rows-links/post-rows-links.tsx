@@ -14,6 +14,7 @@ import {
 } from "~/styles/shared";
 import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
 import { LinkText } from "~/components/atoms/link-text/link-text";
+import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 
 export const PostRowsLinks: FC<IPostRowsLinks> = ({
   isLoading,
@@ -40,10 +41,10 @@ export const PostRowsLinks: FC<IPostRowsLinks> = ({
           }
         };
 
-        return slug ? (
+        return slug && fileUnder ? (
           <li key={id} className={postRowItemStyles}>
             <LinkText
-              href={slug}
+              href={`${getKebabCaseFromSentenceCase(fileUnder)}/${slug}`}
               className={postRowItemClickStyles}
               onClick={handleLinkClick}
             >

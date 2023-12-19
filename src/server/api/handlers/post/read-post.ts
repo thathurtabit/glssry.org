@@ -6,12 +6,12 @@ import { z } from "zod";
 
 export const readPost = publicProcedure.input(
   z.object({
-    id: z.string(),
+    slug: z.string(),
   })
 ).query(async ({ input, ctx }) => {
   try {
     const post = await ctx.db.post.findUnique({
-      where: { id: input.id },
+      where: { slug: input.slug },
       include: {
         author: {
           select: {

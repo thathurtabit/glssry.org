@@ -6,6 +6,8 @@ import { getFormattedDate } from "~/utils/get-formatted-date";
 import { Link } from "~/components/atoms/link/link";
 import { IconAccount } from "~/components/icons/account/account";
 import { IconExternalLink } from "~/components/icons/external-link/external-link";
+import { HorizontalRule } from "~/components/atoms/hr/hr";
+import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 
 export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   author: originalAuthor,
@@ -34,38 +36,59 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   const { username: latestAuthorUsername } = latestAuthor;
 
   return (
-    <section className="border-2 border-copy p-4">
+    <section className="p-4 text-copy">
       <SectionTitle>{title}</SectionTitle>
 
       <p>{body}</p>
 
-      <dl className="flex gap-2 my-4">
-        <dt>Abbreviation:</dt>
-        <dd>{abbreviation}</dd>
-        <dt>Acronym:</dt>
-        <dd>{acronym}</dd>
-        <dt>Initialism:</dt>
-        <dd>{initialism}</dd>
+      <dl className="flex gap-5 my-4">
+        <div>
+          <dt className="text-[0.5rem] uppercase opacity-50">Abbreviation:</dt>
+          <dd>{abbreviation}</dd>
+        </div>
+        <div>
+          <dt className="text-[0.5rem] uppercase opacity-50">Acronym:</dt>
+          <dd>{acronym}</dd>
+        </div>
+        <div>
+          <dt className="text-[0.5rem] uppercase opacity-50">Initialism:</dt>
+          <dd>{initialism}</dd>
+        </div>
       </dl>
 
-      <p className="flex gap-2 text-xs items-center mb-5">
-        <IconAccount />
-        <span>{originalAuthorUsername}</span> |{" "}
-        <span>{getFormattedDate({ date: createdAt })}</span>
-      </p>
+      <div className="flex gap-5 text-xs">
+        <div className="flex gap-2 text-xs items-center mb-5">
+          <SectionSubtitle className="text-[0.5rem] opacity-50">
+            Author
+          </SectionSubtitle>
+          <p className="flex gap-2 text-xs items-center mb-5">
+            <IconAccount />
+            <span>{originalAuthorUsername}</span> |{" "}
+            <span>{getFormattedDate({ date: createdAt })}</span>
+          </p>
+        </div>
+        <div className="flex gap-2 text-xs items-center mb-5">
+          <SectionSubtitle className="text-[0.5rem] opacity-50">
+            Last update
+          </SectionSubtitle>
+          <p className="flex gap-2 text-xs items-center mb-5">
+            <IconAccount />
+            <span>{latestAuthorUsername}</span> |{" "}
+            <span>{getFormattedDate({ date: createdAt })}</span>
+          </p>
+        </div>
+      </div>
 
-      <p className="flex gap-2 text-xs items-center mb-5">
-        <IconAccount />
-        <span>{latestAuthorUsername}</span> |{" "}
-        <span>{getFormattedDate({ date: createdAt })}</span>
-      </p>
-
-      <Link href={link}>
+      <Link href={link} size="small">
         Learn more <IconExternalLink />
       </Link>
 
-      <p>File under: {fileUnder}</p>
-      <p>Versions: {versions.length}</p>
+      <HorizontalRule />
+
+      <div className="flex gap-2 text-xs">
+        <p>File under: {fileUnder}</p>
+        <p>Versions: {versions.length}</p>
+      </div>
     </section>
   );
 };

@@ -10,6 +10,7 @@ export const getTRPCPostFormat = (postData: TPost): TTRPCReadPost => ({
     image: "",
   },
   id: "mock-post-id",
+  slug: "mock-post-slug",
   authorId: "mock-author-id",
   title: postData.title,
   createdAt: new Date(),

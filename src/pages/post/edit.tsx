@@ -16,7 +16,7 @@ export const EditPost: FC = () => {
   const isEditor = useIsEditor();
 
   const { postData, postDataIsFetching, postDataHasError } = useReadPost({
-    id: hash ?? "",
+    slug: hash ?? "",
   });
 
   const postDataFromTRPC = postData ? getPostFormatFromTRPC(postData) : null;

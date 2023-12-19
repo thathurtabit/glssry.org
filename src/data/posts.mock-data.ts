@@ -2,6 +2,7 @@ import type { TTRPCReadLatestPosts, TTRPCReadPost } from "~/types/prisma.types";
 
 export const postsFullMockData: NonNullable<TTRPCReadPost>[] = [{
   id: "1",
+  slug: "cascading-style-sheets",
   title: "Cascading Style Sheets",
   authorId: "1",
   createdAt: new Date(),
@@ -21,7 +22,7 @@ export const postsFullMockData: NonNullable<TTRPCReadPost>[] = [{
     },
     published: true,
     title: "Cascading Style Sheets",
-    slug: "programming/cascading-style-sheets",
+    slug: "cascading-style-sheets",
     acronym: "CSS",
     abbreviation: "CSS",
     initialism: "CSS",
@@ -36,6 +37,7 @@ export const postsFullMockData: NonNullable<TTRPCReadPost>[] = [{
 }, {
   id: "2",
   title: "HyperText Markup Language",
+  slug: "hypertext-markup-language",
   authorId: "2",
   createdAt: new Date(),
   author: {
@@ -75,7 +77,7 @@ export const postsLinksMockData: NonNullable<TTRPCReadLatestPosts> = [{
     id: "1",
     title: "Cascading Style Sheets",
     fileUnder: "Computing",
-    slug: "programming/cascading-style-sheets",
+    slug: "cascading-style-sheets",
     tags: ["Test", "Uncategorized"],
     updatedAt: new Date(),
   }],

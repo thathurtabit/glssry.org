@@ -16,9 +16,9 @@ export const ListAllPosts: FC = () => {
         {postsDataIsFetching ? <LoadingSpinner /> : null}
         {postsData ? (
           <ul>
-            {postsData.map(({ id, title }) => (
+            {postsData.map(({ id, slug, title }) => (
               <li key={id} className="mb-4">
-                <LinkText href={`${EURLS.EditPost}#${id}`}>{title}</LinkText>
+                <LinkText href={`${EURLS.EditPost}#${slug}`}>{title}</LinkText>
               </li>
             ))}
           </ul>

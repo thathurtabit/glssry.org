@@ -4,6 +4,7 @@ import type { TPost } from "~/schemas/post/post.schema";
 /** Turn TPost data into data ready be saved to db */
 export const getPostData = (input: TPost, userData: User): Prisma.PostCreateInput => ({
   title: input.title,
+  slug: input.slug,
   author: {
     connect: {
       id: userData?.id,

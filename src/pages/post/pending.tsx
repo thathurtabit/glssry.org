@@ -28,7 +28,7 @@ export const ListPendingPosts: FC = () => {
       return;
     }
 
-    const { id: postVersionId } = lastVersion;
+    const { id: postVersionId, slug } = lastVersion;
     dispatch(
       setModal({
         title: postData.title,
@@ -45,7 +45,7 @@ export const ListPendingPosts: FC = () => {
           cancel: {
             text: "Edit",
             icon: <IconEdit />,
-            href: `/post/edit#${postVersionId}`,
+            href: `/post/edit#${slug}`,
           },
         },
       })

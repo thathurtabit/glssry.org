@@ -1,16 +1,16 @@
 import { api } from "~/utils/api";
 
 export interface IReadPost {
-  id: string;
+  slug: string;
 }
 
-export const useReadPost = ({ id }: IReadPost) => {
+export const useReadPost = ({ slug }: IReadPost) => {
   const { data, isFetching, error, isError } = api.post.readPost.useQuery(
     {
-      id,
+      slug,
     },
     {
-      enabled: Boolean(id),
+      enabled: Boolean(slug),
     }
   );
 

@@ -80,6 +80,7 @@ model Post {
     id        String        @id @default(cuid())
     createdAt DateTime      @default(now())
     title     String        @unique
+    slug      String        @unique
     author    User          @relation(fields: [authorId], references: [id])
     authorId  String
     versions  PostVersion[]

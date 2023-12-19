@@ -48,7 +48,7 @@ export const useUpdatePost = ({ onSuccessCallback }: IUseUpdatePost) => {
         onSuccessCallback?.();
       },
       async onSettled() {
-        await trpcContext.post.readAllPosts.invalidate();
+        await trpcContext.post.readAllPendingPosts.invalidate();
       },
     });
 
