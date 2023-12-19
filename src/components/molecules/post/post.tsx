@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import type { TTRPCReadPost } from "~/types/prisma.types";
 import React from "react";
-import { SectionTitle } from "~/components/atoms/section-title/section-title";
 import { getFormattedDate } from "~/utils/get-formatted-date";
 import { Link } from "~/components/atoms/link/link";
 import { IconAccount } from "~/components/icons/account/account";
@@ -36,10 +35,14 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   const { username: latestAuthorUsername } = latestAuthor;
 
   return (
-    <section className="p-4 text-copy">
-      <SectionTitle>{title}</SectionTitle>
+    <section className="p-4 text-copy max-w-3xl">
+      <h1 className="mb-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+        {title}
+      </h1>
 
-      <p>{body}</p>
+      <p className="first-line:uppercase first-line:font-sub-heading md:first-line:text-lg lg:first-line:text-2xl md:text-lg">
+        {body}
+      </p>
 
       <dl className="flex gap-5 my-4">
         <div>
@@ -79,7 +82,7 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
         </div>
       </div>
 
-      <Link href={link} size="small">
+      <Link href={link} target="_blank" rel="noopener noreferrer" size="small">
         Learn more <IconExternalLink />
       </Link>
 
