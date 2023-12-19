@@ -1,7 +1,10 @@
 import type { FC } from "react";
 import FocusTrap from "focus-trap-react";
 import React, { Fragment, useContext } from "react";
-import { GlssryStateContext } from "~/context/context/context";
+import {
+  GlssryDispatchContext,
+  GlssryStateContext,
+} from "~/context/context/context";
 import { EURLS } from "~/settings/constants";
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 import { SignInOrOutButton } from "~/components/atoms/sign-in-button/sign-in-button";
@@ -10,15 +13,22 @@ import { HorizontalRule } from "~/components/atoms/hr/hr";
 import { LinkText } from "~/components/atoms/link-text/link-text";
 import { useReadAllPendingPosts } from "~/hooks/post/read-all-pending-posts.hook";
 import { BadgeCount } from "~/components/atoms/badge-count/badge-count";
+import { setCloseModal } from "~/context/actions/page/page.actions";
+import { IconCancel } from "~/components/icons/cancel/cancel";
 
 export const HeaderMenu: FC = () => {
   const { page } = useContext(GlssryStateContext);
+  const dispatch = useContext(GlssryDispatchContext);
   const isEditor = useIsEditor();
   const { pendingPostsData } = useReadAllPendingPosts();
   const { isMenuOpen } = page;
   const menuStyles = isMenuOpen ? "w-1/3 max-w-[300px] p-10" : "w-0";
 
   const pendingPostsCount = pendingPostsData?.length;
+
+  const handleMenuClose = () => {
+    dispatch(setCloseModal());
+  };
 
   return (
     <nav
@@ -27,6 +37,14 @@ export const HeaderMenu: FC = () => {
       {isMenuOpen ? (
         <FocusTrap>
           <div className="flex flex-col h-full">
+            <button
+              type="button"
+              className="absolute top-5 right-5 hover:bg-copy-dark rounded-full p-1 transition-colors"
+              title="Close menu"
+              onClick={handleMenuClose}
+            >
+              <IconCancel />
+            </button>
             <SectionSubtitle>Menu</SectionSubtitle>
             <ul className="flex flex-col gap-2">
               <LinkText inverse href={EURLS.Home}>

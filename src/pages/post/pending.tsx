@@ -32,7 +32,7 @@ export const ListPendingPosts: FC = () => {
     dispatch(
       setModal({
         title: postData.title,
-        type: "medium",
+        type: "large",
         content: <Post {...postData} />,
         footer: {
           confirm: {

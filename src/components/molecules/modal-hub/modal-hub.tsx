@@ -170,7 +170,7 @@ export const ModalHub: FC = () => {
               <dialog
                 open
                 data-cy="modal"
-                className="relative w-full overflow-hidden rounded-md bg-primary p-0 bg-clip-padding"
+                className="relative w-full overflow-hidden rounded-md bg-primary p-0 bg-clip-padding z-50"
               >
                 <header
                   data-cy="modal-header"

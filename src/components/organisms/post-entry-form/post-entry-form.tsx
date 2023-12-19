@@ -24,6 +24,8 @@ import { useCreatePost } from "~/hooks/post/create-post.hook";
 import { useUpdatePost } from "~/hooks/post/update-post.hook";
 import { IconThumb } from "~/components/icons/thumb/thumb";
 import { Link } from "~/components/atoms/link/link";
+import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
+import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 
 export const PostEntryForm: FC<IPostEntryForm> = ({
   postId,
@@ -221,20 +223,22 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           onChange={(event) => handleOnChange(event, "body")}
         />
         <FormInput
-          id="post-related-post-id-1"
-          label="Related post Id #1"
-          description="The Id of a closely related post"
+          id="post-related-post-slug-1"
+          label="Related post slug #1"
+          description="The slug of a closely related post"
           type="string"
+          placeholder="i.e. javascript"
           hasError={Boolean(errorData?.relatedPostId1)}
           value={state.relatedPostId1}
           disabled={shouldDisableInputs}
           onChange={(event) => handleOnChange(event, "relatedPostId1")}
         />
         <FormInput
-          id="post-related-post-id-2"
-          label="Related post Id #2"
-          description="The Id of a closely related post"
+          id="post-related-post-slug-2"
+          label="Related post slug #2"
+          description="The slug of a closely related post"
           type="string"
+          placeholder="i.e. cascading-style-sheets"
           hasError={Boolean(errorData?.relatedPostId2)}
           value={state.relatedPostId2}
           disabled={shouldDisableInputs}
@@ -250,12 +254,17 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
         </Button>
       </div>
       <div className="flex-1">
-        <SectionSubtitle>Preview</SectionSubtitle>
-        {postPreviewData ? <Post {...postPreviewData} /> : null}
+        <SectionSubtitle className="opacity-50">Preview:</SectionSubtitle>
+        {postPreviewData?.title ? (
+          <Post {...postPreviewData} />
+        ) : (
+          <InfoPanel type="info" title="Post preview will appear here" />
+        )}
         <div className="mt-5">
-          <SectionSubtitle>Slug</SectionSubtitle>
+          <SectionSubtitle className="opacity-50">Slug:</SectionSubtitle>
           <p>
-            {appURL}/{state.slug}
+            {appURL}/{getKebabCaseFromSentenceCase(state.fileUnder)}/
+            {state.slug}
           </p>
         </div>
       </div>
