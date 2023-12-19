@@ -4,38 +4,43 @@ import type {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
+import { Fragment } from "react";
 import superjson from "superjson";
 import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
+import { LoadingSpinner } from "~/components/atoms/loading-spinner/loading-spinner";
 import { Post } from "~/components/molecules/post/post";
+import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 import { appRouter } from "~/server/api/root";
 import { db } from "~/server/db";
 import { api } from "~/utils/api";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 
-export default function PostViewPage(
-  props: InferGetStaticPropsType<typeof getStaticProps>
-) {
-  const { slug, trpcState } = props;
-
-  console.log({ trpcState: trpcState?.queries?.at(0)?.state.data });
-
+export default function PostViewPage({
+  slug,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const postQuery = api.post.readPost.useQuery({ slug });
 
   if (postQuery.status !== "success") {
     // Won't happen since we're using `fallback: "blocking"`
-    return <>Loading...</>;
+    return <LoadingSpinner />;
   }
 
   const { data } = postQuery;
+  const latestVersion = data?.versions.at(-1);
 
-  if (!data) {
+  if (!data || !latestVersion) {
     return <InfoPanel title="Post not found" type="info" />;
   }
 
+  const { title, body } = latestVersion;
+
   return (
-    <article className="container">
-      <Post {...data} />
-    </article>
+    <Fragment>
+      <SharedHead title={title} description={body} />
+      <article className="container">
+        <Post {...data} />
+      </article>
+    </Fragment>
   );
 }
 

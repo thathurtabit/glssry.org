@@ -1,6 +1,6 @@
 import type { TPostKeys } from "~/schemas/post/post.schema";
 
 export type TPostAction = {
-  type: TPostKeys;
+  type: TPostKeys | "reset";
   payload: unknown;
 }

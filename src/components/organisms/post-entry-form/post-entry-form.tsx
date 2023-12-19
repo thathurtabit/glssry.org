@@ -87,6 +87,11 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
     }
   };
 
+  const handleResetForm = () => {
+    dispatch({ type: "reset", payload: initState });
+    setPostSuccessful(false);
+  };
+
   if (postSuccessful) {
     return (
       <Fragment>
@@ -98,8 +103,9 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           submitted and is pending approval.
         </p>
         <p>Thank you!</p>
-        <p>
-          <Link size="small" href={EURLS.Home}>
+        <p className="flex gap-5">
+          <Button onClick={handleResetForm}>Create a post</Button>
+          <Link size="small" variant="secondary" href={EURLS.Home}>
             Go home
           </Link>
         </p>

@@ -1,6 +1,7 @@
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 import type { TPostAction } from "./form.reducer.types";
 import type { TPost } from "~/schemas/post/post.schema";
+import { initState } from "./init-state";
 
 export const postReducer = (state: TPost, { type, payload }: TPostAction): TPost => {
   switch (type) {
@@ -26,6 +27,8 @@ export const postReducer = (state: TPost, { type, payload }: TPostAction): TPost
       };
     case "tags":
       return { ...state, tags: payload as TPost["tags"] };
+    case "reset":
+      return { ...initState };
     default:
       return state;
   }
