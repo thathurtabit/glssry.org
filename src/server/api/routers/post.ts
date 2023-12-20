@@ -1,3 +1,4 @@
+import { searchPublishedPosts } from "./../handlers/post/search-published-posts";
 import { readAllPostsInCategory } from "./../handlers/post/read-all-posts-in-category";
 import { readLatestPosts } from "~/server/api/handlers/post/read-latest-posts";
 import { publishPost } from "~/server/api/handlers/post/publish-post";
@@ -17,4 +18,5 @@ export const postRouter = createTRPCRouter({
   createPost,
   updatePost,
   publishPost,
+  searchPublishedPosts,
 });

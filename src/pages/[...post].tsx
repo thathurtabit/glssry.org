@@ -4,7 +4,7 @@ import type {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
-import type { TNativeTag } from "~/schemas/post/post.schema";
+import { tagKeys, type TNativeTag } from "~/schemas/post/post.schema";
 import { Fragment } from "react";
 import superjson from "superjson";
 import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
@@ -19,6 +19,7 @@ import { PostRowsLinks } from "~/components/molecules/post-rows-links/post-rows-
 import { SectionTitle } from "~/components/atoms/section-title/section-title";
 import { getPascalCaseFromKebabCase } from "~/utils/get-pascal-case-from-kebab-case";
 import { PageMain } from "~/components/molecules/page-main/page-main";
+import type { TagName } from "@prisma/client";
 
 export default function PostViewPage({
   slug,
@@ -152,9 +153,11 @@ export async function getStaticProps(
   }
 
   if (!uniqueSlug && fileUnder) {
-    await helpers.post.readAllPostsInCategory.prefetch({
-      category: getPascalCaseFromKebabCase(fileUnder) as TNativeTag,
-    });
+    if (tagKeys.includes(getPascalCaseFromKebabCase(fileUnder) as TagName)) {
+      await helpers.post.readAllPostsInCategory.prefetch({
+        category: getPascalCaseFromKebabCase(fileUnder) as TNativeTag,
+      });
+    }
   }
 
   return {

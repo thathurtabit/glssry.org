@@ -6,6 +6,7 @@ import {
   Nunito_Sans as nunitoSansFont,
 } from "next/font/google";
 import { HeaderStrip } from "~/components/organisms/header-strip/header-strip";
+import { OmniSearch } from "~/components/organisms/omni-search/omni-search";
 
 const heading = abrilFont({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export const AppWrapper: FCC = ({ children }) => (
       className={`flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background ${heading.variable} ${subHeading.variable} ${body.variable}`}
     >
       <HeaderStrip />
+      <OmniSearch />
       {children}
     </div>
   </Fragment>

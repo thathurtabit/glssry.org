@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
+    previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -77,15 +78,20 @@ enum TagName {
 }
 
 model Post {
-    id        String        @id @default(cuid())
-    createdAt DateTime      @default(now())
-    title     String        @unique
-    slug      String        @unique
-    author    User          @relation(fields: [authorId], references: [id])
-    authorId  String
-    versions  PostVersion[]
+    id           String        @id @default(cuid())
+    createdAt    DateTime      @default(now())
+    title        String        @unique
+    slug         String        @unique
+    abbreviation String        @db.VarChar(30) @default("")
+    acronym      String        @db.VarChar(20) @default("")
+    initialism   String        @db.VarChar(10) @default("")
+    author       User          @relation(fields: [authorId], references: [id])
+    authorId     String
+    versions     PostVersion[]
 
     @@index([authorId])
+    @@fulltext([title])
+    @@fulltext([title, acronym, initialism, abbreviation])
 }
 
 model PostVersion {

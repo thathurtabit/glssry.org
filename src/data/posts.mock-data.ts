@@ -4,6 +4,9 @@ export const postsFullMockData: NonNullable<TTRPCReadPost>[] = [{
   id: "1",
   slug: "cascading-style-sheets",
   title: "Cascading Style Sheets",
+  abbreviation: "CSS",
+  acronym: "CSS",
+  initialism: "CSS",
   authorId: "1",
   createdAt: new Date(),
   author: {
@@ -38,6 +41,9 @@ export const postsFullMockData: NonNullable<TTRPCReadPost>[] = [{
   id: "2",
   title: "HyperText Markup Language",
   slug: "hypertext-markup-language",
+  abbreviation: "HTML",
+  acronym: "HTML",
+  initialism: "HTML",
   authorId: "2",
   createdAt: new Date(),
   author: {
