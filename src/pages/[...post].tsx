@@ -87,9 +87,9 @@ export default function PostViewPage({
   return (
     <Fragment>
       <SharedHead title={title} description={body} />
-      <article className="container">
+      <PageMain justifyContent="start" className="container items-start">
         <Post {...postData} />
-      </article>
+      </PageMain>
     </Fragment>
   );
 }

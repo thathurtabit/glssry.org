@@ -6,6 +6,7 @@ import { z } from "zod";
 
 export const searchPublishedPosts = publicProcedure.input(z.object({ searchTerm: z.string() })).query(async ({ ctx, input }) => {
   const { searchTerm } = input;
+
   console.log({ SEARCH_TERM: searchTerm });
   try {
     const posts = await ctx.db.post.findMany({
@@ -49,10 +50,10 @@ export const searchPublishedPosts = publicProcedure.input(z.object({ searchTerm:
           take: 1,
         },
       },
-      take: 10,
+      take: 20,
       orderBy: {
         _relevance: {
-          fields: ["title", "acronym", "abbreviation", "initialism"],
+          fields: ["title"],
           search: searchTerm,
           sort: "asc",
         },

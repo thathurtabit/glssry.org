@@ -91,7 +91,10 @@ model Post {
 
     @@index([authorId])
     @@fulltext([title])
-    @@fulltext([title, acronym, initialism, abbreviation])
+    @@fulltext([abbreviation])
+    @@fulltext([acronym])
+    @@fulltext([initialism])
+    @@fulltext([title, abbreviation, acronym, initialism ])
 }
 
 model PostVersion {

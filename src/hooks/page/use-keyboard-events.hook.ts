@@ -7,7 +7,6 @@ export const useKeyboardEvents = () => {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        console.log("Escape key pressed");
         dispatch(setCloseModal());
       }
     };

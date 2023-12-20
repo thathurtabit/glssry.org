@@ -4,10 +4,7 @@ export interface IUseSearchPublishedPosts {
   searchTerm: string;
 }
 
-export const useSearchPublishedPosts = ({
-  searchTerm,
-}: IUseSearchPublishedPosts) => {
-  console.log({ searchTerm });
+export const useSearchPublishedPosts = ({ searchTerm }: IUseSearchPublishedPosts) => {
   const { data, isFetching, error, isError } =
     api.post.searchPublishedPosts.useQuery(
       { searchTerm },
