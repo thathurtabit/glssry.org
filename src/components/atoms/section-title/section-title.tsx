@@ -6,7 +6,11 @@ export const SectionTitle: FCC<ISectionTitle> = ({
   noMargin,
   className,
 }) => (
-  <h3 className={`${noMargin ? "" : "mb-4"} text-3xl ${className ?? ""}`}>
+  <h2
+    className={`${noMargin ? "" : "mb-4"} text-3xl text-copy ${
+      className ?? ""
+    }`}
+  >
     {children}
-  </h3>
+  </h2>
 );

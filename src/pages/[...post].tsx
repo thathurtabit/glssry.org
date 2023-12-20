@@ -4,6 +4,7 @@ import type {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
+import type { TNativeTag } from "~/schemas/post/post.schema";
 import { Fragment } from "react";
 import superjson from "superjson";
 import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
@@ -14,34 +15,79 @@ import { appRouter } from "~/server/api/root";
 import { db } from "~/server/db";
 import { api } from "~/utils/api";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
+import { PostRowsLinks } from "~/components/molecules/post-rows-links/post-rows-links";
+import { SectionTitle } from "~/components/atoms/section-title/section-title";
+import { getPascalCaseFromKebabCase } from "~/utils/get-pascal-case-from-kebab-case";
+import { PageMain } from "~/components/molecules/page-main/page-main";
 
 export default function PostViewPage({
   slug,
+  category,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const postQuery = api.post.readPost.useQuery(
-    { slug },
-    { refetchOnMount: false, refetchOnWindowFocus: false }
-  );
+  const isCategoryPage = Boolean(category) && !slug;
+  const pascalCaseCategory = getPascalCaseFromKebabCase(category ?? "");
 
-  if (postQuery.status !== "success") {
+  const { data: postData, isFetching: postIsLoading } =
+    api.post.readPost.useQuery(
+      { slug: slug ?? "" },
+      {
+        enabled: Boolean(slug),
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+      }
+    );
+  const { data: categoryPostsData, isFetching: categoryPostsAreLoading } =
+    api.post.readAllPostsInCategory.useQuery(
+      { category: pascalCaseCategory as TNativeTag },
+      {
+        enabled: isCategoryPage,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+      }
+    );
+
+  if (postIsLoading) {
     // Won't happen since we're using `fallback: "blocking"`
     return <LoadingSpinner />;
   }
 
-  const { data } = postQuery;
-  const latestVersion = data?.versions.at(-1);
+  // CATEGORY PAGE
+  if (isCategoryPage) {
+    return categoryPostsData ? (
+      <Fragment>
+        <SharedHead
+          title={`Filed under: ${category}`}
+          description={`These are the latest posted filed under ${category}.`}
+        />
+        <PageMain justifyContent="start" className="container items-start">
+          <SectionTitle>{pascalCaseCategory}</SectionTitle>
+          <PostRowsLinks
+            isLoading={categoryPostsAreLoading}
+            postsData={categoryPostsData}
+          />
+        </PageMain>
+      </Fragment>
+    ) : (
+      <InfoPanel
+        title={`No posts filed under: "${pascalCaseCategory}"`}
+        type="info"
+      />
+    );
+  }
 
-  if (!data || !latestVersion) {
+  const postDataLatestVersion = postData?.versions.at(-1);
+
+  if (!postData || !postDataLatestVersion) {
     return <InfoPanel title="Post not found" type="info" />;
   }
 
-  const { title, body } = latestVersion;
+  const { title, body } = postDataLatestVersion;
 
   return (
     <Fragment>
       <SharedHead title={title} description={body} />
       <article className="container">
-        <Post {...data} />
+        <Post {...postData} />
       </article>
     </Fragment>
   );
@@ -56,6 +102,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
         select: {
           fileUnder: true,
           slug: true,
+          relatedPostId1: true,
+          relatedPostId2: true,
         },
         take: 1,
         orderBy: {
@@ -95,17 +143,25 @@ export async function getStaticProps(
     },
     transformer: superjson, // Optional - adds superjson serialization
   });
+
+  const fileUnder = context.params?.post.at(0);
   const uniqueSlug = context.params?.post.at(1);
 
-  if (!uniqueSlug) {
-    throw new Error("No uniqueSlug provided");
+  if (uniqueSlug) {
+    await helpers.post.readPost.prefetch({ slug: uniqueSlug });
   }
 
-  await helpers.post.readPost.prefetch({ slug: uniqueSlug });
+  if (!uniqueSlug && fileUnder) {
+    await helpers.post.readAllPostsInCategory.prefetch({
+      category: getPascalCaseFromKebabCase(fileUnder) as TNativeTag,
+    });
+  }
+
   return {
     props: {
       trpcState: helpers.dehydrate(),
-      slug: uniqueSlug,
+      slug: uniqueSlug ?? "", // We can fallback to "" since 'undefined' is not allowed and is still falsy
+      category: fileUnder,
     },
     revalidate: 1,
   };

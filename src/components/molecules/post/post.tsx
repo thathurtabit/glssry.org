@@ -9,6 +9,8 @@ import { HorizontalRule } from "~/components/atoms/hr/hr";
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 import Image from "next/image";
 import { IconArchive } from "~/components/icons/archive/archive";
+import { LinkText } from "~/components/atoms/link-text/link-text";
+import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 
 export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   author: originalAuthor,
@@ -134,7 +136,10 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
 
         <div className={`flex justify-between gap-2 ${smallTextStyles}`}>
           <p className="flex gap-1 items-center">
-            <IconArchive /> File under: {fileUnder}
+            <IconArchive /> File under:{" "}
+            <LinkText href={getKebabCaseFromSentenceCase(fileUnder)}>
+              {fileUnder}
+            </LinkText>
           </p>
           <p>Version: {versions.length}</p>
         </div>

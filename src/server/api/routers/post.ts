@@ -1,3 +1,4 @@
+import { readAllPostsInCategory } from "./../handlers/post/read-all-posts-in-category";
 import { readLatestPosts } from "~/server/api/handlers/post/read-latest-posts";
 import { publishPost } from "~/server/api/handlers/post/publish-post";
 import { readAllPendingPosts } from "~/server/api/handlers/post/read-all-pending-posts";
@@ -11,6 +12,7 @@ export const postRouter = createTRPCRouter({
   readAllPosts,
   readAllPendingPosts,
   readLatestPosts,
+  readAllPostsInCategory,
   readPost,
   createPost,
   updatePost,
