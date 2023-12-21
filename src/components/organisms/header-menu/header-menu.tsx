@@ -15,6 +15,7 @@ import { useReadAllPendingPosts } from "~/hooks/post/read-all-pending-posts.hook
 import { BadgeCount } from "~/components/atoms/badge-count/badge-count";
 import { setCloseModal } from "~/context/actions/page/page.actions";
 import { IconCancel } from "~/components/icons/cancel/cancel";
+import { IconMenu } from "~/components/icons/menu/menu";
 
 export const HeaderMenu: FC = () => {
   const { page } = useContext(GlssryStateContext);
@@ -22,7 +23,9 @@ export const HeaderMenu: FC = () => {
   const isEditor = useIsEditor();
   const { pendingPostsData } = useReadAllPendingPosts();
   const { isMenuOpen } = page;
-  const menuStyles = isMenuOpen ? "w-1/3 max-w-[300px] p-10" : "w-0";
+  const menuStyles = isMenuOpen
+    ? "w-full md:w-1/3 md:max-w-[300px] p-10"
+    : "w-0";
 
   const pendingPostsCount = pendingPostsData?.length;
 
@@ -32,7 +35,7 @@ export const HeaderMenu: FC = () => {
 
   return (
     <nav
-      className={`bg-copy fixed right-0 top-0 bottom-0 text-copy-inverse transition-all z-50 ${menuStyles}`}
+      className={`bg-copy fixed right-0 top-0 bottom-0 text-copy-inverse transition-all z-[100] ${menuStyles}`}
     >
       {isMenuOpen ? (
         <FocusTrap>
@@ -43,9 +46,11 @@ export const HeaderMenu: FC = () => {
               title="Close menu"
               onClick={handleMenuClose}
             >
-              <IconCancel />
+              <IconCancel size={20} />
             </button>
-            <SectionSubtitle>Menu</SectionSubtitle>
+            <SectionSubtitle>
+              <IconMenu title="Menu" onClick={handleMenuClose} />
+            </SectionSubtitle>
             <ul className="flex flex-col gap-2">
               <LinkText inverse href={EURLS.Home}>
                 Home

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom CSS */
+:root {
+  --space-top: 55px;
+  --color-border: #333;
+}
 
 html {
   font-family: var(--font-body);

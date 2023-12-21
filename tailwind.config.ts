@@ -6,6 +6,21 @@ export default {
   darkMode: ["class", "[data-mode=\"dark\"]"],
   theme: {
     extend: {
+      height: {
+        header: "var(--space-top)",
+      },
+      margin: {
+        header: "var(--space-top)",
+      },
+      spacing: {
+        header: "var(--space-top)",
+      },
+      padding: {
+        header: "var(--space-top)",
+      },
+      borderColor: {
+        divider: "var(--color-border)",
+      },
       fontFamily: {
         heading: ["var(--font-heading)", ...fontFamily.sans],
         "sub-heading": ["var(--font-sub-heading)", ...fontFamily.sans],
@@ -69,6 +84,7 @@ export default {
         },
       },
     },
+
   },
   plugins: [],
 } satisfies Config;

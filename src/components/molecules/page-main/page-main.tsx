@@ -9,11 +9,11 @@ export const PageMain: FCC<IPageMain> = ({
   const getJustifyContent = () => {
     switch (justifyContent) {
       case "start": {
-        return "justify-start mt-16";
+        return "justify-start";
       }
 
       case "end": {
-        return "justify-end mb-16";
+        return "justify-end";
       }
 
       case "between": {
@@ -37,7 +37,7 @@ export const PageMain: FCC<IPageMain> = ({
   const justifiedContent = getJustifyContent();
   return (
     <main
-      className={`relative z-1 h-screen p-7 sm:px-20 flex flex-1 flex-col mt-10 self-stretch text-copy ${justifiedContent} ${
+      className={`relative mt-header z-1 h-screen py-header px-10 flex flex-1 items-center flex-col self-stretch text-copy w-full ${justifiedContent} ${
         className ?? ""
       }`}
     >

@@ -11,6 +11,7 @@ import {
 import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
 import { EURLS, appTitle } from "~/settings/constants";
 import { HeaderMenu } from "../header-menu/header-menu";
+import { OmniSearch } from "../omni-search/omni-search";
 
 export const HeaderStrip: FC = () => {
   const isAuthenticated = useIsAuthenticated();
@@ -25,10 +26,11 @@ export const HeaderStrip: FC = () => {
   const hoverClasses = "hover:bg-copy-light/10";
 
   return (
-    <section className="fixed top-0 bg-background left-0 right-0 flex justify-between py-3 px-5 text-white items-center border-b-[1px] border-white/10 z-40">
+    <section className="fixed top-0 bg-background left-0 right-0 flex justify-between h-header px-5 text-white items-center border-b-[1px] border-divider z-40">
       <LinkText href={EURLS.Home} className="font-heading text-lg">
         {appTitle}
       </LinkText>
+      <OmniSearch />
       {isAuthenticated ? (
         <button
           type="button"

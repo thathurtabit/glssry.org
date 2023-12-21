@@ -6,8 +6,6 @@ import { z } from "zod";
 
 export const searchPublishedPosts = publicProcedure.input(z.object({ searchTerm: z.string() })).query(async ({ ctx, input }) => {
   const { searchTerm } = input;
-
-  console.log({ SEARCH_TERM: searchTerm });
   try {
     const posts = await ctx.db.post.findMany({
       where: {
