@@ -1,5 +1,5 @@
 import { HorizontalRule } from "~/components/atoms/hr/hr";
-import { PageStructure } from "~/components/molecules/page-structure/page-structure";
+import { PageMain } from "~/components/molecules/page-main/page-main";
 import { PostRowsLinks } from "~/components/molecules/post-rows-links/post-rows-links";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 import { useReadLatestPosts } from "~/hooks/post/read-latest-posts.hook";
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <SharedHead title={`Welcome to ${appTitle}`} />
-      <PageStructure title={appTitle} width="full" justifyContent="start">
+      <PageMain justifyContent="start">
         <p className="text-copy">{appDescription}</p>
         <HorizontalRule />
         <h2 className="font-sub-heading">Latest posts</h2>
@@ -18,7 +18,7 @@ export default function Home() {
           isLoading={latestPostsDataIsFetching}
           postsData={latestPostsData}
         />
-      </PageStructure>
+      </PageMain>
     </>
   );
 }

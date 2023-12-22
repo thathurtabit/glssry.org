@@ -46,7 +46,7 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   const smallTextStyles = "text-[0.5rem] opacity-50 uppercase";
 
   return (
-    <section className="p-4 text-copy max-w-4xl">
+    <section className="text-copy max-w-4xl">
       <h1 className="mb-6 md:mb-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
         {title}
       </h1>
@@ -56,8 +56,8 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
           {body}
         </p>
 
-        <div className="flex gap-5 items-center justify-between text-xs mb-5">
-          <dl className="flex gap-5 my-4">
+        <div className="flex gap-1 justify-between text-xs mb-10 flex-col md:flex-row md:items-center md:gap-5">
+          <dl className="flex gap-5 my-2 md:my-4">
             <div>
               <dt className={`${smallTextStyles} mb-0`}>Abbreviation:</dt>
               <dd>{abbreviation}</dd>
@@ -71,10 +71,10 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
               <dd>{initialism}</dd>
             </div>
           </dl>
-          <div className="flex text-xs items-end flex-col justify-end">
-            <SectionSubtitle className={`${smallTextStyles} mb-0 text-right`}>
+          <div className="flex text-xs md:items-end flex-col justify-end">
+            <h4 className={`${smallTextStyles} font-body mb-0 md:text-right`}>
               Added by:
-            </SectionSubtitle>
+            </h4>
             <p
               className="flex gap-2 text-xs items-center m-0"
               title={`Created: ${getFormattedDate({

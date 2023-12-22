@@ -20,6 +20,7 @@ import { SectionTitle } from "~/components/atoms/section-title/section-title";
 import { getPascalCaseFromKebabCase } from "~/utils/get-pascal-case-from-kebab-case";
 import { PageMain } from "~/components/molecules/page-main/page-main";
 import type { TagName } from "@prisma/client";
+import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
 
 export default function PostViewPage({
   slug,
@@ -53,13 +54,14 @@ export default function PostViewPage({
   }
 
   // CATEGORY PAGE
-  if (isCategoryPage) {
+  if (isCategoryPage && category) {
     return categoryPostsData ? (
       <Fragment>
         <SharedHead
           title={`Filed under: ${category}`}
           description={`These are the latest posted filed under ${category}.`}
         />
+        <Breadcrumbs items={[category]} />
         <PageMain justifyContent="start" className="items-start">
           <SectionTitle>{pascalCaseCategory}</SectionTitle>
           <PostRowsLinks
@@ -78,7 +80,7 @@ export default function PostViewPage({
 
   const postDataLatestVersion = postData?.versions.at(-1);
 
-  if (!postData || !postDataLatestVersion) {
+  if (!postData || !postDataLatestVersion || !category) {
     return <InfoPanel title="Post not found" type="info" />;
   }
 
@@ -87,6 +89,7 @@ export default function PostViewPage({
   return (
     <Fragment>
       <SharedHead title={title} description={body} />
+      <Breadcrumbs items={[category, slug]} />
       <PageMain justifyContent="center" className="items-start">
         <Post {...postData} />
       </PageMain>

@@ -48,6 +48,7 @@ export default {
           light: "hsl(0deg 0% 100%)",
           dark: "hsl(0deg 0% 90%)",
         },
+        border: "var(--color-border)",
         link: {
           DEFAULT: "hsl(0deg 0% 100%)",
           light: "hsl(0deg 0% 100%)",

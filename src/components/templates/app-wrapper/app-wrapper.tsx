@@ -6,7 +6,6 @@ import {
   Nunito_Sans as nunitoSansFont,
 } from "next/font/google";
 import { HeaderStrip } from "~/components/organisms/header-strip/header-strip";
-import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
 
 const heading = abrilFont({
   subsets: ["latin"],
@@ -44,7 +43,6 @@ export const AppWrapper: FCC = ({ children }) => (
     >
       <HeaderStrip />
       <section className="mt-mobile-header md:mt-header flex flex-1 flex-col w-full">
-        <Breadcrumbs />
         {children}
       </section>
     </div>
