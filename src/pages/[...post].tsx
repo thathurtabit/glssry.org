@@ -21,6 +21,7 @@ import { getPascalCaseFromKebabCase } from "~/utils/get-pascal-case-from-kebab-c
 import { PageMain } from "~/components/molecules/page-main/page-main";
 import type { TagName } from "@prisma/client";
 import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
+import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
 
 export default function PostViewPage({
   slug,
@@ -63,11 +64,13 @@ export default function PostViewPage({
         />
         <Breadcrumbs items={[category]} />
         <PageMain justifyContent="start" className="items-start">
-          <SectionTitle>{pascalCaseCategory}</SectionTitle>
-          <PostRowsLinks
-            isLoading={categoryPostsAreLoading}
-            postsData={categoryPostsData}
-          />
+          <PageMainIndent>
+            <SectionTitle>{pascalCaseCategory}</SectionTitle>
+            <PostRowsLinks
+              isLoading={categoryPostsAreLoading}
+              postsData={categoryPostsData}
+            />
+          </PageMainIndent>
         </PageMain>
       </Fragment>
     ) : (

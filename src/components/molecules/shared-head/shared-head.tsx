@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 export const SharedHead: FC<ISharedHead> = ({ title, description }) => {
   const pathname = usePathname();
-  useRouterEvent();
+  useRouterEvent({});
   useKeyboardEvents();
   const isHomepage = pathname === "/";
   const pageTitle = title ?? appTitle;

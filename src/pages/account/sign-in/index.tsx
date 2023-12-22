@@ -175,12 +175,13 @@ export const SignIn = ({
             {providersList.map(({ name, id }) => (
               <li key={name} className="m-2">
                 <Button
-                  size="medium"
+                  size="small"
                   variant="primary"
                   className="min-w-fit"
                   onClick={() => handleSignIn(id)}
                 >
-                  <span>{getProviderIconByID(id)}</span>Sign in with {name}
+                  <span className="mr-1">{getProviderIconByID(id)}</span>Sign in
+                  with {name}
                 </Button>
               </li>
             ))}

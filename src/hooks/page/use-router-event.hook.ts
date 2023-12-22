@@ -6,7 +6,11 @@ import {
 } from "../../context/context/context";
 import { setMenuOpen } from "../../context/actions/page/page.actions";
 
-export const useRouterEvent = () => {
+interface IUseRouterEvent {
+  callback?: () => void;
+}
+
+export const useRouterEvent = ({ callback }: IUseRouterEvent) => {
   const { page } = useContext(GlssryStateContext);
   const dispatch = useContext(GlssryDispatchContext);
   const { events } = useRouter();
@@ -17,8 +21,10 @@ export const useRouterEvent = () => {
       if (isMenuOpen) {
         dispatch(setMenuOpen(false));
       }
+
+      callback?.();
     };
 
     events.on("routeChangeStart", handleRouteChangeStart);
-  }, [events, isMenuOpen, dispatch]);
+  }, [events, isMenuOpen, callback, dispatch]);
 };

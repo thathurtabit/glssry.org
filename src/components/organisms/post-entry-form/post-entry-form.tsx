@@ -26,6 +26,10 @@ import { IconThumb } from "~/components/icons/thumb/thumb";
 import { Link } from "~/components/atoms/link/link";
 import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
+import { useSearchPublishedPosts } from "~/hooks/post/search-published-posts.hook";
+import { PostRowsLinks } from "~/components/molecules/post-rows-links/post-rows-links";
+import { LinkText } from "~/components/atoms/link-text/link-text";
+import { IconExternalLink } from "~/components/icons/external-link/external-link";
 
 export const PostEntryForm: FC<IPostEntryForm> = ({
   postId,
@@ -33,8 +37,30 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
   postData,
 }) => {
   const reducerState = postData ?? initState;
+  const [hasSubmittedTitleCheck, setHasSubmittedTitleCheck] = useState(false);
   const [state, dispatch] = useReducer(postReducer, reducerState);
   const [postSuccessful, setPostSuccessful] = useState(false);
+
+  const {
+    searchedPublishedPostsData,
+    searchedPublishedPostsDataIsFetching,
+    searchedPublishedPostsDataHasError,
+    searchedPublishedPostsDataError,
+  } = useSearchPublishedPosts({
+    searchTerm: state.title,
+    shouldSearch: hasSubmittedTitleCheck,
+  });
+
+  const postAlreadyExists = Boolean(
+    state.title && searchedPublishedPostsData?.length
+  );
+
+  const isOKToShowFullForm =
+    mode === "edit" ||
+    (state.title &&
+      !searchedPublishedPostsData?.length &&
+      hasSubmittedTitleCheck &&
+      !searchedPublishedPostsDataIsFetching);
 
   const { createPostMutation, createPostMutationIsLoading } = useCreatePost({
     onSuccessCallback: () => setPostSuccessful(true),
@@ -64,6 +90,9 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
 
   const shouldDisableInputs =
     createPostMutationIsLoading || updatePostMutationIsLoading;
+
+  const disablePreliminaryPostTitleSearch =
+    shouldDisableInputs || state.title.length < 2;
 
   const postPreviewData = getTRPCPostFormat(state);
 
@@ -111,6 +140,53 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
             Go home
           </Link>
         </p>
+      </Fragment>
+    );
+  }
+
+  if (postAlreadyExists) {
+    const { versions, title } = searchedPublishedPostsData?.[0] ?? {};
+    const latestVersion = versions?.at(-1);
+    const { fileUnder, slug } = latestVersion ?? {};
+
+    return (
+      <Fragment>
+        <SectionSubtitle>Hmm, seems this post already exists</SectionSubtitle>
+        <p>Searching existing posts we&apos;ve found the below</p>
+
+        <Link
+          href={`/${getKebabCaseFromSentenceCase(fileUnder ?? "")}/${slug}`}
+        >
+          {title} <IconExternalLink />
+        </Link>
+      </Fragment>
+    );
+  }
+
+  if (!isOKToShowFullForm) {
+    return (
+      <Fragment>
+        <SectionSubtitle className="flex items-center gap-1">
+          Firsty, let&apos;s check if this post already exists
+        </SectionSubtitle>
+        <p>Please enter the full tile of the post below</p>
+        <FormInput
+          required
+          id="post-input-title"
+          label="Post title"
+          placeholder="i.e. Cascading Style Sheets"
+          hasError={searchedPublishedPostsDataHasError}
+          errorText={searchedPublishedPostsDataError?.message}
+          value={state.title}
+          disabled={searchedPublishedPostsDataIsFetching}
+          submitButtonData={{
+            type: "submit",
+            loading: searchedPublishedPostsDataIsFetching,
+            disabled: disablePreliminaryPostTitleSearch,
+            onClick: () => setHasSubmittedTitleCheck(true),
+          }}
+          onChange={(event) => handleOnChange(event, "title")}
+        />
       </Fragment>
     );
   }

@@ -6,11 +6,19 @@ import { IconArchive } from "~/components/icons/archive/archive";
 import { IconCancel } from "~/components/icons/cancel/cancel";
 import { IconError } from "~/components/icons/error/error";
 import { IconSearch } from "~/components/icons/search/search";
+import { useRouterEvent } from "~/hooks/page/use-router-event.hook";
 import { useSearchPublishedPosts } from "~/hooks/post/search-published-posts.hook";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 
 export const OmniSearch: FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
+
+  const handleClearSearchTerm = () => {
+    setSearchTerm("");
+  };
+
+  useRouterEvent({ callback: handleClearSearchTerm });
+
   const {
     searchedPublishedPostsData,
     searchedPublishedPostsDataIsFetching,
@@ -19,10 +27,6 @@ export const OmniSearch: FC = () => {
 
   const handleSearchTermChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
-  };
-
-  const handleClearSearchTerm = () => {
-    setSearchTerm("");
   };
 
   return (
