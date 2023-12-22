@@ -13,7 +13,6 @@ import { Post } from "~/components/molecules/post/post";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 import { appRouter } from "~/server/api/root";
 import { db } from "~/server/db";
-import { api } from "~/utils/api";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 import { PostRowsLinks } from "~/components/molecules/post-rows-links/post-rows-links";
 import { SectionTitle } from "~/components/atoms/section-title/section-title";
@@ -22,6 +21,8 @@ import { PageMain } from "~/components/molecules/page-main/page-main";
 import type { TagName } from "@prisma/client";
 import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
 import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
+import { useReadPost } from "~/hooks/post/read-post.hook";
+import { useReadAllPostsInCategory } from "~/hooks/post/read-all-posts-in-category.hook";
 
 export default function PostViewPage({
   slug,
@@ -30,26 +31,11 @@ export default function PostViewPage({
   const isCategoryPage = Boolean(category) && !slug;
   const pascalCaseCategory = getPascalCaseFromKebabCase(category ?? "");
 
-  const { data: postData, isFetching: postIsLoading } =
-    api.post.readPost.useQuery(
-      { slug: slug ?? "" },
-      {
-        enabled: Boolean(slug),
-        refetchOnMount: false,
-        refetchOnWindowFocus: false,
-      }
-    );
-  const { data: categoryPostsData, isFetching: categoryPostsAreLoading } =
-    api.post.readAllPostsInCategory.useQuery(
-      { category: pascalCaseCategory as TNativeTag },
-      {
-        enabled: isCategoryPage,
-        refetchOnMount: false,
-        refetchOnWindowFocus: false,
-      }
-    );
+  const { postData, postDataIsFetching } = useReadPost({ slug });
+  const { categoryPostsData, categoryPostsDataIsFetching } =
+    useReadAllPostsInCategory({ category: pascalCaseCategory as TNativeTag });
 
-  if (postIsLoading) {
+  if (postDataIsFetching) {
     // Won't happen since we're using `fallback: "blocking"`
     return <LoadingSpinner />;
   }
@@ -67,7 +53,7 @@ export default function PostViewPage({
           <PageMainIndent>
             <SectionTitle>{pascalCaseCategory}</SectionTitle>
             <PostRowsLinks
-              isLoading={categoryPostsAreLoading}
+              isLoading={categoryPostsDataIsFetching}
               postsData={categoryPostsData}
             />
           </PageMainIndent>
@@ -124,12 +110,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
   return {
     paths: posts.map(({ slug, versions }) => {
-      const { fileUnder } = versions.at(0) ?? {};
+      const { fileUnder, relatedPostId1, relatedPostId2 } =
+        versions.at(0) ?? {};
+
       return {
         params: {
           post: [
             getKebabCaseFromSentenceCase(fileUnder ?? ""),
             getKebabCaseFromSentenceCase(slug ?? ""),
+            relatedPostId1 ?? "",
+            relatedPostId2 ?? "",
           ],
         },
       };
@@ -153,6 +143,8 @@ export async function getStaticProps(
 
   const fileUnder = context.params?.post.at(0);
   const uniqueSlug = context.params?.post.at(1);
+  const relatedPostId1 = context.params?.post.at(2);
+  const relatedPostId2 = context.params?.post.at(3);
 
   if (uniqueSlug) {
     await helpers.post.readPost.prefetch({ slug: uniqueSlug });
@@ -164,6 +156,14 @@ export async function getStaticProps(
         category: getPascalCaseFromKebabCase(fileUnder) as TNativeTag,
       });
     }
+  }
+
+  if (relatedPostId1) {
+    await helpers.post.readPost.prefetch({ slug: relatedPostId1 });
+  }
+
+  if (relatedPostId2) {
+    await helpers.post.readPost.prefetch({ slug: relatedPostId2 });
   }
 
   return {

@@ -29,7 +29,7 @@ export const Breadcrumbs: FC<IBreadcrumbs> = ({ items }) => {
               className="truncate opacity-50 text-ellipsis overflow-hidden inline-block"
               {...(isLastItem ? { "aria-current": "page" } : null)}
             >
-              {replaceAll(pathSection, "-", " ")}
+              {replaceAll(pathSection, "-", " ").toLowerCase()}
             </LinkText>
           </Fragment>
         );

@@ -11,6 +11,8 @@ export const useReadPost = ({ slug }: IReadPost) => {
     },
     {
       enabled: Boolean(slug),
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
 

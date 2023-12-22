@@ -1,5 +1,5 @@
-import { api } from "~/utils/api";
 import type { TNativeTag } from "~/schemas/post/post.schema";
+import { api } from "~/utils/api";
 
 export interface IUseReadAllPostsInCategory {
   category: TNativeTag;
@@ -13,6 +13,8 @@ export const useReadAllPostsInCategory = ({
       { category },
       {
         enabled: Boolean(category),
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
       }
     );
 
