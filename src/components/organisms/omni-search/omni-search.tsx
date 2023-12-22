@@ -35,7 +35,7 @@ export const OmniSearch: FC = () => {
           type="text"
           value={searchTerm}
           placeholder="Search posts"
-          className="bg-background border-0 text-copy p-2"
+          className="bg-background border-0 text-copy p-2 text-sm font-sub-heading"
           onChange={handleSearchTermChange}
         />
         {searchedPublishedPostsDataIsFetching ? (
@@ -49,13 +49,15 @@ export const OmniSearch: FC = () => {
           </span>
         ) : null}
       </div>
-      <button
-        type="button"
-        className="border-0 inline-flex col-start-10 items-center justify-center"
-        onClick={handleClearSearchTerm}
-      >
-        <IconCancel className="text-lg" />
-      </button>
+      {searchTerm ? (
+        <button
+          type="button"
+          className="border-0 inline-flex col-start-10 items-center justify-center"
+          onClick={handleClearSearchTerm}
+        >
+          <IconCancel className="text-lg" />
+        </button>
+      ) : null}
       {searchedPublishedPostsData ? (
         <dialog
           open

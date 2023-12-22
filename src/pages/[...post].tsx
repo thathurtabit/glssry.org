@@ -60,7 +60,7 @@ export default function PostViewPage({
           title={`Filed under: ${category}`}
           description={`These are the latest posted filed under ${category}.`}
         />
-        <PageMain justifyContent="start" className="container items-start">
+        <PageMain justifyContent="start" className="items-start">
           <SectionTitle>{pascalCaseCategory}</SectionTitle>
           <PostRowsLinks
             isLoading={categoryPostsAreLoading}
@@ -87,7 +87,7 @@ export default function PostViewPage({
   return (
     <Fragment>
       <SharedHead title={title} description={body} />
-      <PageMain justifyContent="start" className="container items-start">
+      <PageMain justifyContent="center" className="items-start">
         <Post {...postData} />
       </PageMain>
     </Fragment>

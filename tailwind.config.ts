@@ -11,6 +11,7 @@ export default {
       },
       margin: {
         header: "var(--space-top)",
+        "mobile-header": "var(--space-top-mobile)",
       },
       spacing: {
         header: "var(--space-top)",

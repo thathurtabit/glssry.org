@@ -38,7 +38,7 @@ export const getInputCoreClasses = (inverse = false, hasError: boolean) => {
 
 // POST ROWS
 export const postRowWrapperStyles = `w-full py-5`;
-export const postRowItemStyles = `border-b-[1px] border-dotted border-white/10`;
+export const postRowItemStyles = `border-b-[1px] border-dotted border-divider`;
 export const postRowItemClickStyles = `flex flex-row items-center gap-4 w-full py-1 px-2 hover:bg-background-light transition-colors`;
 export const postRowTitleStyles = `flex flex-1 items-start`;
 export const postRowItemMetaStyles = `ml-auto flex items-center gap-1 uppercase opacity-50 text-xs`;
