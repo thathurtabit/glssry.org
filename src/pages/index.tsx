@@ -1,4 +1,3 @@
-import { HorizontalRule } from "~/components/atoms/hr/hr";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
 import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
 import { PageMain } from "~/components/molecules/page-main/page-main";

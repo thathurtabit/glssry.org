@@ -27,8 +27,6 @@ import { Link } from "~/components/atoms/link/link";
 import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 import { useSearchPublishedPosts } from "~/hooks/post/search-published-posts.hook";
-import { PostRowsLinks } from "~/components/molecules/post-rows-links/post-rows-links";
-import { LinkText } from "~/components/atoms/link-text/link-text";
 import { IconExternalLink } from "~/components/icons/external-link/external-link";
 
 export const PostEntryForm: FC<IPostEntryForm> = ({
