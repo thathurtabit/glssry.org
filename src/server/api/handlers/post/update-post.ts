@@ -32,31 +32,32 @@ export const updatePost = protectedProcedure.input(z.object({
   const { abbreviation, acronym, body, fileUnder, initialism, link, slug, title, relatedPostId1, relatedPostId2, tags } = updatedData;
 
   try {
-    const post = await ctx.db.post.update({
-      where: {
-        id: input.postId,
+    const post = await ctx.db.postVersion.create({
+      include: {
+        post: true,
       },
       data: {
-        versions: {
-          create: {
-            author: {
-              connect: {
-                id: userId,
-              },
-            },
-            abbreviation,
-            acronym,
-            body,
-            fileUnder,
-            initialism,
-            link,
-            slug,
-            title,
-            relatedPostId1,
-            relatedPostId2,
-            tags: JSON.stringify(tags),
+        post: {
+          connect: {
+            id: input.postId,
           },
         },
+        author: {
+          connect: {
+            id: userId,
+          },
+        },
+        abbreviation,
+        acronym,
+        body,
+        fileUnder,
+        initialism,
+        link,
+        slug,
+        title,
+        relatedPostId1,
+        relatedPostId2,
+        tags: JSON.stringify(tags),
       },
     });
     return post;

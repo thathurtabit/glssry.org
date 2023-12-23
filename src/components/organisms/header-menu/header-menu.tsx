@@ -71,7 +71,7 @@ export const HeaderMenu: FC = () => {
                     href={EURLS.PostPending}
                     className="relative"
                   >
-                    Pending Posts{" "}
+                    Pending posts{" "}
                     {pendingPostsCount ? (
                       <BadgeCount
                         count={pendingPostsCount}
@@ -79,8 +79,8 @@ export const HeaderMenu: FC = () => {
                       />
                     ) : null}
                   </LinkText>
-                  <LinkText inverse href={EURLS.EditPost}>
-                    Edit
+                  <LinkText inverse href={EURLS.PostList}>
+                    Published posts
                   </LinkText>
                 </ul>
               </Fragment>
