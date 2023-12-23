@@ -42,11 +42,11 @@ export const createPost = protectedProcedure.input(
       const { message } = error;
       throw new TRPCError({
         code: error.code,
-        message: errorMessage.readPost(httpCode, message),
+        message: errorMessage.createPost(httpCode, message),
         cause: error,
       });
     }
 
-    throw new Error(errorMessage.readPost(500, error as string));
+    throw new Error(errorMessage.createPost(500, error as string));
   }
 });

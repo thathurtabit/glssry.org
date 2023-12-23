@@ -27,6 +27,9 @@ export default {
         "sub-heading": ["var(--font-sub-heading)", ...fontFamily.sans],
         body: ["var(--font-body)", ...fontFamily.sans],
       },
+      zIndex: {
+        modal: "1000",
+      },
       colors: {
         copy: {
           DEFAULT: "hsl(0deg 0% 95%)",

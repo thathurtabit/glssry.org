@@ -12,6 +12,7 @@ import {
   inputSizeWrapperSmallClasses,
   inputWrapperClasses,
 } from "~/styles/shared";
+import { ModalInfoButton } from "../modal-info-button/modal-info-button";
 
 export const minInputWidth = "w-48";
 export const maxInputWidth = "w-72";
@@ -30,10 +31,12 @@ export const FormInput: FC<IFormInput> = ({
   Icon,
   inputSize = "default",
   required,
+  modalData,
   ...inputProperties
 }) => {
   const inputSizeClasses = getSizeClasses(inputSize);
   const inputCoreClasses = getInputCoreClasses(inverse, hasError);
+
   return (
     <div
       className={`${
@@ -48,7 +51,8 @@ export const FormInput: FC<IFormInput> = ({
           inverse ? "text-copy-inverse" : ""
         } ${inputLabelClasses}`}
       >
-        {label} {required && <span className="text-error">*</span>}
+        {label} {required && <span className="text-error">*</span>}{" "}
+        <ModalInfoButton modalData={modalData} />
       </label>
       {description && (
         <p className={inputDescriptionClasses}>

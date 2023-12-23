@@ -1,8 +1,8 @@
 import type { FC } from "react";
-import type { IHR } from "./hr.types";
+import type { IHR } from "./horizontal-rule.types";
 
 export const HorizontalRule: FC<IHR> = ({ className, inverse, position }) => {
-  const hrColor = inverse ? "bg-copy-inverse/50" : "bg-copy/50";
+  const hrColor = inverse ? "border-divider" : "border-divider";
   const getPositionStyles = () => {
     switch (position) {
       case "right": {

@@ -16,6 +16,7 @@ export const ModalHub: FC = () => {
   const [showDialog, setShowDialog] = useState(false);
   const state = useContext(GlssryStateContext);
   const dispatch = useContext(GlssryDispatchContext);
+  const transitionDelay = 10;
 
   const {
     content,
@@ -44,6 +45,7 @@ export const ModalHub: FC = () => {
   } = confirm ?? {};
 
   const handleCloseModal = () => {
+    setShowDialog(false);
     dispatch(setCloseModal());
   };
 
@@ -64,7 +66,7 @@ export const ModalHub: FC = () => {
 
     const timeout = setTimeout(() => {
       setShowDialog(true);
-    }, 200);
+    }, transitionDelay);
 
     return () => {
       clearTimeout(timeout);
@@ -74,11 +76,11 @@ export const ModalHub: FC = () => {
   const getHeaderBackgroundClasses = () => {
     switch (background) {
       case "dark": {
-        return "bg-background-light text-copy";
+        return "bg-background-inverse-dark";
       }
 
       default: {
-        return "bg-background-inverse-dark";
+        return "bg-background-light text-copy";
       }
     }
   };
@@ -126,11 +128,11 @@ export const ModalHub: FC = () => {
   const getCloseButtonClasses = () => {
     switch (background) {
       case "dark": {
-        return "hover:bg-background text-copy";
+        return "hover:bg-background hover:text-copy text-copy";
       }
 
       default: {
-        return "hover:bg-background-inverse text-copy";
+        return "hover:bg-background-inverse text-copy-inverse";
       }
     }
   };
@@ -166,99 +168,101 @@ export const ModalHub: FC = () => {
             onClick={(event) => event.stopPropagation()}
             onKeyDown={handleKeyDown}
           >
-            {showDialog && (
-              <dialog
-                open
-                data-cy="modal"
-                className="relative w-full overflow-hidden rounded-md bg-primary p-0 bg-clip-padding z-50"
+            <dialog
+              open
+              data-cy="modal"
+              className={`relative w-full overflow-auto max-h-screen rounded-t-md bg-primary p-0 bg-clip-padding z-50 transition-all duration-300 ${
+                showDialog
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-5"
+              }`}
+            >
+              <header
+                data-cy="modal-header"
+                className={`relative px-5 py-0 text-center rounded-t-lg font-semibold ${headerBackgroundClasses}`}
               >
-                <header
-                  data-cy="modal-header"
-                  className={`relative px-5 py-0 text-center font-semibold ${headerBackgroundClasses}`}
-                >
-                  {title && (
-                    <ContentWellHeader
-                      span={preTitle ?? undefined}
-                      text={title}
-                    />
-                  )}
-                  <button
-                    type="button"
-                    title="Close modal"
-                    className={closeButtonClasses}
-                    onClick={handleCloseModal}
-                  >
-                    <IconCancel size={20} />
-                  </button>
-                </header>
-                <div
-                  className={`modal-content p-8 font-medium ${backgroundClasses}`}
-                >
-                  {content}
-                </div>
-                {footer && (
-                  <footer
-                    data-cy="modal-footer"
-                    className={`flex justify-end gap-4 p-2 ${footerBackgroundClasses}`}
-                  >
-                    {cancel ? (
-                      cancelHref ? (
-                        <Link
-                          variant={cancelVariant}
-                          href={cancelHref}
-                          size="small"
-                          onClick={onCancel}
-                        >
-                          {cancelIcon && (
-                            <span className="pr-0">{cancelIcon}</span>
-                          )}
-                          {cancelText}
-                        </Link>
-                      ) : (
-                        <Button
-                          variant={cancelVariant}
-                          loading={cancelLoading}
-                          size="small"
-                          onClick={onCancel}
-                        >
-                          {cancelIcon && (
-                            <span className="pr-0">{cancelIcon}</span>
-                          )}
-                          {cancelText}
-                        </Button>
-                      )
-                    ) : null}
-                    {confirm ? (
-                      confirmHref ? (
-                        <Link
-                          variant={confirmVariant}
-                          size="small"
-                          href={confirmHref}
-                          onClick={onConfirm}
-                        >
-                          {confirmIcon && (
-                            <span className="pr-1">{confirmIcon}</span>
-                          )}
-                          {confirmText}
-                        </Link>
-                      ) : (
-                        <Button
-                          variant={confirmVariant}
-                          size="small"
-                          loading={confirmLoading}
-                          onClick={onConfirm}
-                        >
-                          {confirmIcon && (
-                            <span className="pr-1">{confirmIcon}</span>
-                          )}
-                          {confirmText}
-                        </Button>
-                      )
-                    ) : null}
-                  </footer>
+                {title && (
+                  <ContentWellHeader
+                    span={preTitle ?? undefined}
+                    text={title}
+                  />
                 )}
-              </dialog>
-            )}
+                <button
+                  type="button"
+                  title="Close modal"
+                  className={closeButtonClasses}
+                  onClick={handleCloseModal}
+                >
+                  <IconCancel size={20} />
+                </button>
+              </header>
+              <div
+                className={`modal-content p-8 font-medium ${backgroundClasses}`}
+              >
+                {content}
+              </div>
+              {footer && (
+                <footer
+                  data-cy="modal-footer"
+                  className={`flex justify-end gap-4 p-2 ${footerBackgroundClasses}`}
+                >
+                  {cancel ? (
+                    cancelHref ? (
+                      <Link
+                        variant={cancelVariant}
+                        href={cancelHref}
+                        size="small"
+                        onClick={onCancel}
+                      >
+                        {cancelIcon && (
+                          <span className="pr-0">{cancelIcon}</span>
+                        )}
+                        {cancelText}
+                      </Link>
+                    ) : (
+                      <Button
+                        variant={cancelVariant}
+                        loading={cancelLoading}
+                        size="small"
+                        onClick={onCancel}
+                      >
+                        {cancelIcon && (
+                          <span className="pr-0">{cancelIcon}</span>
+                        )}
+                        {cancelText}
+                      </Button>
+                    )
+                  ) : null}
+                  {confirm ? (
+                    confirmHref ? (
+                      <Link
+                        variant={confirmVariant}
+                        size="small"
+                        href={confirmHref}
+                        onClick={onConfirm}
+                      >
+                        {confirmIcon && (
+                          <span className="pr-1">{confirmIcon}</span>
+                        )}
+                        {confirmText}
+                      </Link>
+                    ) : (
+                      <Button
+                        variant={confirmVariant}
+                        size="small"
+                        loading={confirmLoading}
+                        onClick={onConfirm}
+                      >
+                        {confirmIcon && (
+                          <span className="pr-1">{confirmIcon}</span>
+                        )}
+                        {confirmText}
+                      </Button>
+                    )
+                  ) : null}
+                </footer>
+              )}
+            </dialog>
           </div>
         </section>
       </FocusTrap>

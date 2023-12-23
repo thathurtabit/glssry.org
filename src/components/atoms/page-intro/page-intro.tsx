@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { HorizontalRule } from "../hr/hr";
+import { HorizontalRule } from "../horizontal-rule/horizontal-rule";
 import type { IPageIntro } from "./page-intro.types";
 
 export const PageIntro: FC<IPageIntro> = ({ textList, hrProps, showHR = true }) => (

@@ -5,7 +5,7 @@ import { getFormattedDate } from "~/utils/get-formatted-date";
 import { Link } from "~/components/atoms/link/link";
 import { IconAccount } from "~/components/icons/account/account";
 import { IconExternalLink } from "~/components/icons/external-link/external-link";
-import { HorizontalRule } from "~/components/atoms/hr/hr";
+import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 import Image from "next/image";
 import { IconArchive } from "~/components/icons/archive/archive";

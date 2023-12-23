@@ -12,6 +12,7 @@ import {
   inputWrapperClasses,
 } from "~/styles/shared";
 import { summaryMaxCharacterCount } from "~/settings/constants";
+import { ModalInfoButton } from "../modal-info-button/modal-info-button";
 
 export const minInputWidth = "w-48";
 export const maxInputWidth = "w-96";
@@ -28,6 +29,7 @@ export const FormTextarea: FC<IFormTextarea> = ({
   rows = 10,
   maxCharacterCount = summaryMaxCharacterCount,
   required,
+  modalData,
   ...inputProperties
 }) => {
   const {
@@ -69,7 +71,8 @@ export const FormTextarea: FC<IFormTextarea> = ({
           inverse ? "text-copy-inverse" : ""
         } ${inputLabelClasses}`}
       >
-        {label} {required && <span className="text-error">*</span>}
+        {label} {required && <span className="text-error">*</span>}{" "}
+        <ModalInfoButton modalData={modalData} />
       </label>
       {description && (
         <p className={inputDescriptionClasses}>

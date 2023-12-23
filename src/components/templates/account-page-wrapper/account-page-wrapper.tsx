@@ -4,6 +4,7 @@ import React, { Fragment } from "react";
 import { PleaseSignIn } from "~/components/atoms/please-sign-in/please-sign-in";
 import { ModalsAndNotifications } from "~/components/molecules/modals-and-notifications/modals-and-notifications";
 import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
+import { PageMain } from "~/components/molecules/page-main/page-main";
 
 export const AccountPageWrapper: FCC<IAccountWrapper> = ({
   children,
@@ -12,7 +13,11 @@ export const AccountPageWrapper: FCC<IAccountWrapper> = ({
   const isAuthenticated = useIsAuthenticated();
 
   if (!isAuthenticated && !skipAuthCheck) {
-    return <PleaseSignIn />;
+    return (
+      <PageMain>
+        <PleaseSignIn />
+      </PageMain>
+    );
   }
 
   return (

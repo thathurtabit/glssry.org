@@ -18,7 +18,7 @@ import { getTRPCPostFormat } from "~/utils/get-trpc-post-format";
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 import { FormSelect } from "~/components/atoms/form-select/form-select";
 import { TagsList } from "./children/tags-list/tags-list";
-import { HorizontalRule } from "~/components/atoms/hr/hr";
+import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
 import { useFormValidation } from "~/hooks/post/form-validation.hook";
 import { useCreatePost } from "~/hooks/post/create-post.hook";
 import { useUpdatePost } from "~/hooks/post/update-post.hook";
@@ -222,6 +222,16 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           errorText={errorData?.acronym}
           value={state.acronym}
           disabled={shouldDisableInputs}
+          modalData={{
+            title: "Acronym",
+            type: "small",
+            content: (
+              <p>
+                An acronym is an abbreviation formed from the initial letters of
+                other words and pronounced as a word (e.g. ASCII, NASA).
+              </p>
+            ),
+          }}
           onChange={(event) => handleOnChange(event, "acronym")}
         />
         <FormInput
@@ -233,6 +243,22 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           errorText={errorData?.abbreviation}
           value={state.abbreviation}
           disabled={shouldDisableInputs}
+          modalData={{
+            title: "Abbreviation",
+            type: "small",
+            content: (
+              <Fragment>
+                <p>
+                  An abbreviation is a shortened form of a written word or
+                  phrase used in place of the whole word or phrase
+                </p>
+                <p>
+                  For example: <strong>amt.</strong> is an abbreviation for{" "}
+                  <strong>amount</strong>.
+                </p>
+              </Fragment>
+            ),
+          }}
           onChange={(event) => handleOnChange(event, "abbreviation")}
         />
         <FormInput
@@ -244,6 +270,23 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           errorText={errorData?.initialism}
           value={state.initialism}
           disabled={shouldDisableInputs}
+          modalData={{
+            title: "Initialism",
+            type: "small",
+            content: (
+              <Fragment>
+                <p>
+                  An initialism is an abbreviation consisting of the first
+                  letters of each word in the name of something, pronounced as
+                  separate letters.
+                </p>
+                <p>
+                  For example: <strong>HTML</strong> is an initialism of:{" "}
+                  <strong>HyperText Markup Language</strong>
+                </p>
+              </Fragment>
+            ),
+          }}
           onChange={(event) => handleOnChange(event, "initialism")}
         />
         <FormInput

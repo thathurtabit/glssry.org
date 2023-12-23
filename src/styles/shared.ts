@@ -5,7 +5,7 @@ export const infoPanelBody = `text-sm font-body`;
 
 // FORM INPUTS
 export const inputWrapperClasses = "mb-4 flex w-full flex-col";
-export const inputLabelClasses = "font-medium";
+export const inputLabelClasses = "font-medium relative";
 export const inputDescriptionClasses = "inline mb-3 max-w-sm opacity-70";
 export const inputSizeWrapperDefaultClasses = "text-base";
 export const inputSizeWrapperSmallClasses = "text-sm";

@@ -11,6 +11,7 @@ import {
   inputSizeWrapperSmallClasses,
   inputWrapperClasses,
 } from "~/styles/shared";
+import { ModalInfoButton } from "../modal-info-button/modal-info-button";
 
 export const minInputWidth = "w-48";
 export const maxInputWidth = "w-72";
@@ -27,6 +28,7 @@ export const FormSelect: FC<IFormSelect> = ({
   inputSize = "default",
   optionList,
   required,
+  modalData,
   ...selectProperties
 }) => {
   const inputSizeClasses = getSizeClasses(inputSize);
@@ -47,6 +49,7 @@ export const FormSelect: FC<IFormSelect> = ({
         } ${inputLabelClasses}`}
       >
         {label} {required && <span className="text-error">*</span>}
+        <ModalInfoButton modalData={modalData} />
       </label>
       {description && (
         <p className={inputDescriptionClasses}>

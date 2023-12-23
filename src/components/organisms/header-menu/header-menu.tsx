@@ -9,7 +9,7 @@ import { EURLS } from "~/settings/constants";
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 import { SignInOrOutButton } from "~/components/atoms/sign-in-button/sign-in-button";
 import { useIsEditor } from "~/hooks/auth/is-editor.hook";
-import { HorizontalRule } from "~/components/atoms/hr/hr";
+import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
 import { LinkText } from "~/components/atoms/link-text/link-text";
 import { useReadAllPendingPosts } from "~/hooks/post/read-all-pending-posts.hook";
 import { BadgeCount } from "~/components/atoms/badge-count/badge-count";

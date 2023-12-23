@@ -4,7 +4,6 @@ import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 import { protectedProcedure } from "~/server/api/trpc";
 import { errorMessage } from "../../utils/error-message";
 import { sharedReadUserData } from "../shared/user/shared-read-user-data";
-import { getPostData } from "../shared/post/get-post-data.util";
 import z from "zod";
 
 export const updatePost = protectedProcedure.input(z.object({
@@ -29,7 +28,8 @@ export const updatePost = protectedProcedure.input(z.object({
     });
   }
 
-  const postData = getPostData(input.data, userData);
+  const updatedData = input.data;
+  const { abbreviation, acronym, body, fileUnder, initialism, link, slug, title, relatedPostId1, relatedPostId2, tags } = updatedData;
 
   try {
     const post = await ctx.db.post.update({
@@ -37,7 +37,26 @@ export const updatePost = protectedProcedure.input(z.object({
         id: input.postId,
       },
       data: {
-        ...postData,
+        versions: {
+          create: {
+            author: {
+              connect: {
+                id: userId,
+              },
+            },
+            abbreviation,
+            acronym,
+            body,
+            fileUnder,
+            initialism,
+            link,
+            slug,
+            title,
+            relatedPostId1,
+            relatedPostId2,
+            tags: JSON.stringify(tags),
+          },
+        },
       },
     });
     return post;
@@ -47,11 +66,11 @@ export const updatePost = protectedProcedure.input(z.object({
       const { message } = error;
       throw new TRPCError({
         code: error.code,
-        message: errorMessage.readPost(httpCode, message),
+        message: errorMessage.updatePost(httpCode, message),
         cause: error,
       });
     }
 
-    throw new Error(errorMessage.readPost(500, error as string));
+    throw new Error(errorMessage.updatePost(500, error as string));
   }
 });

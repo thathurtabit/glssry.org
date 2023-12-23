@@ -24,6 +24,7 @@ enum UserRole {
 }
 
 enum TagName {
+    Aeronautics
     Animals
     Art
     Astronomy
@@ -71,6 +72,7 @@ enum TagName {
     Security
     Sex
     Software
+    Space
     Sports
     Teaching
     Technology
