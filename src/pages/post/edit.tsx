@@ -33,7 +33,7 @@ export const EditPost: FC = () => {
           <PostEntryForm
             mode="edit"
             postData={postDataFromTRPC}
-            postId={hash ?? undefined}
+            postId={postData.id ?? undefined}
           />
         ) : postData && !isEditor ? (
           <p className="flex gap-2 items-center">
