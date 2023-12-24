@@ -27,6 +27,10 @@ export const postReducer = (state: TPost, { type, payload }: TPostAction): TPost
       };
     case "tags":
       return { ...state, tags: payload as TPost["tags"] };
+    case "relatedPostId1":
+      return { ...state, relatedPostId1: payload as TPost["relatedPostId1"] };
+    case "relatedPostId2":
+      return { ...state, relatedPostId2: payload as TPost["relatedPostId2"] };
     case "reset":
       return { ...initState };
     default:

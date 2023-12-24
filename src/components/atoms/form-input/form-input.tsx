@@ -73,7 +73,7 @@ export const FormInput: FC<IFormInput> = ({
             isTypeAheadOpen ? "rounded-bl-none rounded-br-none" : ""
           } ${submitButtonData ? "rounded-br-none rounded-tr-none" : ""} ${
             width === "small" ? minInputWidth : maxInputWidth
-          }`}
+          }${inputProperties.disabled ? " opacity-50 cursor-not-allowed" : ""}`}
           {...inputProperties}
         />
         {submitButtonData && (

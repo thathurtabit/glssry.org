@@ -27,6 +27,8 @@ import { Link } from "~/components/atoms/link/link";
 import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 import { useSearchPublishedPosts } from "~/hooks/post/search-published-posts.hook";
+import { IconInfo } from "~/components/icons/info/info";
+import { LinkText } from "~/components/atoms/link-text/link-text";
 import { IconExternalLink } from "~/components/icons/external-link/external-link";
 
 export const PostEntryForm: FC<IPostEntryForm> = ({
@@ -38,6 +40,8 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
   const [hasSubmittedTitleCheck, setHasSubmittedTitleCheck] = useState(false);
   const [state, dispatch] = useReducer(postReducer, reducerState);
   const [postSuccessful, setPostSuccessful] = useState(false);
+  const [userHasSaidPostIsNotDuplicate, setUserHasSaidPostIsNotDuplicate] =
+    useState(false);
 
   const {
     searchedPublishedPostsData,
@@ -50,13 +54,15 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
   });
 
   const postAlreadyExists = Boolean(
-    state.title && searchedPublishedPostsData?.length
+    state.title &&
+      searchedPublishedPostsData?.length &&
+      userHasSaidPostIsNotDuplicate === false
   );
 
   const isOKToShowFullForm =
     mode === "edit" ||
     (state.title &&
-      !searchedPublishedPostsData?.length &&
+      (!searchedPublishedPostsData?.length || userHasSaidPostIsNotDuplicate) &&
       hasSubmittedTitleCheck &&
       !searchedPublishedPostsDataIsFetching);
 
@@ -121,6 +127,10 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
     setPostSuccessful(false);
   };
 
+  const handleUserHasSaidPostIsNotDuplicate = () => {
+    setUserHasSaidPostIsNotDuplicate(true);
+  };
+
   if (postSuccessful) {
     return (
       <Fragment>
@@ -143,20 +153,64 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
   }
 
   if (postAlreadyExists) {
-    const { versions, title } = searchedPublishedPostsData?.[0] ?? {};
-    const latestVersion = versions?.at(-1);
-    const { fileUnder, slug } = latestVersion ?? {};
-
     return (
       <Fragment>
-        <SectionSubtitle>Hmm, seems this post already exists</SectionSubtitle>
-        <p>Searching existing posts we&apos;ve found the below</p>
+        <SectionSubtitle className="flex items-center gap-2">
+          <IconInfo /> Hmm, we&apos;ve found similar posts
+        </SectionSubtitle>
 
-        <Link
-          href={`/${getKebabCaseFromSentenceCase(fileUnder ?? "")}/${slug}`}
-        >
-          {title} <IconExternalLink />
-        </Link>
+        <p>
+          It looks like there are already posts with similar titles to &ldquo;
+          {}
+          <strong>{state.title}</strong>&rdquo; which you&apos;re trying to
+          create.
+        </p>
+
+        <HorizontalRule position="left" />
+        <div className="flex gap-5">
+          <div className="flex-1">
+            <SectionSubtitle>Similar posts</SectionSubtitle>
+            <p>
+              Please check the below posts to see if they&apos;re the same as
+              the one you&apos;re trying to create.
+            </p>
+            <ul className="list-disc m-4">
+              {searchedPublishedPostsData?.map((post) => {
+                const { versions, title } = post;
+                const latestVersion = versions?.at(-1);
+                const { fileUnder, slug } = latestVersion ?? {};
+
+                return (
+                  <li key={post.id}>
+                    <LinkText
+                      href={`/${getKebabCaseFromSentenceCase(
+                        fileUnder ?? ""
+                      )}/${slug}`}
+                      target="_blank"
+                    >
+                      {title} <IconExternalLink />
+                    </LinkText>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="flex-1">
+            <SectionSubtitle>My post is not a duplication</SectionSubtitle>
+            <p>
+              If you&apos;ve checked the list of similar posts and you&apos;re
+              sure your post is not a duplication, please click the button below
+              to continue.
+            </p>
+            <Button
+              disabled={disablePreliminaryPostTitleSearch}
+              variant="secondary"
+              onClick={handleUserHasSaidPostIsNotDuplicate}
+            >
+              Create &ldquo;{state.title}&rdquo;
+            </Button>
+          </div>
+        </div>
       </Fragment>
     );
   }
@@ -204,13 +258,18 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
         />
         <FormInput
           required
+          disabled={mode === "create"} // We disable this as the entry is created from the preliminary title check
           id="post-input-title"
           label="Post title"
           placeholder="i.e. Cascading Style Sheets"
+          description={
+            mode === "create"
+              ? "Title can't be edited after the preliminary check"
+              : undefined
+          }
           hasError={Boolean(errorData?.title)}
           errorText={errorData?.title}
           value={state.title}
-          disabled={shouldDisableInputs}
           onChange={(event) => handleOnChange(event, "title")}
         />
         <FormInput

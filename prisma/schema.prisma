@@ -33,6 +33,7 @@ enum TagName {
     Business
     Chemistry
     Civics
+    Communications
     Computing
     Construction
     Crafts
@@ -51,6 +52,7 @@ enum TagName {
     History
     Internet
     Journalism
+    Languages
     Law
     Linguistics
     Literature
@@ -71,6 +73,7 @@ enum TagName {
     Science
     Security
     Sex
+    Slang
     Software
     Space
     Sports

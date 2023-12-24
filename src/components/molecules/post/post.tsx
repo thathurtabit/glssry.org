@@ -52,26 +52,26 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   return (
     <article className="text-copy w-full max-w-4xl">
       <h1 className="mb-6 md:mb-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-        {title}
+        {title ?? "Title not found"}
       </h1>
       <div className="flex flex-col lg:flex-row gap-5 md:gap-14">
         <div className="flex-1 max-w-xl w-full">
           <p className="first-line:uppercase first-line:font-sub-heading md:first-line:text-lg lg:first-line:text-xl md:text-lg">
-            {body}
+            {body ?? "Body..."}
           </p>
           <div className="flex gap-1 justify-between text-xs mb-10 flex-col md:flex-row md:items-center md:gap-5">
             <dl className="flex gap-5 my-2 md:my-4">
               <div>
                 <dt className={`${smallTextStyles} mb-0`}>Abbreviation:</dt>
-                <dd>{abbreviation}</dd>
+                <dd>{abbreviation ?? "-"}</dd>
               </div>
               <div>
                 <dt className={`${smallTextStyles} mb-0`}>Acronym:</dt>
-                <dd>{acronym}</dd>
+                <dd>{acronym ?? "-"}</dd>
               </div>
               <div>
                 <dt className={`${smallTextStyles} mb-0`}>Initialism:</dt>
-                <dd>{initialism}</dd>
+                <dd>{initialism ?? "-"}</dd>
               </div>
             </dl>
             <div className="flex text-xs md:items-end flex-col justify-end">
@@ -95,7 +95,7 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
                 ) : (
                   <IconAccount />
                 )}
-                <span>{originalAuthorUsername}</span>
+                <span>{originalAuthorUsername ?? "-"}</span>
               </p>
             </div>
             {shouldShowUpdatedBy ? (
