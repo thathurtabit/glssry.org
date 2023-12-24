@@ -1,12 +1,13 @@
 import type { FC } from "react";
-import type { IRelatedPosts } from "./related-posts.types";
 import type { TTRPCReadPost } from "~/types/prisma.types";
-import { useReadPost } from "~/hooks/post/read-post.hook";
+import type { IRelatedTaxonomyPosts } from "./related-taxonomy-posts.types";
+import type { TNativeTag } from "~/schemas/post/post.schema";
 import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 import { getTruncatedString } from "~/utils/get-truncated-string";
 import { IconArchive } from "~/components/icons/archive/archive";
 import { LinkText } from "~/components/atoms/link-text/link-text";
+import { useReadRandomisedRelatedPosts } from "~/hooks/post/read-randomised-related-posts.hook";
 import {
   relatedPostLinkStyles,
   relatedPostLinkTitleStyles,
@@ -17,34 +18,27 @@ import {
 } from "~/styles/shared";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 
-export const RelatedPosts: FC<IRelatedPosts> = ({
-  title = "Related terms",
-  slugs,
+export const RelatedTaxonomyPosts: FC<IRelatedTaxonomyPosts> = ({
+  title = "Other posts",
+  relatedTaxonomies,
 }) => {
-  const {
-    postData: relatedPost1Data,
-    postDataIsFetching: relatedPost1DataIsFetching,
-  } = useReadPost({ slug: slugs.at(0) ?? "" });
-  const {
-    postData: relatedPost2Data,
-    postDataIsFetching: relatedPost2DataIsFetching,
-  } = useReadPost({ slug: slugs.at(1) ?? "" });
+  const { randomisedRelatedPosts, randomisedRelatedPostsIsFetching } =
+    useReadRandomisedRelatedPosts({
+      categories: relatedTaxonomies as TNativeTag[],
+    });
 
-  const postsData = [relatedPost1Data, relatedPost2Data].filter(
-    (post): post is TTRPCReadPost => Boolean(post)
-  );
-
-  const isLoading = relatedPost1DataIsFetching || relatedPost2DataIsFetching;
+  const isLoading = randomisedRelatedPostsIsFetching;
 
   if (isLoading) {
     return <PostRowsLoading />;
   }
 
-  if (!postsData?.length) {
+  if (!randomisedRelatedPosts?.length) {
     return null;
   }
 
-  const postsDataNonNullable = postsData as NonNullable<TTRPCReadPost>[];
+  const postsDataNonNullable =
+    randomisedRelatedPosts as NonNullable<TTRPCReadPost>[];
 
   return (
     <aside className="w-full md:max-w-xs mt-5 md:mt-0">

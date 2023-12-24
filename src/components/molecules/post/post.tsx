@@ -11,6 +11,9 @@ import { IconArchive } from "~/components/icons/archive/archive";
 import { LinkText } from "~/components/atoms/link-text/link-text";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 import { RelatedPosts } from "../related-posts/related-posts";
+import { RelatedTaxonomyPosts } from "../related-taxonomy-posts/related-taxonomy-posts";
+import { getTagsArrayFromJsonArray } from "~/utils/get-tags-array-from-json-array";
+import { IconTag } from "~/components/icons/tag/tag";
 
 export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   author: originalAuthor,
@@ -33,21 +36,23 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
     link,
     title,
     updatedAt,
+    tags,
     relatedPostId1,
     relatedPostId2,
   } = latestVersion;
 
   const { username: originalAuthorUsername, image: originalAuthorImageURL } =
     originalAuthor;
-
   const { username: latestAuthorUsername, image: latestAuthorImageURL } =
     latestAuthor;
-
   const shouldShowUpdatedBy = latestAuthorUsername !== originalAuthorUsername;
 
   const smallTextStyles = "text-[0.5rem] opacity-50 uppercase";
 
   const hasRelatedPosts = Boolean(relatedPostId1) || Boolean(relatedPostId2);
+
+  const tagsArray = getTagsArrayFromJsonArray(tags);
+  const conjoinedTaxonomies = [fileUnder, ...tagsArray];
 
   return (
     <article className="text-copy w-full max-w-4xl">
@@ -145,11 +150,21 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
                 {fileUnder}
               </LinkText>
             </p>
+            <p className="flex gap-1 items-center">
+              <IconTag /> Tags:{" "}
+              {tagsArray.map((tag) => (
+                <LinkText key={tag} href={getKebabCaseFromSentenceCase(tag)}>
+                  {tag}
+                </LinkText>
+              ))}
+            </p>
             <p>Version: {versions.length}</p>
           </div>
         </div>
         {hasRelatedPosts ? (
           <RelatedPosts slugs={[relatedPostId1 ?? "", relatedPostId2 ?? ""]} />
+        ) : conjoinedTaxonomies ? (
+          <RelatedTaxonomyPosts relatedTaxonomies={conjoinedTaxonomies} />
         ) : null}
       </div>
     </article>

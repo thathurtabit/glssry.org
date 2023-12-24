@@ -1,3 +1,4 @@
+import { readRandomisedRelatedPosts } from "./../handlers/post/read-randomised-related-posts";
 import { searchPublishedPosts } from "./../handlers/post/search-published-posts";
 import { readAllPostsInCategory } from "./../handlers/post/read-all-posts-in-category";
 import { readLatestPosts } from "~/server/api/handlers/post/read-latest-posts";
@@ -10,13 +11,14 @@ import { readPost } from "~/server/api/handlers/post/read-post";
 import { createPost } from "~/server/api/handlers/post/create-post";
 
 export const postRouter = createTRPCRouter({
-  readAllPosts,
-  readAllPendingPosts,
-  readLatestPosts,
-  readAllPostsInCategory,
-  readPost,
   createPost,
-  updatePost,
   publishPost,
+  readAllPendingPosts,
+  readAllPosts,
+  readAllPostsInCategory,
+  readLatestPosts,
+  readPost,
+  readRandomisedRelatedPosts,
   searchPublishedPosts,
+  updatePost,
 });
