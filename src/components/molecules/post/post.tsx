@@ -6,7 +6,6 @@ import { Link } from "~/components/atoms/link/link";
 import { IconAccount } from "~/components/icons/account/account";
 import { IconExternalLink } from "~/components/icons/external-link/external-link";
 import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
-import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 import Image from "next/image";
 import { IconArchive } from "~/components/icons/archive/archive";
 import { LinkText } from "~/components/atoms/link-text/link-text";
@@ -101,16 +100,16 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
             </div>
             {shouldShowUpdatedBy ? (
               <div className="flex text-xs items-end flex-col justify-end">
-                <SectionSubtitle
-                  className={`${smallTextStyles} mb-0 text-right`}
+                <h4
+                  className={`${smallTextStyles} font-body mb-0 md:text-right`}
                 >
                   Edited by:
-                </SectionSubtitle>
+                </h4>
                 <p
                   className="flex gap-2 text-xs items-center m-0"
                   title={`Updated: ${getFormattedDate({
                     date: updatedAt,
-                  })} by ${latestAuthorUsername}`}
+                  })} by ${latestAuthorUsername ?? "-"}`}
                 >
                   {latestAuthorImageURL ? (
                     <Image
@@ -123,7 +122,7 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
                   ) : (
                     <IconAccount />
                   )}
-                  <span>{latestAuthorUsername}</span>
+                  <span>{latestAuthorUsername ?? "-"}</span>
                 </p>
               </div>
             ) : null}

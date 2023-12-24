@@ -24,7 +24,7 @@ export const useGenerateAndSetRandomUsernameOnLoad = () => {
     }
 
     setShouldCreateAndSetRandomUsername(true);
-    if (randomUsername && Boolean(username)) {
+    if (randomUsername && !username) {
       setUsername({ username: randomUsername });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- we want to avoid mutation loop of doom

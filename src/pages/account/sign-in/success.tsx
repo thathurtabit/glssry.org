@@ -19,12 +19,9 @@ const SignInSuccess: NextPage = () => {
   return (
     <AccountPageWrapper>
       <SharedHead title="Signed In" />
-      <PageStructure title="Sign in success!" width="narrow">
+      <PageStructure title="You're now signed in" width="narrow">
         <PageIntro
-          textList={[
-            "You are now signed in!",
-            "Click the link below to get started",
-          ]}
+          textList={["Click the link below to get started"]}
           hrProps={{ position: "left" }}
         />
         <Link href="/">Home&apos;</Link>

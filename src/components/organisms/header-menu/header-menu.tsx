@@ -59,7 +59,7 @@ export const HeaderMenu: FC = () => {
                 Create
               </LinkText>
               <LinkText inverse href={EURLS.SetUsername}>
-                Username
+                Set username
               </LinkText>
             </ul>
             {isEditor ? (
@@ -80,7 +80,7 @@ export const HeaderMenu: FC = () => {
                     ) : null}
                   </LinkText>
                   <LinkText inverse href={EURLS.PostList}>
-                    Published posts
+                    List posts
                   </LinkText>
                 </ul>
               </Fragment>

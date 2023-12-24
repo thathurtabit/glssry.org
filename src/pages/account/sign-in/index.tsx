@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getProviders, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { ErrorMessage } from "~/components/atoms/error-message/error-message";
-import { appURL } from "~/settings/constants";
+import { EURLS } from "~/settings/constants";
 import { getSignInErrorMessage } from "~/utils/sign-in.utils";
 import { PageStructure } from "~/components/molecules/page-structure/page-structure";
 import { Button } from "~/components/atoms/button/button";
@@ -114,7 +114,7 @@ export const SignIn = ({
 
   const handleSignIn = (id: string) => {
     (async () => {
-      await signIn(id, { callbackUrl: appURL });
+      await signIn(id, { callbackUrl: EURLS.SignInSuccess });
     })().catch((error) => {
       // eslint-disable-next-line no-console
       console.error(error); // TODO: Add error logging
