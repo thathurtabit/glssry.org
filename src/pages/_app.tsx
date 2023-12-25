@@ -7,6 +7,7 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import { GlssryAppProvider } from "~/context/context/context";
 import { AppWrapper } from "~/components/templates/app-wrapper/app-wrapper";
+import { ModalsAndNotifications } from "~/components/molecules/modals-and-notifications/modals-and-notifications";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -17,6 +18,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <AppWrapper>
         <Component {...pageProps} />
       </AppWrapper>
+      <ModalsAndNotifications />
     </GlssryAppProvider>
   </SessionProvider>
 );
