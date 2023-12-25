@@ -1,6 +1,6 @@
 export const appTitle = "glssry";
 export const appStrapline = "a helpful collection of summaries to understand everything.";
-export const appDescription = "glssry.org is an open-source glossary, dictionary, and encyclopedia of acronyms, initialisms, terms and definitions.";
+export const appDescription = "is an open-source glossary, dictionary, and encyclopedia of acronyms, initialisms, terms and definitions.";
 export const appURL = process.env.NODE_ENV === "development"
   ? "http://dev.localhost:3000"
   : "https://glssry.org";

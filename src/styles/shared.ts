@@ -37,9 +37,9 @@ export const getInputCoreClasses = (inverse = false, hasError: boolean) => {
 };
 
 // POST ROWS
-export const postRowWrapperStyles = `py-5`;
-export const postRowItemStyles = `border-b-[1px] border-dotted border-divider`;
-export const postRowItemClickStyles = `flex flex-row items-center gap-4 w-full py-1 px-2 hover:bg-background-light transition-colors`;
+export const postRowWrapperStyles = `p-0`;
+export const postRowItemStyles = `border-b-[1px] border-dotted border-divider gap-10`;
+export const postRowItemClickStyles = `flex flex-row items-center gap-4 w-full py-1 hover:bg-background-light transition-colors`;
 export const postRowTitleStyles = `flex flex-1 items-start`;
 export const postRowItemMetaStyles = `ml-auto flex items-center gap-1 uppercase opacity-50 text-xs`;
 export const postRowNoItemsStyles = `flex gap-2 items-center`;
@@ -48,7 +48,7 @@ export const postRowNoItemsStyles = `flex gap-2 items-center`;
 export const relatedPostsWrapperStyles = `w-full md:w-60 mt-5 md:mt-0`;
 export const relatedPostsULStyles = `relative`;
 export const relatedPostsLIStyles = `[&:not(:last-child)]:border-b-[1px] border-divider pb-2 mb-5`;
-export const relatedPostLinkStyles = `mb-2`;
+export const relatedPostLinkStyles = `mb-2 px-0 py-0`;
 export const relatedPostLinkTitleStyles = `text-md m-0`;
 export const relatedPostsBodyStyles = `text-sm opacity-70`;
 export const relatedPostsCategoryStyles = `flex gap-2 text-xs items-center`;

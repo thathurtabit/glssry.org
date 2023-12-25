@@ -6,6 +6,7 @@ import type { readAllPosts } from "~/server/api/handlers/post/read-all-posts";
 import type { readAllPostsInCategory } from "~/server/api/handlers/post/read-all-posts-in-category";
 import type { readLatestPosts } from "~/server/api/handlers/post/read-latest-posts";
 import type { readPost } from "~/server/api/handlers/post/read-post";
+import type { readRandomPost } from "~/server/api/handlers/post/read-random-post";
 
 // USER
 export type TTRPCReadUser = inferProcedureOutput<typeof readUser>;
@@ -13,6 +14,7 @@ export type TTRPCReadUser = inferProcedureOutput<typeof readUser>;
 // POST
 export type TTRPCCreatePost = inferProcedureInput<typeof createPost>;
 export type TTRPCReadPost = inferProcedureOutput<typeof readPost>;
+export type TTRPCReadRandomPost = inferProcedureOutput<typeof readRandomPost>;
 export type TTRPCReadAllPosts = inferProcedureOutput<typeof readAllPosts>;
 export type TTRPCReadLatestPosts = inferProcedureOutput<typeof readLatestPosts>;
 export type TTRPCReadCategoryPosts = inferProcedureOutput<typeof readAllPostsInCategory>;

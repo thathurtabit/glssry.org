@@ -3,8 +3,6 @@ import React from "react";
 import type { IPostRowsButtons } from "./post-rows-buttons.types";
 import { IconArchive } from "~/components/icons/archive/archive";
 import { IconInfo } from "~/components/icons/info/info";
-import { IconCalendar } from "~/components/icons/calendar/calendar";
-import { getFormattedDate } from "~/utils/get-formatted-date";
 import {
   postRowItemClickStyles,
   postRowItemMetaStyles,
@@ -29,10 +27,7 @@ export const PostRowsButtons: FC<IPostRowsButtons> = ({
       {postsData.map((trpcPostData) => {
         const { id, title, versions } = trpcPostData;
         const latestVersion = versions.at(-1);
-        const { fileUnder, updatedAt } = latestVersion ?? {};
-        const date = updatedAt
-          ? getFormattedDate({ date: updatedAt, withSlashes: false })
-          : null;
+        const { fileUnder } = latestVersion ?? {};
 
         return (
           <li key={id} className={postRowItemStyles}>
@@ -48,10 +43,6 @@ export const PostRowsButtons: FC<IPostRowsButtons> = ({
               >
                 <IconArchive />
                 {fileUnder}
-              </small>
-              <small className={postRowItemMetaStyles}>
-                <IconCalendar />
-                {date}
               </small>
             </button>
           </li>

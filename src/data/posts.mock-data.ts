@@ -76,6 +76,8 @@ export const postsFullMockData: NonNullable<TTRPCReadPost>[] = [{
   }],
 }];
 
+export const postFullMockData = postsFullMockData.at(0);
+
 export const postsLinksMockData: NonNullable<TTRPCReadLatestPosts> = [{
   id: "1",
   title: "Cascading Style Sheets",
@@ -84,6 +86,7 @@ export const postsLinksMockData: NonNullable<TTRPCReadLatestPosts> = [{
     title: "Cascading Style Sheets",
     fileUnder: "Computing",
     slug: "cascading-style-sheets",
+    acronym: "CSS",
     tags: ["Test", "Uncategorized"],
     updatedAt: new Date(),
   }],
@@ -93,6 +96,7 @@ export const postsLinksMockData: NonNullable<TTRPCReadLatestPosts> = [{
   versions: [{
     id: "2",
     title: "HyperText Markup Language",
+    acronym: "HTML",
     fileUnder: "Computing",
     slug: "programming/hypertext-markup-language",
     tags: ["Test", "Uncategorized"],
