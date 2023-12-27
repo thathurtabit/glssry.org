@@ -9,7 +9,9 @@ export const SectionSubtitle: FCC<ISectionSubtitle> = ({
   <h4
     className={`${
       noMargin ? "" : "mb-5"
-    } font-body font-medium uppercase tracking-wide ${className ?? ""}`}
+    } font-body font-medium uppercase opacity-50 tracking-wide ${
+      className ?? ""
+    }`}
   >
     {children}
   </h4>

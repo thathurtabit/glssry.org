@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useContext, type FC, Fragment } from "react";
+import { useContext, type FC } from "react";
 import { LinkText } from "~/components/atoms/link-text/link-text";
 import { IconAccount } from "~/components/icons/account/account";
 import { IconMenu } from "~/components/icons/menu/menu";
@@ -13,6 +13,7 @@ import { EURLS, appTitle } from "~/settings/constants";
 import { HeaderMenu } from "../header-menu/header-menu";
 import { OmniSearch } from "../omni-search/omni-search";
 import { IconPlus } from "~/components/icons/plus/plus";
+import { contributeModalData } from "~/data/modals/contribute.data";
 
 export const HeaderStrip: FC = () => {
   const isAuthenticated = useIsAuthenticated();
@@ -27,30 +28,7 @@ export const HeaderStrip: FC = () => {
   const hoverClasses = "hover:bg-copy-light/10";
 
   const handleContributeClick = () => {
-    dispatch(
-      setModal({
-        title: "Contribute",
-        type: "small",
-        content: (
-          <Fragment>
-            <p>
-              Want to contribute to <strong>{appTitle}</strong>? You can!
-            </p>
-            <p>
-              You just need an account (it only takes a few seconds to sign up)
-              then you&apos;re free to post!
-            </p>
-          </Fragment>
-        ),
-        footer: {
-          confirm: {
-            text: "Contribute",
-            href: EURLS.CreatePost,
-            icon: <IconPlus />,
-          },
-        },
-      })
-    );
+    dispatch(setModal(contributeModalData));
   };
 
   return (

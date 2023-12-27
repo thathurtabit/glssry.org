@@ -37,7 +37,7 @@ export const getInputCoreClasses = (inverse = false, hasError: boolean) => {
 };
 
 // POST ROWS
-export const postRowWrapperStyles = `p-0`;
+export const postRowWrapperStyles = `p-0 relative w-full flex-1`;
 export const postRowItemStyles = `border-b-[1px] border-dotted border-divider gap-10`;
 export const postRowItemClickStyles = `flex flex-row items-center gap-4 w-full py-1 hover:bg-background-light transition-colors`;
 export const postRowTitleStyles = `flex flex-1 items-start`;
@@ -52,3 +52,4 @@ export const relatedPostLinkStyles = `mb-2 px-0 py-0`;
 export const relatedPostLinkTitleStyles = `text-md m-0`;
 export const relatedPostsBodyStyles = `text-sm opacity-70`;
 export const relatedPostsCategoryStyles = `flex gap-2 text-xs items-center`;
+

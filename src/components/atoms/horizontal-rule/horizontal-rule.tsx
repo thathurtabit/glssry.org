@@ -22,7 +22,7 @@ export const HorizontalRule: FC<IHR> = ({ className, inverse, position }) => {
   const positionStyles = getPositionStyles();
   return (
     <hr
-      className={`${positionStyles} my-6 h-[1px] w-full border-copy border-none bg-primary-dark ${hrColor} ${className}`}
+      className={`${positionStyles} my-6 border-b-[1px] h-0 w-full  bg-primary-dark ${hrColor} ${className}`}
     />
   );
 };

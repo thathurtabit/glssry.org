@@ -2,7 +2,6 @@ import type { FC } from "react";
 import type { IRelatedPosts } from "./related-posts.types";
 import type { TTRPCReadPost } from "~/types/prisma.types";
 import { useReadPost } from "~/hooks/post/read-post.hook";
-import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 import { getTruncatedString } from "~/utils/get-truncated-string";
 import { IconArchive } from "~/components/icons/archive/archive";
@@ -16,6 +15,7 @@ import {
   relatedPostsULStyles,
 } from "~/styles/shared";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
+import { RelatedPostLoading } from "../related-post-loading/related-post-loading";
 
 export const RelatedPosts: FC<IRelatedPosts> = ({
   title = "Related terms",
@@ -37,7 +37,7 @@ export const RelatedPosts: FC<IRelatedPosts> = ({
   const isLoading = relatedPost1DataIsFetching || relatedPost2DataIsFetching;
 
   if (isLoading) {
-    return <PostRowsLoading />;
+    return <RelatedPostLoading />;
   }
 
   if (!postsData?.length) {

@@ -3,5 +3,6 @@ import type { TTRPCReadCategoryPosts, TTRPCReadLatestPost, TTRPCReadLatestPosts 
 export interface IPostRowsLinks {
   isLoading?: boolean
   postsData?: NonNullable<TTRPCReadLatestPosts | TTRPCReadCategoryPosts>
+  itemsCount?: number
   onClickCallback?: (postData: NonNullable<TTRPCReadLatestPost>) => void
 }

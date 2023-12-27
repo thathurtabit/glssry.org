@@ -13,7 +13,7 @@ export const PostRowsLoading: FC<IPostRowsLoading> = ({ itemsCount = 5 }) => (
       <li
         // eslint-disable-next-line react/no-array-index-key
         key={`post-row-loading-${index}`}
-        className={`${postRowItemStyles} py-2 px-4 flex gap-4 animate-pulse`}
+        className={`${postRowItemStyles} py-2 justify-between items-start flex gap-4 animate-pulse`}
       >
         <span className={`${postRowTitleStyles} bg-background-light h-4`} />
         <span

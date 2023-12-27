@@ -2,6 +2,7 @@ export const errorMessage = {
   // Post
   readPost: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to read this post. Message: ${message}.`,
   readRandomPost: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to read a random post. Message: ${message}.`,
+  readRandomCategoryPostCount: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to read a random categories and their post counts. Message: ${message}.`,
   createPost: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to create post. Message: ${message}.`,
   updatePost: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to update post. Message: ${message}.`,
   publishPost: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying publish this post. Message: ${message}.`,

@@ -12,14 +12,16 @@ import {
   postRowWrapperStyles,
 } from "~/styles/shared";
 import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
+import { NoPostFound } from "../no-post-found/no-post-found";
 
 export const PostRowsButtons: FC<IPostRowsButtons> = ({
   isLoading,
   postsData,
+  itemsCount = 5,
   onClickCallback,
 }) => {
   if (isLoading) {
-    return <PostRowsLoading />;
+    return <PostRowsLoading itemsCount={itemsCount} />;
   }
 
   return postsData?.length ? (
@@ -50,8 +52,6 @@ export const PostRowsButtons: FC<IPostRowsButtons> = ({
       })}
     </ul>
   ) : (
-    <p className={postRowNoItemsStyles}>
-      <IconInfo /> No posts found
-    </p>
+    <NoPostFound />
   );
 };

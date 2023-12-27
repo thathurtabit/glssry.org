@@ -2,7 +2,6 @@ import type { FC } from "react";
 import type { TTRPCReadPost } from "~/types/prisma.types";
 import type { IRelatedTaxonomyPosts } from "./related-taxonomy-posts.types";
 import type { TNativeTag } from "~/schemas/post/post.schema";
-import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 import { getTruncatedString } from "~/utils/get-truncated-string";
 import { IconArchive } from "~/components/icons/archive/archive";
@@ -17,6 +16,7 @@ import {
   relatedPostsULStyles,
 } from "~/styles/shared";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
+import { RelatedPostLoading } from "../related-post-loading/related-post-loading";
 
 export const RelatedTaxonomyPosts: FC<IRelatedTaxonomyPosts> = ({
   title = "Other posts",
@@ -30,7 +30,7 @@ export const RelatedTaxonomyPosts: FC<IRelatedTaxonomyPosts> = ({
   const isLoading = randomisedRelatedPostsIsFetching;
 
   if (isLoading) {
-    return <PostRowsLoading />;
+    return <RelatedPostLoading />;
   }
 
   if (!randomisedRelatedPosts?.length) {

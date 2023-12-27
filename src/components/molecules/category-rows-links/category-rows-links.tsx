@@ -1,20 +1,21 @@
-import { type FC } from "react";
-import type { IPostRowsLinks } from "./post-rows-links.types";
+import type { FC } from "react";
+import type { ICategoryRowsLinks } from "./category-rows-links.types";
+import { IconInfo } from "~/components/icons/info/info";
 import {
   postRowItemClickStyles,
   postRowItemMetaStyles,
   postRowItemStyles,
+  postRowNoItemsStyles,
   postRowTitleStyles,
   postRowWrapperStyles,
 } from "~/styles/shared";
 import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
 import { LinkText } from "~/components/atoms/link-text/link-text";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
-import { NoPostFound } from "../no-post-found/no-post-found";
 
-export const PostRowsLinks: FC<IPostRowsLinks> = ({
+export const CategoryRowsLinks: FC<ICategoryRowsLinks> = ({
   isLoading,
-  postsData,
+  categoryData,
   itemsCount = 5,
   onClickCallback,
 }) => {
@@ -22,34 +23,34 @@ export const PostRowsLinks: FC<IPostRowsLinks> = ({
     return <PostRowsLoading itemsCount={itemsCount} />;
   }
 
-  return postsData?.length ? (
+  return categoryData?.length ? (
     <ul className={postRowWrapperStyles}>
-      {postsData.map((trpcPostData) => {
-        const { id, title, versions } = trpcPostData;
-        const latestVersion = versions.at(-1);
-        const { fileUnder, acronym, slug } = latestVersion ?? {};
+      {categoryData.map((trpcCategoryData) => {
+        const [category, count] = trpcCategoryData;
 
         const handleLinkClick = () => {
           if (onClickCallback) {
-            onClickCallback(trpcPostData);
+            onClickCallback(trpcCategoryData);
           }
         };
 
-        return slug && fileUnder ? (
-          <li key={id} className={postRowItemStyles}>
+        return category ? (
+          <li key={category} className={postRowItemStyles}>
             <LinkText
-              href={`${getKebabCaseFromSentenceCase(fileUnder)}/${slug}`}
+              href={`${getKebabCaseFromSentenceCase(category)}`}
               className={postRowItemClickStyles}
               onClick={handleLinkClick}
             >
-              <span className={postRowTitleStyles}>{title}</span>{" "}
-              <small className={postRowItemMetaStyles}>{acronym}</small>
+              <span className={postRowTitleStyles}>{category}</span>{" "}
+              <small className={postRowItemMetaStyles}>{count}</small>
             </LinkText>
           </li>
         ) : null;
       })}
     </ul>
   ) : (
-    <NoPostFound />
+    <p className={postRowNoItemsStyles}>
+      <IconInfo /> No categories found
+    </p>
   );
 };

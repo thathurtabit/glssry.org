@@ -2,10 +2,11 @@ import type { FC } from "react";
 import type { IPostShort } from "./post-short.types";
 import React from "react";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
-import { LoadingSpinner } from "~/components/atoms/loading-spinner/loading-spinner";
 import { getTruncatedString } from "~/utils/get-truncated-string";
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 import { LinkText } from "~/components/atoms/link-text/link-text";
+import { PostShortLoading } from "../post-short-loading/post-short-loading";
+import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
 
 export const PostShort: FC<IPostShort> = ({
   postTitle = "Random term",
@@ -16,8 +17,16 @@ export const PostShort: FC<IPostShort> = ({
   const { versions } = postData ?? {};
   const latestVersion = versions?.at(-1);
 
+  if (!latestVersion && !isLoading) {
+    return (
+      <InfoPanel title="No post found" type="info">
+        Hmm, strangely, we couldn&apos;t find any posts to show!
+      </InfoPanel>
+    );
+  }
+
   if (!latestVersion) {
-    return <p>No information found</p>;
+    return null;
   }
 
   const { abbreviation, acronym, body, fileUnder, initialism, title, slug } =
@@ -26,7 +35,7 @@ export const PostShort: FC<IPostShort> = ({
   const smallTextStyles = "text-[0.5rem] opacity-50 uppercase";
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <PostShortLoading />;
   }
 
   return (
