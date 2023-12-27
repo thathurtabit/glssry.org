@@ -432,7 +432,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
       <div className="flex-1">
         <SectionSubtitle className="opacity-50">Preview:</SectionSubtitle>
         {postPreviewData?.title ? (
-          <Post {...postPreviewData} />
+          <Post postData={postPreviewData} showRelatedPosts={false} />
         ) : (
           <InfoPanel type="info" title="Post preview will appear here" />
         )}

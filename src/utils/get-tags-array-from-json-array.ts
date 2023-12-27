@@ -1,3 +1,3 @@
 import type { JsonValue } from "@prisma/client/runtime/library";
 
-export const getTagsArrayFromJsonArray = (jsonArray: JsonValue): string[] => jsonArray ? JSON.parse(jsonArray as string) as string[] : [];
+export const getTagsArrayFromJsonArray = (jsonTags: JsonValue | undefined): string[] => jsonTags ? Array.isArray(jsonTags) ? (jsonTags as { name: string }[]).map(({ name }) => name) : [] : [];

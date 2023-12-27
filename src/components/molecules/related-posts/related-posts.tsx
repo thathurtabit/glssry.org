@@ -16,6 +16,7 @@ import {
 } from "~/styles/shared";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 import { RelatedPostsLoading } from "../related-posts-loading/related-posts-loading";
+import { NoPostFound } from "../no-post-found/no-post-found";
 
 export const RelatedPosts: FC<IRelatedPosts> = ({
   title = "Related terms",
@@ -76,7 +77,9 @@ export const RelatedPosts: FC<IRelatedPosts> = ({
             );
           })}
         </ul>
-      ) : null}
+      ) : (
+        <NoPostFound />
+      )}
     </aside>
   );
 };

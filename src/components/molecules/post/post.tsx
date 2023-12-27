@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import type { TTRPCReadPost } from "~/types/prisma.types";
 import React from "react";
 import { getFormattedDate } from "~/utils/get-formatted-date";
 import { Link } from "~/components/atoms/link/link";
@@ -15,12 +14,10 @@ import { RelatedTaxonomyPosts } from "../related-taxonomy-posts/related-taxonomy
 import { getTagsArrayFromJsonArray } from "~/utils/get-tags-array-from-json-array";
 import { IconTag } from "~/components/icons/tag/tag";
 import { NoPostFound } from "../no-post-found/no-post-found";
+import type { IPost } from "./post.types";
 
-export const Post: FC<NonNullable<TTRPCReadPost>> = ({
-  author: originalAuthor,
-  createdAt,
-  versions,
-}) => {
+export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
+  const { author: originalAuthor, createdAt, versions } = postData;
   const latestVersion = versions.at(-1);
 
   if (!latestVersion) {
@@ -50,10 +47,14 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
 
   const smallTextStyles = "text-[0.5rem] opacity-50 uppercase";
 
-  const hasRelatedPosts = Boolean(relatedPostId1) || Boolean(relatedPostId2);
+  const hasRelatedPosts =
+    (Boolean(relatedPostId1) || Boolean(relatedPostId2)) && showRelatedPosts;
 
   const tagsArray = getTagsArrayFromJsonArray(tags);
+
   const conjoinedTaxonomies = [fileUnder, ...tagsArray];
+  const hasConjoinedTaxonomies =
+    conjoinedTaxonomies.length > 0 && showRelatedPosts;
 
   return (
     <article className="text-copy md:mx-auto w-full max-w-4xl">
@@ -164,7 +165,7 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
         </div>
         {hasRelatedPosts ? (
           <RelatedPosts slugs={[relatedPostId1 ?? "", relatedPostId2 ?? ""]} />
-        ) : conjoinedTaxonomies ? (
+        ) : hasConjoinedTaxonomies ? (
           <RelatedTaxonomyPosts relatedTaxonomies={conjoinedTaxonomies} />
         ) : null}
       </div>

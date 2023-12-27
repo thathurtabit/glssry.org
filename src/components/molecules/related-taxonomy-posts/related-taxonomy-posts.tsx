@@ -17,6 +17,7 @@ import {
 } from "~/styles/shared";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 import { RelatedPostsLoading } from "../related-posts-loading/related-posts-loading";
+import { NoPostFound } from "../no-post-found/no-post-found";
 
 export const RelatedTaxonomyPosts: FC<IRelatedTaxonomyPosts> = ({
   title = "Other posts",
@@ -70,7 +71,9 @@ export const RelatedTaxonomyPosts: FC<IRelatedTaxonomyPosts> = ({
             );
           })}
         </ul>
-      ) : null}
+      ) : (
+        <NoPostFound />
+      )}
     </aside>
   );
 };

@@ -33,7 +33,7 @@ export const ListPendingPosts: FC = () => {
       setModal({
         title: postData.title,
         type: "large",
-        content: <Post {...postData} />,
+        content: <Post postData={postData} />,
         footer: {
           confirm: {
             text: "Approve",

@@ -80,7 +80,7 @@ export default function PostViewPage({
       <SharedHead title={title} description={body} />
       <Breadcrumbs items={[category, slug]} />
       <PageMain justifyContent="center" className="items-start">
-        <Post {...postData} />
+        <Post postData={postData} />
       </PageMain>
     </Fragment>
   );
