@@ -14,6 +14,7 @@ import { RelatedPosts } from "../related-posts/related-posts";
 import { RelatedTaxonomyPosts } from "../related-taxonomy-posts/related-taxonomy-posts";
 import { getTagsArrayFromJsonArray } from "~/utils/get-tags-array-from-json-array";
 import { IconTag } from "~/components/icons/tag/tag";
+import { NoPostFound } from "../no-post-found/no-post-found";
 
 export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   author: originalAuthor,
@@ -23,7 +24,7 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   const latestVersion = versions.at(-1);
 
   if (!latestVersion) {
-    return <p>No information found</p>;
+    return <NoPostFound />;
   }
 
   const {
@@ -55,13 +56,13 @@ export const Post: FC<NonNullable<TTRPCReadPost>> = ({
   const conjoinedTaxonomies = [fileUnder, ...tagsArray];
 
   return (
-    <article className="text-copy w-full max-w-4xl">
+    <article className="text-copy md:mx-auto w-full max-w-4xl">
       <h1 className="mb-6 md:mb-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
         {title ?? "Title not found"}
       </h1>
       <div className="flex flex-col lg:flex-row gap-5 md:gap-14">
-        <div className="flex-1 max-w-xl w-full">
-          <p className="first-line:uppercase first-line:font-sub-heading md:first-line:text-lg lg:first-line:text-xl md:text-lg">
+        <div className="w-full md:max-w-lg">
+          <p className="first-line:uppercase first-line:font-sub-heading md:first-line:text-lg lg:first-line:text-xl md:text-lg max-w-prose">
             {body ?? "Body..."}
           </p>
           <div className="flex gap-1 justify-between text-xs mb-10 flex-col md:flex-row md:items-center md:gap-5">

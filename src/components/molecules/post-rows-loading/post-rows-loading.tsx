@@ -15,13 +15,9 @@ export const PostRowsLoading: FC<IPostRowsLoading> = ({ itemsCount = 5 }) => (
         key={`post-row-loading-${index}`}
         className={`${postRowItemStyles} py-2 justify-between items-start flex gap-4 animate-pulse`}
       >
-        <span className={`${postRowTitleStyles} bg-background-light h-4`} />
-        <span
-          className={`${postRowItemMetaStyles} bg-background-light h-4 w-20`}
-        />
-        <span
-          className={`${postRowItemMetaStyles} bg-background-light h-4 w-20`}
-        />
+        <span className={`${postRowTitleStyles} bg-loading h-4`} />
+        <span className={`${postRowItemMetaStyles} bg-loading h-4 w-20`} />
+        <span className={`${postRowItemMetaStyles} bg-loading h-4 w-20`} />
       </li>
     ))}
   </ul>

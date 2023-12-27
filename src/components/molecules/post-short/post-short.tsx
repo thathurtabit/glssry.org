@@ -39,7 +39,11 @@ export const PostShort: FC<IPostShort> = ({
   }
 
   return (
-    <article className={`text-copy w-full max-w-4xl mb-9 ${className ?? ""}`}>
+    <article
+      className={`text-copy w-full md:container max-w-4xl mb-9 ${
+        className ?? ""
+      }`}
+    >
       <SectionSubtitle>{postTitle}</SectionSubtitle>
       <h2 className="mb-4 md:mb-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
         <LinkText

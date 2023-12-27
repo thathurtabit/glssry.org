@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { type FC } from "react";
 import type { IRelatedPosts } from "./related-posts.types";
 import type { TTRPCReadPost } from "~/types/prisma.types";
 import { useReadPost } from "~/hooks/post/read-post.hook";
@@ -15,7 +15,7 @@ import {
   relatedPostsULStyles,
 } from "~/styles/shared";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
-import { RelatedPostLoading } from "../related-post-loading/related-post-loading";
+import { RelatedPostsLoading } from "../related-posts-loading/related-posts-loading";
 
 export const RelatedPosts: FC<IRelatedPosts> = ({
   title = "Related terms",
@@ -36,51 +36,47 @@ export const RelatedPosts: FC<IRelatedPosts> = ({
 
   const isLoading = relatedPost1DataIsFetching || relatedPost2DataIsFetching;
 
-  if (isLoading) {
-    return <RelatedPostLoading />;
-  }
-
-  if (!postsData?.length) {
-    return null;
-  }
-
   const postsDataNonNullable = postsData as NonNullable<TTRPCReadPost>[];
 
   return (
     <aside className="w-full md:max-w-xs mt-5 md:mt-0">
       <SectionSubtitle>{title}</SectionSubtitle>
-      <ul className={relatedPostsULStyles}>
-        {postsDataNonNullable.map(({ title, slug, versions }) => {
-          const latestVersion = versions.at(-1);
-          const { fileUnder, body, acronym } = latestVersion ?? {};
-          const kebabCaseFileUnder = getKebabCaseFromSentenceCase(
-            fileUnder ?? ""
-          );
-          return (
-            <li key={slug} className={relatedPostsLIStyles}>
-              <LinkText
-                href={`/${kebabCaseFileUnder}/${slug}`}
-                className={relatedPostLinkStyles}
-              >
-                <h4 className={relatedPostLinkTitleStyles}>
-                  {title} / {acronym}
-                </h4>
-              </LinkText>
-              <p className={relatedPostsBodyStyles}>
-                {getTruncatedString(body ?? "")}
-              </p>
-              {fileUnder ? (
-                <p className={relatedPostsCategoryStyles}>
-                  <LinkText href={`/${kebabCaseFileUnder}`}>
-                    <IconArchive />
-                    {fileUnder}
-                  </LinkText>
+      {isLoading ? (
+        <RelatedPostsLoading />
+      ) : postsDataNonNullable.length ? (
+        <ul className={relatedPostsULStyles}>
+          {postsDataNonNullable.map(({ title, slug, versions }) => {
+            const latestVersion = versions.at(-1);
+            const { fileUnder, body, acronym } = latestVersion ?? {};
+            const kebabCaseFileUnder = getKebabCaseFromSentenceCase(
+              fileUnder ?? ""
+            );
+            return (
+              <li key={slug} className={relatedPostsLIStyles}>
+                <LinkText
+                  href={`/${kebabCaseFileUnder}/${slug}`}
+                  className={relatedPostLinkStyles}
+                >
+                  <h4 className={relatedPostLinkTitleStyles}>
+                    {title} / {acronym}
+                  </h4>
+                </LinkText>
+                <p className={relatedPostsBodyStyles}>
+                  {getTruncatedString(body ?? "")}
                 </p>
-              ) : null}
-            </li>
-          );
-        })}
-      </ul>
+                {fileUnder ? (
+                  <p className={relatedPostsCategoryStyles}>
+                    <LinkText href={`/${kebabCaseFileUnder}`}>
+                      <IconArchive />
+                      {fileUnder}
+                    </LinkText>
+                  </p>
+                ) : null}
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
     </aside>
   );
 };

@@ -46,6 +46,7 @@ export default {
           light: "hsl(0deg 0% 10%)",
           dark: "hsl(0deg 0% 0%)",
         },
+        loading: "var(--loading)",
         "background-inverse": {
           DEFAULT: "hsl(0deg 0% 95%)",
           light: "hsl(0deg 0% 100%)",

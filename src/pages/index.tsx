@@ -23,7 +23,7 @@ export default function Home() {
         description={appDescription}
       />
       <PageMain justifyContent="start">
-        <PageMainIndent className="w-full max-w">
+        <PageMainIndent className="max-w-screen-2xl">
           <section className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 lg:gap-24 w-full justify-center items-center">
             <Intro />
             <PostShort

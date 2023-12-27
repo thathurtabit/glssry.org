@@ -46,8 +46,8 @@ export const postRowNoItemsStyles = `flex gap-2 items-center`;
 
 // RELATED POSTS
 export const relatedPostsWrapperStyles = `w-full md:w-60 mt-5 md:mt-0`;
-export const relatedPostsULStyles = `relative`;
-export const relatedPostsLIStyles = `[&:not(:last-child)]:border-b-[1px] border-divider pb-2 mb-5`;
+export const relatedPostsULStyles = `flex flex-col relative gap-4`;
+export const relatedPostsLIStyles = `[&:not(:last-child)]:border-b-[1px] border-divider pb-2`;
 export const relatedPostLinkStyles = `mb-2 px-0 py-0`;
 export const relatedPostLinkTitleStyles = `text-md m-0`;
 export const relatedPostsBodyStyles = `text-sm opacity-70`;

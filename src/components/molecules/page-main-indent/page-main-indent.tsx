@@ -5,4 +5,4 @@ import type { IPageMainIndent } from "./page-main-indent.types";
 export const PageMainIndent: FCC<IPageMainIndent> = ({
   children,
   className = "max-w-2xl",
-}) => <div className={`container ${className}`}>{children}</div>;
+}) => <div className={`flex-1 w-full md:mx-auto ${className}`}>{children}</div>;

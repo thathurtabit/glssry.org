@@ -49,8 +49,8 @@ export default function PostViewPage({
           description={`These are the latest posted filed under ${category}.`}
         />
         <Breadcrumbs items={[category]} />
-        <PageMain justifyContent="start" className="items-start">
-          <PageMainIndent>
+        <PageMain justifyContent="start">
+          <PageMainIndent className="max-w-2xl">
             <SectionTitle>{pascalCaseCategory}</SectionTitle>
             <PostRowsLinks
               isLoading={categoryPostsDataIsFetching}
