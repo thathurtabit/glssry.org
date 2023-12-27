@@ -2,12 +2,10 @@ import type { FC } from "react";
 import React from "react";
 import type { IPostRowsButtons } from "./post-rows-buttons.types";
 import { IconArchive } from "~/components/icons/archive/archive";
-import { IconInfo } from "~/components/icons/info/info";
 import {
   postRowItemClickStyles,
   postRowItemMetaStyles,
   postRowItemStyles,
-  postRowNoItemsStyles,
   postRowTitleStyles,
   postRowWrapperStyles,
 } from "~/styles/shared";
