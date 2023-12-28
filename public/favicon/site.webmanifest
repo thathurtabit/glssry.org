@@ -5,6 +5,8 @@
   "background_color": "#000000",
   "display": "fullScreen",
   "orientation": "natural",
+  "scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

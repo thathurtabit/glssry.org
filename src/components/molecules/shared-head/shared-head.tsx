@@ -43,6 +43,10 @@ export const SharedHead: FC<ISharedHead> = ({ title, description }) => {
       />
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" content="#000000" />
+      <meta
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+      />
     </Head>
   );
 };
