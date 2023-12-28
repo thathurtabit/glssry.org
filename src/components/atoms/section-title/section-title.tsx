@@ -5,12 +5,16 @@ export const SectionTitle: FCC<ISectionTitle> = ({
   children,
   noMargin,
   className,
-}) => (
-  <h2
-    className={`${noMargin ? "" : "mb-4"} text-3xl text-copy ${
-      className ?? ""
-    }`}
-  >
-    {children}
-  </h2>
-);
+  headingLevel = "h2",
+}) => {
+  const HeadingTag = headingLevel;
+  return (
+    <HeadingTag
+      className={`${noMargin ? "" : "mb-4"} text-3xl text-copy ${
+        className ?? ""
+      }`}
+    >
+      {children}
+    </HeadingTag>
+  );
+};

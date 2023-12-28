@@ -44,15 +44,15 @@ export const PostShort: FC<IPostShort> = ({
         className ?? ""
       }`}
     >
-      <SectionSubtitle>{postTitle}</SectionSubtitle>
-      <h2 className="mb-4 md:mb-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
+      <SectionSubtitle headingLevel="h2">{postTitle}</SectionSubtitle>
+      <h3 className="mb-4 md:mb-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
         <LinkText
           href={`/${getKebabCaseFromSentenceCase(fileUnder)}/${slug}`}
           className="font-heading"
         >
           {title ?? "Title not found"}
         </LinkText>
-      </h2>
+      </h3>
       <div className="flex flex-col lg:flex-row gap-3 md:gap-5">
         <div className="flex-1 w-full">
           <p className="md:text-lg mb-2">

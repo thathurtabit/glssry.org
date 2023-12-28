@@ -83,11 +83,11 @@ export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
                 </div>
               </dl>
               <div className="flex text-xs md:items-end flex-col justify-end">
-                <h4
+                <p
                   className={`${smallTextStyles} font-body mb-0 md:text-right`}
                 >
                   Added by:
-                </h4>
+                </p>
                 <p
                   className="flex gap-2 text-xs items-center m-0"
                   title={`Created: ${getFormattedDate({
@@ -97,7 +97,7 @@ export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
                   {originalAuthorImageURL ? (
                     <Image
                       src={originalAuthorImageURL}
-                      alt={originalAuthorUsername ?? "Original author"}
+                      alt=""
                       width={15}
                       height={15}
                       className="rounded-full aspect-square"
@@ -124,7 +124,7 @@ export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
                     {latestAuthorImageURL ? (
                       <Image
                         src={latestAuthorImageURL}
-                        alt={latestAuthorUsername ?? "Editor"}
+                        alt=""
                         width={15}
                         height={15}
                         className="rounded-full aspect-square"
@@ -143,7 +143,7 @@ export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
               rel="noopener noreferrer"
               size="small"
             >
-              Learn more <IconExternalLink />
+              Learn more about {abbreviation} <IconExternalLink />
             </Link>
 
             <HorizontalRule />

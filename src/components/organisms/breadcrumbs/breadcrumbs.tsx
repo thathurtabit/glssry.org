@@ -15,7 +15,7 @@ export const Breadcrumbs: FC<IBreadcrumbs> = ({ items }) => {
       aria-label="breadcrumb"
       className="flex gap-2 py-3 px-5 text-xs max-w-full"
     >
-      <LinkText href={EURLS.Home}>
+      <LinkText href={EURLS.Home} title="Home">
         <IconHome className="opacity-50" />
       </LinkText>
       {items.map((pathSection, index) => {

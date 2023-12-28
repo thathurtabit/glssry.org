@@ -35,7 +35,7 @@ export const RelatedTaxonomyPosts: FC<IRelatedTaxonomyPosts> = ({
 
   return (
     <aside className="w-full md:max-w-xs mt-5 md:mt-0">
-      <SectionSubtitle>{title}</SectionSubtitle>
+      <SectionSubtitle headingLevel="h2">{title}</SectionSubtitle>
       {isLoading ? (
         <RelatedPostsLoading />
       ) : postsDataNonNullable.length ? (
@@ -52,9 +52,9 @@ export const RelatedTaxonomyPosts: FC<IRelatedTaxonomyPosts> = ({
                   href={`/${kebabCaseFileUnder}/${slug}`}
                   className={relatedPostLinkStyles}
                 >
-                  <h4 className={relatedPostLinkTitleStyles}>
+                  <h3 className={relatedPostLinkTitleStyles}>
                     {title} / {acronym}
-                  </h4>
+                  </h3>
                 </LinkText>
                 <p className={relatedPostsBodyStyles}>
                   {getTruncatedString(body ?? "")}
