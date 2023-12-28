@@ -9,4 +9,8 @@ describe("getKebabCaseFromSentenceCase", () => {
   it("should allow only alpha and numbers", () => {
     expect(getKebabCaseFromSentenceCase("Maslow's hierarchy of needs 007!")).toBe("maslows-hierarchy-of-needs-007");
   });
+
+  it("should allow hyphens", () => {
+    expect(getKebabCaseFromSentenceCase("maslows-hierarchy of needs-007")).toBe("maslows-hierarchy-of-needs-007");
+  });
 });

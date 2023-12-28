@@ -95,8 +95,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
         select: {
           fileUnder: true,
           slug: true,
-          relatedPostId1: true,
-          relatedPostId2: true,
         },
         take: 1,
         orderBy: {
@@ -110,16 +108,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
   return {
     paths: posts.map(({ slug, versions }) => {
-      const { fileUnder, relatedPostId1, relatedPostId2 } =
-        versions.at(0) ?? {};
+      const { fileUnder } = versions.at(0) ?? {};
 
       return {
         params: {
           post: [
             getKebabCaseFromSentenceCase(fileUnder ?? ""),
             getKebabCaseFromSentenceCase(slug ?? ""),
-            relatedPostId1 ?? "",
-            relatedPostId2 ?? "",
           ],
         },
       };
@@ -143,8 +138,6 @@ export async function getStaticProps(
 
   const fileUnder = context.params?.post.at(0);
   const uniqueSlug = context.params?.post.at(1);
-  const relatedPostId1 = context.params?.post.at(2);
-  const relatedPostId2 = context.params?.post.at(3);
 
   if (uniqueSlug) {
     await helpers.post.readPost.prefetch({ slug: uniqueSlug });
@@ -156,14 +149,6 @@ export async function getStaticProps(
         category: getPascalCaseFromKebabCase(fileUnder) as TNativeTag,
       });
     }
-  }
-
-  if (relatedPostId1) {
-    await helpers.post.readPost.prefetch({ slug: relatedPostId1 });
-  }
-
-  if (relatedPostId2) {
-    await helpers.post.readPost.prefetch({ slug: relatedPostId2 });
   }
 
   return {
