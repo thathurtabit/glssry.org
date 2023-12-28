@@ -23,17 +23,23 @@ import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
 import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
 import { useReadPost } from "~/hooks/post/read-post.hook";
 import { useReadAllPostsInCategory } from "~/hooks/post/read-all-posts-in-category.hook";
+import { NoPostFound } from "~/components/molecules/no-post-found/no-post-found";
+import { getPascalCaseWithUnderscores } from "~/utils/get-pascal-case-with-underscores";
 
 export default function PostViewPage({
   slug,
   category,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const isCategoryPage = Boolean(category) && !slug;
-  const pascalCaseCategory = getPascalCaseFromKebabCase(category ?? "");
+  const pascalCaseCategory = getPascalCaseFromKebabCase(category ?? "", " ");
+  const pascalCaseWithUnderscoreCategory =
+    getPascalCaseWithUnderscores(pascalCaseCategory);
 
   const { postData, postDataIsFetching } = useReadPost({ slug });
   const { categoryPostsData, categoryPostsDataIsFetching } =
-    useReadAllPostsInCategory({ category: pascalCaseCategory as TNativeTag });
+    useReadAllPostsInCategory({
+      category: pascalCaseWithUnderscoreCategory as TNativeTag,
+    });
 
   if (postDataIsFetching) {
     // Won't happen since we're using `fallback: "blocking"`
@@ -60,10 +66,19 @@ export default function PostViewPage({
         </PageMain>
       </Fragment>
     ) : (
-      <InfoPanel
-        title={`No posts filed under: "${pascalCaseCategory}"`}
-        type="info"
-      />
+      <Fragment>
+        <SharedHead
+          title={`Filed under: ${category}`}
+          description={`These are the latest posted filed under ${category}.`}
+        />
+        <Breadcrumbs items={[category]} />
+        <PageMain justifyContent="start">
+          <PageMainIndent className="max-w-2xl">
+            <SectionTitle>{pascalCaseCategory}</SectionTitle>
+            <NoPostFound />
+          </PageMainIndent>
+        </PageMain>
+      </Fragment>
     );
   }
 

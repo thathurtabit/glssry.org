@@ -13,4 +13,9 @@ describe("getKebabCaseFromSentenceCase", () => {
   it("should allow hyphens", () => {
     expect(getKebabCaseFromSentenceCase("maslows-hierarchy of needs-007")).toBe("maslows-hierarchy-of-needs-007");
   });
+
+  it("should swap out underscores for hyphens", () => {
+    expect(getKebabCaseFromSentenceCase("Graphic_Novels")).toBe("graphic-novels");
+    expect(getKebabCaseFromSentenceCase("Graphic Novels")).toBe("graphic-novels");
+  });
 });

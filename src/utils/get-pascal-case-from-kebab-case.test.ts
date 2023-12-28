@@ -13,4 +13,8 @@ describe("getPascalCaseFromKebabCase", () => {
   it("should convert kebab-case to PascalCase (swap hyphens for spaces)", () => {
     expect(getPascalCaseFromKebabCase("something-else-yeah", " ")).toEqual("Something Else Yeah");
   });
+
+  it("should convert kebab-case to PascalCase (swap underscore for spaces)", () => {
+    expect(getPascalCaseFromKebabCase("Graphic_novel-Hello", " ")).toEqual("Graphic Novel Hello");
+  });
 });

@@ -32,6 +32,7 @@ enum TagName {
     Biology
     Business
     Chemistry
+    Cinema
     Civics
     Communications
     Computing
@@ -47,6 +48,7 @@ enum TagName {
     Games
     Geography
     Geology
+    Graphic_Novels
     Hardware
     Health
     History
@@ -79,6 +81,7 @@ enum TagName {
     Sports
     Teaching
     Technology
+    Television
     Uncategorized
 }
 
