@@ -4,6 +4,7 @@ export const appDescription = "is an open-source glossary, dictionary, and encyc
 export const appURL = process.env.NODE_ENV === "development"
   ? "http://dev.localhost:3000"
   : "https://glssry.org";
+export const googleAnalyticsId = "G-QSBYKCC0Q";
 
 export enum EURLS {
   Home = "/",
