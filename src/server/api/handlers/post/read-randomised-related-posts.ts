@@ -53,7 +53,8 @@ export const readRandomisedRelatedPosts = publicProcedure.input(z.object({ categ
 
       const { fileUnder, tags } = latestVersion;
       const tagsArray = getTagsArrayFromJsonArray(tags);
-      const conjoinedTaxonomiesFromPublishedPosts = [...fileUnder, ...tagsArray];
+      const conjoinedTaxonomiesFromPublishedPosts = [fileUnder, ...tagsArray];
+
       const relatedPosts = conjoinedTaxonomiesFromPublishedPosts.filter((postCategory) => categories.includes(postCategory as TagName));
       return relatedPosts.length > 0;
     });

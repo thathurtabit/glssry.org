@@ -32,8 +32,8 @@ export const ListPendingPosts: FC = () => {
     dispatch(
       setModal({
         title: postData.title,
-        type: "large",
-        content: <Post postData={postData} />,
+        type: "medium",
+        content: <Post postData={postData} showRelatedPosts={false} />,
         footer: {
           confirm: {
             text: "Approve",
@@ -55,7 +55,11 @@ export const ListPendingPosts: FC = () => {
   return (
     <AccountPageWrapper>
       <SharedHead title="Pending Posts" />
-      <PageStructure title="Pending posts" width="full" justifyContent="start">
+      <PageStructure
+        title="Pending posts"
+        width="narrow"
+        justifyContent="start"
+      >
         {pendingPostsData?.length ? (
           <Fragment>
             <PageIntro textList={["Click on a post title to view details"]} />

@@ -14,11 +14,13 @@ import { HeaderMenu } from "../header-menu/header-menu";
 import { OmniSearch } from "../omni-search/omni-search";
 import { IconPlus } from "~/components/icons/plus/plus";
 import { contributeModalData } from "~/data/modals/contribute.data";
+import { useReadAllPendingPosts } from "~/hooks/post/read-all-pending-posts.hook";
 
 export const HeaderStrip: FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const dispatch = useContext(GlssryDispatchContext);
   const { page } = useContext(GlssryStateContext);
+  const { pendingPostsData } = useReadAllPendingPosts();
   const { isMenuOpen } = page;
   const handleMenuToggle = () => {
     dispatch(setMenuOpen(!isMenuOpen));
@@ -31,6 +33,8 @@ export const HeaderStrip: FC = () => {
     dispatch(setModal(contributeModalData));
   };
 
+  const pendingPostsCount = pendingPostsData?.length;
+
   return (
     <section className="fixed top-0 bg-background left-0 right-0 flex justify-between h-header px-5 text-white items-center border-b-[1px] border-divider z-40">
       <LinkText href={EURLS.Home} className="font-heading text-lg">
@@ -38,6 +42,15 @@ export const HeaderStrip: FC = () => {
       </LinkText>
       <OmniSearch />
       <div className="flex gap-5">
+        {pendingPostsCount ? (
+          <Link
+            href={EURLS.PostPending}
+            title={`${pendingPostsCount} pending posts`}
+            className={`${hoverClasses} ${sharedButtonClasses} w-7 h-7 flex items-center justify-center`}
+          >
+            <span className="text-sm">{pendingPostsCount}</span>
+          </Link>
+        ) : null}
         <button
           type="button"
           title="Contribute"

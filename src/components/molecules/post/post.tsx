@@ -50,78 +50,54 @@ export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
   const hasRelatedPosts =
     (Boolean(relatedPostId1) || Boolean(relatedPostId2)) && showRelatedPosts;
 
-  const tagsArray = getTagsArrayFromJsonArray(tags);
+    const tagsArray = getTagsArrayFromJsonArray(tags);
 
-  const conjoinedTaxonomies = [fileUnder, ...tagsArray];
-  const hasConjoinedTaxonomies =
-    conjoinedTaxonomies.length > 0 && showRelatedPosts;
+    const conjoinedTaxonomies = [fileUnder, ...tagsArray];
 
-  return (
-    <article className="text-copy md:mx-auto w-full max-w-4xl">
-      <h1 className="mb-6 md:mb-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-        {title ?? "Title not found"}
-      </h1>
-      <div className="flex flex-col lg:flex-row gap-5 md:gap-14">
-        <div className="w-full md:max-w-lg">
-          <p className="first-line:uppercase first-line:font-sub-heading md:first-line:text-lg lg:first-line:text-xl md:text-lg max-w-prose">
-            {body ?? "Body..."}
-          </p>
-          <div className="flex gap-1 justify-between text-xs mb-10 flex-col md:flex-row md:items-center md:gap-5">
-            <dl className="flex gap-5 my-2 md:my-4">
-              <div>
-                <dt className={`${smallTextStyles} mb-0`}>Abbreviation:</dt>
-                <dd>{abbreviation ?? "-"}</dd>
-              </div>
-              <div>
-                <dt className={`${smallTextStyles} mb-0`}>Acronym:</dt>
-                <dd>{acronym ?? "-"}</dd>
-              </div>
-              <div>
-                <dt className={`${smallTextStyles} mb-0`}>Initialism:</dt>
-                <dd>{initialism ?? "-"}</dd>
-              </div>
-            </dl>
-            <div className="flex text-xs md:items-end flex-col justify-end">
-              <h4 className={`${smallTextStyles} font-body mb-0 md:text-right`}>
-                Added by:
-              </h4>
-              <p
-                className="flex gap-2 text-xs items-center m-0"
-                title={`Created: ${getFormattedDate({
-                  date: createdAt,
-                })} by ${originalAuthorUsername}`}
-              >
-                {originalAuthorImageURL ? (
-                  <Image
-                    src={originalAuthorImageURL}
-                    alt={originalAuthorUsername ?? "Original author"}
-                    width={15}
-                    height={15}
-                    className="rounded-full aspect-square"
-                  />
-                ) : (
-                  <IconAccount />
-                )}
-                <span>{originalAuthorUsername ?? "-"}</span>
-              </p>
-            </div>
-            {shouldShowUpdatedBy ? (
-              <div className="flex text-xs items-end flex-col justify-end">
+    const hasConjoinedTaxonomies =
+      conjoinedTaxonomies.length > 0 && showRelatedPosts;
+
+    return (
+      <article className="text-copy md:mx-auto w-full max-w-4xl">
+        <h1 className="mb-6 md:mb-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+          {title ?? "Title not found"}
+        </h1>
+        <div className="flex flex-col lg:flex-row gap-5 md:gap-14">
+          <div className="w-full md:max-w-lg">
+            <p className="first-line:uppercase first-line:font-sub-heading md:first-line:text-lg lg:first-line:text-xl md:text-lg max-w-prose">
+              {body ?? "Body..."}
+            </p>
+            <div className="flex gap-1 justify-between text-xs mb-10 flex-col md:flex-row md:items-center md:gap-5">
+              <dl className="flex gap-5 my-2 md:my-4">
+                <div>
+                  <dt className={`${smallTextStyles} mb-0`}>Abbreviation:</dt>
+                  <dd>{abbreviation ?? "-"}</dd>
+                </div>
+                <div>
+                  <dt className={`${smallTextStyles} mb-0`}>Acronym:</dt>
+                  <dd>{acronym ?? "-"}</dd>
+                </div>
+                <div>
+                  <dt className={`${smallTextStyles} mb-0`}>Initialism:</dt>
+                  <dd>{initialism ?? "-"}</dd>
+                </div>
+              </dl>
+              <div className="flex text-xs md:items-end flex-col justify-end">
                 <h4
                   className={`${smallTextStyles} font-body mb-0 md:text-right`}
                 >
-                  Edited by:
+                  Added by:
                 </h4>
                 <p
                   className="flex gap-2 text-xs items-center m-0"
-                  title={`Updated: ${getFormattedDate({
-                    date: updatedAt,
-                  })} by ${latestAuthorUsername ?? "-"}`}
+                  title={`Created: ${getFormattedDate({
+                    date: createdAt,
+                  })} by ${originalAuthorUsername}`}
                 >
-                  {latestAuthorImageURL ? (
+                  {originalAuthorImageURL ? (
                     <Image
-                      src={latestAuthorImageURL}
-                      alt={latestAuthorUsername ?? "Editor"}
+                      src={originalAuthorImageURL}
+                      alt={originalAuthorUsername ?? "Original author"}
                       width={15}
                       height={15}
                       className="rounded-full aspect-square"
@@ -129,46 +105,80 @@ export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
                   ) : (
                     <IconAccount />
                   )}
-                  <span>{latestAuthorUsername ?? "-"}</span>
+                  <span>{originalAuthorUsername ?? "-"}</span>
                 </p>
               </div>
-            ) : null}
-          </div>
-          <Link
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            size="small"
-          >
-            Learn more <IconExternalLink />
-          </Link>
+              {shouldShowUpdatedBy ? (
+                <div className="flex text-xs items-end flex-col justify-end">
+                  <h4
+                    className={`${smallTextStyles} font-body mb-0 md:text-right`}
+                  >
+                    Edited by:
+                  </h4>
+                  <p
+                    className="flex gap-2 text-xs items-center m-0"
+                    title={`Updated: ${getFormattedDate({
+                      date: updatedAt,
+                    })} by ${latestAuthorUsername ?? "-"}`}
+                  >
+                    {latestAuthorImageURL ? (
+                      <Image
+                        src={latestAuthorImageURL}
+                        alt={latestAuthorUsername ?? "Editor"}
+                        width={15}
+                        height={15}
+                        className="rounded-full aspect-square"
+                      />
+                    ) : (
+                      <IconAccount />
+                    )}
+                    <span>{latestAuthorUsername ?? "-"}</span>
+                  </p>
+                </div>
+              ) : null}
+            </div>
+            <Link
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              size="small"
+            >
+              Learn more <IconExternalLink />
+            </Link>
 
-          <HorizontalRule />
+            <HorizontalRule />
 
-          <div className={`flex justify-between gap-2 ${smallTextStyles}`}>
-            <p className="flex gap-1 items-center">
-              <IconArchive /> File under:{" "}
-              <LinkText href={getKebabCaseFromSentenceCase(fileUnder)}>
-                {fileUnder}
-              </LinkText>
-            </p>
-            <p className="flex gap-1 items-center">
-              <IconTag /> Tags:{" "}
-              {tagsArray.map((tag) => (
-                <LinkText key={tag} href={getKebabCaseFromSentenceCase(tag)}>
-                  {tag}
+            <div className={`flex justify-between gap-2 ${smallTextStyles}`}>
+              <p className="flex gap-1 items-center">
+                <IconArchive /> File under:{" "}
+                <LinkText href={getKebabCaseFromSentenceCase(fileUnder)}>
+                  {fileUnder}
                 </LinkText>
-              ))}
-            </p>
-            <p>Version: {versions.length}</p>
+              </p>
+              {hasConjoinedTaxonomies ? (
+                <p className="flex gap-1 items-center">
+                  <IconTag /> Tags:{" "}
+                  {tagsArray.map((tag) => (
+                    <LinkText
+                      key={tag}
+                      href={getKebabCaseFromSentenceCase(tag)}
+                    >
+                      {tag}
+                    </LinkText>
+                  ))}
+                </p>
+              ) : null}
+              <p>Version: {versions.length}</p>
+            </div>
           </div>
+          {hasRelatedPosts ? (
+            <RelatedPosts
+              slugs={[relatedPostId1 ?? "", relatedPostId2 ?? ""]}
+            />
+          ) : hasConjoinedTaxonomies ? (
+            <RelatedTaxonomyPosts relatedTaxonomies={conjoinedTaxonomies} />
+          ) : null}
         </div>
-        {hasRelatedPosts ? (
-          <RelatedPosts slugs={[relatedPostId1 ?? "", relatedPostId2 ?? ""]} />
-        ) : hasConjoinedTaxonomies ? (
-          <RelatedTaxonomyPosts relatedTaxonomies={conjoinedTaxonomies} />
-        ) : null}
-      </div>
-    </article>
-  );
+      </article>
+    );
 };

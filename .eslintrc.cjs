@@ -30,7 +30,7 @@ const config = {
       },
     ],
     "@typescript-eslint/no-unused-vars": ["error"],
-    "no-console": "warn",
+    "no-console": "error",
     semi: "error",
     indent: "off",
     "arrow-parens": ["error", "always"],

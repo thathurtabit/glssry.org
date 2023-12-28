@@ -25,6 +25,10 @@ export const PostShort: FC<IPostShort> = ({
     );
   }
 
+  if (isLoading) {
+    return <PostShortLoading />;
+  }
+
   if (!latestVersion) {
     return null;
   }
@@ -33,10 +37,6 @@ export const PostShort: FC<IPostShort> = ({
     latestVersion;
 
   const smallTextStyles = "text-[0.5rem] opacity-50 uppercase";
-
-  if (isLoading) {
-    return <PostShortLoading />;
-  }
 
   return (
     <article
