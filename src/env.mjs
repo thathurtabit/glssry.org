@@ -33,6 +33,8 @@ export const env = createEnv({
     GITHUB_CLIENT_SECRET: z.string(),
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
+    FACEBOOK_CLIENT_ID: z.string(),
+    FACEBOOK_CLIENT_SECRET: z.string(),
     REDDIT_CLIENT_ID: z.string(),
     REDDIT_CLIENT_SECRET: z.string(),
   },
@@ -63,8 +65,10 @@ export const env = createEnv({
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     GOOGLE_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
-    REDDIT_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
-    REDDIT_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+    FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
+    FACEBOOK_CLIENT_SECRET: process.env.FACEBOOK_CLIENT_SECRET,
+    REDDIT_CLIENT_ID: process.env.REDDIT_CLIENT_ID,
+    REDDIT_CLIENT_SECRET: process.env.REDDIT_CLIENT_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

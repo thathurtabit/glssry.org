@@ -9,6 +9,7 @@ import {
 import githubProvider from "next-auth/providers/github";
 import googleProvider from "next-auth/providers/google";
 import redditProvider from "next-auth/providers/reddit";
+import facebookProvider from "next-auth/providers/facebook";
 
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
@@ -67,12 +68,15 @@ export const authOptions: NextAuthOptions = {
     githubProvider({
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
-
       // Checks: ["pkce", "state"], // Required here: https://github.com/nextauthjs/next-auth/issues/4190#issuecomment-1326519901
     }),
     googleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
+    }),
+    facebookProvider({
+      clientId: env.FACEBOOK_CLIENT_ID,
+      clientSecret: env.FACEBOOK_CLIENT_SECRET,
     }),
     redditProvider({
       clientId: env.REDDIT_CLIENT_ID,

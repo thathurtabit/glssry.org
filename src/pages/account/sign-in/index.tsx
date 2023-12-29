@@ -22,6 +22,7 @@ import { env } from "~/env.mjs";
 import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 import { IconReddit } from "~/components/icons/reddit/reddit";
+import { IconFacebook } from "~/components/icons/facebook/facebook";
 
 export const SignIn = ({
   providers,
@@ -101,6 +102,10 @@ export const SignIn = ({
 
       case "reddit": {
         return <IconReddit size="1.15rem" />;
+      }
+
+      case "facebook": {
+        return <IconFacebook size="1.15rem" />;
       }
 
       case "discord": {
