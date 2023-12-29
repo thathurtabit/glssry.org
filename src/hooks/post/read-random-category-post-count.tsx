@@ -8,7 +8,10 @@ export const useReadRandomCategoryPostCount = ({
   maxCount = 10,
 }: IUseReadRandomCategoryPostCount) => {
   const { data, isFetching, error, isError } =
-    api.post.readRandomCategoryPostCount.useQuery({ maxCount });
+    api.post.readRandomCategoryPostCount.useQuery(
+      { maxCount },
+      { refetchOnWindowFocus: false }
+    );
 
   return {
     randomCategoryPostCountData: data,
