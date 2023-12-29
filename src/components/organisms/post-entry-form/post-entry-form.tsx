@@ -30,6 +30,7 @@ import { useSearchPublishedPosts } from "~/hooks/post/search-published-posts.hoo
 import { IconInfo } from "~/components/icons/info/info";
 import { LinkText } from "~/components/atoms/link-text/link-text";
 import { IconExternalLink } from "~/components/icons/external-link/external-link";
+import { formStateTransform } from "./utils/form-state-transform.util";
 
 export const PostEntryForm: FC<IPostEntryForm> = ({
   postId,
@@ -110,14 +111,14 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
     }
 
     if (mode === "create") {
-      createPostMutation(state);
+      createPostMutation(formStateTransform(state));
       return;
     }
 
     if (mode === "edit" && postId) {
       updatePostMutation({
         postId,
-        data: state,
+        data: formStateTransform(state),
       });
     }
   };
@@ -219,7 +220,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
     return (
       <Fragment>
         <SectionSubtitle className="flex items-center gap-1">
-          Firsty, let&apos;s check if this post already exists
+          Firstly, let&apos;s check if this post already exists
         </SectionSubtitle>
         <p>Please enter the full tile of the post below</p>
         <FormInput
@@ -440,7 +441,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           <SectionSubtitle className="opacity-50">Slug:</SectionSubtitle>
           <p>
             {appURL}/{getKebabCaseFromSentenceCase(state.fileUnder)}/
-            {state.slug}
+            {getKebabCaseFromSentenceCase(state.slug)}
           </p>
         </div>
       </div>

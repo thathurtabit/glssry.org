@@ -17,6 +17,7 @@ import {
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 import { RelatedPostsLoading } from "../related-posts-loading/related-posts-loading";
 import { NoPostFound } from "../no-post-found/no-post-found";
+import { EditThisPost } from "~/components/atoms/edit-this-post/edit-this-post";
 
 export const RelatedPosts: FC<IRelatedPosts> = ({
   title = "Related terms",
@@ -80,6 +81,7 @@ export const RelatedPosts: FC<IRelatedPosts> = ({
       ) : (
         <NoPostFound />
       )}
+      <EditThisPost />
     </aside>
   );
 };

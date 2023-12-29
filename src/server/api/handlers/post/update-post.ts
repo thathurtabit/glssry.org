@@ -32,7 +32,21 @@ export const updatePost = protectedProcedure.input(z.object({
   const { abbreviation, acronym, body, fileUnder, initialism, link, slug, title, relatedPostId1, relatedPostId2, tags } = updatedData;
 
   try {
-    const post = await ctx.db.postVersion.create({
+    // Update the root post
+    await ctx.db.post.update({
+      where: {
+        id: input.postId,
+      },
+      data: {
+        abbreviation: input.data.abbreviation,
+        acronym: input.data.acronym,
+        initialism: input.data.initialism,
+        slug: input.data.slug,
+      },
+    });
+
+    // Create a new post version
+    const postVersion = await ctx.db.postVersion.create({
       include: {
         post: true,
       },
@@ -60,7 +74,7 @@ export const updatePost = protectedProcedure.input(z.object({
         tags: JSON.stringify(tags),
       },
     });
-    return post;
+    return postVersion;
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);

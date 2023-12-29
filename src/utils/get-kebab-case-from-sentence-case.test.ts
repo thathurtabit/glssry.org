@@ -18,4 +18,8 @@ describe("getKebabCaseFromSentenceCase", () => {
     expect(getKebabCaseFromSentenceCase("Graphic_Novels")).toBe("graphic-novels");
     expect(getKebabCaseFromSentenceCase("Graphic Novels")).toBe("graphic-novels");
   });
+
+  it("should remove apostrophes", () => {
+    expect(getKebabCaseFromSentenceCase("User's Network")).toBe("users-network");
+  });
 });

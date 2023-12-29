@@ -74,7 +74,7 @@ export const OmniSearch: FC = () => {
               return (
                 <div key={id} className="flex gap-2 text-copy p-2">
                   <LinkText
-                    href={`${category}/${slug}`}
+                    href={`/${category}/${slug}`}
                     className="p-2 w-full gap-2 flex justify-between"
                   >
                     <span>{title}</span>

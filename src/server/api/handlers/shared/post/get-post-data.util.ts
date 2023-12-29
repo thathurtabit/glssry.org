@@ -5,6 +5,9 @@ import type { TPost } from "~/schemas/post/post.schema";
 export const getPostData = (input: TPost, userData: User): Prisma.PostCreateInput => ({
   title: input.title,
   slug: input.slug,
+  acronym: input.acronym,
+  abbreviation: input.abbreviation,
+  initialism: input.initialism,
   author: {
     connect: {
       id: userData?.id,

@@ -18,6 +18,7 @@ import {
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 import { RelatedPostsLoading } from "../related-posts-loading/related-posts-loading";
 import { NoPostFound } from "../no-post-found/no-post-found";
+import { EditThisPost } from "~/components/atoms/edit-this-post/edit-this-post";
 
 export const RelatedTaxonomyPosts: FC<IRelatedTaxonomyPosts> = ({
   title = "Other posts",
@@ -74,6 +75,7 @@ export const RelatedTaxonomyPosts: FC<IRelatedTaxonomyPosts> = ({
       ) : (
         <NoPostFound />
       )}
+      <EditThisPost />
     </aside>
   );
 };

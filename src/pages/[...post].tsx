@@ -85,7 +85,14 @@ export default function PostViewPage({
   const postDataLatestVersion = postData?.versions.at(-1);
 
   if (!postData || !postDataLatestVersion || !category) {
-    return <InfoPanel title="Post not found" type="info" />;
+    return (
+      <Fragment>
+        <Breadcrumbs items={[slug]} />
+        <PageMain justifyContent="center" className="items-start">
+          <InfoPanel title="Post not found" type="info" />
+        </PageMain>
+      </Fragment>
+    );
   }
 
   const { title, body } = postDataLatestVersion;
