@@ -8,6 +8,6 @@ export const initState: TPost = {
   initialism: "",
   link: "",
   body: "",
-  fileUnder: "Uncategorized",
-  tags: ["Uncategorized"],
+  fileUnder: "Miscellaneous",
+  tags: ["Miscellaneous"],
 };

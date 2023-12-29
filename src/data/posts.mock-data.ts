@@ -31,7 +31,7 @@ export const postsFullMockData: NonNullable<TTRPCReadPost>[] = [{
     initialism: "CSS",
     link: "https://www.google.com",
     body: "Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a document written in HTML or XML (including XML dialects such as SVG, MathML or XHTML). CSS describes how elements should be rendered on screen, on paper, in speech, or on other media.",
-    tags: ["Test", "Uncategorized"],
+    tags: ["Test", "Miscellaneous"],
     fileUnder: "Computing",
     relatedPostId1: "2",
     relatedPostId2: "3",

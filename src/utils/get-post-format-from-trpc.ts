@@ -15,7 +15,7 @@ export const getPostFormatFromTRPC = (postData: NonNullable<TTRPCReadPost>): TPo
     initialism: lastVersion?.initialism ?? "",
     body: lastVersion?.body ?? "",
     link: lastVersion?.link ?? "",
-    fileUnder: lastVersion?.fileUnder ?? "Uncategorized",
+    fileUnder: lastVersion?.fileUnder ?? "Miscellaneous",
     tags: lastVersion?.tags ? JSON.parse(lastVersion.tags as string) as TagName[] : [],
     relatedPostId1: lastVersion?.relatedPostId1 ?? "",
     relatedPostId2: lastVersion?.relatedPostId2 ?? "",

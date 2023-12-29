@@ -12,6 +12,7 @@ import {
 import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
 import { LinkText } from "~/components/atoms/link-text/link-text";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
+import { getPascalCaseFromKebabCase } from "~/utils/get-pascal-case-from-kebab-case";
 
 export const CategoryRowsLinks: FC<ICategoryRowsLinks> = ({
   isLoading,
@@ -41,7 +42,9 @@ export const CategoryRowsLinks: FC<ICategoryRowsLinks> = ({
               className={postRowItemClickStyles}
               onClick={handleLinkClick}
             >
-              <span className={postRowTitleStyles}>{category}</span>{" "}
+              <span className={postRowTitleStyles}>
+                {getPascalCaseFromKebabCase(category)}
+              </span>{" "}
               <small className={postRowItemMetaStyles}>{count}</small>
             </LinkText>
           </li>

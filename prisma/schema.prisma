@@ -47,6 +47,7 @@ enum TagName {
     Environment
     Finance
     Games
+    Gender
     Geography
     Geology
     Graphic_Novels
@@ -62,6 +63,7 @@ enum TagName {
     Mathematics
     Medicine
     Military
+    Miscellaneous
     Music
     Mythology
     Networking
@@ -75,7 +77,6 @@ enum TagName {
     Religion
     Science
     Security
-    Sex
     Slang
     Software
     Space
@@ -83,7 +84,6 @@ enum TagName {
     Teaching
     Technology
     Television
-    Uncategorized
 }
 
 model Post {
