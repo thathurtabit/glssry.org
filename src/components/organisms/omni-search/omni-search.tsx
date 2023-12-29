@@ -43,8 +43,8 @@ export const OmniSearch: FC = () => {
           onChange={handleSearchTermChange}
         />
         {searchedPublishedPostsDataIsFetching ? (
-          <span className="absolute animate-spin right-5 -translate-y-1/2 top-1/2">
-            <LoadingSpinner />
+          <span className="absolute animate-spin right-3 top-3">
+            <LoadingSpinner className="" />
           </span>
         ) : null}
         {searchedPublishedPostsDataHasError ? (
