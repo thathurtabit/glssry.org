@@ -7,6 +7,8 @@ import {
   type NextAuthOptions,
 } from "next-auth";
 import githubProvider from "next-auth/providers/github";
+import googleProvider from "next-auth/providers/google";
+import redditProvider from "next-auth/providers/reddit";
 
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
@@ -67,6 +69,14 @@ export const authOptions: NextAuthOptions = {
       clientSecret: env.GITHUB_CLIENT_SECRET,
 
       // Checks: ["pkce", "state"], // Required here: https://github.com/nextauthjs/next-auth/issues/4190#issuecomment-1326519901
+    }),
+    googleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    }),
+    redditProvider({
+      clientId: env.REDDIT_CLIENT_ID,
+      clientSecret: env.REDDIT_CLIENT_SECRET,
     }),
     /**
      * ...add more providers here.

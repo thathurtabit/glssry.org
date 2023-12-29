@@ -68,7 +68,7 @@ export const postsFullMockData: NonNullable<TTRPCReadPost>[] = [{
     initialism: "HTML",
     link: "https://www.google.com",
     body: "HTML (HyperText Markup Language) is the most basic building block of the Web. It defines the meaning and structure of web content. Other technologies besides HTML are generally used to describe a web page's appearance/presentation (CSS) or functionality/behavior (JavaScript).",
-    tags: ["Test", "Uncategorized"],
+    tags: ["Test", "Miscellaneous"],
     fileUnder: "Computing",
     relatedPostId1: "2",
     relatedPostId2: "3",
@@ -87,7 +87,7 @@ export const postsLinksMockData: NonNullable<TTRPCReadLatestPosts> = [{
     fileUnder: "Computing",
     slug: "cascading-style-sheets",
     acronym: "CSS",
-    tags: ["Test", "Uncategorized"],
+    tags: ["Test", "Miscellaneous"],
     updatedAt: new Date(),
   }],
 }, {
@@ -99,7 +99,7 @@ export const postsLinksMockData: NonNullable<TTRPCReadLatestPosts> = [{
     acronym: "HTML",
     fileUnder: "Computing",
     slug: "programming/hypertext-markup-language",
-    tags: ["Test", "Uncategorized"],
+    tags: ["Test", "Miscellaneous"],
     updatedAt: new Date(),
   }],
 }];

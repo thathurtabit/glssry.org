@@ -21,6 +21,7 @@ import { useVerifyRecaptchaMutation } from "~/hooks/auth/recaptcha-verify.hook";
 import { env } from "~/env.mjs";
 import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
+import { IconReddit } from "~/components/icons/reddit/reddit";
 
 export const SignIn = ({
   providers,
@@ -96,6 +97,10 @@ export const SignIn = ({
 
       case "google": {
         return <IconGoogle size="1.15rem" />;
+      }
+
+      case "reddit": {
+        return <IconReddit size="1.15rem" />;
       }
 
       case "discord": {
