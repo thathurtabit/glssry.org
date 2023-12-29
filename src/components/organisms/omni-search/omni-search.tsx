@@ -48,7 +48,7 @@ export const OmniSearch: FC = () => {
           </span>
         ) : null}
         {searchedPublishedPostsDataHasError ? (
-          <span className="absolute animate-spin right-5 -translate-y-1/2 top-1/2">
+          <span className="absolute right-3 top-3">
             <IconError />
           </span>
         ) : null}
