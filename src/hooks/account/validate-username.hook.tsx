@@ -62,7 +62,6 @@ export const useValidateUsername = (username = "") => {
       setValidateUsernameError(null);
       return true;
     } catch {
-      // TODO: do something with this error? Logging service?
       return false;
     }
   };

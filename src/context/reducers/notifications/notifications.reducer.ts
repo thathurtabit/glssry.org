@@ -7,7 +7,7 @@ export const notificationsReducer = (
     state: INotificationsState | null,
     { type, payload }: IContextAction
 ): INotificationsState | null => {
-  switch (type) {
+  switch (type as NotificationsActions) {
     case NotificationsActions.SET_NEW_NOTIFICATION: {
       return {
         ...state,

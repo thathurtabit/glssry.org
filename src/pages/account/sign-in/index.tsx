@@ -115,9 +115,8 @@ export const SignIn = ({
   const handleSignIn = (id: string) => {
     (async () => {
       await signIn(id, { callbackUrl: EURLS.SignInSuccess });
-    })().catch((error) => {
-      // eslint-disable-next-line no-console
-      console.error(error); // TODO: Add error logging
+    })().catch((error: Error) => {
+      throw new Error(error.message);
     });
   };
 

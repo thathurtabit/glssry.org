@@ -7,7 +7,7 @@ export const pageReducer = (
     state: IPageState,
     { type, payload }: IContextAction
 ): IPageState => {
-  switch (type) {
+  switch (type as PageActions) {
     case PageActions.SET_MENU_OPEN: {
       return {
         ...state,
