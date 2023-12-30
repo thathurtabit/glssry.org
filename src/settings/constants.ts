@@ -5,10 +5,12 @@ export const appURL = process.env.NODE_ENV === "development"
   ? "http://dev.localhost:3000"
   : "https://glssry.org";
 export const googleAnalyticsId = "G-QSBYKCC0QE";
+export const githubRepoURL = "https://github.com/thathurtabit/glssry.org";
 
 export enum EURLS {
   Home = "/",
   Account = "/account",
+  Nuke = "/account/nuke",
   SignIn = "/account/sign-in",
   SignedOut = "/account/signed-out",
   SignInMagicLink = "/account/sign-in/magic-link",

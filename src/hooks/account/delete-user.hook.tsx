@@ -23,7 +23,7 @@ export const useDeleteUser = ({ onSuccess }: IDeleteUser) => {
           uuid: onMutateId,
           type: "info",
           title: "Hold tight!",
-          message: "Deleting your account",
+          message: "Deleting account details...",
           Icon: () => <IconDelete />,
         })
       );
@@ -34,7 +34,7 @@ export const useDeleteUser = ({ onSuccess }: IDeleteUser) => {
           uuid: onErrorId,
           type: "error",
           title: "Oh no!",
-          message: "Error when trying to delete your account",
+          message: "Error when trying to delete account details",
           Icon: () => <IconDelete />,
         })
       );
@@ -45,7 +45,7 @@ export const useDeleteUser = ({ onSuccess }: IDeleteUser) => {
           uuid: onSuccessId,
           type: "success",
           title: "Done!",
-          message: "Your account has been deleted",
+          message: "Your account details have been deleted",
           Icon: () => <IconDelete />,
         })
       );

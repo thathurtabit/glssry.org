@@ -12,7 +12,7 @@ export const SharedHead: FC<ISharedHead> = ({ title, description }) => {
   useKeyboardEvents();
   const isHomepage = pathname === "/";
   const pageTitle = title ?? appTitle;
-  const pageDescription = description ?? appDescription;
+  const pageDescription = description ?? `${appTitle} ${appDescription}`;
   return (
     <Head>
       <title>{isHomepage ? pageTitle : `${pageTitle} | ${appTitle}`}</title>

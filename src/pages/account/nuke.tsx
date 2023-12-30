@@ -11,7 +11,6 @@ import {
 } from "../../context/actions/page/page.actions";
 import { useDeleteUser } from "~/hooks/account/delete-user.hook";
 import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
-import { PageIntro } from "~/components/atoms/page-intro/page-intro";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 
 const Nuke: NextPage = () => {
@@ -23,17 +22,17 @@ const Nuke: NextPage = () => {
     dispatch(
       setModal({
         type: "small",
-        title: "Delete my account",
+        title: "Delete account details",
         background: "dark",
         content: (
           <p>
-            OK, last chance to change your mind. Are you sure you want to delete
-            your account? Your data will be lost, like tears in rain.
+            OK, last chance to change your mind. Are you sure you want to remove
+            your account details?
           </p>
         ),
         footer: {
           confirm: {
-            text: "Delete my account",
+            text: "Delete account details",
             variant: "danger",
             icon: <IconError size={15} />,
             onClick: () => deleteUser(),
@@ -51,17 +50,15 @@ const Nuke: NextPage = () => {
     <AccountPageWrapper>
       <SharedHead title="Nuke" />
       <PageStructure title="Nuke" width="narrow">
-        <PageIntro
-          textList={[
-            "Want to delete your account and all your data?",
-            "That's cool, we understand...",
-          ]}
-        />
         {isAuthenticated ? (
           <Fragment>
             <p>
-              Click the button below to <strong>delete your account</strong> and
-              all your data.
+              Click the button below to{" "}
+              <strong>delete your account details</strong>
+            </p>
+            <p>
+              <strong>NOTE</strong> - the posts you&apos;ve created will remain
+              as these do not hold personal information.
             </p>
             <Button
               className="mt-4"
@@ -69,7 +66,7 @@ const Nuke: NextPage = () => {
               variant="danger"
               onClick={handleDeleteAccount}
             >
-              <IconError size={15} /> Delete my account
+              <IconError size={15} /> Delete account details
             </Button>
           </Fragment>
         ) : (
