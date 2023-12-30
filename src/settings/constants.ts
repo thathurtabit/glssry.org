@@ -9,6 +9,10 @@ export const githubRepoURL = "https://github.com/thathurtabit/glssry.org";
 
 export enum EURLS {
   Home = "/",
+  About = "/about",
+  Contribute = "/contribute",
+  Terms = "/terms",
+  Privacy = "/privacy",
   Account = "/account",
   Nuke = "/account/nuke",
   SignIn = "/account/sign-in",

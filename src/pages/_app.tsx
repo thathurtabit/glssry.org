@@ -10,6 +10,7 @@ import { AppWrapper } from "~/components/templates/app-wrapper/app-wrapper";
 import { ModalsAndNotifications } from "~/components/molecules/modals-and-notifications/modals-and-notifications";
 import Script from "next/script";
 import { googleAnalyticsId } from "~/settings/constants";
+import { FooterStrip } from "~/components/molecules/footer-strip/footer-strip";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -31,6 +32,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <GlssryAppProvider>
       <AppWrapper>
         <Component {...pageProps} />
+        <FooterStrip />
       </AppWrapper>
       <ModalsAndNotifications />
     </GlssryAppProvider>

@@ -2,31 +2,36 @@ import { Fragment, type FC } from "react";
 import { PageStructure } from "~/components/molecules/page-structure/page-structure";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
-import { appTitle, githubRepoURL } from "~/settings/constants";
+import { EURLS, appTitle, githubRepoURL } from "~/settings/constants";
 import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
 import { LinkText } from "~/components/atoms/link-text/link-text";
 import { IconGithub } from "~/components/icons/github/github";
 import { IconExternalLink } from "~/components/icons/external-link/external-link";
+import { Link } from "~/components/atoms/link/link";
+import { IconPlus } from "~/components/icons/plus/plus";
+import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
 
-export const About: FC = () => (
+export const Contribute: FC = () => (
   <Fragment>
-    <SharedHead title="About" />
+    <SharedHead title="Contribute" />
     <Breadcrumbs />
-    <PageStructure title="About" width="narrow" justifyContent="start">
+    <PageStructure title="Contribute" width="narrow" justifyContent="start">
       <PageMainIndent>
         <p>
-          {appTitle} is a free, open-source, educational, &apos;meta&apos; site
-          which intends to give users an easy to understand glossary of terms
-          used across a range of different subject matters.
+          As {appTitle} is an open-source project, it relies on contributions
+          from others to improve and grow in usefulness. If you would like to
+          contribute by adding terms to the database, please click the link
+          below.
         </p>
         <p>
-          {appTitle} is not responsible for the content of external sites, and
-          is meant as a starting point for further research.
+          <Link href={EURLS.CreatePost} size="small">
+            Create post <IconPlus size={15} />
+          </Link>
         </p>
+        <HorizontalRule />
         <p>
-          As {appTitle} is an open-source project, it allows contributions from
-          everyone, and the source code behind the project is available via the
-          link below:
+          Or, if you&apos;d like to contribute to the codebase, please visit the
+          Github repository, you can find the link below.
         </p>
         <p>
           <LinkText
@@ -44,4 +49,4 @@ export const About: FC = () => (
   </Fragment>
 );
 
-export default About;
+export default Contribute;
