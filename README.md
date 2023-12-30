@@ -1,7 +1,13 @@
-# Glssry.org
+# [glssry.org](https://glssry.org)
 
-This is a Next application that uses NextAuth.js for authentication and Prisma/PlanetScale for database access. It is a work in progress.
+**glssry** is an open-source glossary, dictionary, and encyclopedia of acronyms, initialisms, terms and definitions.
 
+## Contribute to the database:
+[glssry.org/contribute](https://glssry.org/contribute)
+
+---
+
+## Development
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
 - [Next.js](https://nextjs.org)
