@@ -35,7 +35,11 @@ export const OmniSearch: FC = () => {
         <IconSearch className="text-sm" />
       </span>
       <div className="grid col-span-8 relative">
+        <label htmlFor="search" className="sr-only">
+          Search for a term
+        </label>
         <input
+          id="search"
           type="text"
           value={searchTerm}
           placeholder="Search posts"
@@ -57,6 +61,7 @@ export const OmniSearch: FC = () => {
         <button
           type="button"
           className="border-0 inline-flex col-start-10 items-center justify-center"
+          title="Clear search term"
           onClick={handleClearSearchTerm}
         >
           <IconCancel className="text-lg" />
