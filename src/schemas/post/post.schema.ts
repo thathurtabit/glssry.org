@@ -18,7 +18,7 @@ export const postSchema = z.object({
   abbreviation: z.string().min(1).max(15),
   initialism: z.string().min(1).max(10),
   link: z.string().min(5).url().max(maxPostLinkLength),
-  body: z.string().min(1).max(summaryMaxCharacterCount), // Check schema.prisma
+  body: z.string().min(1).max(summaryMaxCharacterCount).refine((value) => !(value.includes("[") || value.includes("]")), { message: "Double check this text is valid" }), // Check schema.prisma
   tags: z.array(ZNativeTagEnum).min(1).max(maxTagsForPost).refine((tags) => tags.some((tag) => tag !== "Miscellaneous" && (tag as string) !== emptySelectOption), { message: `Please ${emptySelectOption.toLocaleLowerCase()}` }).optional(),
   fileUnder: ZNativeTagEnum.refine((value) => (value as string) !== emptySelectOption, { message: `Please ${emptySelectOption.toLocaleLowerCase()}` }),
   relatedPostId1: z.string().optional(),
