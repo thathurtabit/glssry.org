@@ -43,7 +43,7 @@ export const CategoryRowsLinks: FC<ICategoryRowsLinks> = ({
               onClick={handleLinkClick}
             >
               <span className={postRowTitleStyles}>
-                {getPascalCaseFromKebabCase(category)}
+                {getPascalCaseFromKebabCase(category, " ")}
               </span>{" "}
               <small className={postRowItemMetaStyles}>{count}</small>
             </LinkText>

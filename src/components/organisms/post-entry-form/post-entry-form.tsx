@@ -39,6 +39,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
 }) => {
   const reducerState = postData ?? initState;
   const [hasSubmittedTitleCheck, setHasSubmittedTitleCheck] = useState(false);
+  const [showRelated, setShowRelated] = useState(false);
   const [state, dispatch] = useReducer(postReducer, reducerState);
   const [postSuccessful, setPostSuccessful] = useState(false);
   const [userHasSaidPostIsNotDuplicate, setUserHasSaidPostIsNotDuplicate] =
@@ -130,6 +131,10 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
 
   const handleUserHasSaidPostIsNotDuplicate = () => {
     setUserHasSaidPostIsNotDuplicate(true);
+  };
+
+  const handleShowRelated = () => {
+    setShowRelated(!showRelated);
   };
 
   if (postSuccessful) {
@@ -399,28 +404,37 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           disabled={shouldDisableInputs}
           onChange={(event) => handleOnChange(event, "body")}
         />
-        <FormInput
-          id="post-related-post-slug-1"
-          label="Related post slug #1"
-          description="The slug of a closely related post"
-          type="string"
-          placeholder="i.e. javascript"
-          hasError={Boolean(errorData?.relatedPostId1)}
-          value={state.relatedPostId1}
-          disabled={shouldDisableInputs}
-          onChange={(event) => handleOnChange(event, "relatedPostId1")}
-        />
-        <FormInput
-          id="post-related-post-slug-2"
-          label="Related post slug #2"
-          description="The slug of a closely related post"
-          type="string"
-          placeholder="i.e. cascading-style-sheets"
-          hasError={Boolean(errorData?.relatedPostId2)}
-          value={state.relatedPostId2}
-          disabled={shouldDisableInputs}
-          onChange={(event) => handleOnChange(event, "relatedPostId2")}
-        />
+        <HorizontalRule position="left" />
+        <Button size="small" onClick={handleShowRelated}>
+          {showRelated ? "Hide" : "Show"} related terms inputs
+        </Button>
+        {showRelated ? (
+          <div className="mt-8">
+            <FormInput
+              id="post-related-post-slug-1"
+              label="Related post slug #1"
+              description="The slug of a closely related post"
+              type="string"
+              placeholder="i.e. javascript"
+              hasError={Boolean(errorData?.relatedPostId1)}
+              value={state.relatedPostId1}
+              disabled={shouldDisableInputs}
+              onChange={(event) => handleOnChange(event, "relatedPostId1")}
+            />
+            <FormInput
+              id="post-related-post-slug-2"
+              label="Related post slug #2"
+              description="The slug of a closely related post"
+              type="string"
+              placeholder="i.e. cascading-style-sheets"
+              hasError={Boolean(errorData?.relatedPostId2)}
+              value={state.relatedPostId2}
+              disabled={shouldDisableInputs}
+              onChange={(event) => handleOnChange(event, "relatedPostId2")}
+            />
+          </div>
+        ) : null}
+        <HorizontalRule position="left" />
         <Button
           type="submit"
           variant={hasError ? "danger" : "primary"}
