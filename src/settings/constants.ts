@@ -6,6 +6,7 @@ export const appURL = process.env.NODE_ENV === "development"
   : "https://glssry.org";
 export const googleAnalyticsId = "G-QSBYKCC0QE";
 export const githubRepoURL = "https://github.com/thathurtabit/glssry.org";
+export const appDomain = "glssry.org";
 
 export enum EURLS {
   Home = "/",

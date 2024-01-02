@@ -6,7 +6,12 @@ import { usePathname } from "next/navigation";
 
 import { useKeyboardEvents } from "~/hooks/page/use-keyboard-events.hook";
 import { useRouterEvent } from "~/hooks/page/use-router-event.hook";
-import { appDescription, appTitle } from "~/settings/constants";
+import {
+  appDescription,
+  appDomain,
+  appTitle,
+  appURL,
+} from "~/settings/constants";
 
 import type { ISharedHead } from "./shared-head.types";
 
@@ -17,6 +22,7 @@ export const SharedHead: FC<ISharedHead> = ({ title, description }) => {
   const isHomepage = pathname === "/";
   const pageTitle = title ?? appTitle;
   const pageDescription = description ?? `${appTitle} ${appDescription}`;
+  const openGraphImage = `${appURL}/favicon/favicon-large.png`;
   return (
     <Head>
       <title>{isHomepage ? pageTitle : `${pageTitle} | ${appTitle}`}</title>
@@ -45,6 +51,24 @@ export const SharedHead: FC<ISharedHead> = ({ title, description }) => {
         href="/favicon/safari-pinned-tab.svg"
         color="#000000"
       />
+      <meta property="og:url" content={appURL} />
+      <meta property="og:type" content="website" />
+      <meta
+        property="og:title"
+        content={isHomepage ? pageTitle : `${pageTitle} | ${appTitle}`}
+      />
+      <meta property="og:description" content={pageDescription} />
+      <meta property="og:image" content={openGraphImage} />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta property="twitter:domain" content={appDomain} />
+      <meta property="twitter:url" content={appURL} />
+      <meta
+        name="twitter:title"
+        content={isHomepage ? pageTitle : `${pageTitle} | ${appTitle}`}
+      />
+      <meta name="twitter:description" content={pageDescription} />
+      <meta name="twitter:image" content={openGraphImage} />
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" content="#000000" />
       <meta
