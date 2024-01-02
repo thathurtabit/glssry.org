@@ -9,7 +9,7 @@
     "cz": "git-cz",
     "cm": "npm run commit",
     "commit": "sh ./commit.sh",
-    "build": "next build",
+    "build": "npm run db:generate && next build",
     "postbuild": "next-sitemap",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",

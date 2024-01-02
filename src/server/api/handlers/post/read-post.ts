@@ -16,8 +16,14 @@ export const readPost = publicProcedure.input(
     const post = await ctx.db.post.findUnique({
       where: { slug: input.slug },
       select: {
+        id: true,
         title: true,
         slug: true,
+        abbreviation: true,
+        acronym: true,
+        initialism: true,
+        authorId: true,
+        createdAt: true,
         author: {
           select: {
             id: true,
