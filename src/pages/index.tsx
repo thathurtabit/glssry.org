@@ -9,7 +9,7 @@ import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 import { useReadLatestPosts } from "~/hooks/post/read-latest-posts.hook";
 import { useReadRandomCategoryPostCount } from "~/hooks/post/read-random-category-post-count";
 import { useReadRandomPost } from "~/hooks/post/read-random-post.hook";
-import { appDescription, appStrapline, appTitle } from "~/settings/constants";
+import { appDescription, appDomain, appStrapline } from "~/settings/constants";
 
 export default function Home() {
   const { latestPostsData, latestPostsDataIsFetching } = useReadLatestPosts();
@@ -19,8 +19,8 @@ export default function Home() {
   return (
     <>
       <SharedHead
-        title={`${appTitle}.org - ${appStrapline}`}
-        description={appDescription}
+        title={`${appDomain} - ${appStrapline}`}
+        description={`${appDomain} ${appDescription}`}
       />
       <PageMain justifyContent="start">
         <PageMainIndent className="max-w-screen-2xl">

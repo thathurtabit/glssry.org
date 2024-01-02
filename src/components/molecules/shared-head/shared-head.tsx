@@ -25,7 +25,7 @@ export const SharedHead: FC<ISharedHead> = ({ title, description }) => {
   const openGraphImage = `${appURL}/favicon/favicon-large.png`;
   return (
     <Head>
-      <title>{isHomepage ? pageTitle : `${pageTitle} | ${appTitle}`}</title>
+      <title>{isHomepage ? pageTitle : `${pageTitle} | ${appDomain}`}</title>
       <meta name="description" content={pageDescription} />
       <link rel="icon" href="/favicon/favicon.ico" />
       <link
@@ -55,7 +55,7 @@ export const SharedHead: FC<ISharedHead> = ({ title, description }) => {
       <meta property="og:type" content="website" />
       <meta
         property="og:title"
-        content={isHomepage ? pageTitle : `${pageTitle} | ${appTitle}`}
+        content={isHomepage ? pageTitle : `${pageTitle} | ${appDomain}`}
       />
       <meta property="og:description" content={pageDescription} />
       <meta property="og:image" content={openGraphImage} />
@@ -65,7 +65,7 @@ export const SharedHead: FC<ISharedHead> = ({ title, description }) => {
       <meta property="twitter:url" content={appURL} />
       <meta
         name="twitter:title"
-        content={isHomepage ? pageTitle : `${pageTitle} | ${appTitle}`}
+        content={isHomepage ? pageTitle : `${pageTitle} | ${appDomain}`}
       />
       <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={openGraphImage} />
