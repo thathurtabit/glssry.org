@@ -6,6 +6,7 @@ import Image from "next/image";
 import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
 import { Link } from "~/components/atoms/link/link";
 import { LinkText } from "~/components/atoms/link-text/link-text";
+import { Share } from "~/components/atoms/share/share";
 import { IconAccount } from "~/components/icons/account/account";
 import { IconArchive } from "~/components/icons/archive/archive";
 import { IconExternalLink } from "~/components/icons/external-link/external-link";
@@ -141,14 +142,17 @@ export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
               </div>
             ) : null}
           </div>
-          <Link
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            size="small"
-          >
-            Learn more about {abbreviation} <IconExternalLink />
-          </Link>
+          <div className="inline-flex flex-row gap-5">
+            <Link
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              size="small"
+            >
+              Learn more about {abbreviation} <IconExternalLink />
+            </Link>
+            <Share title={title} text={body} />
+          </div>
 
           <HorizontalRule />
 

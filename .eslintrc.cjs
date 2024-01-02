@@ -48,6 +48,12 @@ const config = {
     "operator-linebreak": "off",
     "react/jsx-curly-newline": "off",
     "no-extra-parens": "off",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        checksVoidReturn: false,
+      },
+    ],
     "import/order": [
       "error",
       {
