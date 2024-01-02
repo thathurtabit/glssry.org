@@ -78,6 +78,7 @@ enum TagName {
     Science
     Security
     Slang
+    Social
     Software
     Space
     Sports
