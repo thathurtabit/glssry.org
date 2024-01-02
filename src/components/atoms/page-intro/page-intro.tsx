@@ -1,6 +1,7 @@
 import type { FC } from "react";
-import { HorizontalRule } from "../horizontal-rule/horizontal-rule";
+
 import type { IPageIntro } from "./page-intro.types";
+import { HorizontalRule } from "../horizontal-rule/horizontal-rule";
 
 export const PageIntro: FC<IPageIntro> = ({ textList, hrProps, showHR = true }) => (
   <section className="bottom-2 mb-3 lg:mb-6 font-body">

@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import React, { useContext } from "react";
+
 import { Button } from "~/components/atoms/button/button";
 import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
 import { IconInfo } from "~/components/icons/info/info";

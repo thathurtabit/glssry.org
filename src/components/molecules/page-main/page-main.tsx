@@ -1,4 +1,5 @@
 import type { FCC } from "~/types/react.types";
+
 import type { IPageMain } from "./page-main.types";
 
 export const PageMain: FCC<IPageMain> = ({

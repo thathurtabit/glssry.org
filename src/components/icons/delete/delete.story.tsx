@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconDelete } from "./delete";
 
 const meta: Meta<typeof IconDelete> = {

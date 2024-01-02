@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+
 import type { TButtonVariant } from "~/types/common.types";
 
 export interface IPageState {

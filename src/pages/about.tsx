@@ -1,12 +1,13 @@
 import { Fragment, type FC } from "react";
+
+import { LinkText } from "~/components/atoms/link-text/link-text";
+import { IconExternalLink } from "~/components/icons/external-link/external-link";
+import { IconGithub } from "~/components/icons/github/github";
+import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
 import { PageStructure } from "~/components/molecules/page-structure/page-structure";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
-import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
-import { appTitle, githubRepoURL } from "~/settings/constants";
 import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
-import { LinkText } from "~/components/atoms/link-text/link-text";
-import { IconGithub } from "~/components/icons/github/github";
-import { IconExternalLink } from "~/components/icons/external-link/external-link";
+import { appTitle, githubRepoURL } from "~/settings/constants";
 
 export const About: FC = () => (
   <Fragment>

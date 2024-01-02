@@ -1,11 +1,15 @@
-import type { ISignInOrOutButton } from "./sign-in-button.types";
 import type { FC } from "react";
+
 import { signIn, signOut, useSession } from "next-auth/react";
+
+import { IconAccount } from "~/components/icons/account/account";
+import { IconExit } from "~/components/icons/exit/exit";
 import { EURLS } from "~/settings/constants";
+
+import type { ISignInOrOutButton } from "./sign-in-button.types";
+
 import { Button } from "../button/button";
 import { LoadingSpinner } from "../loading-spinner/loading-spinner";
-import { IconExit } from "~/components/icons/exit/exit";
-import { IconAccount } from "~/components/icons/account/account";
 
 export const SignInOrOutButton: FC<ISignInOrOutButton> = ({
   allowSignOut = false,

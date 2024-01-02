@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { SignInOrOutButton } from "./sign-in-button";
 
 const meta: Meta<typeof SignInOrOutButton> = {

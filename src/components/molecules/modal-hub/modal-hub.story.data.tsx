@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import type { IGlssryState } from "~/context/types/context.types";
 import { initState } from "~/context/state/init-state";
+import type { IGlssryState } from "~/context/types/context.types";
 
 export const initialState: IGlssryState = {
   ...initState,

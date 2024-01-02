@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PostRowsButtons } from "./post-rows-buttons";
+
 import { postsFullMockData } from "~/data/posts.mock-data";
+
+import { PostRowsButtons } from "./post-rows-buttons";
 
 const meta: Meta<typeof PostRowsButtons> = {
   title: "Molecules/Post Rows Buttons",

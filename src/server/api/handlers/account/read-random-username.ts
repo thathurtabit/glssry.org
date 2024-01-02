@@ -1,9 +1,11 @@
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
+
 import { protectedProcedure } from "~/server/api/trpc";
 import { getRandomUsername } from "~/utils/get-username-generator";
-import { sharedReadIsUsernameTaken } from "../shared/user/shared-read-is-username-taken";
+
 import { errorMessage } from "../../utils/error-message";
+import { sharedReadIsUsernameTaken } from "../shared/user/shared-read-is-username-taken";
 
 export const readRandomUsername = protectedProcedure.query(async ({ ctx }) => {
   try {
@@ -21,9 +23,9 @@ export const readRandomUsername = protectedProcedure.query(async ({ ctx }) => {
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);
-      const { message } = error;
+      const { message, code } = error;
       throw new TRPCError({
-        code: error.code,
+        code,
         message: errorMessage.readRandomUsername(httpCode, message),
         cause: error,
       });

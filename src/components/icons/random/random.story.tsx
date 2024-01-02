@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconRandom } from "./random";
 
 const meta: Meta<typeof IconRandom> = {

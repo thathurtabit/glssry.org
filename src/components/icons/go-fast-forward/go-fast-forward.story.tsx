@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconGoFastForward } from "./go-fast-forward";
 
 const meta: Meta<typeof IconGoFastForward> = {

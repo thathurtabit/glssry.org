@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import { IconInfo } from "~/components/icons/info/info";
 import { appDescription, appTitle } from "~/settings/constants";
 

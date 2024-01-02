@@ -1,7 +1,7 @@
-export const getTruncatedString = (str: string, length = 100) => {
-  if (str.length <= length) {
-    return str;
+export const getTruncatedString = (string_: string, length = 100) => {
+  if (string_.length <= length) {
+    return string_;
   }
 
-  return `${str.slice(0, length)}...`;
+  return `${string_.slice(0, length)}...`;
 };

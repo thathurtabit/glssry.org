@@ -1,6 +1,7 @@
 import type { FC } from "react";
-import type { IconBaseProps } from "react-icons/lib";
+
 import { GoNumber } from "react-icons/go";
+import type { IconBaseProps } from "react-icons/lib";
 
 export const IconNumber: FC<IconBaseProps> = (properties) => (
   <GoNumber {...properties} />

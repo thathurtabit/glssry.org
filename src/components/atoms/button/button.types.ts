@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes } from "react";
+
 import type { TButtonVariant } from "~/types/common.types";
 
 export type TButtonSize = "small" | "medium" | "large";

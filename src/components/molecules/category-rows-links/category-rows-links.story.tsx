@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { CategoryRowsLinks } from "./category-rows-links";
+
 import { tagKeys } from "~/schemas/post/post.schema";
 import { getRandomNumber } from "~/utils/get-random-number";
+
+import { CategoryRowsLinks } from "./category-rows-links";
 
 const meta: Meta<typeof CategoryRowsLinks> = {
   title: "Molecules/Category Rows Links",

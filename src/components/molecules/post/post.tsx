@@ -1,21 +1,26 @@
 import type { FC } from "react";
 import React from "react";
-import { getFormattedDate } from "~/utils/get-formatted-date";
-import { Link } from "~/components/atoms/link/link";
-import { IconAccount } from "~/components/icons/account/account";
-import { IconExternalLink } from "~/components/icons/external-link/external-link";
-import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
+
 import Image from "next/image";
-import { IconArchive } from "~/components/icons/archive/archive";
+
+import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
+import { Link } from "~/components/atoms/link/link";
 import { LinkText } from "~/components/atoms/link-text/link-text";
+import { IconAccount } from "~/components/icons/account/account";
+import { IconArchive } from "~/components/icons/archive/archive";
+import { IconExternalLink } from "~/components/icons/external-link/external-link";
+import { IconTag } from "~/components/icons/tag/tag";
+import { getFormattedDate } from "~/utils/get-formatted-date";
+
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
+
+import { getPascalCaseFromKebabCase } from "~/utils/get-pascal-case-from-kebab-case";
+import { getTagsArrayFromJsonArray } from "~/utils/get-tags-array-from-json-array";
+
+import type { IPost } from "./post.types";
+import { NoPostFound } from "../no-post-found/no-post-found";
 import { RelatedPosts } from "../related-posts/related-posts";
 import { RelatedTaxonomyPosts } from "../related-taxonomy-posts/related-taxonomy-posts";
-import { getTagsArrayFromJsonArray } from "~/utils/get-tags-array-from-json-array";
-import { IconTag } from "~/components/icons/tag/tag";
-import { NoPostFound } from "../no-post-found/no-post-found";
-import type { IPost } from "./post.types";
-import { getPascalCaseFromKebabCase } from "~/utils/get-pascal-case-from-kebab-case";
 
 export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
   const { author: originalAuthor, createdAt, versions } = postData;

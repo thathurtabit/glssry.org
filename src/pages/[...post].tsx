@@ -1,29 +1,34 @@
+import { Fragment } from "react";
+
+import type { TagName } from "@prisma/client";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import type {
   GetStaticPaths,
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
-import { tagKeys, type TNativeTag } from "~/schemas/post/post.schema";
-import { Fragment } from "react";
+
 import superjson from "superjson";
+
 import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
 import { LoadingSpinner } from "~/components/atoms/loading-spinner/loading-spinner";
-import { Post } from "~/components/molecules/post/post";
-import { SharedHead } from "~/components/molecules/shared-head/shared-head";
-import { appRouter } from "~/server/api/root";
-import { db } from "~/server/db";
-import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
-import { PostRowsLinks } from "~/components/molecules/post-rows-links/post-rows-links";
 import { SectionTitle } from "~/components/atoms/section-title/section-title";
-import { getPascalCaseFromKebabCase } from "~/utils/get-pascal-case-from-kebab-case";
-import { PageMain } from "~/components/molecules/page-main/page-main";
-import type { TagName } from "@prisma/client";
-import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
-import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
-import { useReadPost } from "~/hooks/post/read-post.hook";
-import { useReadAllPostsInCategory } from "~/hooks/post/read-all-posts-in-category.hook";
 import { NoPostFound } from "~/components/molecules/no-post-found/no-post-found";
+import { PageMain } from "~/components/molecules/page-main/page-main";
+import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
+import { Post } from "~/components/molecules/post/post";
+
+import { PostRowsLinks } from "~/components/molecules/post-rows-links/post-rows-links";
+import { SharedHead } from "~/components/molecules/shared-head/shared-head";
+
+import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
+import { useReadAllPostsInCategory } from "~/hooks/post/read-all-posts-in-category.hook";
+import { useReadPost } from "~/hooks/post/read-post.hook";
+import { tagKeys, type TNativeTag } from "~/schemas/post/post.schema";
+import { appRouter } from "~/server/api/root";
+import { database } from "~/server/database";
+import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
+import { getPascalCaseFromKebabCase } from "~/utils/get-pascal-case-from-kebab-case";
 import { getPascalCaseWithUnderscores } from "~/utils/get-pascal-case-with-underscores";
 
 export default function PostViewPage({
@@ -109,7 +114,7 @@ export default function PostViewPage({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await db.post.findMany({
+  const posts = await database.post.findMany({
     select: {
       id: true,
       slug: true,
@@ -153,7 +158,7 @@ export async function getStaticProps(
     router: appRouter,
     ctx: {
       session: null,
-      db,
+      db: database,
     },
     transformer: superjson, // Optional - adds superjson serialization
   });
@@ -165,12 +170,14 @@ export async function getStaticProps(
     await helpers.post.readPost.prefetch({ slug: uniqueSlug });
   }
 
-  if (!uniqueSlug && fileUnder) {
-    if (tagKeys.includes(getPascalCaseFromKebabCase(fileUnder) as TagName)) {
-      await helpers.post.readAllPostsInCategory.prefetch({
-        category: getPascalCaseFromKebabCase(fileUnder) as TNativeTag,
-      });
-    }
+  if (
+    !uniqueSlug &&
+    fileUnder &&
+    tagKeys.includes(getPascalCaseFromKebabCase(fileUnder) as TagName)
+  ) {
+    await helpers.post.readAllPostsInCategory.prefetch({
+      category: getPascalCaseFromKebabCase(fileUnder) as TNativeTag,
+    });
   }
 
   return {

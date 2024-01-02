@@ -1,10 +1,12 @@
 import { useContext, useEffect } from "react";
+
 import { useRouter } from "next/router";
+
+import { setMenuOpen } from "../../context/actions/page/page.actions";
 import {
   GlssryStateContext,
   GlssryDispatchContext,
 } from "../../context/context/context";
-import { setMenuOpen } from "../../context/actions/page/page.actions";
 
 interface IUseRouterEvent {
   callback?: () => void;

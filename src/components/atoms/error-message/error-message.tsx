@@ -1,11 +1,13 @@
 import type { FC } from "react";
-import type { IErrorMessage } from "./error-message.types";
+
 import { IconError } from "~/components/icons/error/error";
 import {
   infoPanelBody,
   infoPanelHeading,
   infoPanelWrapper,
 } from "~/styles/shared";
+
+import type { IErrorMessage } from "./error-message.types";
 
 export const ErrorMessage: FC<IErrorMessage> = ({
   title,

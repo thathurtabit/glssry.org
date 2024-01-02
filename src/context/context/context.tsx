@@ -1,15 +1,17 @@
+import type { ReactNode } from "react";
+import React, { createContext, useMemo, useReducer } from "react";
+import combineReducers from "react-combine-reducers";
+
+import type { IAppProvider } from "~/context/context/context.types";
+import { notificationsReducer } from "~/context/reducers/notifications/notifications.reducer";
+import { pageReducer } from "~/context/reducers/page/page.reducer";
+import { initState } from "~/context/state/init-state";
+
 import type {
   ContextReducer,
   TGlssryStateContext,
   TGlssryDispatchContext,
 } from "../types/context.types";
-import type { IAppProvider } from "~/context/context/context.types";
-import type { ReactNode } from "react";
-import React, { createContext, useMemo, useReducer } from "react";
-import combineReducers from "react-combine-reducers";
-import { initState } from "~/context/state/init-state";
-import { pageReducer } from "~/context/reducers/page/page.reducer";
-import { notificationsReducer } from "~/context/reducers/notifications/notifications.reducer";
 export const GlssryStateContext = createContext<TGlssryStateContext>(initState);
 
 export const GlssryDispatchContext = createContext<TGlssryDispatchContext>(

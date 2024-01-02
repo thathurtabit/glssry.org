@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import type { IconBaseProps } from "react-icons/lib";
 import { TiArrowSortedUp } from "react-icons/ti";
 

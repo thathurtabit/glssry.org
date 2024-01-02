@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconTrophy } from "./trophy";
 
 const meta: Meta<typeof IconTrophy> = {

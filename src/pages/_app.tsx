@@ -1,20 +1,20 @@
+import { type AppType } from "next/app";
+import Script from "next/script";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { type AppType } from "next/app";
 
+import { FooterStrip } from "~/components/molecules/footer-strip/footer-strip";
+import { ModalsAndNotifications } from "~/components/molecules/modals-and-notifications/modals-and-notifications";
+import { AppWrapper } from "~/components/templates/app-wrapper/app-wrapper";
+import { GlssryAppProvider } from "~/context/context/context";
+import { googleAnalyticsId } from "~/settings/constants";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
-import { GlssryAppProvider } from "~/context/context/context";
-import { AppWrapper } from "~/components/templates/app-wrapper/app-wrapper";
-import { ModalsAndNotifications } from "~/components/molecules/modals-and-notifications/modals-and-notifications";
-import Script from "next/script";
-import { googleAnalyticsId } from "~/settings/constants";
-import { FooterStrip } from "~/components/molecules/footer-strip/footer-strip";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { session, ...pageProperties },
 }) => (
   <SessionProvider session={session}>
     <Script
@@ -31,7 +31,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     </Script>
     <GlssryAppProvider>
       <AppWrapper>
-        <Component {...pageProps} />
+        <Component {...pageProperties} />
         <FooterStrip />
       </AppWrapper>
       <ModalsAndNotifications />

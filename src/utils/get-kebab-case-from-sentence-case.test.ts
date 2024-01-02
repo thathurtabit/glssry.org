@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+
 import { getKebabCaseFromSentenceCase } from "./get-kebab-case-from-sentence-case";
 
 describe("getKebabCaseFromSentenceCase", () => {

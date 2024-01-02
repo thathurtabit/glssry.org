@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { PostShortLoading } from "./post-short-loading";
 
 const meta: Meta<typeof PostShortLoading> = {

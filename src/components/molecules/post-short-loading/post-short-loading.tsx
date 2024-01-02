@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import { postRowItemMetaStyles } from "~/styles/shared";
 
 export const PostShortLoading: FC = () => (

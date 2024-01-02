@@ -1,5 +1,6 @@
 import type { IContextAction } from "~/context/types/context.types";
 import type { IModalData } from "~/context/types/state/page-state.types";
+
 import { PageActions } from "./page.actions.types";
 
 export const setMenuOpen = (payload: boolean): IContextAction => ({

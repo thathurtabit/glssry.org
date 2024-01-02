@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import { postRowItemMetaStyles, postRowWrapperStyles } from "~/styles/shared";
 
 export const RelatedPostLoading: FC = () => (

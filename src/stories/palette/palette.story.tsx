@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { Palette } from "./palette";
 
 const meta: Meta<typeof Palette> = {

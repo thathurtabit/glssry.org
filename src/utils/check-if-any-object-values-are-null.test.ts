@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { checkIfAnyObjectValuesAreNull } from "./check-if-any-object-values-are-null";
 describe("checkIfAnyObjectValuesAreNull", () => {
   it("should return true if any values are null", () => {

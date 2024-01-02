@@ -1,10 +1,11 @@
 import { Fragment, type FC } from "react";
+
+import { LinkText } from "~/components/atoms/link-text/link-text";
+import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
 import { PageStructure } from "~/components/molecules/page-structure/page-structure";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
-import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
-import { EURLS, appTitle } from "~/settings/constants";
 import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
-import { LinkText } from "~/components/atoms/link-text/link-text";
+import { EURLS, appTitle } from "~/settings/constants";
 
 export const Privacy: FC = () => (
   <Fragment>

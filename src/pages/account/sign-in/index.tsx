@@ -1,28 +1,39 @@
-import { ESignInMessage } from "~/types/sign-in.types";
-import { ReCaptcha, ReCaptchaProvider } from "next-recaptcha-v3";
 import { useEffect, useState } from "react";
-import { getProviders, signIn } from "next-auth/react";
-import { useRouter } from "next/router";
-import { ErrorMessage } from "~/components/atoms/error-message/error-message";
-import { EURLS } from "~/settings/constants";
-import { getSignInErrorMessage } from "~/utils/sign-in.utils";
-import { PageStructure } from "~/components/molecules/page-structure/page-structure";
-import { Button } from "~/components/atoms/button/button";
-import { PageIntro } from "~/components/atoms/page-intro/page-intro";
-import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
-import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-signed-in";
-import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
-import { IconGoogle } from "~/components/icons/google/google";
-import { IconGithub } from "~/components/icons/github/github";
-import { IconEmail } from "~/components/icons/email/email";
-import { IconDiscord } from "~/components/icons/discord/discord";
+
 import { type InferGetServerSidePropsType } from "next";
-import { useVerifyRecaptchaMutation } from "~/hooks/auth/recaptcha-verify.hook";
-import { env } from "~/env.mjs";
-import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
-import { SharedHead } from "~/components/molecules/shared-head/shared-head";
-import { IconReddit } from "~/components/icons/reddit/reddit";
+import { useRouter } from "next/router";
+import { getProviders, signIn } from "next-auth/react";
+import { ReCaptcha, ReCaptchaProvider } from "next-recaptcha-v3";
+
+import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-signed-in";
+import { Button } from "~/components/atoms/button/button";
+import { ErrorMessage } from "~/components/atoms/error-message/error-message";
+import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
+import { PageIntro } from "~/components/atoms/page-intro/page-intro";
+import { IconDiscord } from "~/components/icons/discord/discord";
+import { IconEmail } from "~/components/icons/email/email";
+
 import { IconFacebook } from "~/components/icons/facebook/facebook";
+import { IconGithub } from "~/components/icons/github/github";
+import { IconGoogle } from "~/components/icons/google/google";
+import { IconReddit } from "~/components/icons/reddit/reddit";
+import { PageStructure } from "~/components/molecules/page-structure/page-structure";
+import { SharedHead } from "~/components/molecules/shared-head/shared-head";
+import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
+import { environment } from "~/environment.mjs";
+import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
+import { useVerifyRecaptchaMutation } from "~/hooks/auth/recaptcha-verify.hook";
+import { EURLS } from "~/settings/constants";
+import { ESignInMessage } from "~/types/sign-in.types";
+import { getSignInErrorMessage } from "~/utils/sign-in.utils";
+
+const handleSignIn = (id: string) => {
+  (async () => {
+    await signIn(id, { callbackUrl: EURLS.SignInSuccess });
+  })().catch((error: Error) => {
+    throw new Error(error.message);
+  });
+};
 
 export const SignIn = ({
   providers,
@@ -122,19 +133,11 @@ export const SignIn = ({
     return <AlreadySignedIn />;
   }
 
-  const handleSignIn = (id: string) => {
-    (async () => {
-      await signIn(id, { callbackUrl: EURLS.SignInSuccess });
-    })().catch((error: Error) => {
-      throw new Error(error.message);
-    });
-  };
-
   if (!isHuman) {
     return (
       <ReCaptchaProvider
         useEnterprise
-        reCaptchaKey={env.NEXT_PUBLIC_RECAPTCHA_SITEKEY}
+        reCaptchaKey={environment.NEXT_PUBLIC_RECAPTCHA_SITEKEY}
       >
         <AccountPageWrapper skipAuthCheck>
           <SharedHead title="Bot Check" />

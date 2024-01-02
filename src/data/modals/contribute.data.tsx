@@ -1,6 +1,7 @@
-import type { IModalData } from "~/context/types/state/page-state.types";
 import { Fragment } from "react";
+
 import { IconPlus } from "~/components/icons/plus/plus";
+import type { IModalData } from "~/context/types/state/page-state.types";
 import { EURLS, appTitle } from "~/settings/constants";
 
 export const contributeModalData: IModalData = {

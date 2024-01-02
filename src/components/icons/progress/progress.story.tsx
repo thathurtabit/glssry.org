@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconProgress } from "./progress";
 
 const meta: Meta<typeof IconProgress> = {

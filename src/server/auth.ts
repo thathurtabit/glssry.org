@@ -6,13 +6,14 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
+import facebookProvider from "next-auth/providers/facebook";
 import githubProvider from "next-auth/providers/github";
 import googleProvider from "next-auth/providers/google";
 import redditProvider from "next-auth/providers/reddit";
-import facebookProvider from "next-auth/providers/facebook";
 
-import { env } from "~/env.mjs";
-import { db } from "~/server/db";
+import { environment } from "~/environment.mjs";
+
+import { database } from "~/server/database";
 import { EURLS } from "~/settings/constants";
 
 /**
@@ -57,7 +58,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   },
-  adapter: prismaAdapter(db),
+  adapter: prismaAdapter(database),
   pages: {
     signIn: EURLS.SignIn,
     verifyRequest: EURLS.SignInMagicLink,
@@ -66,21 +67,21 @@ export const authOptions: NextAuthOptions = {
   providers: [
     // NOTE: Github only allows an app to have one callback URL, so there needs to be a Dev and Prod app
     githubProvider({
-      clientId: env.GITHUB_CLIENT_ID,
-      clientSecret: env.GITHUB_CLIENT_SECRET,
+      clientId: environment.GITHUB_CLIENT_ID,
+      clientSecret: environment.GITHUB_CLIENT_SECRET,
       // Checks: ["pkce", "state"], // Required here: https://github.com/nextauthjs/next-auth/issues/4190#issuecomment-1326519901
     }),
     googleProvider({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      clientId: environment.GOOGLE_CLIENT_ID,
+      clientSecret: environment.GOOGLE_CLIENT_SECRET,
     }),
     facebookProvider({
-      clientId: env.FACEBOOK_CLIENT_ID,
-      clientSecret: env.FACEBOOK_CLIENT_SECRET,
+      clientId: environment.FACEBOOK_CLIENT_ID,
+      clientSecret: environment.FACEBOOK_CLIENT_SECRET,
     }),
     redditProvider({
-      clientId: env.REDDIT_CLIENT_ID,
-      clientSecret: env.REDDIT_CLIENT_SECRET,
+      clientId: environment.REDDIT_CLIENT_ID,
+      clientSecret: environment.REDDIT_CLIENT_SECRET,
     }),
     /**
      * ...add more providers here.
@@ -99,7 +100,7 @@ export const authOptions: NextAuthOptions = {
  *
  * @see https://next-auth.js.org/configuration/nextjs
  */
-export const getServerAuthSession = (ctx: {
+export const getServerAuthSession = (context: {
   req: GetServerSidePropsContext["req"];
   res: GetServerSidePropsContext["res"];
-}) => getServerSession(ctx.req, ctx.res, authOptions);
+}) => getServerSession(context.req, context.res, authOptions);

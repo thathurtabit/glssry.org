@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { getTotalDaysInMonth } from "./get-total-days-in-month";
 describe("getTotalDaysInMonth", () => {
   it("should return correct number of days in month (jan, 23)", () => {

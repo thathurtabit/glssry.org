@@ -1,20 +1,23 @@
-import Link from "next/link";
 import { useContext, type FC } from "react";
+
+import Link from "next/link";
+
 import { LinkText } from "~/components/atoms/link-text/link-text";
 import { IconAccount } from "~/components/icons/account/account";
 import { IconMenu } from "~/components/icons/menu/menu";
+import { IconPlus } from "~/components/icons/plus/plus";
 import { setMenuOpen, setModal } from "~/context/actions/page/page.actions";
 import {
   GlssryDispatchContext,
   GlssryStateContext,
 } from "~/context/context/context";
+import { contributeModalData } from "~/data/modals/contribute.data";
 import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
+import { useReadAllPendingPosts } from "~/hooks/post/read-all-pending-posts.hook";
 import { EURLS, appTitle } from "~/settings/constants";
+
 import { HeaderMenu } from "../header-menu/header-menu";
 import { OmniSearch } from "../omni-search/omni-search";
-import { IconPlus } from "~/components/icons/plus/plus";
-import { contributeModalData } from "~/data/modals/contribute.data";
-import { useReadAllPendingPosts } from "~/hooks/post/read-all-pending-posts.hook";
 
 export const HeaderStrip: FC = () => {
   const isAuthenticated = useIsAuthenticated();

@@ -1,5 +1,6 @@
 import type { FC } from "react";
-import type { IconBaseProps } from "react-icons/lib";
+
 import { FaAngleLeft } from "react-icons/fa";
+import type { IconBaseProps } from "react-icons/lib";
 
 export const IconGoBack: FC<IconBaseProps> = (properties) => <FaAngleLeft {...properties} />;

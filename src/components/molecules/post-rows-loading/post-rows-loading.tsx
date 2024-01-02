@@ -1,10 +1,12 @@
 import type { FC } from "react";
+
 import {
   postRowItemMetaStyles,
   postRowItemStyles,
   postRowTitleStyles,
   postRowWrapperStyles,
 } from "~/styles/shared";
+
 import type { IPostRowsLoading } from "./post-rows-loading.types";
 
 export const PostRowsLoading: FC<IPostRowsLoading> = ({ itemsCount = 5 }) => (

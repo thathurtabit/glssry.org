@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconAddPersonGroup } from "./add-person-group";
 
 const meta: Meta<typeof IconAddPersonGroup> = {

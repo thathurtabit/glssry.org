@@ -1,15 +1,16 @@
 import { Fragment, type FC } from "react";
+
+import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
+import { Link } from "~/components/atoms/link/link";
+import { LinkText } from "~/components/atoms/link-text/link-text";
+import { IconExternalLink } from "~/components/icons/external-link/external-link";
+import { IconGithub } from "~/components/icons/github/github";
+import { IconPlus } from "~/components/icons/plus/plus";
+import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
 import { PageStructure } from "~/components/molecules/page-structure/page-structure";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
-import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
-import { EURLS, appTitle, githubRepoURL } from "~/settings/constants";
 import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
-import { LinkText } from "~/components/atoms/link-text/link-text";
-import { IconGithub } from "~/components/icons/github/github";
-import { IconExternalLink } from "~/components/icons/external-link/external-link";
-import { Link } from "~/components/atoms/link/link";
-import { IconPlus } from "~/components/icons/plus/plus";
-import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
+import { EURLS, appTitle, githubRepoURL } from "~/settings/constants";
 
 export const Contribute: FC = () => (
   <Fragment>

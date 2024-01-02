@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FormSelect } from "./form-select";
+
 import { tagKeys } from "~/schemas/post/post.schema";
+
+import { FormSelect } from "./form-select";
 
 const meta: Meta<typeof FormSelect> = {
   title: "Atoms/Form Select",

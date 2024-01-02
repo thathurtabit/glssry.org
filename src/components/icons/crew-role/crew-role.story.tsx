@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconCrewRole } from "./crew-role";
 
 const meta: Meta<typeof IconCrewRole> = {

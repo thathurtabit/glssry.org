@@ -1,7 +1,9 @@
-import { getShuffledArray } from "./../../../../utils/get-shuffled-array";
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
+
 import { publicProcedure } from "~/server/api/trpc";
+
+import { getShuffledArray } from "./../../../../utils/get-shuffled-array";
 import { errorMessage } from "../../utils/error-message";
 
 export const readRandomPost = publicProcedure.query(async ({ ctx }) => {
@@ -42,9 +44,9 @@ export const readRandomPost = publicProcedure.query(async ({ ctx }) => {
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);
-      const { message } = error;
+      const { message, code } = error;
       throw new TRPCError({
-        code: error.code,
+        code,
         message: errorMessage.readRandomPost(httpCode, message),
         cause: error,
       });

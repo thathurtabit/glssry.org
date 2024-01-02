@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { removeNonNumericCharacters } from "./remove-non-numeric-characters";
 
 describe("removeNonNumericCharacters", () => {

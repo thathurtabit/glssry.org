@@ -1,7 +1,7 @@
-import type { IModalData, IPageState } from "../../types/state/page-state.types";
-import type { IContextAction } from "./../../types/context.types";
 import { initState } from "./../../state/init-state";
+import type { IContextAction } from "./../../types/context.types";
 import { PageActions } from "../../actions/page/page.actions.types";
+import type { IModalData, IPageState } from "../../types/state/page-state.types";
 
 export const pageReducer = (
     state: IPageState,

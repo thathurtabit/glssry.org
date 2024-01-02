@@ -1,9 +1,11 @@
 import { Fragment, type FC } from "react";
-import type { IBreadcrumbs } from "./breadcrumbs.types";
+
 import { LinkText } from "~/components/atoms/link-text/link-text";
 import { IconHome } from "~/components/icons/home/home";
 import { EURLS } from "~/settings/constants";
 import { replaceAll } from "~/utils/replace-all";
+
+import type { IBreadcrumbs } from "./breadcrumbs.types";
 
 export const Breadcrumbs: FC<IBreadcrumbs> = ({ items }) => (
   <nav

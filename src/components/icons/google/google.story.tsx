@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconGoogle } from "./google";
 
 const meta: Meta<typeof IconGoogle> = {

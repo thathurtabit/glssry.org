@@ -1,4 +1,5 @@
 import type { AnchorHTMLAttributes } from "react";
+
 import type { TButtonVariant } from "~/types/common.types";
 
 export interface ILink extends AnchorHTMLAttributes<HTMLAnchorElement> {

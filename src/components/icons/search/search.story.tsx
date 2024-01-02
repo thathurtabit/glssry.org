@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconSearch } from "./search";
 
 const meta: Meta<typeof IconSearch> = {

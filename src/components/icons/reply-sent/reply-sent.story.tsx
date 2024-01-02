@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconReplySent } from "./reply-sent";
 
 const meta: Meta<typeof IconReplySent> = {

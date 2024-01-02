@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import type { IContentWellHeader } from "./content-well-header.types";
 
 export const preTitleStyles = "font-medium opacity-70";

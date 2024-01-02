@@ -1,4 +1,5 @@
 import type { FCC } from "~/types/react.types";
+
 import type { ISectionSubtitle } from "./section-subtitle.types";
 
 export const SectionSubtitle: FCC<ISectionSubtitle> = ({

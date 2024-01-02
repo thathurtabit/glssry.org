@@ -1,4 +1,5 @@
 import { usePathname } from "next/navigation";
+
 import type { TNativeTag } from "~/schemas/post/post.schema";
 import { api } from "~/utils/api";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";

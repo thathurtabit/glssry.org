@@ -1,9 +1,11 @@
-import type { FCC } from "~/types/react.types";
-import type { IAccountWrapper } from "./account-page-wrapper.types";
 import React from "react";
+
 import { PleaseSignIn } from "~/components/atoms/please-sign-in/please-sign-in";
-import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
 import { PageMain } from "~/components/molecules/page-main/page-main";
+import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
+import type { FCC } from "~/types/react.types";
+
+import type { IAccountWrapper } from "./account-page-wrapper.types";
 
 export const AccountPageWrapper: FCC<IAccountWrapper> = ({
   children,

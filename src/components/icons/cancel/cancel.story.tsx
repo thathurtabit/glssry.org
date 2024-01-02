@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconCancel } from "./cancel";
 
 const meta: Meta<typeof IconCancel> = {

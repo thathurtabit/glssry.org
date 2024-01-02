@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { EphemeralNotificationsCustomIconExample } from "./example/ephemeral-notifications-custom-icon.example";
 
 const meta: Meta<typeof EphemeralNotificationsCustomIconExample> = {

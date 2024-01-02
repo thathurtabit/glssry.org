@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import type { IFormInput } from "./form-input.types";
+
 import { Fragment } from "react";
-import { Button } from "../button/button";
+
 import {
   errorMessageClasses,
   getInputCoreClasses,
@@ -12,6 +12,10 @@ import {
   inputSizeWrapperSmallClasses,
   inputWrapperClasses,
 } from "~/styles/shared";
+
+import type { IFormInput } from "./form-input.types";
+import { Button } from "../button/button";
+
 import { ModalInfoButton } from "../modal-info-button/modal-info-button";
 
 export const minInputWidth = "w-48";

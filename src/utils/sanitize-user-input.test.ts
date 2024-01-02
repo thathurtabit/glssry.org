@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { sanitizeUserInput } from "./sanitize-user-input";
 describe("sanitizeUserInput", () => {
   it("should remove all non-alphanumeric characters", () => {

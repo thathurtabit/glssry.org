@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { HeaderStrip } from "./header-strip";
 
 const meta: Meta<typeof HeaderStrip> = {

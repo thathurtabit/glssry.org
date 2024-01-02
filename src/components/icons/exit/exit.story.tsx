@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconExit } from "./exit";
 
 const meta: Meta<typeof IconExit> = {

@@ -1,10 +1,12 @@
-import { api } from "~/utils/api";
 import { useContext, useEffect } from "react";
+
+import { setNewNotification } from "~/context/actions/notifications/notifications.actions";
 import {
   GlssryDispatchContext,
   GlssryStateContext,
 } from "~/context/context/context";
-import { setNewNotification } from "~/context/actions/notifications/notifications.actions";
+import { api } from "~/utils/api";
+
 import { useIsAuthenticated } from "../auth/is-authenticated.hook";
 
 /** Read User Data from TRPC */

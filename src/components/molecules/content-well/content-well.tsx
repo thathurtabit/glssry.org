@@ -1,4 +1,5 @@
 import type { FCC } from "~/types/react.types";
+
 import type { IContentWell } from "./content-well.types";
 
 export const ContentWell: FCC<IContentWell> = ({

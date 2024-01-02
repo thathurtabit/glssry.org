@@ -1,9 +1,10 @@
 import { Fragment, type FC } from "react";
+
+import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
 import { PageStructure } from "~/components/molecules/page-structure/page-structure";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
-import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
-import { appTitle } from "~/settings/constants";
 import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
+import { appTitle } from "~/settings/constants";
 
 export const Terms: FC = () => (
   <Fragment>

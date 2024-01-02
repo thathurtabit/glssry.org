@@ -1,10 +1,13 @@
 import type { FC } from "react";
-import type { INotification } from "~/types/common.types";
+
 import { useContext, useId } from "react";
-import { EphemeralNotifications } from "../ephemeral-notifications";
-import { GlssryDispatchContext } from "../../../../context/context/context";
+
+import type { INotification } from "~/types/common.types";
+
 import { setNewNotification } from "../../../../context/actions/notifications/notifications.actions";
+import { GlssryDispatchContext } from "../../../../context/context/context";
 import { Button } from "../../button/button";
+import { EphemeralNotifications } from "../ephemeral-notifications";
 
 interface IEphemeralNotificationsExample {
   customIcon: boolean | undefined;

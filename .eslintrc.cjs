@@ -9,8 +9,13 @@ const config = {
   env: {
     es2024: true,
   },
-  plugins: ["@typescript-eslint", "unicorn"],
+  plugins: ["jsx-a11y", "@typescript-eslint", "unicorn"],
   extends: [
+    "plugin:jsx-a11y/recommended",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:unicorn/recommended",
+    "plugin:import/warnings",
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",
@@ -43,6 +48,31 @@ const config = {
     "operator-linebreak": "off",
     "react/jsx-curly-newline": "off",
     "no-extra-parens": "off",
+    "import/order": [
+      "error",
+      {
+        groups: ["builtin", "external", "internal"],
+        pathGroups: [
+          {
+            pattern: "react*",
+            group: "external",
+            position: "before",
+          },
+          {
+            pattern: "@at",
+            group: "external",
+            position: "after",
+          },
+        ],
+        pathGroupsExcludedImportTypes: ["react*"],
+        alphabetize: {
+          order: "asc",
+          caseInsensitive: false,
+        },
+        "newlines-between": "always-and-inside-groups",
+        warnOnUnassignedImports: false,
+      },
+    ],
     "comma-dangle": [
       "error",
       {

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { capitalizeFirstLetterOfEachWord } from "./capitalize-first-letter-of-each-word";
 describe("capitalizeFirstLetterOfEachWord", () => {
   it("should capitalize the first letter of each word", () => {

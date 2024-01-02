@@ -1,13 +1,16 @@
 import type { FC } from "react";
-import type { IEphemeralInfoPanels } from "./ephemeral-notifications.types";
-import type { TInfoTypes } from "~/types/common.types";
+
 import { Fragment, useContext, useEffect, useState } from "react";
+
+import { InfoIcon } from "~/components/atoms/info-panel-icon/info-panel-icon";
 import { clearOldestNotification } from "~/context/actions/notifications/notifications.actions";
 import {
   GlssryDispatchContext,
   GlssryStateContext,
 } from "~/context/context/context";
-import { InfoIcon } from "~/components/atoms/info-panel-icon/info-panel-icon";
+import type { TInfoTypes } from "~/types/common.types";
+
+import type { IEphemeralInfoPanels } from "./ephemeral-notifications.types";
 
 const getIconClasses = (type: TInfoTypes) => {
   switch (type) {

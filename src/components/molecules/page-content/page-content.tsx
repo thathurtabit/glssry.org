@@ -1,4 +1,5 @@
 import type { FCC } from "~/types/react.types";
+
 import type { IPageContent } from "./page-content.types";
 
 export const PageContent: FCC<IPageContent> = ({ children, width = "full" }) => (

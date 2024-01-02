@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import type { IHR } from "./horizontal-rule.types";
 
 export const HorizontalRule: FC<IHR> = ({ className, inverse, position }) => {

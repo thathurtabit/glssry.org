@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Link } from "./link";
+
 import { IconCrew } from "~/components/icons/crew/crew";
+
+import { Link } from "./link";
 
 const meta: Meta<typeof Link> = {
   title: "Atoms/Link",

@@ -1,10 +1,12 @@
 import { useContext, useId } from "react";
-import { GlssryDispatchContext } from "~/context/context/context";
-import { api } from "~/utils/api";
+
 import { signOut } from "next-auth/react";
-import { setNewNotification } from "~/context/actions/notifications/notifications.actions";
+
 import { IconDelete } from "~/components/icons/delete/delete";
+import { setNewNotification } from "~/context/actions/notifications/notifications.actions";
+import { GlssryDispatchContext } from "~/context/context/context";
 import { EURLS } from "~/settings/constants";
+import { api } from "~/utils/api";
 
 interface IDeleteUser {
   onSuccess?: () => void;

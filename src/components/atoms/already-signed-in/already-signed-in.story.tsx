@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { AlreadySignedIn } from "./already-signed-in";
 
 const meta: Meta<typeof AlreadySignedIn> = {

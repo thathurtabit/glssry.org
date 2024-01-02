@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconNoMovement } from "./no-movement";
 
 const meta: Meta<typeof IconNoMovement> = {

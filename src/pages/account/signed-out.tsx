@@ -1,14 +1,27 @@
 import type { NextPage } from "next";
-import { PageIntro } from "~/components/atoms/page-intro/page-intro";
-import { PageStructure } from "~/components/molecules/page-structure/page-structure";
-import { Button } from "~/components/atoms/button/button";
+
 import { signIn } from "next-auth/react";
-import { EURLS } from "~/settings/constants";
-import { useIsAuthenticated } from "../../hooks/auth/is-authenticated.hook";
+
 import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-signed-in";
-import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
+import { Button } from "~/components/atoms/button/button";
+import { PageIntro } from "~/components/atoms/page-intro/page-intro";
 import { IconAccount } from "~/components/icons/account/account";
+import { PageStructure } from "~/components/molecules/page-structure/page-structure";
+
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
+import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
+import { EURLS } from "~/settings/constants";
+
+import { useIsAuthenticated } from "../../hooks/auth/is-authenticated.hook";
+
+const handleSignInAgain = () => {
+  (async () => {
+    await signIn("sign-in-again", { callbackUrl: EURLS.SignInSuccess });
+  })().catch((error) => {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  });
+};
 
 const SignedOut: NextPage = () => {
   const isAuthenticated = useIsAuthenticated();
@@ -21,15 +34,6 @@ const SignedOut: NextPage = () => {
       />
     );
   }
-
-  const handleSignInAgain = () => {
-    (async () => {
-      await signIn("sign-in-again", { callbackUrl: EURLS.SignInSuccess });
-    })().catch((error) => {
-      // eslint-disable-next-line no-console
-      console.error(error);
-    });
-  };
 
   return (
     <AccountPageWrapper>

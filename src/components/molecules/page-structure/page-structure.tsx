@@ -1,12 +1,16 @@
-import type { FCC } from "~/types/react.types";
-import type { IPageStructure } from "./page-structure.types";
 import { Fragment } from "react";
+
 import { PageHeader } from "~/components/atoms/page-header/page-header";
+import { PleaseSignIn } from "~/components/atoms/please-sign-in/please-sign-in";
+import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
+import type { FCC } from "~/types/react.types";
+
+import type { IPageStructure } from "./page-structure.types";
+
 import { PageBody } from "../page-body/page-body";
 import { PageContent } from "../page-content/page-content";
 import { PageMain } from "../page-main/page-main";
-import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
-import { PleaseSignIn } from "~/components/atoms/please-sign-in/please-sign-in";
+
 import { SharedHead } from "../shared-head/shared-head";
 
 export const PageStructure: FCC<IPageStructure> = ({

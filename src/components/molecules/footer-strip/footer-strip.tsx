@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import { LinkText } from "~/components/atoms/link-text/link-text";
 import { EURLS } from "~/settings/constants";
 

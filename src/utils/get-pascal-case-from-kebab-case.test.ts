@@ -1,6 +1,7 @@
-import { describe, expect, it } from "vitest";
-import { getPascalCaseFromKebabCase } from "./get-pascal-case-from-kebab-case";
 import { TagName } from "@prisma/client";
+import { describe, expect, it } from "vitest";
+
+import { getPascalCaseFromKebabCase } from "./get-pascal-case-from-kebab-case";
 
 describe("getPascalCaseFromKebabCase", () => {
   it("should convert kebab-case to PascalCase", () => {

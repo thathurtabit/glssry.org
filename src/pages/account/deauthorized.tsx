@@ -1,4 +1,5 @@
 import { type NextPage } from "next";
+
 import { PageStructure } from "~/components/molecules/page-structure/page-structure";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 

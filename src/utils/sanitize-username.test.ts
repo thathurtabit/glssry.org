@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { sanitizeUsername } from "./sanitize-username";
 
 describe("sanitizeUsername", () => {

@@ -1,11 +1,13 @@
 import { Fragment } from "react";
-import type { FCC } from "~/types/react.types";
+
 import {
   Abril_Fatface as abrilFont,
   Comfortaa as comfortaaFont,
   Nunito_Sans as nunitoSansFont,
 } from "next/font/google";
+
 import { HeaderStrip } from "~/components/organisms/header-strip/header-strip";
+import type { FCC } from "~/types/react.types";
 
 const heading = abrilFont({
   subsets: ["latin"],

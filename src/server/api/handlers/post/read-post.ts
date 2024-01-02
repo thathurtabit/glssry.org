@@ -1,8 +1,11 @@
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
-import { publicProcedure } from "~/server/api/trpc";
-import { errorMessage } from "../../utils/error-message";
+
 import { z } from "zod";
+
+import { publicProcedure } from "~/server/api/trpc";
+
+import { errorMessage } from "../../utils/error-message";
 
 export const readPost = publicProcedure.input(
   z.object({
@@ -12,7 +15,9 @@ export const readPost = publicProcedure.input(
   try {
     const post = await ctx.db.post.findUnique({
       where: { slug: input.slug },
-      include: {
+      select: {
+        title: true,
+        slug: true,
         author: {
           select: {
             id: true,
@@ -29,6 +34,7 @@ export const readPost = publicProcedure.input(
                 image: true,
               },
             },
+
           },
         },
       },
@@ -37,9 +43,9 @@ export const readPost = publicProcedure.input(
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);
-      const { message } = error;
+      const { message, code } = error;
       throw new TRPCError({
-        code: error.code,
+        code,
         message: errorMessage.readPost(httpCode, message),
         cause: error,
       });

@@ -1,5 +1,6 @@
 import { type FC } from "react";
-import type { IPostRowsLinks } from "./post-rows-links.types";
+
+import { LinkText } from "~/components/atoms/link-text/link-text";
 import {
   postRowItemClickStyles,
   postRowItemMetaStyles,
@@ -7,10 +8,11 @@ import {
   postRowTitleStyles,
   postRowWrapperStyles,
 } from "~/styles/shared";
-import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
-import { LinkText } from "~/components/atoms/link-text/link-text";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
+
+import type { IPostRowsLinks } from "./post-rows-links.types";
 import { NoPostFound } from "../no-post-found/no-post-found";
+import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
 
 export const PostRowsLinks: FC<IPostRowsLinks> = ({
   isLoading,

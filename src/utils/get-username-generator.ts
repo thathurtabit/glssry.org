@@ -1,6 +1,8 @@
 import { usernames } from "~/data/nicknames";
-import { getRandomItemFromArray } from "./get-random-item-from-array";
+
 import { appTitle } from "~/settings/constants";
+
+import { getRandomItemFromArray } from "./get-random-item-from-array";
 
 interface IUniqueUsernameGenerator {
   dictionary?: string[],

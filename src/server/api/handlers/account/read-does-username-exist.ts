@@ -1,9 +1,11 @@
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 import { z } from "zod";
+
 import { protectedProcedure } from "~/server/api/trpc";
-import { sharedReadIsUsernameTaken } from "../shared/user/shared-read-is-username-taken";
+
 import { errorMessage } from "../../utils/error-message";
+import { sharedReadIsUsernameTaken } from "../shared/user/shared-read-is-username-taken";
 
 export const readDoesUsernameExist = protectedProcedure.input(
   z.object({
@@ -15,9 +17,9 @@ export const readDoesUsernameExist = protectedProcedure.input(
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);
-      const { message } = error;
+      const { message, code } = error;
       throw new TRPCError({
-        code: error.code,
+        code,
         message: errorMessage.readDoesUsernameExist(httpCode, message),
         cause: error,
       });

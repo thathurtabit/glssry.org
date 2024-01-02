@@ -1,10 +1,14 @@
 import type { FC } from "react";
-import type { ISharedHead } from "./shared-head.types";
+
 import Head from "next/head";
-import { appDescription, appTitle } from "~/settings/constants";
-import { useRouterEvent } from "~/hooks/page/use-router-event.hook";
-import { useKeyboardEvents } from "~/hooks/page/use-keyboard-events.hook";
+
 import { usePathname } from "next/navigation";
+
+import { useKeyboardEvents } from "~/hooks/page/use-keyboard-events.hook";
+import { useRouterEvent } from "~/hooks/page/use-router-event.hook";
+import { appDescription, appTitle } from "~/settings/constants";
+
+import type { ISharedHead } from "./shared-head.types";
 
 export const SharedHead: FC<ISharedHead> = ({ title, description }) => {
   const pathname = usePathname();

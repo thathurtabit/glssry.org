@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { LinkText } from "./link-text";
 
 const meta: Meta<typeof LinkText> = {

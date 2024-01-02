@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { EphemeralNotificationsListExample } from "./example/ephemeral-notifications.example-list";
 
 const meta: Meta<typeof EphemeralNotificationsListExample> = {

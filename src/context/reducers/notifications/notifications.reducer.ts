@@ -1,7 +1,8 @@
 import type { INotification } from "~/types/common.types";
-import type { INotificationsState } from "../../types/state/notifications-state.types";
+
 import type { IContextAction } from "./../../types/context.types";
 import { NotificationsActions } from "../../actions/notifications/notifications.types";
+import type { INotificationsState } from "../../types/state/notifications-state.types";
 
 export const notificationsReducer = (
     state: INotificationsState | null,

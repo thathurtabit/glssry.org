@@ -1,17 +1,20 @@
-import { type NextPage } from "next";
-import { PageStructure } from "~/components/molecules/page-structure/page-structure";
-import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
 import { Fragment, useContext } from "react";
-import { GlssryDispatchContext } from "../../context/context/context";
+
+import { type NextPage } from "next";
+
 import { Button } from "~/components/atoms/button/button";
 import { IconError } from "~/components/icons/error/error";
+import { PageStructure } from "~/components/molecules/page-structure/page-structure";
+import { SharedHead } from "~/components/molecules/shared-head/shared-head";
+import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
+import { useDeleteUser } from "~/hooks/account/delete-user.hook";
+import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
+
 import {
   setCloseModal,
   setModal,
 } from "../../context/actions/page/page.actions";
-import { useDeleteUser } from "~/hooks/account/delete-user.hook";
-import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
-import { SharedHead } from "~/components/molecules/shared-head/shared-head";
+import { GlssryDispatchContext } from "../../context/context/context";
 
 const Nuke: NextPage = () => {
   const dispatch = useContext(GlssryDispatchContext);

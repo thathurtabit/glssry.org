@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { getNamesWithoutSpecialCharacters } from "./get-names-without-special-characters";
 
 const filterForNames = (searchedName: string, array: string[]) => array.filter((name) => name === searchedName);

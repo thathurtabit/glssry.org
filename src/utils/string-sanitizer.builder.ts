@@ -1,4 +1,5 @@
 import { cleanUpSwearyString } from "swears";
+
 import { capitalizeFirstLetterOfEachWord } from "./capitalize-first-letter-of-each-word";
 import { replaceAll } from "./replace-all";
 

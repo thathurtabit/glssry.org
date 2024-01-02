@@ -1,9 +1,13 @@
 import type { FC } from "react";
-import { useIsEditor } from "~/hooks/auth/is-editor.hook";
-import { LinkText } from "../link-text/link-text";
-import { IconEdit } from "~/components/icons/edit/edit";
-import { EURLS } from "~/settings/constants";
+
 import { usePathname } from "next/navigation";
+
+import { IconEdit } from "~/components/icons/edit/edit";
+import { useIsEditor } from "~/hooks/auth/is-editor.hook";
+
+import { EURLS } from "~/settings/constants";
+
+import { LinkText } from "../link-text/link-text";
 
 export const EditThisPost: FC = () => {
   const isEditor = useIsEditor();

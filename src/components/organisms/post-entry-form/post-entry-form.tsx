@@ -1,35 +1,40 @@
-import type { TPost, TPostKeys } from "~/schemas/post/post.schema";
-import type { IPostEntryForm, TPostEntryEvent } from "./post-entry-form.types";
-import type { FormEvent } from "react";
+import { useReducer, Fragment, useState } from "react";
+import type { FormEvent, FC } from "react";
+
+import { Button } from "~/components/atoms/button/button";
+import { FormInput } from "~/components/atoms/form-input/form-input";
+
+import { FormSelect } from "~/components/atoms/form-select/form-select";
+import { FormTextarea } from "~/components/atoms/form-textarea/form-textarea";
+
+import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
+import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
+import { Link } from "~/components/atoms/link/link";
+import { LinkText } from "~/components/atoms/link-text/link-text";
+import { PageIntro } from "~/components/atoms/page-intro/page-intro";
+import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
+import { IconExternalLink } from "~/components/icons/external-link/external-link";
+import { IconInfo } from "~/components/icons/info/info";
+import { IconThumb } from "~/components/icons/thumb/thumb";
+import { Post } from "~/components/molecules/post/post";
+import { useCreatePost } from "~/hooks/post/create-post.hook";
+import { useFormValidation } from "~/hooks/post/form-validation.hook";
+import { useSearchPublishedPosts } from "~/hooks/post/search-published-posts.hook";
+import { useUpdatePost } from "~/hooks/post/update-post.hook";
 import {
   postSchema,
   tagsKeysWithSelectInstruction,
 } from "~/schemas/post/post.schema";
-import { useReducer, type FC, Fragment, useState } from "react";
-import { FormInput } from "~/components/atoms/form-input/form-input";
-import { PageIntro } from "~/components/atoms/page-intro/page-intro";
+import type { TPost, TPostKeys } from "~/schemas/post/post.schema";
 import { EURLS, appTitle, appURL } from "~/settings/constants";
-import { Button } from "~/components/atoms/button/button";
-import { FormTextarea } from "~/components/atoms/form-textarea/form-textarea";
+import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
+import { getTRPCPostFormat } from "~/utils/get-trpc-post-format";
+
+import { TagsList } from "./children/tags-list/tags-list";
+
+import type { IPostEntryForm, TPostEntryEvent } from "./post-entry-form.types";
 import { postReducer } from "./reducer/form.reducer";
 import { initState } from "./reducer/init-state";
-import { Post } from "~/components/molecules/post/post";
-import { getTRPCPostFormat } from "~/utils/get-trpc-post-format";
-import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
-import { FormSelect } from "~/components/atoms/form-select/form-select";
-import { TagsList } from "./children/tags-list/tags-list";
-import { HorizontalRule } from "~/components/atoms/horizontal-rule/horizontal-rule";
-import { useFormValidation } from "~/hooks/post/form-validation.hook";
-import { useCreatePost } from "~/hooks/post/create-post.hook";
-import { useUpdatePost } from "~/hooks/post/update-post.hook";
-import { IconThumb } from "~/components/icons/thumb/thumb";
-import { Link } from "~/components/atoms/link/link";
-import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
-import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
-import { useSearchPublishedPosts } from "~/hooks/post/search-published-posts.hook";
-import { IconInfo } from "~/components/icons/info/info";
-import { LinkText } from "~/components/atoms/link-text/link-text";
-import { IconExternalLink } from "~/components/icons/external-link/external-link";
 import { formStateTransform } from "./utils/form-state-transform.util";
 
 export const PostEntryForm: FC<IPostEntryForm> = ({
@@ -182,12 +187,12 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
             </p>
             <ul className="list-disc m-4">
               {searchedPublishedPostsData?.map((post) => {
-                const { versions, title } = post;
+                const { versions, title, id } = post;
                 const latestVersion = versions?.at(-1);
                 const { fileUnder, slug } = latestVersion ?? {};
 
                 return (
-                  <li key={post.id}>
+                  <li key={id}>
                     <LinkText
                       href={`/${getKebabCaseFromSentenceCase(
                         fileUnder ?? ""

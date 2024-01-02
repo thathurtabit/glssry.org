@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { getClampedValueZeroToHundred } from "./get-clamped-values-zero-hundred";
 describe("getClampedValueZeroToHundred", () => {
   it("should return 0 if value is less than 0", () => {

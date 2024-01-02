@@ -1,14 +1,19 @@
 import type { FC } from "react";
-import type { TInfoTypes } from "~/types/common.types";
+
 import { useContext, useId } from "react";
-import { EphemeralNotifications } from "../ephemeral-notifications";
-import { getRandomUsername } from "../../../../utils/get-username-generator";
-import { GlssryDispatchContext } from "../../../../context/context/context";
-import { setNewNotification } from "../../../../context/actions/notifications/notifications.actions";
-import { getRandomItemFromArray } from "../../../../utils/get-random-item-from-array";
+
+import type { TInfoTypes } from "~/types/common.types";
+
 import { infoTypes } from "~/types/common.types";
-import { Button } from "../../button/button";
+
+import { setNewNotification } from "../../../../context/actions/notifications/notifications.actions";
+import { GlssryDispatchContext } from "../../../../context/context/context";
+import { getRandomItemFromArray } from "../../../../utils/get-random-item-from-array";
+
+import { getRandomUsername } from "../../../../utils/get-username-generator";
 import { IconEmail } from "../../../icons/email/email";
+import { Button } from "../../button/button";
+import { EphemeralNotifications } from "../ephemeral-notifications";
 
 export const EphemeralNotificationsCustomIconExample: FC = () => {
   const dispatch = useContext(GlssryDispatchContext);

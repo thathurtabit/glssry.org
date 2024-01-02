@@ -1,15 +1,16 @@
 import type { FC } from "react";
+
+import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
+import { LoadingSpinner } from "~/components/atoms/loading-spinner/loading-spinner";
+import { IconInfo } from "~/components/icons/info/info";
 import { PageStructure } from "~/components/molecules/page-structure/page-structure";
-import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
-import { PostEntryForm } from "~/components/organisms/post-entry-form/post-entry-form";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
+import { PostEntryForm } from "~/components/organisms/post-entry-form/post-entry-form";
+import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
+import { useIsEditor } from "~/hooks/auth/is-editor.hook";
 import { useURLHash } from "~/hooks/page/use-url-hash.hook";
 import { useReadPost } from "~/hooks/post/read-post.hook";
-import { LoadingSpinner } from "~/components/atoms/loading-spinner/loading-spinner";
 import { getPostFormatFromTRPC } from "~/utils/get-post-format-from-trpc";
-import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
-import { useIsEditor } from "~/hooks/auth/is-editor.hook";
-import { IconInfo } from "~/components/icons/info/info";
 
 export const EditPost: FC = () => {
   const hash = useURLHash();

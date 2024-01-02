@@ -1,11 +1,12 @@
 import type { FC } from "react";
-import { PageStructure } from "~/components/molecules/page-structure/page-structure";
-import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
-import { SharedHead } from "~/components/molecules/shared-head/shared-head";
-import { useReadAllPosts } from "~/hooks/post/read-all-posts.hook";
-import { LoadingSpinner } from "~/components/atoms/loading-spinner/loading-spinner";
-import { EURLS } from "~/settings/constants";
+
 import { LinkText } from "~/components/atoms/link-text/link-text";
+import { LoadingSpinner } from "~/components/atoms/loading-spinner/loading-spinner";
+import { PageStructure } from "~/components/molecules/page-structure/page-structure";
+import { SharedHead } from "~/components/molecules/shared-head/shared-head";
+import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
+import { useReadAllPosts } from "~/hooks/post/read-all-posts.hook";
+import { EURLS } from "~/settings/constants";
 
 export const ListAllPosts: FC = () => {
   const { postsData, postsDataIsFetching } = useReadAllPosts();

@@ -1,7 +1,8 @@
-import type { FCC } from "../../../types/react.types";
-import type { IInfoPanel } from "./info-panel.types";
-import { InfoIcon } from "../info-panel-icon/info-panel-icon";
 import { infoPanelHeading, infoPanelWrapper } from "~/styles/shared";
+
+import type { IInfoPanel } from "./info-panel.types";
+import type { FCC } from "../../../types/react.types";
+import { InfoIcon } from "../info-panel-icon/info-panel-icon";
 
 export const InfoPanel: FCC<IInfoPanel> = ({ title, type = "info", children }) => (
   <section

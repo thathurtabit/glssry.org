@@ -1,12 +1,17 @@
 import type { FC } from "react";
-import type { IPostShort } from "./post-short.types";
+
 import React from "react";
-import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
-import { getTruncatedString } from "~/utils/get-truncated-string";
-import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
-import { LinkText } from "~/components/atoms/link-text/link-text";
-import { PostShortLoading } from "../post-short-loading/post-short-loading";
+
 import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
+import { LinkText } from "~/components/atoms/link-text/link-text";
+import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
+import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
+
+import { getTruncatedString } from "~/utils/get-truncated-string";
+
+import type { IPostShort } from "./post-short.types";
+
+import { PostShortLoading } from "../post-short-loading/post-short-loading";
 
 export const PostShort: FC<IPostShort> = ({
   postTitle = "Random term",

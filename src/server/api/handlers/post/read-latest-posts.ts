@@ -1,6 +1,8 @@
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
+
 import { publicProcedure } from "~/server/api/trpc";
+
 import { errorMessage } from "../../utils/error-message";
 
 export const readLatestPosts = publicProcedure.query(async ({ ctx }) => {
@@ -41,9 +43,9 @@ export const readLatestPosts = publicProcedure.query(async ({ ctx }) => {
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);
-      const { message } = error;
+      const { message, code } = error;
       throw new TRPCError({
-        code: error.code,
+        code,
         message: errorMessage.readLatestPosts(httpCode, message),
         cause: error,
       });

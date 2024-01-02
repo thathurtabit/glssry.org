@@ -1,13 +1,15 @@
 import type { FC } from "react";
-import type { TButtonVariant } from "~/types/common.types";
-import type { IButton, TButtonSize } from "./button.types";
+
 import { LoadingSpinner } from "~/components/atoms/loading-spinner/loading-spinner";
+import { IconError } from "~/components/icons/error/error";
 import { IconGoBack } from "~/components/icons/go-back/go-back";
 import { IconGoForward } from "~/components/icons/go-forward/go-forward";
-import { IconError } from "~/components/icons/error/error";
 import { IconPlay } from "~/components/icons/play/play";
-import { IconStop } from "~/components/icons/stop/stop";
 import { IconReset } from "~/components/icons/reset/reset";
+import { IconStop } from "~/components/icons/stop/stop";
+import type { TButtonVariant } from "~/types/common.types";
+
+import type { IButton, TButtonSize } from "./button.types";
 
 export const getButtonSizeClasses = (size: TButtonSize) => {
   switch (size) {
@@ -108,7 +110,7 @@ export const Button: FC<IButton> = ({
       className={`transition-all ${dropShadowClasses} ${
         hasError ? errorClasses : variantClasses
       } ${buttonSizeClasses} ${
-        className ? className : ""
+        className ?? ""
       } ${buttonShapeClasses} ${coreButtonStyles} ${
         loading || disabled ? "cursor-not-allowed" : ""
       }`}

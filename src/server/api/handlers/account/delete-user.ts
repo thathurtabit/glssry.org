@@ -1,9 +1,11 @@
-import { getRandomUsername } from "~/utils/get-username-generator";
 import { UserRole } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
+
 import { protectedProcedure } from "~/server/api/trpc";
 import { errorMessage } from "~/server/api/utils/error-message";
+import { getRandomUsername } from "~/utils/get-username-generator";
+
 import { sharedReadIsUsernameTaken } from "../shared/user/shared-read-is-username-taken";
 
 export const deleteUser = protectedProcedure.mutation(async ({ ctx }) => {
@@ -34,10 +36,10 @@ export const deleteUser = protectedProcedure.mutation(async ({ ctx }) => {
     });
   } catch (error) {
     if (error instanceof TRPCError) {
-      const { message } = error;
+      const { message, code } = error;
       const httpCode = getHTTPStatusCodeFromError(error);
       throw new TRPCError({
-        code: error.code,
+        code,
         message: errorMessage.deleteUser(httpCode, message),
         cause: error,
       });

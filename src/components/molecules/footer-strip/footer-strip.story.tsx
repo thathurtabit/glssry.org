@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { FooterStrip } from "./footer-strip";
 
 const meta: Meta<typeof FooterStrip> = {

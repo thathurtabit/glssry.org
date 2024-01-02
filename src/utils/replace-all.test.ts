@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { replaceAll } from "./replace-all";
 
 describe("replaceAll", () => {

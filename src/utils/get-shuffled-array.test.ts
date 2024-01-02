@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { getShuffledArray } from "./get-shuffled-array";
 describe("getShuffledArray", () => {
   it("should return a shuffled array", () => {

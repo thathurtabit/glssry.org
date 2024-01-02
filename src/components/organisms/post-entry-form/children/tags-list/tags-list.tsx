@@ -1,15 +1,18 @@
 import type { ChangeEvent, FC } from "react";
-import type { ITagsListProps } from "./tags-list.types";
+
 import { Fragment, useState } from "react";
+
 import { Button } from "~/components/atoms/button/button";
 import { FormSelect } from "~/components/atoms/form-select/form-select";
+import { IconMinus } from "~/components/icons/minus/minus";
 import { IconPlus } from "~/components/icons/plus/plus";
 import { tagsKeysWithSelectInstruction } from "~/schemas/post/post.schema";
 import { maxTagsForPost } from "~/settings/constants";
-import { IconMinus } from "~/components/icons/minus/minus";
 import { removeItemFromArrayAtIndex } from "~/utils/remove-item-from-array-at-index";
 
-export const TagsList: FC<ITagsListProps> = ({
+import type { ITagsListProperties } from "./tags-list.types";
+
+export const TagsList: FC<ITagsListProperties> = ({
   tags,
   errorText,
   disabled,
@@ -31,7 +34,7 @@ export const TagsList: FC<ITagsListProps> = ({
         return;
       }
 
-      setTagsCount((prev) => prev + 1);
+      setTagsCount((previous) => previous + 1);
       return;
     }
 
@@ -39,7 +42,7 @@ export const TagsList: FC<ITagsListProps> = ({
       return;
     }
 
-    setTagsCount((prev) => prev - 1);
+    setTagsCount((previous) => previous - 1);
     const updatedTags = removeItemFromArrayAtIndex([...tags], index);
     handleOnTagsChange(updatedTags);
   };

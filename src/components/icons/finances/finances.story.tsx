@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconFinances } from "./finances";
 
 const meta: Meta<typeof IconFinances> = {

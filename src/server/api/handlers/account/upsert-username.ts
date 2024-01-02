@@ -1,9 +1,12 @@
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 import { z } from "zod";
+
 import { protectedProcedure } from "~/server/api/trpc";
-import { errorMessage } from "../../utils/error-message";
+
 import { sanitizeUsername } from "~/utils/sanitize-username";
+
+import { errorMessage } from "../../utils/error-message";
 import { sharedReadIsUsernameTaken } from "../shared/user/shared-read-is-username-taken";
 
 export const upsertUsername = protectedProcedure
@@ -29,9 +32,9 @@ export const upsertUsername = protectedProcedure
     } catch (error) {
       if (error instanceof TRPCError) {
         const httpCode = getHTTPStatusCodeFromError(error);
-        const { message } = error;
+        const { message, code } = error;
         throw new TRPCError({
-          code: error.code,
+          code,
           message: errorMessage.upsertUsername(httpCode, message),
           cause: error,
         });

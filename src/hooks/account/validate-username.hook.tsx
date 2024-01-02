@@ -1,8 +1,9 @@
-import { api } from "~/utils/api";
 import { useContext, useId, useState } from "react";
-import { GlssryDispatchContext } from "~/context/context/context";
+
 import { setNewNotification } from "~/context/actions/notifications/notifications.actions";
+import { GlssryDispatchContext } from "~/context/context/context";
 import { usernameSchema } from "~/schemas/account/username.schema";
+import { api } from "~/utils/api";
 
 export const useValidateUsername = (username = "") => {
   const dispatch = useContext(GlssryDispatchContext);

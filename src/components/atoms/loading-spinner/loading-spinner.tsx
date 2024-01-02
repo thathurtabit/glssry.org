@@ -1,6 +1,8 @@
 import type { FC } from "react";
-import type { ILoadingSpinner } from "./loading-spinner.types";
+
 import { IconLoading } from "~/components/icons/loading/loading";
+
+import type { ILoadingSpinner } from "./loading-spinner.types";
 
 export const LoadingSpinner: FC<ILoadingSpinner> = ({
   size,

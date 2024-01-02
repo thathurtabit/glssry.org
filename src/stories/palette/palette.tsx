@@ -1,5 +1,6 @@
 import React from "react";
 import type { FC } from "react";
+
 import type { IPalette } from "./palette.types";
 
 export const Palette: FC<IPalette> = ({ styles = true }) => (

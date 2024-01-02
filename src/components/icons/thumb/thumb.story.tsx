@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconThumb } from "./thumb";
 
 const meta: Meta<typeof IconThumb> = {

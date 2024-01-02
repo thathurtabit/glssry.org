@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconConfirm } from "./confirm";
 
 const meta: Meta<typeof IconConfirm> = {

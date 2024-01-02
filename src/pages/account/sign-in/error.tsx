@@ -1,13 +1,15 @@
 import type { NextPage } from "next";
+
+import { useRouter } from "next/router";
+
+import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-signed-in";
 import { Link } from "~/components/atoms/link/link";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
 import { PageStructure } from "~/components/molecules/page-structure/page-structure";
-import { useRouter } from "next/router";
-import { EURLS } from "~/settings/constants";
-import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
-import { AlreadySignedIn } from "~/components/atoms/already-signed-in/already-signed-in";
-import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
+import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
+import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
+import { EURLS } from "~/settings/constants";
 
 const getSignInError = (error: string) => {
   switch (error) {

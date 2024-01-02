@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { Post } from "./post";
 
 const meta: Meta<typeof Post> = {

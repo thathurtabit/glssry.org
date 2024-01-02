@@ -1,9 +1,11 @@
 import type { FC } from "react";
 import React, { useContext } from "react";
-import type { IModalInfoButton } from "./modal-info-button.types";
+
 import { IconInfo } from "~/components/icons/info/info";
-import { GlssryDispatchContext } from "~/context/context/context";
 import { setModal } from "~/context/actions/page/page.actions";
+import { GlssryDispatchContext } from "~/context/context/context";
+
+import type { IModalInfoButton } from "./modal-info-button.types";
 
 export const ModalInfoButton: FC<IModalInfoButton> = ({
   modalData,

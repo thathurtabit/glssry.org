@@ -1,4 +1,5 @@
 import type { InputHTMLAttributes } from "react";
+
 import type { IModalData } from "~/context/types/state/page-state.types";
 import type { TInputSize, TInputWidth } from "~/types/common.types";
 

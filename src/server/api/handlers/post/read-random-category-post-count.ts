@@ -1,10 +1,13 @@
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
-import { publicProcedure } from "~/server/api/trpc";
-import { errorMessage } from "../../utils/error-message";
+
 import { z } from "zod";
+
 import { tagKeys } from "~/schemas/post/post.schema";
+import { publicProcedure } from "~/server/api/trpc";
 import { getShuffledArray } from "~/utils/get-shuffled-array";
+
+import { errorMessage } from "../../utils/error-message";
 
 export const readRandomCategoryPostCount = publicProcedure.input(z.object({ maxCount: z.number().optional() })).query(async ({ ctx, input }) => {
   const { maxCount = 10 } = input;
@@ -29,24 +32,25 @@ export const readRandomCategoryPostCount = publicProcedure.input(z.object({ maxC
 
     const initialEmptyCategoriesMap = new Map(tagKeys.map((tagKey) => [tagKey, 0]));
 
-    const postsInCategories = publishedPosts.reduce((acc, post) => {
+    // eslint-disable-next-line unicorn/no-array-reduce -- Reduce might be the best way to do this
+    const postsInCategories = publishedPosts.reduce((accumulator, post) => {
       const lastVersion = post.versions.at(-1);
 
       if (!lastVersion) {
-        return acc;
+        return accumulator;
       }
 
       const { fileUnder } = lastVersion;
 
-      const currentCount = acc.get(fileUnder);
+      const currentCount = accumulator.get(fileUnder);
 
       if (currentCount === undefined) {
-        return acc;
+        return accumulator;
       }
 
-      acc.set(fileUnder, currentCount + 1);
+      accumulator.set(fileUnder, currentCount + 1);
 
-      return acc;
+      return accumulator;
     }, initialEmptyCategoriesMap);
 
     const postsShuffledCategoryPostCountArray = getShuffledArray([...postsInCategories.entries()]).slice(0, maxCount);
@@ -55,9 +59,9 @@ export const readRandomCategoryPostCount = publicProcedure.input(z.object({ maxC
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);
-      const { message } = error;
+      const { message, code } = error;
       throw new TRPCError({
-        code: error.code,
+        code,
         message: errorMessage.readRandomCategoryPostCount(httpCode, message),
         cause: error,
       });

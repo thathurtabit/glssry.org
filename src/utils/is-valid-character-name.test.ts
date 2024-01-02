@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { isValidCharacterName } from "./is-valid-character-name";
 
 describe("characterNameValidation", () => {

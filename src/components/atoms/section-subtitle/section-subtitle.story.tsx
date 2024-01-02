@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { SectionSubtitle } from "./section-subtitle";
 
 const meta: Meta<typeof SectionSubtitle> = {

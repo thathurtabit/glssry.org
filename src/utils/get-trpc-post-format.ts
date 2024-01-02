@@ -1,4 +1,5 @@
 import type { TagName } from "@prisma/client";
+
 import type { TPost } from "~/schemas/post/post.schema";
 import type { TTRPCReadPost } from "~/types/prisma.types";
 

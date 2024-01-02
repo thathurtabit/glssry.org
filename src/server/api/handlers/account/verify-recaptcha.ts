@@ -1,8 +1,10 @@
-import { publicProcedure } from "~/server/api/trpc";
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 import { z } from "zod";
-import { env } from "~/env.mjs";
+
+import { environment } from "~/environment.mjs";
+import { publicProcedure } from "~/server/api/trpc";
+
 import { errorMessage } from "../../utils/error-message";
 
 type TRecaptchaResponse = {
@@ -27,7 +29,7 @@ export const verifyRecaptcha = publicProcedure
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `secret=${env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY}&response=${token}`,
+        body: `secret=${environment.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY}&response=${token}`,
       });
 
       if (!response.ok) {

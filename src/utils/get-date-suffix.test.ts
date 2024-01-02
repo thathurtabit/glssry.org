@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { getDateSuffix } from "./get-date-suffix";
 describe("getDateSuffix", () => {
   it("should return \"1st\" if date is 1", () => {

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconCalendar } from "./calendar";
 
 const meta: Meta<typeof IconCalendar> = {

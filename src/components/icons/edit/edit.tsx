@@ -1,5 +1,6 @@
 import type { FC } from "react";
-import type { IconBaseProps } from "react-icons/lib";
+
 import { BiEditAlt } from "react-icons/bi";
+import type { IconBaseProps } from "react-icons/lib";
 
 export const IconEdit: FC<IconBaseProps> = (properties) => <BiEditAlt {...properties} />;

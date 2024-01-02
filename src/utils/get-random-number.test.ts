@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { getRandomNumber } from "./get-random-number";
 
 describe("getRandomNumber", () => {

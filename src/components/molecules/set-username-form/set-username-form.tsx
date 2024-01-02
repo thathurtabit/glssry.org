@@ -1,14 +1,16 @@
 import type { FC, FormEvent } from "react";
 import { useState, Fragment } from "react";
-import { PleaseSignIn } from "~/components/atoms/please-sign-in/please-sign-in";
-import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
-import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
+
 import { FormInput } from "~/components/atoms/form-input/form-input";
-import { useReadUser } from "~/hooks/account/read-user.hook";
-import { sanitizeUsername } from "../../../utils/sanitize-username";
-import { useValidateUsername } from "~/hooks/account/validate-username.hook";
+import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
+import { PleaseSignIn } from "~/components/atoms/please-sign-in/please-sign-in";
+import { useReadUser } from "~/hooks/account/read-user.hook";
 import { useUsernameMutation } from "~/hooks/account/username-mutation.hook";
+import { useValidateUsername } from "~/hooks/account/validate-username.hook";
+import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
+
+import { sanitizeUsername } from "../../../utils/sanitize-username";
 
 export const SetUsernameForm: FC = () => {
   const isAuthenticated = useIsAuthenticated();

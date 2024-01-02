@@ -1,18 +1,19 @@
-import type { TTRPCReadPost } from "~/types/prisma.types";
 import { useContext, type FC, Fragment } from "react";
-import { PageStructure } from "~/components/molecules/page-structure/page-structure";
-import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
-import { SharedHead } from "~/components/molecules/shared-head/shared-head";
-import { useReadAllPendingPosts } from "~/hooks/post/read-all-pending-posts.hook";
-import { IconInfo } from "~/components/icons/info/info";
-import { useIsEditor } from "~/hooks/auth/is-editor.hook";
-import { GlssryDispatchContext } from "~/context/context/context";
-import { setModal } from "~/context/actions/page/page.actions";
-import { Post } from "~/components/molecules/post/post";
-import { IconEdit } from "~/components/icons/edit/edit";
+
 import { PageIntro } from "~/components/atoms/page-intro/page-intro";
+import { IconEdit } from "~/components/icons/edit/edit";
+import { IconInfo } from "~/components/icons/info/info";
+import { PageStructure } from "~/components/molecules/page-structure/page-structure";
+import { Post } from "~/components/molecules/post/post";
 import { PostRowsButtons } from "~/components/molecules/post-rows-buttons/post-rows-buttons";
+import { SharedHead } from "~/components/molecules/shared-head/shared-head";
+import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
+import { setModal } from "~/context/actions/page/page.actions";
+import { GlssryDispatchContext } from "~/context/context/context";
+import { useIsEditor } from "~/hooks/auth/is-editor.hook";
 import { usePublishPost } from "~/hooks/post/publish-post.hook";
+import { useReadAllPendingPosts } from "~/hooks/post/read-all-pending-posts.hook";
+import type { TTRPCReadPost } from "~/types/prisma.types";
 
 export const ListPendingPosts: FC = () => {
   const { pendingPostsData, pendingPostsDataIsFetching } =

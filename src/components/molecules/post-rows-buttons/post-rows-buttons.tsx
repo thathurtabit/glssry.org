@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import React from "react";
-import type { IPostRowsButtons } from "./post-rows-buttons.types";
+
 import { IconArchive } from "~/components/icons/archive/archive";
 import {
   postRowItemClickStyles,
@@ -9,8 +9,10 @@ import {
   postRowTitleStyles,
   postRowWrapperStyles,
 } from "~/styles/shared";
-import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
+
+import type { IPostRowsButtons } from "./post-rows-buttons.types";
 import { NoPostFound } from "../no-post-found/no-post-found";
+import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
 
 export const PostRowsButtons: FC<IPostRowsButtons> = ({
   isLoading,

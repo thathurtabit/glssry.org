@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { padZero } from "./pad-zero";
 describe("padZero", () => {
   it("should pad a single digit with two zeros", () => {

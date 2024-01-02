@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconGrid } from "./grid";
 
 const meta: Meta<typeof IconGrid> = {

@@ -1,11 +1,14 @@
+import type { TagName } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
-import { publicProcedure } from "~/server/api/trpc";
-import { errorMessage } from "../../utils/error-message";
+
 import { z } from "zod";
+
 import { ZNativeTagEnum } from "~/schemas/post/post.schema";
-import type { TagName } from "@prisma/client";
+import { publicProcedure } from "~/server/api/trpc";
 import { getTagsArrayFromJsonArray } from "~/utils/get-tags-array-from-json-array";
+
+import { errorMessage } from "../../utils/error-message";
 
 export const readRandomisedRelatedPosts = publicProcedure.input(z.object({ categories: z.array(ZNativeTagEnum), maxCount: z.number().optional() })).query(async ({ ctx, input }) => {
   const { categories, maxCount = 2 } = input;
@@ -62,8 +65,8 @@ export const readRandomisedRelatedPosts = publicProcedure.input(z.object({ categ
     const randomisedRelatedPosts = relatedPosts.sort(() => Math.random() - Math.random()).slice(0, maxCount);
 
     const uniqueRelatedPosts = randomisedRelatedPosts.filter((post, index, self) => {
-      const { id } = post;
-      const isUnique = self.findIndex((post) => post.id === id) === index;
+      const { id: postId } = post;
+      const isUnique = self.findIndex(({ id }) => id === postId) === index;
       return isUnique;
     });
 
@@ -71,9 +74,9 @@ export const readRandomisedRelatedPosts = publicProcedure.input(z.object({ categ
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);
-      const { message } = error;
+      const { message, code } = error;
       throw new TRPCError({
-        code: error.code,
+        code,
         message: errorMessage.readRandomisedRelatedPosts(httpCode, message),
         cause: error,
       });

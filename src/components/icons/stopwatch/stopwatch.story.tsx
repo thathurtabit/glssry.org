@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconStopwatch } from "./stopwatch";
 
 const meta: Meta<typeof IconStopwatch> = {

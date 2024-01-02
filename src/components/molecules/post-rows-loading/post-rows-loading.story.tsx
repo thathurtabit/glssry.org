@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { PostRowsLoading } from "./post-rows-loading";
 
 const meta: Meta<typeof PostRowsLoading> = {

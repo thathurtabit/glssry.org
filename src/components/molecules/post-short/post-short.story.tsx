@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { PostShort } from "./post-short";
 
 const meta: Meta<typeof PostShort> = {

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PostRowsLinks } from "./post-rows-links";
+
 import { postsLinksMockData } from "~/data/posts.mock-data";
+
+import { PostRowsLinks } from "./post-rows-links";
 
 const meta: Meta<typeof PostRowsLinks> = {
   title: "Molecules/Post Rows Links",

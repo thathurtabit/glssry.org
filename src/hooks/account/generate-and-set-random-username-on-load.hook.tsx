@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+
 import { useGenerateAndSetRandomUsername } from "./generate-and-set-random-username.hook";
-import { useIsAuthenticated } from "../auth/is-authenticated.hook";
 import { useReadUser } from "./read-user.hook";
+import { useIsAuthenticated } from "../auth/is-authenticated.hook";
 
 /** Generate random username and mutate it if one doesn't already exist */
 export const useGenerateAndSetRandomUsernameOnLoad = () => {

@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import type { FC } from "react";
+
 import type { IPageHeader } from "./page-header.types";
 
 export const PageHeader: FC<IPageHeader> = ({

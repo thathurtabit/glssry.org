@@ -1,8 +1,8 @@
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
 import { CategoryRowsLinks } from "~/components/molecules/category-rows-links/category-rows-links";
 import { Intro } from "~/components/molecules/intro/intro";
-import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
 import { PageMain } from "~/components/molecules/page-main/page-main";
+import { PageMainIndent } from "~/components/molecules/page-main-indent/page-main-indent";
 import { PostRowsLinks } from "~/components/molecules/post-rows-links/post-rows-links";
 import { PostShort } from "~/components/molecules/post-short/post-short";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";

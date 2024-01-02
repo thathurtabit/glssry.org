@@ -1,16 +1,20 @@
 import type { FC, KeyboardEvent } from "react";
-import FocusTrap from "focus-trap-react";
+
 import { useContext, useState, useEffect } from "react";
+
+import FocusTrap from "focus-trap-react";
+
+import { Button } from "~/components/atoms/button/button";
+import { Link } from "~/components/atoms/link/link";
+import { IconCancel } from "~/components/icons/cancel/cancel";
+import { IconConfirm } from "~/components/icons/confirm/confirm";
 import { setCloseModal } from "~/context/actions/page/page.actions";
 import {
   GlssryDispatchContext,
   GlssryStateContext,
 } from "~/context/context/context";
-import { Button } from "~/components/atoms/button/button";
-import { IconCancel } from "~/components/icons/cancel/cancel";
-import { IconConfirm } from "~/components/icons/confirm/confirm";
+
 import { ContentWellHeader } from "../content-well-header/content-well-header";
-import { Link } from "~/components/atoms/link/link";
 
 export const ModalHub: FC = () => {
   const [showDialog, setShowDialog] = useState(false);
@@ -33,7 +37,7 @@ export const ModalHub: FC = () => {
     loading: cancelLoading = false,
     icon: cancelIcon = <IconCancel size={type === "small" ? 19 : 21} />,
     variant: cancelVariant = "secondary",
-    href: cancelHref = undefined,
+    href: cancelHref,
   } = cancel ?? {};
   const {
     onClick: passedConfirmOnClick,
@@ -41,7 +45,7 @@ export const ModalHub: FC = () => {
     loading: confirmLoading = false,
     icon: confirmIcon = <IconConfirm size={type === "small" ? 20 : 23} />,
     variant: confirmVariant = "primary",
-    href: confirmHref = undefined,
+    href: confirmHref,
   } = confirm ?? {};
 
   const handleCloseModal = () => {

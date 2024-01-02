@@ -1,4 +1,5 @@
 import type { Prisma, TagName, User } from "@prisma/client";
+
 import type { TPost } from "~/schemas/post/post.schema";
 
 /** Turn TPost data into data ready be saved to db */

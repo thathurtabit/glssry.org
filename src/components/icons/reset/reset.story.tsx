@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconReset } from "./reset";
 
 const meta: Meta<typeof IconReset> = {

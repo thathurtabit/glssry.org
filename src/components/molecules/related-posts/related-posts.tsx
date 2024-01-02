@@ -1,11 +1,10 @@
 import { type FC } from "react";
-import type { IRelatedPosts } from "./related-posts.types";
-import type { TTRPCReadPost } from "~/types/prisma.types";
-import { useReadPost } from "~/hooks/post/read-post.hook";
-import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
-import { getTruncatedString } from "~/utils/get-truncated-string";
-import { IconArchive } from "~/components/icons/archive/archive";
+
+import { EditThisPost } from "~/components/atoms/edit-this-post/edit-this-post";
 import { LinkText } from "~/components/atoms/link-text/link-text";
+import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
+import { IconArchive } from "~/components/icons/archive/archive";
+import { useReadPost } from "~/hooks/post/read-post.hook";
 import {
   relatedPostLinkStyles,
   relatedPostLinkTitleStyles,
@@ -14,10 +13,14 @@ import {
   relatedPostsLIStyles,
   relatedPostsULStyles,
 } from "~/styles/shared";
+
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
-import { RelatedPostsLoading } from "../related-posts-loading/related-posts-loading";
+import { getTruncatedString } from "~/utils/get-truncated-string";
+
+import type { IRelatedPosts } from "./related-posts.types";
+
 import { NoPostFound } from "../no-post-found/no-post-found";
-import { EditThisPost } from "~/components/atoms/edit-this-post/edit-this-post";
+import { RelatedPostsLoading } from "../related-posts-loading/related-posts-loading";
 
 export const RelatedPosts: FC<IRelatedPosts> = ({
   title = "Related terms",
@@ -32,20 +35,23 @@ export const RelatedPosts: FC<IRelatedPosts> = ({
     postDataIsFetching: relatedPost2DataIsFetching,
   } = useReadPost({ slug: slugs.at(1) ?? "" });
 
-  const postsData = [relatedPost1Data, relatedPost2Data].filter(
-    (post): post is TTRPCReadPost => Boolean(post)
-  );
+  const postsData = [relatedPost1Data, relatedPost2Data]
+    .filter(Boolean)
+    .filter(
+      (relatedPost): relatedPost is NonNullable<typeof relatedPost> =>
+        relatedPost !== null
+    );
 
   const isLoading = relatedPost1DataIsFetching || relatedPost2DataIsFetching;
 
-  const postsDataNonNullable = postsData as NonNullable<TTRPCReadPost>[];
+  const postsDataNonNullable = postsData;
 
   return (
     <aside className="w-full md:max-w-xs mt-5 md:mt-0">
       <SectionSubtitle headingLevel="h2">{title}</SectionSubtitle>
       {isLoading ? (
         <RelatedPostsLoading />
-      ) : postsDataNonNullable.length ? (
+      ) : postsDataNonNullable && postsDataNonNullable.length > 0 ? (
         <ul className={relatedPostsULStyles}>
           {postsDataNonNullable.map(({ title, slug, versions }) => {
             const latestVersion = versions.at(-1);

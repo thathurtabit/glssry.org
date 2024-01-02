@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { cutArrayIntoChunks } from "./cut-array-into-chunks";
 
 describe("cutArrayIntoChunks", () => {

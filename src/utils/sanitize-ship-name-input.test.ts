@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { sanitizeShipNameInput } from "./sanitize-ship-name-input";
 
 describe("sanitizeShipNameInput", () => {

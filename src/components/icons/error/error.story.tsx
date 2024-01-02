@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { IconError } from "./error";
 
 const meta: Meta<typeof IconError> = {

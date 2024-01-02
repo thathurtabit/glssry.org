@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { getRandomNumberDecimal } from "./get-random-number-decimal";
 describe("getRandomNumberDecimal", () => {
   it("should return a random number between two numbers", () => {

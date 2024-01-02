@@ -1,6 +1,8 @@
 import type { ChangeEvent, FC } from "react";
-import type { IFormTextarea } from "./form-textarea.types";
+
 import React, { Fragment, useState } from "react";
+
+import { summaryMaxCharacterCount } from "~/settings/constants";
 import {
   errorMessageClasses,
   getInputCoreClasses,
@@ -11,7 +13,8 @@ import {
   inputSizeWrapperSmallClasses,
   inputWrapperClasses,
 } from "~/styles/shared";
-import { summaryMaxCharacterCount } from "~/settings/constants";
+
+import type { IFormTextarea } from "./form-textarea.types";
 import { ModalInfoButton } from "../modal-info-button/modal-info-button";
 
 export const minInputWidth = "w-48";
@@ -33,11 +36,11 @@ export const FormTextarea: FC<IFormTextarea> = ({
   ...inputProperties
 }) => {
   const {
-    value: valueFromProps,
+    value: valueFromProperties,
     onChange,
     ...otherInputProperties
   } = inputProperties;
-  const value = valueFromProps ? String(valueFromProps) : "";
+  const value = valueFromProperties ? String(valueFromProperties) : "";
 
   const [characterCount, setCharacterCount] = useState<number>(
     value?.length ?? 0

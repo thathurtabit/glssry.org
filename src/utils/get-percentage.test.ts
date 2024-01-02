@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { getPercentage } from "./get-percentage";
 describe("getPercentage", () => {
   it("should return 0 when the numerator is 0", () => {

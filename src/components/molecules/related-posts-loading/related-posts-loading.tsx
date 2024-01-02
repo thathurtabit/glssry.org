@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import React from "react";
+
 import { RelatedPostLoading } from "../related-post-loading/related-post-loading";
 
 export const RelatedPostsLoading: FC = () => (

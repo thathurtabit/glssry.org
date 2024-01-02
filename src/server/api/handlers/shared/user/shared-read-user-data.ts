@@ -1,4 +1,5 @@
 import type { PrismaClient, User } from "@prisma/client";
+
 import { errorMessage } from "~/server/api/utils/error-message";
 
 export const sharedReadUserData = async (userId: string, prisma: PrismaClient): Promise<User | null> => {

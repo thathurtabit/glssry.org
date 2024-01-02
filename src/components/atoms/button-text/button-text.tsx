@@ -1,4 +1,5 @@
 import type { FCC } from "~/types/react.types";
+
 import type { IButtonText } from "./button-text.types";
 
 export const sharedTextClasses =

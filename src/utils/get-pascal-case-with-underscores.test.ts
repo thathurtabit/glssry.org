@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { getPascalCaseWithUnderscores } from "./get-pascal-case-with-underscores";
 
 describe("getPascalCaseWithUnderscores", () => {

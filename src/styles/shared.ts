@@ -17,10 +17,13 @@ export const errorMessageClasses =
 
 export const getSizeClasses = (size: string) => {
   switch (size) {
-    case "small":
+    case "small": {
       return inputSizeSmallClasses;
-    default:
+    }
+
+    default: {
       return inputSizeDefaultClasses;
+    }
   }
 };
 

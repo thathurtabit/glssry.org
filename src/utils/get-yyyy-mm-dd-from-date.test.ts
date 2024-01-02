@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { getYYYMMDDFromDate } from "./get-yyyy-mm-dd-from-date";
 
 describe("getYYYMMDDFromDate", () => {

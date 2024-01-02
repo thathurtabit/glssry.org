@@ -1,6 +1,7 @@
 import type { Dispatch } from "react";
-import type { IPageState } from "./state/page-state.types";
+
 import type { INotificationsState } from "./state/notifications-state.types";
+import type { IPageState } from "./state/page-state.types";
 
 export interface IGlssryState {
   page: IPageState;

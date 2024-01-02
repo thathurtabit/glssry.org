@@ -1,10 +1,12 @@
-import { postSchema } from "~/schemas/post/post.schema";
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
+
+import { postSchema } from "~/schemas/post/post.schema";
 import { protectedProcedure } from "~/server/api/trpc";
+
 import { errorMessage } from "../../utils/error-message";
-import { sharedReadUserData } from "../shared/user/shared-read-user-data";
 import { getPostData } from "../shared/post/get-post-data.util";
+import { sharedReadUserData } from "../shared/user/shared-read-user-data";
 
 export const createPost = protectedProcedure.input(
   postSchema
@@ -39,9 +41,9 @@ export const createPost = protectedProcedure.input(
   } catch (error) {
     if (error instanceof TRPCError) {
       const httpCode = getHTTPStatusCodeFromError(error);
-      const { message } = error;
+      const { message, code } = error;
       throw new TRPCError({
-        code: error.code,
+        code,
         message: errorMessage.createPost(httpCode, message),
         cause: error,
       });

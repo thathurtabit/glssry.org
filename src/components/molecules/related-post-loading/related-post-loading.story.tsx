@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { RelatedPostLoading } from "./related-post-loading";
 
 const meta: Meta<typeof RelatedPostLoading> = {

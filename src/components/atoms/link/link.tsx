@@ -1,14 +1,17 @@
 import type { FC } from "react";
-import type { ILink } from "./link.types";
+
 import NextLink from "next/link";
+
+import { IconGoBack } from "~/components/icons/go-back/go-back";
+import { IconGoForward } from "~/components/icons/go-forward/go-forward";
+
+import type { ILink } from "./link.types";
 import {
   coreButtonStyles,
   getButtonSizeClasses,
   getButtonVariantClasses,
   getNextPreviousIconSize,
 } from "../button/button";
-import { IconGoBack } from "~/components/icons/go-back/go-back";
-import { IconGoForward } from "~/components/icons/go-forward/go-forward";
 
 export const Link: FC<ILink> = ({
   href,

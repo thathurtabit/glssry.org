@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { SetUsernameForm } from "./set-username-form";
 
 const meta: Meta<typeof SetUsernameForm> = {

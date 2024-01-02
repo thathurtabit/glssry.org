@@ -1,8 +1,9 @@
 import type { FC } from "react";
-import { SetUsernameForm } from "~/components/molecules/set-username-form/set-username-form";
+
 import { PageStructure } from "~/components/molecules/page-structure/page-structure";
-import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
+import { SetUsernameForm } from "~/components/molecules/set-username-form/set-username-form";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
+import { AccountPageWrapper } from "~/components/templates/account-page-wrapper/account-page-wrapper";
 
 export const SetUsername: FC = () => (
   <AccountPageWrapper>
