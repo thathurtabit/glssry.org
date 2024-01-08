@@ -25,7 +25,7 @@ const SignInSuccess: NextPage = () => {
           textList={["Click the link below to get started"]}
           hrProps={{ position: "left" }}
         />
-        <Link href="/">Home&apos;</Link>
+        <Link href="/">Home</Link>
       </PageStructure>
     </AccountPageWrapper>
   );

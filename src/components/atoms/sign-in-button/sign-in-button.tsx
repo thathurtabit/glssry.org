@@ -43,7 +43,11 @@ export const SignInOrOutButton: FC<ISignInOrOutButton> = ({
   }
 
   return (
-    <Button size="small" className="inline-block" onClick={handleSignInOrOut}>
+    <Button
+      size="small"
+      className="inline-block mt-auto"
+      onClick={handleSignInOrOut}
+    >
       {shouldShowSignOut ? "Sign out" : "Sign in"}
       {shouldShowSignOut ? <IconExit /> : <IconAccount />}
     </Button>
