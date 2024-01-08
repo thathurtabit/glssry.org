@@ -449,19 +449,21 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
           {mode === "create" ? "Submit" : "Update"}
         </Button>
       </div>
-      <div className="flex-1">
-        <SectionSubtitle className="opacity-50">Preview:</SectionSubtitle>
-        {postPreviewData?.title ? (
-          <Post postData={postPreviewData} showRelatedPosts={false} />
-        ) : (
-          <InfoPanel type="info" title="Post preview will appear here" />
-        )}
-        <div className="mt-5">
-          <SectionSubtitle className="opacity-50">Slug:</SectionSubtitle>
-          <p>
-            {appURL}/{getKebabCaseFromSentenceCase(state.fileUnder)}/
-            {getKebabCaseFromSentenceCase(state.slug)}
-          </p>
+      <div className="flex-1 relative">
+        <div className="sticky top-header">
+          <SectionSubtitle className="opacity-50">Preview:</SectionSubtitle>
+          {postPreviewData?.title ? (
+            <Post postData={postPreviewData} showRelatedPosts={false} />
+          ) : (
+            <InfoPanel type="info" title="Post preview will appear here" />
+          )}
+          <div className="mt-5">
+            <SectionSubtitle className="opacity-50">Slug:</SectionSubtitle>
+            <p>
+              {appURL}/{getKebabCaseFromSentenceCase(state.fileUnder)}/
+              {getKebabCaseFromSentenceCase(state.slug)}
+            </p>
+          </div>
         </div>
       </div>
     </form>

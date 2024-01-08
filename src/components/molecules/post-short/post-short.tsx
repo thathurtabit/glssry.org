@@ -50,7 +50,7 @@ export const PostShort: FC<IPostShort> = ({
       }`}
     >
       <SectionSubtitle headingLevel="h2">{postTitle}</SectionSubtitle>
-      <h3 className="mb-4 md:mb-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
+      <h3 className="mb-4 md:mb-4 text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
         <LinkText
           href={`/${getKebabCaseFromSentenceCase(fileUnder)}/${slug}`}
           className="font-heading"
