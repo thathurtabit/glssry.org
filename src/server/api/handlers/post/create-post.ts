@@ -37,17 +37,19 @@ export const createPost = protectedProcedure.input(
       data: postData,
     });
 
-    const createCaller = createCallerFactory(appRouter);
-    const caller = createCaller({
-      db: ctx.db,
-      session: ctx.session,
-    });
+    if (userData.role === "CONTRIBUTOR") {
+      const createCaller = createCallerFactory(appRouter);
+      const caller = createCaller({
+        db: ctx.db,
+        session: ctx.session,
+      });
 
-    await caller.email.newPostEmailNotification({
-      title: input.title,
-      fileUnder: input.fileUnder,
-      body: input.body,
-    });
+      await caller.email.newPostEmailNotification({
+        title: input.title,
+        fileUnder: input.fileUnder,
+        body: input.body,
+      });
+    }
 
     return post;
   } catch (error) {
