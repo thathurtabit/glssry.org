@@ -2,10 +2,9 @@ import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 
 import { postSchema } from "~/schemas/post/post.schema";
-import { createCallerFactory, protectedProcedure } from "~/server/api/trpc";
+import { protectedProcedure } from "~/server/api/trpc";
 import { errorMessage } from "~/server/api/utils/error-message";
 
-import { appRouter } from "../../root";
 import { getPostData } from "../shared/post/get-post-data.util";
 import { sharedReadUserData } from "../shared/user/shared-read-user-data";
 
@@ -36,20 +35,6 @@ export const createPost = protectedProcedure.input(
     const post = await ctx.db.post.create({
       data: postData,
     });
-
-    if (userData.role !== "ADMIN" && userData.role !== "EDITOR") {
-      const createCaller = createCallerFactory(appRouter);
-      const caller = createCaller({
-        db: ctx.db,
-        session: ctx.session,
-      });
-
-      await caller.email.newPostEmailNotification({
-        title: input.title,
-        fileUnder: input.fileUnder,
-        body: input.body,
-      });
-    }
 
     return post;
   } catch (error) {

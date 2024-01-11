@@ -5,11 +5,11 @@ import { Hr } from "@react-email/hr";
 import { Html } from "@react-email/html";
 import { Text } from "@react-email/text";
 
-import type { TNewPostEmailSchema } from "~/schemas/email/new-post.schema";
+import type { TNewPostEmail } from "~/schemas/email/new-post.schema";
 
 import { EURLS, appDescription, appTitle, appURL } from "~/settings/constants";
 
-export const newPost = ({ title, body, fileUnder }: TNewPostEmailSchema) => (
+export const newPost = ({ title, body, fileUnder }: TNewPostEmail) => (
   <Html lang="en" dir="ltr">
     <Container>
       <Heading as="h1">New Post {appTitle}</Heading>

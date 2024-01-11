@@ -17,6 +17,8 @@ import { IconExternalLink } from "~/components/icons/external-link/external-link
 import { IconInfo } from "~/components/icons/info/info";
 import { IconThumb } from "~/components/icons/thumb/thumb";
 import { Post } from "~/components/molecules/post/post";
+import { useIsEditor } from "~/hooks/auth/is-editor.hook";
+import { useNewPostEmail } from "~/hooks/email/new-post-email.hook";
 import { useCreatePost } from "~/hooks/post/create-post.hook";
 import { useFormValidation } from "~/hooks/post/form-validation.hook";
 import { useSearchPublishedPosts } from "~/hooks/post/search-published-posts.hook";
@@ -49,6 +51,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
   const [postSuccessful, setPostSuccessful] = useState(false);
   const [userHasSaidPostIsNotDuplicate, setUserHasSaidPostIsNotDuplicate] =
     useState(false);
+  const isEditor = useIsEditor();
 
   const {
     searchedPublishedPostsData,
@@ -79,6 +82,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
   const { updatePostMutation, updatePostMutationIsLoading } = useUpdatePost({
     onSuccessCallback: () => setPostSuccessful(true),
   });
+  const { newPostEmailMutation } = useNewPostEmail();
 
   const handleOnChange = (event: TPostEntryEvent, type: TPostKeys) => {
     if (!event.target) {
@@ -143,6 +147,15 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
   };
 
   if (postSuccessful) {
+    // If not editor or admin, send email to admin
+    if (isEditor) {
+      newPostEmailMutation({
+        title: state.title,
+        fileUnder: state.fileUnder,
+        body: state.body,
+      });
+    }
+
     return (
       <Fragment>
         <SectionSubtitle className="flex items-center gap-1">

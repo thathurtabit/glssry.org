@@ -11,5 +11,5 @@ export const newPostEmailSchema = z.object({
   fileUnder: ZNativeTagEnum.refine((value) => (value as string) !== emptySelectOption, { message: `Please ${emptySelectOption.toLocaleLowerCase()}` }),
 });
 
-export type TNewPostEmailSchema = z.infer<typeof newPostEmailSchema>;
+export type TNewPostEmail = z.infer<typeof newPostEmailSchema>;
 
