@@ -1,4 +1,6 @@
 export const errorMessage = {
+  // Email
+  newPostEmailNotification: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to send a new post email notification. Message: ${message}.`,
   // Post
   readPost: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to read this post. Message: ${message}.`,
   readRandomPost: (httpCode: number, message: string) => `httpCode: ${httpCode}. There was a problem when trying to read a random post. Message: ${message}.`,

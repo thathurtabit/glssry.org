@@ -70,7 +70,7 @@ export const createTRPCContext = async (options: CreateNextContextOptions) => {
  * errors on the backend.
  */
 
-const t = initTRPC.context<typeof createTRPCContext>().create({
+const trpc = initTRPC.context<typeof createTRPCContext>().create({
   transformer: superjson,
   errorFormatter({ shape, error }) {
     return {
@@ -96,7 +96,9 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
  *
  * @see https://trpc.io/docs/router
  */
-export const createTRPCRouter = t.router;
+export const createTRPCRouter = trpc.router;
+
+export const { createCallerFactory, procedure } = trpc;
 
 /**
  * Public (unauthenticated) procedure
@@ -105,10 +107,10 @@ export const createTRPCRouter = t.router;
  * guarantee that a user querying is authorized, but you can still access user session data if they
  * are logged in.
  */
-export const publicProcedure = t.procedure;
+export const publicProcedure = procedure;
 
 /** Reusable middleware that enforces users are logged in before running the procedure. */
-const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
+const enforceUserIsAuthed = trpc.middleware(({ ctx, next }) => {
   if (!ctx.session?.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
@@ -121,7 +123,7 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
   });
 });
 
-const enforceUserIsAdmin = t.middleware(({ ctx, next }) => {
+const enforceUserIsAdmin = trpc.middleware(({ ctx, next }) => {
   if (!ctx.session?.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
@@ -138,7 +140,7 @@ const enforceUserIsAdmin = t.middleware(({ ctx, next }) => {
   });
 });
 
-const enforceUserIsEditor = t.middleware(({ ctx, next }) => {
+const enforceUserIsEditor = trpc.middleware(({ ctx, next }) => {
   if (!ctx.session?.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
@@ -163,6 +165,6 @@ const enforceUserIsEditor = t.middleware(({ ctx, next }) => {
  *
  * @see https://trpc.io/docs/procedures
  */
-export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
-export const adminProcedure = t.procedure.use(enforceUserIsAdmin);
-export const editorProcedure = t.procedure.use(enforceUserIsEditor);
+export const protectedProcedure = procedure.use(enforceUserIsAuthed);
+export const adminProcedure = procedure.use(enforceUserIsAdmin);
+export const editorProcedure = procedure.use(enforceUserIsEditor);
