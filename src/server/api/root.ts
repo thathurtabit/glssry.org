@@ -1,6 +1,7 @@
 import { accountRouter } from "~/server/api/routers/account";
 import { createTRPCRouter } from "~/server/api/trpc";
 
+import { emailRouter } from "./routers/email";
 import { postRouter } from "./routers/post";
 
 /**
@@ -11,6 +12,7 @@ import { postRouter } from "./routers/post";
 export const appRouter = createTRPCRouter({
   account: accountRouter,
   post: postRouter,
+  email: emailRouter,
 });
 
 // Export type definition of API

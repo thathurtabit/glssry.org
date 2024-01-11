@@ -18,8 +18,6 @@ import { getServerAuthSession } from "~/server/auth";
 
 import { database } from "~/server/database";
 
-import { appRouter } from "./root";
-
 /**
  * 1. CONTEXT
  *
@@ -100,13 +98,7 @@ const trpc = initTRPC.context<typeof createTRPCContext>().create({
  */
 export const createTRPCRouter = trpc.router;
 
-const { createCallerFactory, procedure } = trpc;
-/**
- * CreateCaller
- * This is used for server-side calls to your tRPC API. It is used in the backend API to call other procedures.
- *
- * */
-export const createCaller = createCallerFactory(appRouter);
+export const { createCallerFactory, procedure } = trpc;
 
 /**
  * Public (unauthenticated) procedure
