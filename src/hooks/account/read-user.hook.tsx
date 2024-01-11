@@ -14,7 +14,12 @@ export const useReadUser = () => {
   const state = useContext(GlssryStateContext);
   const dispatch = useContext(GlssryDispatchContext);
   const isAuthenticated = useIsAuthenticated();
-  const { data: userData, isError } = api.account.readUser.useQuery(undefined, {
+  const {
+    data: userData,
+    isFetching,
+    isLoading,
+    isError,
+  } = api.account.readUser.useQuery(undefined, {
     enabled: isAuthenticated,
   });
   const errorNotificationUUID = "error-fetching-user-data";
@@ -54,5 +59,6 @@ export const useReadUser = () => {
     id,
     image,
     username,
+    isLoading: isFetching || isLoading,
   };
 };

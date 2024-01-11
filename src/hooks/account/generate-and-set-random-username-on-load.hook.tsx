@@ -13,14 +13,19 @@ export const useGenerateAndSetRandomUsernameOnLoad = () => {
   const [usernameGeneratedAndSaved, setUsernameGeneratedAndSaved] =
     useState(false);
   const isAuthenticated = useIsAuthenticated();
-  const { username } = useReadUser();
+  const { username, isLoading } = useReadUser();
   const { randomUsername, setUsername } = useGenerateAndSetRandomUsername({
     generateRandomUsername: shouldCreateAndSetRandomUsername,
     onSuccess: () => setUsernameGeneratedAndSaved(true),
   });
 
   useEffect(() => {
-    if (!isAuthenticated || Boolean(username) || usernameGeneratedAndSaved) {
+    if (
+      !isAuthenticated ||
+      isLoading ||
+      Boolean(username) ||
+      usernameGeneratedAndSaved
+    ) {
       return;
     }
 
@@ -29,7 +34,13 @@ export const useGenerateAndSetRandomUsernameOnLoad = () => {
       setUsername({ username: randomUsername });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- we want to avoid mutation loop of doom
-  }, [isAuthenticated, username, randomUsername, usernameGeneratedAndSaved]);
+  }, [
+    isAuthenticated,
+    username,
+    randomUsername,
+    usernameGeneratedAndSaved,
+    isLoading,
+  ]);
 
   return {
     shouldCreateAndSetRandomUsername,

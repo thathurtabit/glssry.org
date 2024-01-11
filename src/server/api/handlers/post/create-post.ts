@@ -37,7 +37,7 @@ export const createPost = protectedProcedure.input(
       data: postData,
     });
 
-    if (userData.role === "CONTRIBUTOR") {
+    if (userData.role !== "ADMIN" && userData.role !== "EDITOR") {
       const createCaller = createCallerFactory(appRouter);
       const caller = createCaller({
         db: ctx.db,

@@ -2,17 +2,15 @@ import type { FC } from "react";
 
 import { useContext, useId } from "react";
 
+import { Button } from "~/components/atoms/button/button";
+import { IconEmail } from "~/components/icons/email/email";
+import { setNewNotification } from "~/context/actions/notifications/notifications.actions";
+import { GlssryDispatchContext } from "~/context/context/context";
 import type { TInfoTypes } from "~/types/common.types";
-
 import { infoTypes } from "~/types/common.types";
+import { getRandomItemFromArray } from "~/utils/get-random-item-from-array";
+import { getRandomUsername } from "~/utils/get-username-generator";
 
-import { setNewNotification } from "../../../../context/actions/notifications/notifications.actions";
-import { GlssryDispatchContext } from "../../../../context/context/context";
-import { getRandomItemFromArray } from "../../../../utils/get-random-item-from-array";
-
-import { getRandomUsername } from "../../../../utils/get-username-generator";
-import { IconEmail } from "../../../icons/email/email";
-import { Button } from "../../button/button";
 import { EphemeralNotifications } from "../ephemeral-notifications";
 
 interface IEphemeralNotificationsExample {
