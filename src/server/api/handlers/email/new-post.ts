@@ -37,9 +37,9 @@ export const newPostEmailNotification = protectedProcedure.input(
     (async () => {
       const mailerSend = new MailerSend({
         apiKey: process.env.MAILERSEND_API_KEY ?? "",
-    });
+      });
 
-    const emailHtml = render(newPost(input));
+      const emailHtml = render(newPost(input));
       const sentFrom = new Sender(environment.EMAIL_FROM, appDomain);
       const recipients = [
         new Recipient(environment.EMAIL_TO, `${appDomain} New Post`),
@@ -53,8 +53,8 @@ export const newPostEmailNotification = protectedProcedure.input(
         .setText(input.body);
 
       await mailerSend.email.send(emailParameters);
-    })().catch((error: Error) => {
-      throw new Error(error.message ?? "Error sending Mailersend email");
+    })().catch((error: { body: { message: string } }) => {
+      throw new Error(error.body.message ?? "Error sending Mailersend email");
     });
   } catch (error) {
     if (error instanceof TRPCError) {
