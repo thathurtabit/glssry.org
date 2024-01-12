@@ -28,6 +28,7 @@ export const readLatestPosts = publicProcedure.query(async ({ ctx }) => {
             title: true,
             fileUnder: true,
             acronym: true,
+            abbreviation: true,
             slug: true,
             tags: true,
             updatedAt: true,

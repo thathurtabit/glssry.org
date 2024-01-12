@@ -58,7 +58,7 @@ export const RelatedTaxonomyPosts: FC<IRelatedTaxonomyPosts> = ({
                   className={relatedPostLinkStyles}
                 >
                   <h3 className={relatedPostLinkTitleStyles}>
-                    {title} / {acronym}
+                    {title} {acronym ? `/ ${acronym}` : null}
                   </h3>
                 </LinkText>
                 <p className={relatedPostsBodyStyles}>

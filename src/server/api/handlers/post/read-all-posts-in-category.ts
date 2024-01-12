@@ -33,6 +33,7 @@ export const readAllPostsInCategory = publicProcedure.input(z.object({ category:
             title: true,
             fileUnder: true,
             acronym: true,
+            abbreviation: true,
             slug: true,
             tags: true,
             updatedAt: true,

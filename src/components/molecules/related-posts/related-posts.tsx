@@ -55,10 +55,12 @@ export const RelatedPosts: FC<IRelatedPosts> = ({
         <ul className={relatedPostsULStyles}>
           {postsDataNonNullable.map(({ title, slug, versions }) => {
             const latestVersion = versions.at(-1);
-            const { fileUnder, body, acronym } = latestVersion ?? {};
+            const { fileUnder, body, acronym, abbreviation } =
+              latestVersion ?? {};
             const kebabCaseFileUnder = getKebabCaseFromSentenceCase(
               fileUnder ?? ""
             );
+            const shortedTitle = abbreviation ?? acronym;
             return (
               <li key={slug} className={relatedPostsLIStyles}>
                 <LinkText
@@ -66,7 +68,7 @@ export const RelatedPosts: FC<IRelatedPosts> = ({
                   className={relatedPostLinkStyles}
                 >
                   <h3 className={relatedPostLinkTitleStyles}>
-                    {title} / {acronym}
+                    {title} {shortedTitle ? `/ ${shortedTitle}` : null}
                   </h3>
                 </LinkText>
                 <p className={relatedPostsBodyStyles}>

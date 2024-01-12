@@ -29,13 +29,15 @@ export const PostRowsLinks: FC<IPostRowsLinks> = ({
       {postsData.map((trpcPostData) => {
         const { id, title, versions } = trpcPostData;
         const latestVersion = versions.at(-1);
-        const { fileUnder, acronym, slug } = latestVersion ?? {};
+        const { fileUnder, acronym, abbreviation, slug } = latestVersion ?? {};
 
         const handleLinkClick = () => {
           if (onClickCallback) {
             onClickCallback(trpcPostData);
           }
         };
+
+        const shortedTitle = abbreviation ?? acronym;
 
         return slug && fileUnder ? (
           <li key={id} className={postRowItemStyles}>
@@ -45,7 +47,9 @@ export const PostRowsLinks: FC<IPostRowsLinks> = ({
               onClick={handleLinkClick}
             >
               <span className={postRowTitleStyles}>{title}</span>{" "}
-              <small className={postRowItemMetaStyles}>{acronym}</small>
+              {shortedTitle ? (
+                <small className={postRowItemMetaStyles}>{shortedTitle}</small>
+              ) : null}
             </LinkText>
           </li>
         ) : null;
