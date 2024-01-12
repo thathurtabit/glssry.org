@@ -80,15 +80,21 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
 
   const { createPostMutation, createPostMutationIsLoading } = useCreatePost({
     onSuccessCallback() {
-      setPostSuccessful(true);
-      // If not editor or admin, send notification email to admin
+      // If not an editor/admin, we'll send an email to the root admin
       if (!isEditor) {
-        newPostEmailMutation({
-          title: state.title,
-          fileUnder: state.fileUnder,
-          body: state.body,
-        });
+        try {
+          newPostEmailMutation({
+            title: state.title,
+            fileUnder: state.fileUnder,
+            body: state.body,
+          });
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error(error);
+        }
       }
+
+      setPostSuccessful(true);
     },
   });
 
