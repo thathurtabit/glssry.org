@@ -76,13 +76,25 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
       hasSubmittedTitleCheck &&
       !searchedPublishedPostsDataIsFetching);
 
+  const { newPostEmailMutation } = useNewPostEmail();
+
   const { createPostMutation, createPostMutationIsLoading } = useCreatePost({
-    onSuccessCallback: () => setPostSuccessful(true),
+    onSuccessCallback() {
+      setPostSuccessful(true);
+      // If not editor or admin, send notification email to admin
+      if (isEditor) {
+        newPostEmailMutation({
+          title: state.title,
+          fileUnder: state.fileUnder,
+          body: state.body,
+        });
+      }
+    },
   });
+
   const { updatePostMutation, updatePostMutationIsLoading } = useUpdatePost({
     onSuccessCallback: () => setPostSuccessful(true),
   });
-  const { newPostEmailMutation } = useNewPostEmail();
 
   const handleOnChange = (event: TPostEntryEvent, type: TPostKeys) => {
     if (!event.target) {
@@ -147,15 +159,6 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
   };
 
   if (postSuccessful) {
-    // If not editor or admin, send email to admin
-    if (isEditor) {
-      newPostEmailMutation({
-        title: state.title,
-        fileUnder: state.fileUnder,
-        body: state.body,
-      });
-    }
-
     return (
       <Fragment>
         <SectionSubtitle className="flex items-center gap-1">
