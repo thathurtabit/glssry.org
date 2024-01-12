@@ -14,6 +14,9 @@ export const useSearchPublishedPosts = ({
       { searchTerm },
       {
         enabled: Boolean(searchTerm && shouldSearch),
+        refetchOnWindowFocus: false,
+        refetchIntervalInBackground: false,
+        refetchOnMount: false,
       }
     );
 
