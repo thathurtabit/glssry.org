@@ -1,7 +1,7 @@
 import { render } from "@react-email/render";
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
-import { createTransport } from "nodemailer";
+import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 
 import { newPost } from "~/emails/new-post.email";
 import { environment } from "~/environment.mjs";
@@ -34,30 +34,27 @@ export const newPostEmailNotification = protectedProcedure.input(
   }
 
   try {
-    const transporter = createTransport({
-      host: environment.EMAIL_SERVER_HOST,
-      port: Number(environment.EMAIL_SERVER_PORT),
-      secure: true,
-      auth: {
-        user: environment.EMAIL_SERVER_USER,
-        pass: environment.EMAIL_SERVER_PASSWORD,
-      },
-    });
-    const emailHtml = render(newPost(input));
     (async () => {
-      await transporter.sendMail({
-        from: `"${appDomain}" ${environment.EMAIL_FROM}`,
-        to: environment.EMAIL_TO,
-        subject: `New ${appDomain} Post`,
-        text: input.body,
-        html: emailHtml,
-      });
-    })().catch((error) => {
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: errorMessage.newPostEmailNotification(500, error as string),
-        cause: error,
-      });
+      const mailerSend = new MailerSend({
+        apiKey: process.env.MAILERSEND_API_KEY ?? "",
+    });
+
+    const emailHtml = render(newPost(input));
+      const sentFrom = new Sender(environment.EMAIL_FROM, appDomain);
+      const recipients = [
+        new Recipient(environment.EMAIL_TO, `${appDomain} New Post`),
+      ];
+
+      const emailParameters = new EmailParams()
+        .setFrom(sentFrom)
+        .setTo(recipients)
+        .setSubject(`New Post Submission`)
+        .setHtml(emailHtml)
+        .setText(input.body);
+
+      await mailerSend.email.send(emailParameters);
+    })().catch((error: Error) => {
+      throw new Error(error.message ?? "Error sending Mailersend email");
     });
   } catch (error) {
     if (error instanceof TRPCError) {
