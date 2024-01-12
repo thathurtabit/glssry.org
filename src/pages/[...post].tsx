@@ -122,6 +122,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         select: {
           fileUnder: true,
           slug: true,
+          published: true,
         },
         take: 1,
         orderBy: {
@@ -133,8 +134,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
       },
     },
   });
+
+  const publishedPostsOnly = posts.filter(({ versions }) => {
+    const latestVersion = versions.at(-1);
+    return Boolean(latestVersion?.published);
+  });
+
   return {
-    paths: posts.map(({ slug, versions }) => {
+    paths: publishedPostsOnly.map(({ slug, versions }) => {
       const { fileUnder } = versions.at(0) ?? {};
 
       return {
