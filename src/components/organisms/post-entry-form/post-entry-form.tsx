@@ -82,7 +82,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
     onSuccessCallback() {
       setPostSuccessful(true);
       // If not editor or admin, send notification email to admin
-      if (isEditor) {
+      if (!isEditor) {
         newPostEmailMutation({
           title: state.title,
           fileUnder: state.fileUnder,
