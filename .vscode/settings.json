@@ -27,6 +27,7 @@
     "MAILERSEND",
     "Omni",
     "postbuild",
+    "preinstall",
     "Randomised",
     "superjson",
     "TRPC",

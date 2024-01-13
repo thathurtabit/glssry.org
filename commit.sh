@@ -13,20 +13,20 @@ trap 'echo "\n⚠️ ${RED} Uh oh. Failed to complete: \"${last_command}\". Run 
 
 echo "\n"
 echo "${GREEN}Installing latest packages${NC}"
-npm install
+pnpm i
 echo "\n"
 echo "${GREEN}Running lint --fix${NC}"
-npm run lint:fix
+pnpm run lint:fix
 echo "\n"
 echo "${GREEN}Running unit tests${NC}"
-npm run test:ci
+pnpm run test:ci
 echo "\n"
 echo "${GREEN}Running build${NC}"
-npm run build
+pnpm run build
 echo "\n"
 echo "${GREEN}Running commitizen${NC}"
 echo "(Make sure you've staged your file changes)"
-npm run cz --no-verify
+pnpm run cz --no-verify
 echo "\n"
 
 echo "⚙️ ${GREEN}Tasks completed:\n${NC}"
