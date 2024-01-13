@@ -17,6 +17,7 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - uses: pnpm/action-setup@v2.4.0
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -30,6 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: vitest
     steps:
+      - uses: pnpm/action-setup@v2.4.0
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
         run: pnpm add --global vercel@latest
