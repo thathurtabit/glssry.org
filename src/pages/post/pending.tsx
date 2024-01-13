@@ -73,7 +73,9 @@ export const ListPendingPosts: FC = () => {
         ) : (
           <p className="flex gap-2 items-center">
             <IconInfo />{" "}
-            {isEditor ? "No pending posts found" : "You are not an editor."}
+            {isEditor
+              ? "No pending posts found"
+              : "You'll need to be an editor to view this page"}
           </p>
         )}
       </PageStructure>

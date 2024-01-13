@@ -48,7 +48,7 @@ export const newPostEmailNotification = protectedProcedure.input(
       const emailParameters = new EmailParams()
         .setFrom(sentFrom)
         .setTo(recipients)
-        .setSubject(`New Post Submission`)
+        .setSubject(`New Post - ${input.title}}`)
         .setHtml(emailHtml)
         .setText(input.body);
 

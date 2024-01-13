@@ -7,13 +7,12 @@ import { Text } from "@react-email/text";
 
 import type { TNewPostEmail } from "~/schemas/email/new-post.schema";
 
-import { EURLS, appDescription, appTitle, appURL } from "~/settings/constants";
+import { EURLS, appTitle, appURL } from "~/settings/constants";
 
 export const newPost = ({ title, body, fileUnder }: TNewPostEmail) => (
   <Html lang="en" dir="ltr">
     <Container>
       <Heading as="h1">New Post {appTitle}</Heading>
-      <Text>{appDescription}</Text>
       <Heading as="h2">
         Post title: <Text>{title}</Text>
       </Heading>
