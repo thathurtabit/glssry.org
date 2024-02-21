@@ -49,7 +49,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'pnpm'
-    - run: pnpm ci
+    - run: pnpm i
     - run: pnpm run test:ci
 
   Deploy-Production:
