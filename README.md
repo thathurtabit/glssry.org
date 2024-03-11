@@ -18,4 +18,4 @@ This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3
 - [tRPC](https://trpc.io)
 - [npm](https://www.npmjs.com)
 - [Vercel](https://vercel.com)
-- [PlanetScale](https://planetscale.com)
+- [Railway](https://railway.app/)
