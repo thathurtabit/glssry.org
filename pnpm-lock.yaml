@@ -80,6 +80,9 @@ importers:
       next-recaptcha-v3:
         specifier: ^1.4.1
         version: 1.4.1(next@14.2.5(@babel/core@7.25.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next-superjson-plugin:
+        specifier: ^0.6.3
+        version: 0.6.3(next@14.2.5(@babel/core@7.25.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(superjson@1.13.3)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -5023,6 +5026,9 @@ packages:
   hmac-drbg@1.0.1:
     resolution: {integrity: sha512-Tti3gMqLdZfhOQY1Mzf/AanLiqh1WTiJgEj26ZuYQ9fbkLomzGchCws4FyrSd4VkpBfiNhaE1On+lOz894jvXg==}
 
+  hoist-non-react-statics@3.3.2:
+    resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
+
   homedir-polyfill@1.0.3:
     resolution: {integrity: sha512-eSmmWE5bZTK2Nou4g0AI3zZ9rswp7GRKoKXS1BLUkvPviOqs4YTN1djQIqrXy9k5gEtdLPy86JjRwsNM9tnDcA==}
     engines: {node: '>=0.10.0'}
@@ -6003,6 +6009,12 @@ packages:
     hasBin: true
     peerDependencies:
       next: '*'
+
+  next-superjson-plugin@0.6.3:
+    resolution: {integrity: sha512-gipGROzbbn1Koq84AZQodIvBdORp9dytIDv07SguwXdxnJb6v05KCmHVNU9L6AWqxjP14qNIWCNdKRDhnGRZrg==}
+    peerDependencies:
+      next: ^13.0 || ^14.0
+      superjson: ^1 || ^2
 
   next@13.5.6:
     resolution: {integrity: sha512-Y2wTcTbO4WwEsVb4A8VSnOsG1I9ok+h74q0ZdxkwM3EODqrs4pasq7O0iUxbcS9VtWMicG7f3+HAj0r1+NtKSw==}
@@ -14069,6 +14081,10 @@ snapshots:
       minimalistic-assert: 1.0.1
       minimalistic-crypto-utils: 1.0.1
 
+  hoist-non-react-statics@3.3.2:
+    dependencies:
+      react-is: 16.13.1
+
   homedir-polyfill@1.0.3:
     dependencies:
       parse-passwd: 1.0.0
@@ -15050,6 +15066,12 @@ snapshots:
       fast-glob: 3.3.2
       minimist: 1.2.8
       next: 14.2.5(@babel/core@7.25.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
+  next-superjson-plugin@0.6.3(next@14.2.5(@babel/core@7.25.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(superjson@1.13.3):
+    dependencies:
+      hoist-non-react-statics: 3.3.2
+      next: 14.2.5(@babel/core@7.25.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      superjson: 1.13.3
 
   next@13.5.6(@babel/core@7.25.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
