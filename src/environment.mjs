@@ -29,6 +29,7 @@ export const environment = createEnv({
       process.env.VERCEL ? z.string() : z.string().url()
     ),
     // Add ` on ID and SECRET if you want to make sure they're not empty
+    CRON_SECRET: z.string(),
     GITHUB_CLIENT_ID: z.string(),
     GITHUB_CLIENT_SECRET: z.string(),
     GOOGLE_CLIENT_ID: z.string(),
@@ -68,6 +69,7 @@ export const environment = createEnv({
     NEXT_PUBLIC_RECAPTCHA_SITEKEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY,
     NEXT_PUBLIC_RECAPTCHA_SECRET_KEY:
       process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY,
+    CRON_SECRET: process.env.CRON_SECRET,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     GOOGLE_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
