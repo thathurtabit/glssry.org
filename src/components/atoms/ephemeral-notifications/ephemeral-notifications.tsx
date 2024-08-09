@@ -1,6 +1,8 @@
 import type { FC } from "react";
 
-import { Fragment, useContext, useEffect, useState } from "react";
+import {
+ Fragment, useContext, useEffect, useState,
+} from "react";
 
 import { InfoIcon } from "~/components/atoms/info-panel-icon/info-panel-icon";
 import { clearOldestNotification } from "~/context/actions/notifications/notifications.actions";

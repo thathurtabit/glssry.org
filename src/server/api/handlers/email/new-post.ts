@@ -1,7 +1,9 @@
 import { render } from "@react-email/render";
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
-import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
+import {
+ MailerSend, EmailParams, Sender, Recipient,
+} from "mailersend";
 
 import { newPost } from "~/emails/new-post.email";
 import { environment } from "~/environment.mjs";

@@ -1,7 +1,9 @@
 import { TagName } from "@prisma/client";
 import { z } from "zod";
 
-import { emptySelectOption, maxPostLinkLength, maxTagsForPost, summaryMaxCharacterCount } from "~/settings/constants";
+import {
+ emptySelectOption, maxPostLinkLength, maxTagsForPost, summaryMaxCharacterCount,
+} from "~/settings/constants";
 
 export const ZNativeTagEnum = z.nativeEnum(TagName);
 export type TNativeTag = z.infer<typeof ZNativeTagEnum>;
