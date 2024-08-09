@@ -14,6 +14,10 @@ const withPWA = nextPWA({
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
+  experimental: {
+    forceSwcTransforms: true,
+    swcPlugins: [["next-superjson-plugin", {}]],
+  },
 
   /**
    * If you are using `appDir` then you must comment the below `i18n` config out.
