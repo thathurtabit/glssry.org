@@ -3,19 +3,17 @@
 
 generator client {
     provider        = "prisma-client-js"
-    previewFeatures = ["fullTextSearch", "fullTextIndex"]
-    binaryTargets = ["native", "rhel-openssl-3.0.x"]
+    previewFeatures = ["driverAdapters"]
+}
+
+generator drizzle {
+    provider = "drizzle-prisma-generator"
+    output   = "./drizzle" // Where to put generated Drizle tables
 }
 
 datasource db {
-    provider     = "mysql"
-    // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url          = env("DATABASE_URL")
-    // https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode#how-to-set-the-relation-mode-in-your-prisma-schema
-    relationMode = "prisma"
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
 enum UserRole {
@@ -91,19 +89,14 @@ model Post {
     createdAt    DateTime      @default(now())
     title        String        @unique
     slug         String        @unique
-    abbreviation String        @db.VarChar(30) @default("")
-    acronym      String        @db.VarChar(20) @default("")
-    initialism   String        @db.VarChar(10) @default("")
+    abbreviation String        @default("") @db.VarChar(30)
+    acronym      String        @default("") @db.VarChar(20)
+    initialism   String        @default("") @db.VarChar(10)
     author       User          @relation(fields: [authorId], references: [id])
     authorId     String
     versions     PostVersion[]
 
     @@index([authorId])
-    @@fulltext([title])
-    @@fulltext([abbreviation])
-    @@fulltext([acronym])
-    @@fulltext([initialism])
-    @@fulltext([title, abbreviation, acronym, initialism ])
 }
 
 model PostVersion {
@@ -137,12 +130,12 @@ model Account {
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String? @db.Text
-    access_token      String? @db.Text
+    refresh_token     String?
+    access_token      String?
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String? @db.Text
+    id_token          String?
     session_state     String?
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 

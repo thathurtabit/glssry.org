@@ -1,4 +1,4 @@
-import { PrismaAdapter as prismaAdapter } from "@next-auth/prisma-adapter";
+import { DrizzleAdapter as drizzleAdapter } from "@auth/drizzle-adapter";
 import type { UserRole } from "@prisma/client";
 import { type GetServerSidePropsContext } from "next";
 import {
@@ -6,6 +6,7 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
+
 import facebookProvider from "next-auth/providers/facebook";
 import githubProvider from "next-auth/providers/github";
 import googleProvider from "next-auth/providers/google";
@@ -15,6 +16,11 @@ import { environment } from "~/environment.mjs";
 
 import { database } from "~/server/database";
 import { EURLS } from "~/settings/constants";
+
+import {
+  Session, Account, User, Post, VerificationToken,
+  PostVersion,
+} from "./db/drizzle.schema";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -58,7 +64,14 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   },
-  adapter: prismaAdapter(database),
+  adapter: drizzleAdapter(database, {
+    usersTable: User,
+    accountsTable: Account,
+    sessionsTable: Session,
+    postsTable: Post,
+    postsVersionsTable: PostVersion,
+    verificationTokensTable: VerificationToken,
+  }),
   pages: {
     signIn: EURLS.SignIn,
     verifyRequest: EURLS.SignInMagicLink,
