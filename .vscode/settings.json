@@ -19,6 +19,7 @@
     "titleBar.inactiveForeground": "#e7e7e799"
   },
   "peacock.color": "#35103e",
+  "peacock.remoteColor": "#35103e",
   "cSpell.words": [
     "Deauthorised",
     "EURLS",
