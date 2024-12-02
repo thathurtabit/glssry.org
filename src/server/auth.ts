@@ -18,8 +18,7 @@ import { database } from "~/server/database";
 import { EURLS } from "~/settings/constants";
 
 import {
-  Session, Account, User, Post, VerificationToken,
-  PostVersion,
+  sessions, users, accounts, posts, postVersions, verificationTokens,
 } from "./db/drizzle.schema";
 
 /**
@@ -65,12 +64,12 @@ export const authOptions: NextAuthOptions = {
     }),
   },
   adapter: drizzleAdapter(database, {
-    usersTable: User,
-    accountsTable: Account,
-    sessionsTable: Session,
-    postsTable: Post,
-    postsVersionsTable: PostVersion,
-    verificationTokensTable: VerificationToken,
+    usersTable: users,
+    postsVersionsTable: postVersions,
+    postsTable: posts,
+    accountsTable: accounts,
+    sessionsTable: sessions,
+    verificationTokensTable: verificationTokens,
   }),
   pages: {
     signIn: EURLS.SignIn,

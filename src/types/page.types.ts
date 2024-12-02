@@ -3,7 +3,7 @@ import type {
 } from "./prisma.types";
 
 export interface IHomePageProperties {
-  latestPostsData: TTRPCReadLatestPosts | TTRPCReadCategoryPosts;
+  latestPostsData: TTRPCReadLatestPosts ;
   randomPostData: TTRPCReadRandomPost;
   randomCategoryPostCountData: NonNullable<TTRPCReadRandomCategoryPostCount>
 }
