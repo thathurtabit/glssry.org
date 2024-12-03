@@ -10,7 +10,7 @@ import { updatePost } from "~/server/api/handlers/post/update-post";
 import { createTRPCRouter } from "../trpc";
 import { readAllPostsInCategory } from "./../handlers/post/read-all-posts-in-category";
 import { readRandomCategoryPostCount } from "./../handlers/post/read-random-category-post-count";
-import { readRandomPost } from "./../handlers/post/read-random-post";
+import { readRandomPost, readRandomPosts } from "./../handlers/post/read-random-post";
 import { readRandomisedRelatedPosts } from "./../handlers/post/read-randomised-related-posts";
 import { searchPublishedPosts } from "./../handlers/post/search-published-posts";
 
@@ -23,6 +23,7 @@ export const postRouter = createTRPCRouter({
   readLatestPosts,
   readPost,
   readRandomPost,
+  readRandomPosts,
   readRandomisedRelatedPosts,
   readRandomCategoryPostCount,
   searchPublishedPosts,

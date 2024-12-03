@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { RelatedPosts } from "./related-posts";
+import { RandomPosts } from "./random-posts";
 
-const meta: Meta<typeof RelatedPosts> = {
-  title: "Molecules/Related Posts",
-  component: RelatedPosts,
+const meta: Meta<typeof RandomPosts> = {
+  title: "Molecules/Random Posts",
+  component: RandomPosts,
   parameters: {
     backgrounds: {
       default: "dark",
@@ -14,7 +14,7 @@ const meta: Meta<typeof RelatedPosts> = {
 
 export default meta;
 
-type Story = StoryObj<typeof RelatedPosts>;
+type Story = StoryObj<typeof RandomPosts>;
 
 export const Default: Story = {
   ...meta,

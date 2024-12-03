@@ -20,10 +20,13 @@ import { getTagsArrayFromJsonArray } from "~/utils/get-tags-array-from-json-arra
 
 import type { IPost } from "./post.types";
 import { NoPostFound } from "../no-post-found/no-post-found";
-import { RelatedPosts } from "../related-posts/related-posts";
-import { RelatedTaxonomyPosts } from "../related-taxonomy-posts/related-taxonomy-posts";
+import { RandomPosts } from "../random-posts/random-posts";
 
-export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
+export const Post: FC<IPost> = ({
+  postData,
+  randomisedPosts,
+  showRelatedPosts = true,
+}) => {
   const { author: originalAuthor, createdAt, versions } = postData;
   const latestVersion = versions.at(-1);
 
@@ -42,8 +45,6 @@ export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
     title,
     updatedAt,
     tags,
-    relatedPostId1,
-    relatedPostId2,
   } = latestVersion;
 
   const { username: originalAuthorUsername, image: originalAuthorImageURL } =
@@ -53,9 +54,6 @@ export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
   const shouldShowUpdatedBy = latestAuthorUsername !== originalAuthorUsername;
 
   const smallTextStyles = "text-[0.5rem] opacity-50 uppercase";
-
-  const hasRelatedPosts =
-    (Boolean(relatedPostId1) || Boolean(relatedPostId2)) && showRelatedPosts;
 
   const tagsArray = getTagsArrayFromJsonArray(tags);
 
@@ -176,10 +174,8 @@ export const Post: FC<IPost> = ({ postData, showRelatedPosts = true }) => {
             <p>Version: {versions.length}</p>
           </div>
         </div>
-        {hasRelatedPosts ? (
-          <RelatedPosts slugs={[relatedPostId1 ?? "", relatedPostId2 ?? ""]} />
-        ) : hasConjoinedTaxonomies ? (
-          <RelatedTaxonomyPosts relatedTaxonomies={conjoinedTaxonomies} />
+        {randomisedPosts ? (
+          <RandomPosts randomisedPosts={randomisedPosts} />
         ) : null}
       </div>
     </article>

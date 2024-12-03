@@ -11,7 +11,6 @@ import type {
 import superjson from "superjson";
 
 import { InfoPanel } from "~/components/atoms/info-panel/info-panel";
-import { LoadingSpinner } from "~/components/atoms/loading-spinner/loading-spinner";
 import { SectionTitle } from "~/components/atoms/section-title/section-title";
 import { NoPostFound } from "~/components/molecules/no-post-found/no-post-found";
 import { PageMain } from "~/components/molecules/page-main/page-main";
@@ -23,7 +22,6 @@ import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 
 import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
 import { useReadAllPostsInCategory } from "~/hooks/post/read-all-posts-in-category.hook";
-import { useReadPost } from "~/hooks/post/read-post.hook";
 import { tagKeys, type TNativeTag } from "~/schemas/post/post.schema";
 import { appRouter } from "~/server/api/root";
 import { database } from "~/server/database";
@@ -34,22 +32,18 @@ import { getPascalCaseWithUnderscores } from "~/utils/get-pascal-case-with-under
 export default function PostViewPage({
   slug,
   category,
+  postData,
+  randomisedPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const isCategoryPage = Boolean(category) && !slug;
   const pascalCaseCategory = getPascalCaseFromKebabCase(category ?? "", " ");
   const pascalCaseWithUnderscoreCategory =
     getPascalCaseWithUnderscores(pascalCaseCategory);
 
-  const { postData, postDataIsFetching } = useReadPost({ slug });
   const { categoryPostsData, categoryPostsDataIsFetching } =
     useReadAllPostsInCategory({
       category: pascalCaseWithUnderscoreCategory as TNativeTag,
     });
-
-  if (postDataIsFetching) {
-    // Won't happen since we're using `fallback: "blocking"`
-    return <LoadingSpinner />;
-  }
 
   // CATEGORY PAGE
   if (isCategoryPage && category) {
@@ -107,7 +101,7 @@ export default function PostViewPage({
       <SharedHead title={title} description={body} />
       <Breadcrumbs items={[category, slug]} />
       <PageMain justifyContent="center" className="items-start">
-        <Post postData={postData} />
+        <Post postData={postData} randomisedPosts={randomisedPosts} />
       </PageMain>
     </Fragment>
   );
@@ -173,8 +167,15 @@ export async function getStaticProps(
   const fileUnder = context.params?.post.at(0);
   const uniqueSlug = context.params?.post.at(1);
 
+  let postData;
+  let randomisedPosts;
+
   if (uniqueSlug) {
-    await helpers.post.readPost.prefetch({ slug: uniqueSlug });
+    postData = await helpers.post.readPost.fetch({ slug: uniqueSlug });
+
+    randomisedPosts = await helpers.post.readRandomPosts.fetch({
+      maxCount: 2,
+    });
   }
 
   if (
@@ -192,6 +193,8 @@ export async function getStaticProps(
       trpcState: helpers.dehydrate(),
       slug: uniqueSlug ?? "", // We can fallback to "" since 'undefined' is not allowed and is still falsy
       category: fileUnder,
+      postData,
+      randomisedPosts,
     },
     revalidate: 1,
   };
