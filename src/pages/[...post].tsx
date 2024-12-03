@@ -21,29 +21,21 @@ import { PostRowsLinks } from "~/components/molecules/post-rows-links/post-rows-
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 
 import { Breadcrumbs } from "~/components/organisms/breadcrumbs/breadcrumbs";
-import { useReadAllPostsInCategory } from "~/hooks/post/read-all-posts-in-category.hook";
 import { tagKeys, type TNativeTag } from "~/schemas/post/post.schema";
 import { appRouter } from "~/server/api/root";
 import { database } from "~/server/database";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 import { getPascalCaseFromKebabCase } from "~/utils/get-pascal-case-from-kebab-case";
-import { getPascalCaseWithUnderscores } from "~/utils/get-pascal-case-with-underscores";
 
 export default function PostViewPage({
   slug,
   category,
+  categoryPostsData,
   postData,
   randomisedPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const isCategoryPage = Boolean(category) && !slug;
   const pascalCaseCategory = getPascalCaseFromKebabCase(category ?? "", " ");
-  const pascalCaseWithUnderscoreCategory =
-    getPascalCaseWithUnderscores(pascalCaseCategory);
-
-  const { categoryPostsData, categoryPostsDataIsFetching } =
-    useReadAllPostsInCategory({
-      category: pascalCaseWithUnderscoreCategory as TNativeTag,
-    });
 
   // CATEGORY PAGE
   if (isCategoryPage && category) {
@@ -57,10 +49,7 @@ export default function PostViewPage({
         <PageMain justifyContent="start">
           <PageMainIndent className="max-w-2xl">
             <SectionTitle>{pascalCaseCategory}</SectionTitle>
-            <PostRowsLinks
-              isLoading={categoryPostsDataIsFetching}
-              postsData={categoryPostsData}
-            />
+            <PostRowsLinks postsData={categoryPostsData} />
           </PageMainIndent>
         </PageMain>
       </Fragment>
@@ -169,6 +158,7 @@ export async function getStaticProps(
 
   let postData;
   let randomisedPosts;
+  let categoryPostsData;
 
   if (uniqueSlug) {
     postData = await helpers.post.readPost.fetch({ slug: uniqueSlug });
@@ -183,7 +173,7 @@ export async function getStaticProps(
     fileUnder &&
     tagKeys.includes(getPascalCaseFromKebabCase(fileUnder) as TagName)
   ) {
-    await helpers.post.readAllPostsInCategory.prefetch({
+    categoryPostsData = await helpers.post.readAllPostsInCategory.fetch({
       category: getPascalCaseFromKebabCase(fileUnder) as TNativeTag,
     });
   }
@@ -193,6 +183,7 @@ export async function getStaticProps(
       trpcState: helpers.dehydrate(),
       slug: uniqueSlug ?? "", // We can fallback to "" since 'undefined' is not allowed and is still falsy
       category: fileUnder,
+      categoryPostsData,
       postData,
       randomisedPosts,
     },
