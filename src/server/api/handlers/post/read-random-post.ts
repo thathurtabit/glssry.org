@@ -3,8 +3,8 @@ import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 
 import { publicProcedure } from "~/server/api/trpc";
 
-import { getShuffledArray } from "./../../../../utils/get-shuffled-array";
 import { errorMessage } from "../../utils/error-message";
+import { getShuffledArray } from "./../../../../utils/get-shuffled-array";
 
 export const readRandomPost = publicProcedure.query(async ({ ctx }) => {
   try {

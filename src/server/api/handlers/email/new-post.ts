@@ -2,7 +2,7 @@ import { render } from "@react-email/render";
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 import {
- MailerSend, EmailParams, Sender, Recipient,
+  MailerSend, EmailParams, Sender, Recipient,
 } from "mailersend";
 
 import { newPost } from "~/emails/new-post.email";
@@ -41,7 +41,7 @@ export const newPostEmailNotification = protectedProcedure.input(
         apiKey: process.env.MAILERSEND_API_KEY ?? "",
       });
 
-      const emailHtml = render(newPost(input));
+      const emailHtml = await render(newPost(input));
       const sentFrom = new Sender(environment.EMAIL_FROM, appDomain);
       const recipients = [
         new Recipient(environment.EMAIL_TO, `${appDomain} New Post`),

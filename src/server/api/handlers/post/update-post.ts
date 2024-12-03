@@ -2,7 +2,7 @@ import { TRPCError } from "@trpc/server";
 
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 
-import z from "zod";
+import { string, object } from "zod";
 
 import { postSchema } from "~/schemas/post/post.schema";
 
@@ -11,8 +11,8 @@ import { protectedProcedure } from "~/server/api/trpc";
 import { errorMessage } from "../../utils/error-message";
 import { sharedReadUserData } from "../shared/user/shared-read-user-data";
 
-export const updatePost = protectedProcedure.input(z.object({
-  postId: z.string().min(1),
+export const updatePost = protectedProcedure.input(object({
+  postId: string().min(1),
   data: postSchema,
 })).mutation(async ({ input, ctx }) => {
   const userId = ctx.session?.user.id;

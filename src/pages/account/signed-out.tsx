@@ -27,11 +27,7 @@ const SignedOut: NextPage = () => {
   const isAuthenticated = useIsAuthenticated();
   if (isAuthenticated) {
     return (
-      <AlreadySignedIn
-        message={
-          "Uh, you're on the 'signed-out' page, but you're still signed in!"
-        }
-      />
+      <AlreadySignedIn message="Uh, you're on the 'signed-out' page, but you're still signed in!" />
     );
   }
 

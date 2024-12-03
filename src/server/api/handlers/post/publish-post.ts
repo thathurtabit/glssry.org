@@ -1,14 +1,14 @@
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 
-import z from "zod";
+import { object, string } from "zod";
 
 import { editorProcedure } from "~/server/api/trpc";
 
 import { errorMessage } from "../../utils/error-message";
 
-export const publishPost = editorProcedure.input(z.object({
-  postId: z.string().min(1),
+export const publishPost = editorProcedure.input(object({
+  postId: string().min(1),
 })).mutation(async ({ input, ctx }) => {
   try {
     const post = await ctx.db.postVersion.update({

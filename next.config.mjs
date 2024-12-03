@@ -17,6 +17,8 @@ const config = {
   experimental: {
     forceSwcTransforms: true,
     swcPlugins: [["next-superjson-plugin", {}]],
+    workerThreads: false,
+    cpus: 2,
   },
 
   /**
