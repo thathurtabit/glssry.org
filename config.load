@@ -1,0 +1,5 @@
+load database
+  from mysql://root:UfsZpMiYrLEtVnCZSUomGxGyiWpuunmy@roundhouse.proxy.rlwy.net:30315/railway
+  into postgresql://postgres.bdimcjtnasfpsdyzscov:y3Qj0ILg7d0KTql5@aws-0-us-east-1.pooler.supabase.com:6543/postgres
+alter schema 'public' owner to 'postgres';
+set wal_buffers = '64MB', max_wal_senders = 0, statement_timeout = 0, work_mem to '2GB';
