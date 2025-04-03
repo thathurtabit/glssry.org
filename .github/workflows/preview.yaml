@@ -23,7 +23,7 @@ jobs:
       - uses: pnpm/action-setup@v3
         name: Install pnpm
         with:
-          version: ^10.5.0
+          version: ^10.7.1
 
       - name: Get pnpm store directory
         shell: bash
