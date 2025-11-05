@@ -25,7 +25,7 @@ export const SignInOrOutButton: FC<ISignInOrOutButton> = ({
       (async () => {
         await signOut({ callbackUrl: EURLS.SignedOut });
       })().catch((error) => {
-        // eslint-disable-next-line no-console
+         
         console.error(error);
       });
     }
@@ -33,7 +33,7 @@ export const SignInOrOutButton: FC<ISignInOrOutButton> = ({
     (async () => {
       await signIn("sign-in-button", { callbackUrl: EURLS.SignInSuccess });
     })().catch((error) => {
-      // eslint-disable-next-line no-console
+       
       console.error(error);
     });
   };

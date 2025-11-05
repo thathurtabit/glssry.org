@@ -36,11 +36,11 @@ export const EditPost: FC = () => {
             postData={postDataFromTRPC}
             postId={postData.id ?? undefined}
           />
-        ) : postData && !isEditor ? (
+        ) : (postData && !isEditor ? (
           <p className="flex gap-2 items-center">
             <IconInfo /> You need to be an editor to edit
           </p>
-        ) : null}
+        ) : null)}
       </PageStructure>
     </AccountPageWrapper>
   );

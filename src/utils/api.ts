@@ -12,7 +12,7 @@ import superjson from "superjson";
 import { type AppRouter } from "~/server/api/root";
 
 const getBaseUrl = () => {
-  if (typeof window !== "undefined") {
+  if (globalThis.window !== undefined) {
     return "";
   } // Browser should use relative url
 

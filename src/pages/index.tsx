@@ -151,7 +151,7 @@ export const getStaticProps = async (): Promise<
     tagKeys.map((tagKey) => [tagKey, 0])
   );
 
-  // eslint-disable-next-line unicorn/no-array-reduce -- Reduce might be the best way to do this
+   
   const postsInCategories = categoryPosts.reduce((accumulator, post) => {
     const lastVersion = post.versions.at(-1);
 

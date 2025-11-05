@@ -35,5 +35,6 @@
     "TTRPC",
     "Uncategorized",
     "upsert"
-  ]
+  ],
+  "eslint.useFlatConfig": true
 }

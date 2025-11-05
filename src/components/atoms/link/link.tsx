@@ -41,11 +41,11 @@ export const Link: FC<ILink> = ({
     >
       {isPreviousButton ? (
         <IconGoBack size={nextPreviousIconSize} />
-      ) : isNextButton ? (
+      ) : (isNextButton ? (
         <IconGoForward size={nextPreviousIconSize} />
       ) : (
         content
-      )}
+      ))}
     </NextLink>
   );
 };

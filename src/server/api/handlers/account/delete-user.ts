@@ -18,7 +18,7 @@ export const deleteUser = protectedProcedure.mutation(async ({ ctx }) => {
     do {
       randomUsername = getRandomUsername({});
       // The below might actually be fine
-      // eslint-disable-next-line no-await-in-loop
+       
       isUsernameTaken = await sharedReadIsUsernameTaken(randomUsername, ctx.db);
     } while (isUsernameTaken);
 

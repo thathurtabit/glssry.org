@@ -89,7 +89,7 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
             body: state.body,
           });
         } catch (error) {
-          // eslint-disable-next-line no-console
+           
           console.error(error);
         }
       }

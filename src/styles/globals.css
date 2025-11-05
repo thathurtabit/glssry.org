@@ -7,14 +7,19 @@
   --space-top: 55px;
   --space-top-mobile: 110px;
   --color-border: #333;
-  --loading: #777
+  --loading: #777;
 }
 
 html {
   font-family: var(--font-body);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
 }
 
@@ -22,18 +27,23 @@ p {
   margin-bottom: 1rem;
 }
 
-.grecaptcha-badge { visibility: hidden!important; }
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
 
-*:focus, *:focus-visible {
+*:focus,
+*:focus-visible {
   outline-width: 2px;
-  outline-color: theme(colors.focus.DEFAULT);
+  outline-color: theme("colors.focus.DEFAULT");
   outline-offset: 0.1rem;
   outline-style: dashed;
 }
 
-*:focus:not(:focus-visible) { outline: none }
+*:focus:not(:focus-visible) {
+  outline: none;
+}
 
 *::selection {
-  background-color: theme(colors.link.light);
-  color: theme(colors.copy-inverse.dark);
+  background-color: theme("colors.link.light");
+  color: theme("colors.copy-inverse.dark");
 }

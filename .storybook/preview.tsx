@@ -42,7 +42,7 @@ const preview: Preview = {
     (Story: ComponentType<object>, context) => (
       <GlssryAppProvider>
         {/* https://nextjs.org/blog/styling-next-with-styled-jsx#adding-global-styles */}
-        {/* eslint-disable-next-line react/no-unknown-property */}
+        { }
         <style>
           {`
                 :root {

@@ -84,9 +84,9 @@ export const SignIn = ({
     (error?.at(0) as ESignInMessage) ?? ESignInMessage.Default;
 
   const errorFiltered: ESignInMessage = errorExists
-    ? errorIsArray
+    ? (errorIsArray
       ? firstErrorFromArray
-      : (error as ESignInMessage) ?? ESignInMessage.Default
+      : (error as ESignInMessage) ?? ESignInMessage.Default)
     : ESignInMessage.Default;
 
   const errorMessage = errorFiltered
