@@ -30,19 +30,19 @@ export const getButtonSizeClasses = (size: TButtonSize) => {
 export const getButtonVariantClasses = (variant: TButtonVariant) => {
   switch (variant) {
     case "primary": {
-      return "border-2 border-primary bg-primary text-copy-inverse not-disabled:hover:bg-primary-dark not-disabled:hover:border-primary-dark disabled:opacity-50";
+      return "border-2 border-primary bg-primary text-copy-inverse [&:not(:disabled)]:hover:bg-primary-dark [&:not(:disabled)]:hover:border-primary-dark disabled:opacity-50";
     }
 
     case "secondary": {
-      return "border-2 border-primary bg-secondary text-copy border-copy not-disabled:hover:bg-secondary-light not-disabled:hover:border-primary disabled:opacity-50";
+      return "border-2 border-primary bg-secondary text-copy border-copy [&:not(:disabled)]:hover:bg-secondary-light [&:not(:disabled)]:hover:border-primary disabled:opacity-50";
     }
 
     case "danger": {
-      return "bg-error text-white not-disabled:hover:bg-error-dark";
+      return "bg-error text-white [&:not(:disabled)]:hover:bg-error-dark";
     }
 
     default: {
-      return "bg-action text-copy-inverse not-disabled:hover:bg-action-dark";
+      return "bg-action text-copy-inverse [&:not(:disabled)]:hover:bg-action-dark";
     }
   }
 };
@@ -86,8 +86,8 @@ export const Button: FC<IButton> = ({
     shape === "round" ? "aspect-square" : "aspect-auto";
   const dropShadowClasses =
     shape === "round"
-      ? "drop-shadow-timer [&:not(:disabled)]:active:drop-shadow-timer-active not-disabled:active:translate-x-1 not-disabled:active:translate-y-1"
-      : "drop-shadow-button [&:not(:disabled)]:active:drop-shadow-button-active not-disabled:active:translate-x-1 not-disabled:active:translate-y-1";
+      ? "drop-shadow-timer [&:not(:disabled)]:active:drop-shadow-timer-active [&:not(:disabled)]:active:translate-x-1 [&:not(:disabled)]:active:translate-y-1"
+      : "drop-shadow-button [&:not(:disabled)]:active:drop-shadow-button-active [&:not(:disabled)]:active:translate-x-1 [&:not(:disabled)]:active:translate-y-1";
   const buttonSizeClasses = getButtonSizeClasses(size);
   const variantClasses = getButtonVariantClasses(variant);
   const content = hasError ? (iconOnly ? <IconError /> : errorText) : children;
