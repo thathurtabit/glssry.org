@@ -56,7 +56,7 @@ export const getErrorIconSize = (size: TButtonSize) =>
   size === "small" ? 16 : (size === "medium" ? 18 : 22);
 export const getNextPreviousIconSize = (size: TButtonSize) =>
   size === "small" ? 13 : (size === "medium" ? 14 : 16);
-// Note: the below is assuming these icons are 'rounded-sm' shape
+// Note: the icon sizes below are chosen based on the assumption that the icons themselves are visually similar to a 'rounded-sm' shape (not that a 'rounded-sm' class is applied here)
 export const getResetIconSize = (size: TButtonSize) =>
   size === "small" ? "25" : (size === "medium" ? "30" : "40");
 export const getPlayIconSize = (size: TButtonSize) =>
