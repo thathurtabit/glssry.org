@@ -24,7 +24,7 @@
     "start": "next start",
     "test": "vitest",
     "test:ci": "vitest run",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",

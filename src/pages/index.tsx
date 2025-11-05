@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "~/server/prisma";
 import type { GetStaticPropsResult } from "next";
 
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
@@ -54,7 +54,6 @@ export default function Home({
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<IHomePageProperties>
 > => {
-  const prisma = new PrismaClient();
   const allPublishedPostsData = await prisma.post.findMany({
     where: {
       versions: {
