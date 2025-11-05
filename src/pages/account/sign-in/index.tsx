@@ -25,7 +25,7 @@ import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
 import { useVerifyRecaptchaMutation } from "~/hooks/auth/recaptcha-verify.hook";
 import { EURLS } from "~/settings/constants";
 import { ESignInMessage } from "~/types/sign-in.types";
-import { getSignInErrorMessage } from "~/utils/sign-in.utils";
+import { getSignInErrorMessage } from "~/utils/sign-in.utilities";
 
 const handleSignIn = (id: string) => {
   (async () => {
@@ -84,9 +84,9 @@ export const SignIn = ({
     (error?.at(0) as ESignInMessage) ?? ESignInMessage.Default;
 
   const errorFiltered: ESignInMessage = errorExists
-    ? (errorIsArray
+    ? errorIsArray
       ? firstErrorFromArray
-      : (error as ESignInMessage) ?? ESignInMessage.Default)
+      : ((error as ESignInMessage) ?? ESignInMessage.Default)
     : ESignInMessage.Default;
 
   const errorMessage = errorFiltered

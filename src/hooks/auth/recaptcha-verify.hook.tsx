@@ -8,7 +8,7 @@ export const useVerifyRecaptchaMutation = () => {
   const dispatch = useContext(GlssryDispatchContext);
   const onSuccessId = useId();
 
-  const { mutate, mutateAsync, error, isLoading } =
+  const { mutate, mutateAsync, error, isPending } =
     api.account.verifyRecaptcha.useMutation({
       onSuccess() {
         dispatch(
@@ -25,7 +25,7 @@ export const useVerifyRecaptchaMutation = () => {
   return {
     mutateVerifyRecaptcha: mutate,
     mutateVerifyRecaptchaAsync: mutateAsync,
-    mutateVerifyRecaptchaLoading: isLoading,
+    mutateVerifyRecaptchaLoading: isPending,
     mutateVerifyRecaptchaError: error,
   };
 };

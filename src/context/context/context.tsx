@@ -27,10 +27,7 @@ export const GlssryAppProvider = ({ children }: IAppProvider): ReactNode => {
     notifications: [notificationsReducer, initState.notifications],
   });
 
-  const [state, dispatch] = useReducer<ContextReducer>(
-    combinedReducer,
-    combinedInitState
-  );
+  const [state, dispatch] = useReducer(combinedReducer, combinedInitState);
 
   const memoizedStateContextValue: TGlssryStateContext =
     useMemo<TGlssryStateContext>(() => state, [state]);

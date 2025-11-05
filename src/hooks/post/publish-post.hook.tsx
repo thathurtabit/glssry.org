@@ -11,7 +11,7 @@ export const usePublishPost = () => {
   const publishPostSuccessId = useId();
   const trpcContext = api.useUtils();
 
-  const { mutate, mutateAsync, error, isError, isLoading } =
+  const { mutate, mutateAsync, error, isError, isPending } =
     api.post.publishPost.useMutation({
       onMutate() {
         dispatch(
@@ -51,7 +51,7 @@ export const usePublishPost = () => {
   return {
     publishPostMutation: mutate,
     publishPostMutationAsync: mutateAsync,
-    publishPostMutationIsLoading: isLoading,
+    publishPostMutationIsPending: isPending,
     publishPostMutationError: error,
     publishPostMutationHasError: isError,
   };

@@ -1,14 +1,12 @@
-import {
- useState, useEffect, useCallback, useMemo,
-} from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 
-import type { SomeZodObject } from "zod";
+import type { ZodObject } from "zod";
 
 type IFormState = Record<string, unknown>;
 
 interface IUseFormValidationInputTypes {
   currentFormState: IFormState;
-  currentFormSchema: SomeZodObject;
+  currentFormSchema: ZodObject;
   initialPerformLiveValidation?: boolean;
 }
 

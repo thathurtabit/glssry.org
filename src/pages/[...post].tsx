@@ -49,7 +49,7 @@ export default function PostViewPage({
         <PageMain justifyContent="start">
           <PageMainIndent className="max-w-2xl">
             <SectionTitle>{pascalCaseCategory}</SectionTitle>
-            <PostRowsLinks postsData={categoryPostsData} />
+            <PostRowsLinks postsData={categoryPostsData ?? undefined} />
           </PageMainIndent>
         </PageMain>
       </Fragment>
@@ -90,7 +90,10 @@ export default function PostViewPage({
       <SharedHead title={title} description={body} />
       <Breadcrumbs items={[category, slug]} />
       <PageMain justifyContent="center" className="items-start">
-        <Post postData={postData} randomisedPosts={randomisedPosts} />
+        <Post
+          postData={postData!}
+          randomisedPosts={randomisedPosts ?? undefined}
+        />
       </PageMain>
     </Fragment>
   );
@@ -177,15 +180,21 @@ export async function getStaticProps(
       category: getPascalCaseFromKebabCase(fileUnder) as TNativeTag,
     });
   }
+  // Next requires that props returned from getStaticProps are JSON-serializable
+  // (no `Date` objects, `undefined`, etc.). Convert possible Dates to ISO
+  // strings by serializing via JSON.stringify/parse. We keep `null` for absent
+  // values.
+  const serialize = <T,>(v: T | undefined | null): T | null =>
+    v == null ? null : (JSON.parse(JSON.stringify(v)) as T);
 
   return {
     props: {
       trpcState: helpers.dehydrate(),
-      slug: uniqueSlug ?? "", // We can fallback to "" since 'undefined' is not allowed and is still falsy
+      slug: uniqueSlug ?? "", // fallback to empty string instead of undefined
       category: fileUnder,
-      categoryPostsData,
-      postData,
-      randomisedPosts,
+      categoryPostsData: serialize(categoryPostsData),
+      postData: serialize(postData),
+      randomisedPosts: serialize(randomisedPosts),
     },
     revalidate: 1,
   };

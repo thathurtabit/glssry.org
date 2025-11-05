@@ -31,7 +31,7 @@ export const OmniSearch: FC = () => {
   };
 
   return (
-    <section className="border-b-[1px] border-divider bg-background grid h-header grid-cols-10 fixed left-0 right-0 top-header justify-center items-center md:max-w-md md:top-0 md:left-1/2 md:-translate-x-1/2 md:h-header">
+    <section className="border-b border-divider bg-background grid h-header grid-cols-10 fixed left-0 right-0 top-header justify-center items-center md:max-w-md md:top-0 md:left-1/2 md:-translate-x-1/2 md:h-header">
       <span className="inline-flex col-start-1 items-center justify-center">
         <IconSearch className="text-sm" />
       </span>

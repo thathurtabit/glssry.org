@@ -6,6 +6,7 @@ import json from "@eslint/json";
 import markdown from "@eslint/markdown";
 import css from "@eslint/css";
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
+import eslintTailwind from "eslint-plugin-tailwindcss";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import { defineConfig } from "eslint/config";
 
@@ -20,12 +21,13 @@ export default defineConfig([
       "**/coverage/**",
       "**/.vercel/**",
       "**/.parcel-cache/**",
-      "**/.cache/**"
+      "**/.cache/**",
+      "src/**/*.css"
     ]
   },
   {
     // Only lint source code under `src/`
-    files: ["src/**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"], plugins: { js }, extends: ["js/recommended"],
+    files: ["src/**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"], plugins: { js, tailwindcss: eslintTailwind as unknown as any }, extends: ["js/recommended"],
     // Do not lint generated/build files. Use the flat-config "ignores" property because
     // .eslintignore is deprecated when using flat config.
     ignores: [
@@ -36,7 +38,8 @@ export default defineConfig([
       "**/coverage/**",
       "**/.vercel/**",
       "**/.parcel-cache/**",
-      "**/.cache/**"
+      "**/.cache/**",
+      "src/**/*.css"
     ],
     // Ensure eslint-plugin-react knows which React version to use. "detect" lets the plugin
     // automatically pick the installed React version (or fallback) and removes the warning.
@@ -58,7 +61,7 @@ export default defineConfig([
   {
     // unicorn rules limited to source files
     files: ["src/**/*.{mjs,cjs,ts,mts,cts,jsx,tsx}"], plugins: {
-      unicorn: eslintPluginUnicorn,
+      unicorn: eslintPluginUnicorn as unknown as any,
     },
     rules: {
       'unicorn/no-null': 'off',
@@ -74,5 +77,20 @@ export default defineConfig([
   { files: ["src/**/*.jsonc"], plugins: { json }, language: "json/jsonc", extends: ["json/recommended"] },
   { files: ["src/**/*.json5"], plugins: { json }, language: "json/json5", extends: ["json/recommended"] },
   { files: ["src/**/*.md"], plugins: { markdown }, language: "markdown/gfm", extends: ["markdown/recommended"] },
-  { files: ["src/**/*.css"], plugins: { css }, language: "css/css", extends: ["css/recommended"] },
+  {
+    files: ["src/**/*.css"], plugins: { css: css as unknown as any }, language: "css/css", extends: ["css/recommended"], settings: {
+      tailwindcss: {
+        // Attributes/props that could contain Tailwind CSS classes...
+        // Optional, default values: ["class", "className", "ngClass", "@apply"]
+        attributes: ["class"],
+        // The absolute path pointing to you main Tailwind CSS v4 config file.
+        // It must be a `.css` file (v4), not a `.js` file (v3)
+        // REQUIRED, default value will not help
+        cssConfigPath: "src/styles/globals.css",
+        // Functions/tagFunctions that will be parsed by the plugin.
+        // Optional, default values: ["classnames", "clsx", "ctl", "cva", "tv", "tw"]
+        functions: ["twClasses"]
+      },
+    }
+  },
 ]);
