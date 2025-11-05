@@ -16,7 +16,7 @@ export const ErrorMessage: FC<IErrorMessage> = ({
   Icon,
 }) => (
   <section
-    className={`${infoPanelWrapper} border-red-700 rounded-xs bg-white ${className}`}
+    className={`${infoPanelWrapper} border-red-700 rounded-sm bg-white ${className}`}
   >
     <h3 className={`${infoPanelHeading} text-black`}>
       {Icon ? <Icon /> : <IconError className="mr-2 text-red-700" />}
