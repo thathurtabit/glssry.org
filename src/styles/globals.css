@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 @custom-variant dark (&:is([data-mode="dark"] *));
+@custom-variant not-disabled (&:not(:disabled));
 
 @theme {
   --height-header: var(--space-top);
