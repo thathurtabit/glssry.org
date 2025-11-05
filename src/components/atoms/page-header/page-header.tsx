@@ -16,7 +16,7 @@ export const PageHeader: FC<IPageHeader> = ({
       </p>
     )}
     <h1
-      className={`font-heading drop-shadow-headers leading-7 flex gap-2 text-4xl md:text-5xl ${
+      className={`font-heading drop-shadow-headers flex gap-2 text-4xl md:text-5xl ${
         removeMargin ? "m-0" : "mb-3"
       } ${preText ? "mt-1" : "mt-4"}`}
     >

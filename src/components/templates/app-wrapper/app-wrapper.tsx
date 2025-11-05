@@ -34,9 +34,9 @@ export const AppWrapper: FCC = ({ children }) => (
     <style jsx global>
       {`
         :root {
-          --font-heading: ${heading.style.fontFamily};
-          --font-sub-heading: ${subHeading.style.fontFamily};
-          --font-body: ${body.style.fontFamily};
+          --font-heading-root: ${heading.style.fontFamily};
+          --font-sub-heading-root: ${subHeading.style.fontFamily};
+          --font-body-root: ${body.style.fontFamily};
         }
       `}
     </style>

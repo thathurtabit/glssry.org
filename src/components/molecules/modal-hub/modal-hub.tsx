@@ -120,11 +120,11 @@ export const ModalHub: FC = () => {
       }
 
       case "large": {
-        return "max-w-4xl";
+        return "max-w-6xl";
       }
 
       default: {
-        return "max-w-2xl";
+        return "max-w-4xl";
       }
     }
   };

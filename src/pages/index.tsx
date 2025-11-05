@@ -26,7 +26,7 @@ export default function Home({
         description={`${appDomain} ${appDescription}`}
       />
       <PageMain justifyContent="start">
-        <PageMainIndent className="max-w-2xl">
+        <PageMainIndent className="max-w-4xl">
           <section className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 lg:gap-24 w-full justify-center items-center">
             <Intro />
             <PostShort postData={randomPostData} className="md:max-w-md" />

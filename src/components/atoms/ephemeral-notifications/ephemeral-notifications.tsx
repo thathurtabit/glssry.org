@@ -1,8 +1,6 @@
 import type { FC } from "react";
 
-import {
- Fragment, useContext, useEffect, useState,
-} from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 
 import { InfoIcon } from "~/components/atoms/info-panel-icon/info-panel-icon";
 import { clearOldestNotification } from "~/context/actions/notifications/notifications.actions";
@@ -138,7 +136,7 @@ export const EphemeralNotifications: FC<IEphemeralInfoPanels> = ({
             <dialog
               key={uuid}
               open
-              className="fixed bottom-10 z-notification flex items-center justify-center rounded-full bg-white px-2 py-1.5 text-left leading-tight text-black shadow-md transition-all duration-500 ease-in-out"
+              className="fixed bottom-10 z-notification flex items-center justify-center rounded-full bg-white px-2 py-1.5 left-1/2 transform -translate-x-1/2 text-left leading-tight text-black shadow-md transition-all duration-500 ease-in-out"
             >
               {Icon ? (
                 <span className={iconWrapperClasses}>
@@ -158,7 +156,7 @@ export const EphemeralNotifications: FC<IEphemeralInfoPanels> = ({
                 <h3 className="flex items-center font-body justify-items-start text-[0.7rem] font-semibold">
                   {title}
                 </h3>
-                <p className="m-0 text-[0.675rem]">{message}</p>
+                <p className="mb-0 text-[0.675rem]">{message}</p>
               </div>
             </dialog>
           )

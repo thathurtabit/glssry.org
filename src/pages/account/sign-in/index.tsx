@@ -183,7 +183,7 @@ export const SignIn = ({
         />
         {showError && <ErrorMessage title="Uh oh" text={errorMessage} />}
         {providersList && (
-          <ul className="my-3">
+          <ul className="my-3 w-full flex flex-col items-center justify-center">
             {providersList.map(({ name, id }) => (
               <li key={name} className="m-2">
                 <Button

@@ -47,7 +47,7 @@ export default function PostViewPage({
         />
         <Breadcrumbs items={[category]} />
         <PageMain justifyContent="start">
-          <PageMainIndent className="max-w-2xl">
+          <PageMainIndent className="max-w-4xl">
             <SectionTitle>{pascalCaseCategory}</SectionTitle>
             <PostRowsLinks postsData={categoryPostsData ?? undefined} />
           </PageMainIndent>
@@ -61,7 +61,7 @@ export default function PostViewPage({
         />
         <Breadcrumbs items={[category]} />
         <PageMain justifyContent="start">
-          <PageMainIndent className="max-w-2xl">
+          <PageMainIndent className="max-w-4xl">
             <SectionTitle>{pascalCaseCategory}</SectionTitle>
             <NoPostFound />
           </PageMainIndent>

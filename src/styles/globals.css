@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @custom-variant dark (&:is([data-mode="dark"] *));
 @custom-variant not-disabled (&:not(:disabled));
@@ -16,14 +16,14 @@
   --border-color-divider: var(--color-border);
 
   --font-heading:
-    var(--font-heading), ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    var(--font-heading-root), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-sub-heading:
-    var(--font-sub-heading), ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    var(--font-sub-heading-root), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-body:
-    var(--font-body), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    var(--font-body-root), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   --z-index-modal: 1000;
 
@@ -92,50 +92,55 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
-}
 
-/* Custom CSS */
-:root {
-  --space-top: 55px;
-  --space-top-mobile: 110px;
-  --color-border: #333;
-  --loading: #777;
-}
+  /* Custom CSS */
+  :root {
+    --space-top: 55px;
+    --space-top-mobile: 110px;
+    --color-border: #333;
+    --loading: #777;
+  }
 
-html {
-  font-family: var(--font-body);
-}
+  html {
+    font-family: var(--font-body);
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-}
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+  }
 
-p {
-  margin-bottom: 1rem;
-}
+  :is(h1, h2, h3).font-sub-heading {
+    font-family: var(--font-sub-heading);
+  }
 
-.grecaptcha-badge {
-  visibility: hidden !important;
-}
+  :is(h1, h2, h3).font-body {
+    font-family: var(--font-body);
+  }
 
-*:focus,
-*:focus-visible {
-  outline-width: 2px;
-  outline-color: var(--color-focus);
-  outline-offset: 0.1rem;
-  outline-style: dashed;
-}
+  p {
+    margin-bottom: 1rem;
+  }
 
-*:focus:not(:focus-visible) {
-  outline: none;
-}
+  .grecaptcha-badge {
+    visibility: hidden !important;
+  }
 
-*::selection {
-  background-color: var(--color-link-light);
-  color: var(--color-copy-inverse-dark);
+  *:focus,
+  *:focus-visible {
+    outline-width: 2px;
+    outline-color: var(--color-focus);
+    outline-offset: 0.1rem;
+    outline-style: dashed;
+  }
+
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  *::selection {
+    background-color: var(--color-link-light);
+    color: var(--color-copy-inverse-dark);
+  }
 }
