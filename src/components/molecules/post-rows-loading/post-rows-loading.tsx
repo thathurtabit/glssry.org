@@ -13,7 +13,7 @@ export const PostRowsLoading: FC<IPostRowsLoading> = ({ itemsCount = 5 }) => (
   <ul className={postRowWrapperStyles}>
     {Array.from({ length: itemsCount }).map((_, index) => (
       <li
-        // eslint-disable-next-line react/no-array-index-key
+         
         key={`post-row-loading-${index}`}
         className={`${postRowItemStyles} py-2 justify-between items-start flex gap-4 animate-pulse`}
       >

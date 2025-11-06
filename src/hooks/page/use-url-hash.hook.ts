@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react";
 
 const getHash = () =>
-  typeof window === "undefined"
+  globalThis.window === undefined
     ? undefined
-    : decodeURIComponent(window.location.hash.replace("#", ""));
+    : decodeURIComponent(globalThis.location.hash.replace("#", ""));
 
 /** Get has from current URL */
 export const useURLHash = () => {
@@ -17,9 +17,9 @@ export const useURLHash = () => {
       setHash(getHash());
     };
 
-    window.addEventListener("hashchange", handleHashChange);
+    globalThis.addEventListener("hashchange", handleHashChange);
     return () => {
-      window.removeEventListener("hashchange", handleHashChange);
+      globalThis.removeEventListener("hashchange", handleHashChange);
     };
   }, []);
 

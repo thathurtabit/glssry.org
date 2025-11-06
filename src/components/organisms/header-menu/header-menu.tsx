@@ -38,7 +38,7 @@ export const HeaderMenu: FC = () => {
 
   return (
     <nav
-      className={`bg-copy fixed right-0 top-0 bottom-0 text-copy-inverse transition-all z-[100] ${menuStyles}`}
+      className={`bg-copy fixed right-0 top-0 bottom-0 text-copy-inverse transition-all z-100 ${menuStyles}`}
     >
       {isMenuOpen ? (
         <FocusTrap>

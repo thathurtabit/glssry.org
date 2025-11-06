@@ -5,7 +5,7 @@ import type { IButtonText } from "./button-text.types";
 export const sharedTextClasses =
   "relative font-body font-medium items-center gap-1";
 export const sharedTextUnderlineClasses =
-  "relative after:bg-action after:transition-transform after:absolute after:content-[''] inline-flex after:left-0 after:bottom-0 after:w-full after:scale-x-0 after:h-[1px] after:origin-bottom-right after:ease-in-out";
+  "relative after:bg-action after:transition-transform after:absolute after:content-[''] inline-flex after:left-0 after:bottom-0 after:w-full after:scale-x-0 after:h-px after:origin-bottom-right after:ease-in-out";
 export const sharedTextUnderlineClassesHover =
   "hover:after:scale-x-100 hover:after:origin-bottom-left";
 

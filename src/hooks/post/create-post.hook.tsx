@@ -15,7 +15,7 @@ export const useCreatePost = ({ onSuccessCallback }: IUseCreatePost) => {
   const createPostSuccessId = useId();
   const trpcContext = api.useUtils();
 
-  const { mutate, mutateAsync, error, isError, isLoading } =
+  const { mutate, mutateAsync, error, isError, isPending } =
     api.post.createPost.useMutation({
       onMutate() {
         dispatch(
@@ -56,7 +56,7 @@ export const useCreatePost = ({ onSuccessCallback }: IUseCreatePost) => {
   return {
     createPostMutation: mutate,
     createPostMutationAsync: mutateAsync,
-    createPostMutationIsLoading: isLoading,
+    createPostMutationIsPending: isPending,
     createPostMutationError: error,
     createPostMutationHasError: isError,
   };

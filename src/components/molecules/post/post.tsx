@@ -28,6 +28,11 @@ export const Post: FC<IPost> = ({
   showRelatedPosts = true,
 }) => {
   const { author: originalAuthor, createdAt, versions } = postData;
+  // If props were serialized (Dates -> strings) during getStaticProps we may
+  // receive ISO date strings here. Normalize to Date objects for internal
+  // formatting utilities that expect Date instances.
+  const createdAtDate =
+    typeof createdAt === "string" ? new Date(createdAt) : createdAt;
   const latestVersion = versions.at(-1);
 
   if (!latestVersion) {
@@ -94,7 +99,7 @@ export const Post: FC<IPost> = ({
               <p
                 className="flex gap-2 text-xs items-center m-0"
                 title={`Created: ${getFormattedDate({
-                  date: createdAt,
+                  date: createdAtDate,
                 })} by ${originalAuthorUsername}`}
               >
                 {originalAuthorImageURL ? (
@@ -121,7 +126,10 @@ export const Post: FC<IPost> = ({
                 <p
                   className="flex gap-2 text-xs items-center m-0"
                   title={`Updated: ${getFormattedDate({
-                    date: updatedAt,
+                    date:
+                      typeof updatedAt === "string"
+                        ? new Date(updatedAt)
+                        : (updatedAt as Date | null),
                   })} by ${latestAuthorUsername ?? "-"}`}
                 >
                   {latestAuthorImageURL ? (

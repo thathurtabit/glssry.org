@@ -39,7 +39,7 @@ export const HeaderStrip: FC = () => {
   const pendingPostsCount = pendingPostsData?.length;
 
   return (
-    <section className="fixed top-0 bg-background left-0 right-0 flex justify-between h-header px-5 text-white items-center border-b-[1px] border-divider z-40">
+    <section className="fixed top-0 bg-background left-0 right-0 flex justify-between h-header px-5 text-white items-center border-b border-divider z-40">
       <LinkText href={EURLS.Home} className="font-heading text-lg">
         {appTitle}
       </LinkText>

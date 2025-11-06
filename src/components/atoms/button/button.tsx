@@ -51,18 +51,18 @@ export const coreButtonStyles =
   "font-sub-heading inline-flex items-center rounded-full transition whitespace-nowrap drop-shadow-button";
 
 export const getLoadingIconSize = (size: TButtonSize) =>
-  size === "small" ? 13 : size === "medium" ? 14 : 16;
+  size === "small" ? 13 : (size === "medium" ? 14 : 16);
 export const getErrorIconSize = (size: TButtonSize) =>
-  size === "small" ? 16 : size === "medium" ? 18 : 22;
+  size === "small" ? 16 : (size === "medium" ? 18 : 22);
 export const getNextPreviousIconSize = (size: TButtonSize) =>
-  size === "small" ? 13 : size === "medium" ? 14 : 16;
-// Note: the below is assuming these icons are 'rounded' shape
+  size === "small" ? 13 : (size === "medium" ? 14 : 16);
+// Note: the icon sizes below are chosen based on the assumption that the icons themselves are visually similar to a 'rounded-sm' shape (not that a 'rounded-sm' class is applied here)
 export const getResetIconSize = (size: TButtonSize) =>
-  size === "small" ? "25" : size === "medium" ? "30" : "40";
+  size === "small" ? "25" : (size === "medium" ? "30" : "40");
 export const getPlayIconSize = (size: TButtonSize) =>
-  size === "small" ? "25" : size === "medium" ? "30" : "40";
+  size === "small" ? "25" : (size === "medium" ? "30" : "40");
 export const getStopIconSize = (size: TButtonSize) =>
-  size === "small" ? "25" : size === "medium" ? "30" : "40";
+  size === "small" ? "25" : (size === "medium" ? "30" : "40");
 
 export const Button: FC<IButton> = ({
   title,
@@ -90,7 +90,7 @@ export const Button: FC<IButton> = ({
       : "drop-shadow-button [&:not(:disabled)]:active:drop-shadow-button-active [&:not(:disabled)]:active:translate-x-1 [&:not(:disabled)]:active:translate-y-1";
   const buttonSizeClasses = getButtonSizeClasses(size);
   const variantClasses = getButtonVariantClasses(variant);
-  const content = hasError ? iconOnly ? <IconError /> : errorText : children;
+  const content = hasError ? (iconOnly ? <IconError /> : errorText) : children;
   const isPreviousButton = direction === "prev";
   const isNextButton = direction === "next";
   const resetIconSize = getResetIconSize(size);
@@ -105,7 +105,7 @@ export const Button: FC<IButton> = ({
 
   return (
     <button
-      // eslint-disable-next-line react/button-has-type
+       
       type={type}
       className={`transition-all ${dropShadowClasses} ${
         hasError ? errorClasses : variantClasses

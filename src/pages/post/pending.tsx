@@ -20,8 +20,10 @@ export const ListPendingPosts: FC = () => {
     useReadAllPendingPosts();
   const isEditor = useIsEditor();
   const dispatch = useContext(GlssryDispatchContext);
-  const { publishPostMutation, publishPostMutationIsLoading } =
-    usePublishPost();
+  const {
+    publishPostMutation,
+    publishPostMutationIsPending: publishPostMutationIsLoading,
+  } = usePublishPost();
 
   const handleViewPost = (postData: NonNullable<TTRPCReadPost>) => {
     const lastVersion = postData.versions.at(-1);

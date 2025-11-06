@@ -43,7 +43,7 @@ export const RelatedTaxonomyPosts: FC<IRelatedTaxonomyPosts> = ({
       <SectionSubtitle headingLevel="h2">{title}</SectionSubtitle>
       {isLoading ? (
         <RelatedPostsLoading />
-      ) : postsDataNonNullable.length > 0 ? (
+      ) : (postsDataNonNullable.length > 0 ? (
         <ul className={relatedPostsULStyles}>
           {postsDataNonNullable.map(({ title, slug, versions }) => {
             const latestVersion = versions.at(-1);
@@ -78,7 +78,7 @@ export const RelatedTaxonomyPosts: FC<IRelatedTaxonomyPosts> = ({
         </ul>
       ) : (
         <NoPostFound />
-      )}
+      ))}
       <EditThisPost />
     </aside>
   );

@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+ 
 import { initState } from "~/context/state/init-state";
 import type { IGlssryState } from "~/context/types/context.types";
 

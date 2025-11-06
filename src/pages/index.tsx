@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "~/server/prisma";
 import type { GetStaticPropsResult } from "next";
 
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
@@ -26,7 +26,7 @@ export default function Home({
         description={`${appDomain} ${appDescription}`}
       />
       <PageMain justifyContent="start">
-        <PageMainIndent className="max-w-screen-2xl">
+        <PageMainIndent className="max-w-4xl">
           <section className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 lg:gap-24 w-full justify-center items-center">
             <Intro />
             <PostShort postData={randomPostData} className="md:max-w-md" />
@@ -54,7 +54,6 @@ export default function Home({
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<IHomePageProperties>
 > => {
-  const prisma = new PrismaClient();
   const allPublishedPostsData = await prisma.post.findMany({
     where: {
       versions: {
@@ -151,7 +150,6 @@ export const getStaticProps = async (): Promise<
     tagKeys.map((tagKey) => [tagKey, 0])
   );
 
-  // eslint-disable-next-line unicorn/no-array-reduce -- Reduce might be the best way to do this
   const postsInCategories = categoryPosts.reduce((accumulator, post) => {
     const lastVersion = post.versions.at(-1);
 
@@ -178,11 +176,18 @@ export const getStaticProps = async (): Promise<
 
   const randomPostData: IHomePageProperties["randomPostData"] =
     getShuffledArray(allPostsWithAuthor).at(0);
+  // Ensure props are JSON-serializable for Next (convert Dates to strings)
+  const serialize = <T,>(v: T | undefined | null): T | null =>
+    v == null ? null : (JSON.parse(JSON.stringify(v)) as T);
 
   return {
     props: {
-      latestPostsData,
-      randomPostData,
+      latestPostsData: serialize(
+        latestPostsData
+      ) as unknown as IHomePageProperties["latestPostsData"],
+      randomPostData: serialize(
+        randomPostData
+      ) as unknown as IHomePageProperties["randomPostData"],
       randomCategoryPostCountData,
     },
     revalidate: 24 * 60 * 60, // 24 hours

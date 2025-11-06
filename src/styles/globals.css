@@ -1,39 +1,146 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Custom CSS */
-:root {
-  --space-top: 55px;
-  --space-top-mobile: 110px;
-  --color-border: #333;
-  --loading: #777
+@custom-variant dark (&:is([data-mode="dark"] *));
+@custom-variant not-disabled (&:not(:disabled));
+
+@theme {
+  --height-header: var(--space-top);
+
+  --margin-header: var(--space-top);
+  --margin-mobile-header: var(--space-top-mobile);
+
+  --spacing-header: var(--space-top);
+
+  --padding-header: var(--space-top);
+
+  --border-color-divider: var(--color-border);
+
+  --font-heading:
+    var(--font-heading-root), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sub-heading:
+    var(--font-sub-heading-root), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-body:
+    var(--font-body-root), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --z-index-modal: 1000;
+
+  --color-copy: hsl(0deg 0% 95%);
+  --color-copy-light: hsl(0deg 0% 100%);
+  --color-copy-dark: hsl(0deg 0% 90%);
+
+  --color-copy-inverse: hsl(0deg 0% 5%);
+  --color-copy-inverse-light: hsl(0deg 0% 10%);
+  --color-copy-inverse-dark: hsl(0deg 0% 0%);
+
+  --color-background: hsl(0deg 0% 5%);
+  --color-background-light: hsl(0deg 0% 10%);
+  --color-background-dark: hsl(0deg 0% 0%);
+
+  --color-loading: var(--loading);
+
+  --color-background-inverse: hsl(0deg 0% 95%);
+  --color-background-inverse-light: hsl(0deg 0% 100%);
+  --color-background-inverse-dark: hsl(0deg 0% 90%);
+
+  --color-border: var(--color-border);
+
+  --color-link: hsl(0deg 0% 100%);
+  --color-link-light: hsl(0deg 0% 100%);
+  --color-link-dark: hsl(0deg 0% 85%);
+
+  --color-action: hsl(0deg 0% 100%);
+  --color-action-light: hsl(0deg 0% 100%);
+  --color-action-dark: hsl(0deg 0% 85%);
+
+  --color-primary: hsl(0deg 0% 100%);
+  --color-primary-light: hsl(0deg 0% 100%);
+  --color-primary-dark: hsl(0deg 0% 85%);
+
+  --color-secondary: hsl(0deg 0% 0%);
+  --color-secondary-light: hsl(0deg 0% 15%);
+  --color-secondary-dark: hsl(0deg 0% 0%);
+
+  --color-focus: hsl(240deg 80% 69%);
+  --color-focus-light: hsl(240deg 80% 59%);
+  --color-focus-dark: hsl(240deg 80% 79%);
+
+  --color-error: hsl(352deg 65% 50%);
+  --color-error-light: hsl(352deg 65% 55%);
+  --color-error-dark: hsl(352deg 65% 45%);
+
+  --color-success: hsl(100deg 54% 55%);
+  --color-success-light: hsl(100deg 54% 60%);
+  --color-success-dark: hsl(100deg 54% 50%);
 }
 
-html {
-  font-family: var(--font-body);
-}
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-}
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
 
-p {
-  margin-bottom: 1rem;
-}
+  /* Custom CSS */
+  :root {
+    --space-top: 55px;
+    --space-top-mobile: 110px;
+    --color-border: #333;
+    --loading: #777;
+  }
 
-.grecaptcha-badge { visibility: hidden!important; }
+  html {
+    font-family: var(--font-body);
+  }
 
-*:focus, *:focus-visible {
-  outline-width: 2px;
-  outline-color: theme(colors.focus.DEFAULT);
-  outline-offset: 0.1rem;
-  outline-style: dashed;
-}
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+  }
 
-*:focus:not(:focus-visible) { outline: none }
+  :is(h1, h2, h3).font-sub-heading {
+    font-family: var(--font-sub-heading);
+  }
 
-*::selection {
-  background-color: theme(colors.link.light);
-  color: theme(colors.copy-inverse.dark);
+  :is(h1, h2, h3).font-body {
+    font-family: var(--font-body);
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
+
+  .grecaptcha-badge {
+    visibility: hidden !important;
+  }
+
+  *:focus,
+  *:focus-visible {
+    outline-width: 2px;
+    outline-color: var(--color-focus);
+    outline-offset: 0.1rem;
+    outline-style: dashed;
+  }
+
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  *::selection {
+    background-color: var(--color-link-light);
+    color: var(--color-copy-inverse-dark);
+  }
 }

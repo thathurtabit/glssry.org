@@ -21,7 +21,7 @@ export const EditThisPost: FC = () => {
   const slug = splitPathname.at(-1);
 
   return (
-    <section className="border-t-[1px] border-divider py-3 my-5">
+    <section className="border-t border-divider py-3 my-5">
       <LinkText href={`${EURLS.EditPost}#${slug}`} className="text-sm">
         Edit this post <IconEdit size={15} />
       </LinkText>

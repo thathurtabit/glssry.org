@@ -15,7 +15,7 @@ export const readRandomUsername = protectedProcedure.query(async ({ ctx }) => {
     do {
       username = getRandomUsername({});
       // The below might actually be fine
-      // eslint-disable-next-line no-await-in-loop
+       
       isUsernameTaken = await sharedReadIsUsernameTaken(username, ctx.db);
     } while (isUsernameTaken);
 

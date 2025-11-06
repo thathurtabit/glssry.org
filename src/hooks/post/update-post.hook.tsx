@@ -15,7 +15,7 @@ export const useUpdatePost = ({ onSuccessCallback }: IUseUpdatePost) => {
   const updatePostSuccessId = useId();
   const trpcContext = api.useUtils();
 
-  const { mutate, mutateAsync, error, isError, isLoading } =
+  const { mutate, mutateAsync, error, isError, isPending } =
     api.post.updatePost.useMutation({
       onMutate() {
         dispatch(
@@ -56,7 +56,7 @@ export const useUpdatePost = ({ onSuccessCallback }: IUseUpdatePost) => {
   return {
     updatePostMutation: mutate,
     updatePostMutationAsync: mutateAsync,
-    updatePostMutationIsLoading: isLoading,
+    updatePostMutationIsPending: isPending,
     updatePostMutationError: error,
     updatePostMutationHasError: isError,
   };

@@ -15,7 +15,7 @@ export const Share: FC<IShare> = ({ title, text, onInteraction }) => {
   const dispatch = useContext(GlssryDispatchContext);
 
   const handleShare = async (event: MouseEvent<HTMLButtonElement>) => {
-    const currentHref = window.location.href;
+    const currentHref = globalThis.location.href;
     const shareData: ShareData = {
       title,
       text,
@@ -42,7 +42,7 @@ export const Share: FC<IShare> = ({ title, text, onInteraction }) => {
           message: `"${title}" was not shared due to an error`,
         });
 
-        // eslint-disable-next-line no-console
+         
         console.error(error);
       }
     } else {
@@ -64,7 +64,7 @@ export const Share: FC<IShare> = ({ title, text, onInteraction }) => {
           message: `"${title}" link was not copied due to an error`,
         });
 
-        // eslint-disable-next-line no-console
+         
         console.error(error);
       }
     }

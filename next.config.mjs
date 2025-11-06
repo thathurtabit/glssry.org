@@ -1,4 +1,5 @@
-import nextPWA from "next-pwa";
+// next-pwa temporarily disabled while debugging a build-time plugin crash
+// (rkyv / SWC). Re-enable if/when we confirm compatibility.
 
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
@@ -6,17 +7,19 @@ import nextPWA from "next-pwa";
  */
 await import("./src/environment.mjs");
 
-const withPWA = nextPWA({
-  dest: "public",
-  disable: process.env.NODE_ENV === "development",
-});
+// const withPWA = nextPWA({ dest: "public", disable: process.env.NODE_ENV === "development" });
 
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
   experimental: {
-    forceSwcTransforms: true,
-    swcPlugins: [["next-superjson-plugin", {}]],
+    // temporarily disable forceSwcTransforms to avoid a Rust/SWC runtime panic
+    // seen during production builds. Re-enable if/when upstream issues are fixed.
+    forceSwcTransforms: false,
+    // Temporarily disabled swcPlugins while we fix getStaticProps and avoid
+    // an intermittent SWC/rkyv LayoutError that causes `next build` to crash.
+    // Re-enable individual plugins later for testing (one at a time).
+    // swcPlugins: [["next-superjson-plugin", {}]],
     workerThreads: false,
     cpus: 2,
   },
@@ -42,5 +45,7 @@ const config = {
   },
 };
 
-// @ts-expect-error - This is a valid Next config.
-export default withPWA(config);
+// Temporarily disable next-pwa wrapper to work around a build-time plugin
+// crash (rkyv/SWC). If this fixes the build we can investigate next-pwa
+// compatibility separately and re-enable it.
+export default config;

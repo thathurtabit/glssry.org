@@ -25,7 +25,7 @@ import { useIsAuthenticated } from "~/hooks/auth/is-authenticated.hook";
 import { useVerifyRecaptchaMutation } from "~/hooks/auth/recaptcha-verify.hook";
 import { EURLS } from "~/settings/constants";
 import { ESignInMessage } from "~/types/sign-in.types";
-import { getSignInErrorMessage } from "~/utils/sign-in.utils";
+import { getSignInErrorMessage } from "~/utils/sign-in.utilities";
 
 const handleSignIn = (id: string) => {
   (async () => {
@@ -86,7 +86,7 @@ export const SignIn = ({
   const errorFiltered: ESignInMessage = errorExists
     ? errorIsArray
       ? firstErrorFromArray
-      : (error as ESignInMessage) ?? ESignInMessage.Default
+      : ((error as ESignInMessage) ?? ESignInMessage.Default)
     : ESignInMessage.Default;
 
   const errorMessage = errorFiltered
@@ -183,7 +183,7 @@ export const SignIn = ({
         />
         {showError && <ErrorMessage title="Uh oh" text={errorMessage} />}
         {providersList && (
-          <ul className="my-3">
+          <ul className="my-3 w-full flex flex-col items-center justify-center">
             {providersList.map(({ name, id }) => (
               <li key={name} className="m-2">
                 <Button

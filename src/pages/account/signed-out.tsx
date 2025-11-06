@@ -18,7 +18,7 @@ const handleSignInAgain = () => {
   (async () => {
     await signIn("sign-in-again", { callbackUrl: EURLS.SignInSuccess });
   })().catch((error) => {
-    // eslint-disable-next-line no-console
+     
     console.error(error);
   });
 };

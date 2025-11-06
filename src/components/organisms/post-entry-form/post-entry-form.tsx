@@ -78,7 +78,10 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
 
   const { newPostEmailMutation } = useNewPostEmail();
 
-  const { createPostMutation, createPostMutationIsLoading } = useCreatePost({
+  const {
+    createPostMutation,
+    createPostMutationIsPending: createPostMutationIsLoading,
+  } = useCreatePost({
     onSuccessCallback() {
       // If not an editor/admin, we'll send an email to the root admin
       if (!isEditor) {
@@ -89,7 +92,6 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
             body: state.body,
           });
         } catch (error) {
-          // eslint-disable-next-line no-console
           console.error(error);
         }
       }
@@ -98,7 +100,10 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
     },
   });
 
-  const { updatePostMutation, updatePostMutationIsLoading } = useUpdatePost({
+  const {
+    updatePostMutation,
+    updatePostMutationIsPending: updatePostMutationIsLoading,
+  } = useUpdatePost({
     onSuccessCallback: () => setPostSuccessful(true),
   });
 

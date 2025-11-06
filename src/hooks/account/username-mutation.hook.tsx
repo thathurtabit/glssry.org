@@ -9,7 +9,7 @@ export const useUsernameMutation = () => {
   const trpcContext = api.useUtils();
   const usernameCreatedId = useId();
 
-  const { mutate, mutateAsync, error, isLoading } =
+  const { mutate, mutateAsync, error, isPending } =
     api.account.upsertUsername.useMutation({
       async onMutate() {
         await trpcContext.account.readUser.cancel();
@@ -38,7 +38,7 @@ export const useUsernameMutation = () => {
   return {
     mutateUsername: mutate,
     mutateUsernameAsync: mutateAsync,
-    mutateUsernameLoading: isLoading,
+    mutateUsernameLoading: isPending,
     mutateUsernameError: error,
   };
 };

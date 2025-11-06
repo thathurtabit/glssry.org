@@ -32,7 +32,7 @@ export const readRandomCategoryPostCount = publicProcedure.input(z.object({ maxC
 
     const initialEmptyCategoriesMap = new Map(tagKeys.map((tagKey) => [tagKey, 0]));
 
-    // eslint-disable-next-line unicorn/no-array-reduce -- Reduce might be the best way to do this
+     
     const postsInCategories = publishedPosts.reduce((accumulator, post) => {
       const lastVersion = post.versions.at(-1);
 
