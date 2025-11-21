@@ -27,7 +27,7 @@ export default defineConfig([
   },
   {
     // Only lint source code under `src/`
-    files: ["src/**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"], plugins: { js, tailwindcss: eslintTailwind as unknown as any }, extends: ["js/recommended"],
+    files: ["src/**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"], plugins: { js, tailwindcss: eslintTailwind as unknown as Plugin }, extends: ["js/recommended"],
     // Do not lint generated/build files. Use the flat-config "ignores" property because
     // .eslintignore is deprecated when using flat config.
     ignores: [
@@ -61,7 +61,7 @@ export default defineConfig([
   {
     // unicorn rules limited to source files
     files: ["src/**/*.{mjs,cjs,ts,mts,cts,jsx,tsx}"], plugins: {
-      unicorn: eslintPluginUnicorn as unknown as any,
+      unicorn: eslintPluginUnicorn
     },
     rules: {
       'unicorn/no-null': 'off',
@@ -78,7 +78,7 @@ export default defineConfig([
   { files: ["src/**/*.json5"], plugins: { json }, language: "json/json5", extends: ["json/recommended"] },
   { files: ["src/**/*.md"], plugins: { markdown }, language: "markdown/gfm", extends: ["markdown/recommended"] },
   {
-    files: ["src/**/*.css"], plugins: { css: css as unknown as any }, language: "css/css", extends: ["css/recommended"], settings: {
+    files: ["src/**/*.css"], plugins: { css }, language: "css/css", extends: ["css/recommended"], settings: {
       tailwindcss: {
         // Attributes/props that could contain Tailwind CSS classes...
         // Optional, default values: ["class", "className", "ngClass", "@apply"]
