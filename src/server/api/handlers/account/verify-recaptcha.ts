@@ -33,10 +33,12 @@ export const verifyRecaptcha = publicProcedure
       });
 
       if (!response.ok) {
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
+        return {
+          statusCode: response.status,
+          success: false,
           message: "Something went wrong while verifying the captcha code",
-        });
+          reasons: `verify-endpoint-status-${response.status}`,
+        };
       }
 
       // Using 'as' is dodgy, but it's the only way to get the response body
@@ -44,10 +46,12 @@ export const verifyRecaptcha = publicProcedure
 
       // If the captcha code is invalid, return an error
       if (!data.success) {
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: data["error-codes"]?.join(", "),
-        });
+        return {
+          statusCode: 200,
+          success: false,
+          message: "Captcha verification failed",
+          reasons: data["error-codes"]?.join(", ") ?? "Unknown error",
+        };
       }
 
       if (data.success) {
@@ -59,25 +63,29 @@ export const verifyRecaptcha = publicProcedure
         };
       }
 
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: data["error-codes"]?.join(", "),
-      });
+      return {
+        statusCode: 500,
+        success: false,
+        message: "Captcha verification failed",
+        reasons: data["error-codes"]?.join(", ") ?? "Unknown error",
+      };
     } catch (error) {
-      const message = error as string;
+      const message = error instanceof Error ? error.message : String(error);
       if (error instanceof TRPCError) {
         const httpCode = getHTTPStatusCodeFromError(error);
-        throw new TRPCError({
-          code: error.code,
+        return {
+          statusCode: httpCode,
+          success: false,
           message: errorMessage.verifyCaptcha(httpCode, message),
-          cause: error,
-        });
+          reasons: message,
+        };
       }
 
       return {
         statusCode: 500,
         success: false,
         message,
+        reasons: message,
       };
     }
   });

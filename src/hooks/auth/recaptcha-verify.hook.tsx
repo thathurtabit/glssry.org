@@ -10,7 +10,11 @@ export const useVerifyRecaptchaMutation = () => {
 
   const { mutate, mutateAsync, error, isPending } =
     api.account.verifyRecaptcha.useMutation({
-      onSuccess() {
+      onSuccess(data) {
+        if (!data?.success) {
+          return;
+        }
+
         dispatch(
           setNewNotification({
             uuid: onSuccessId, // Hoping this will only run once to prevent spamming notifications

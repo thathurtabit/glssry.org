@@ -47,6 +47,11 @@ export const SignIn = ({
   const isAuthenticated = useIsAuthenticated();
   const action = "LOGIN";
 
+  const handleRetryRecaptcha = () => {
+    setRecaptchaError("");
+    setToken("");
+  };
+
   useEffect(() => {
     if (token) {
       (async () => {
@@ -160,6 +165,14 @@ export const SignIn = ({
                   Currently loading the <strong>are you human</strong> check...
                 </InfoPanel>
               </div>
+            ) : recaptchaError ? (
+              <Button
+                size="small"
+                variant="secondary"
+                onClick={handleRetryRecaptcha}
+              >
+                Retry bot check
+              </Button>
             ) : (
               <ReCaptcha action={action} onValidate={setToken} />
             )}
