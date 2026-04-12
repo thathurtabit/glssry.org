@@ -22,6 +22,18 @@ export const verifyRecaptcha = publicProcedure
   )
   .mutation(async ({ input }) => {
     const { token } = input;
+    const recaptchaSecretKey =
+      environment.RECAPTCHA_SECRET_KEY ??
+      environment.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY;
+
+    if (!recaptchaSecretKey) {
+      return {
+        statusCode: 200,
+        success: false,
+        message: "Captcha verification failed",
+        reasons: "missing-recaptcha-secret-key",
+      };
+    }
 
     try {
       const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
@@ -29,7 +41,7 @@ export const verifyRecaptcha = publicProcedure
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `secret=${environment.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY}&response=${token}`,
+        body: `secret=${recaptchaSecretKey}&response=${token}`,
       });
 
       if (!response.ok) {

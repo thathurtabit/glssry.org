@@ -37,6 +37,7 @@ export const environment = createEnv({
     FACEBOOK_CLIENT_SECRET: z.string(),
     REDDIT_CLIENT_ID: z.string(),
     REDDIT_CLIENT_SECRET: z.string(),
+    RECAPTCHA_SECRET_KEY: z.string().min(1).optional(),
     MAILERSEND_API_KEY: z.string().min(1),
     EMAIL_SERVER_HOST: z.string().min(1),
     EMAIL_SERVER_PORT: z.string().min(1),
@@ -54,7 +55,7 @@ export const environment = createEnv({
    */
   client: {
     NEXT_PUBLIC_RECAPTCHA_SITEKEY: z.string().min(1),
-    NEXT_PUBLIC_RECAPTCHA_SECRET_KEY: z.string().min(1),
+    NEXT_PUBLIC_RECAPTCHA_SECRET_KEY: z.string().min(1).optional(),
   },
 
   /**
@@ -71,6 +72,7 @@ export const environment = createEnv({
       process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+    RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY,
     GOOGLE_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
