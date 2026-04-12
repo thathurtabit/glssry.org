@@ -1,4 +1,4 @@
-import { TagName } from "@prisma/client";
+import { TagName } from "~/generated/prisma/enums";
 import { z } from "zod";
 
 import { emptySelectOption, summaryMaxCharacterCount } from "~/settings/constants";

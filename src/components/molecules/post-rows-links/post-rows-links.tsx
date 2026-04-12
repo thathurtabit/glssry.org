@@ -10,7 +10,10 @@ import {
 } from "~/styles/shared";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 
-import type { IPostRowsLinks } from "./post-rows-links.types";
+import type {
+  IPostRowsLinks,
+  TPostRowsDataItem,
+} from "./post-rows-links.types";
 import { NoPostFound } from "../no-post-found/no-post-found";
 import { PostRowsLoading } from "../post-rows-loading/post-rows-loading";
 
@@ -26,7 +29,7 @@ export const PostRowsLinks: FC<IPostRowsLinks> = ({
 
   return postsData?.length ? (
     <ul className={postRowWrapperStyles}>
-      {postsData.map((trpcPostData) => {
+      {postsData.map((trpcPostData: TPostRowsDataItem) => {
         const { id, title, versions } = trpcPostData;
         const latestVersion = versions.at(-1);
         const { fileUnder, acronym, abbreviation, slug } = latestVersion ?? {};

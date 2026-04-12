@@ -29,6 +29,7 @@ import {
 } from "~/schemas/post/post.schema";
 import type { TPost, TPostKeys } from "~/schemas/post/post.schema";
 import { EURLS, appTitle, appURL } from "~/settings/constants";
+import type { TTRPCSearchPublishedPost } from "~/types/prisma.types";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 import { getTRPCPostFormat } from "~/utils/get-trpc-post-format";
 
@@ -65,8 +66,8 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
 
   const postAlreadyExists = Boolean(
     state.title &&
-      searchedPublishedPostsData?.length &&
-      userHasSaidPostIsNotDuplicate === false
+    searchedPublishedPostsData?.length &&
+    userHasSaidPostIsNotDuplicate === false
   );
 
   const isOKToShowFullForm =
@@ -213,24 +214,26 @@ export const PostEntryForm: FC<IPostEntryForm> = ({
               the one you&apos;re trying to create.
             </p>
             <ul className="list-disc m-4">
-              {searchedPublishedPostsData?.map((post) => {
-                const { versions, title, id } = post;
-                const latestVersion = versions?.at(-1);
-                const { fileUnder, slug } = latestVersion ?? {};
+              {searchedPublishedPostsData?.map(
+                (post: TTRPCSearchPublishedPost) => {
+                  const { versions, title, id } = post;
+                  const latestVersion = versions?.at(-1);
+                  const { fileUnder, slug } = latestVersion ?? {};
 
-                return (
-                  <li key={id}>
-                    <LinkText
-                      href={`/${getKebabCaseFromSentenceCase(
-                        fileUnder ?? ""
-                      )}/${slug}`}
-                      target="_blank"
-                    >
-                      {title} <IconExternalLink />
-                    </LinkText>
-                  </li>
-                );
-              })}
+                  return (
+                    <li key={id}>
+                      <LinkText
+                        href={`/${getKebabCaseFromSentenceCase(
+                          fileUnder ?? ""
+                        )}/${slug}`}
+                        target="_blank"
+                      >
+                        {title} <IconExternalLink />
+                      </LinkText>
+                    </li>
+                  );
+                }
+              )}
             </ul>
           </div>
           <div className="flex-1">

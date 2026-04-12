@@ -9,6 +9,7 @@ import { IconError } from "~/components/icons/error/error";
 import { IconSearch } from "~/components/icons/search/search";
 import { useRouterEvent } from "~/hooks/page/use-router-event.hook";
 import { useSearchPublishedPosts } from "~/hooks/post/search-published-posts.hook";
+import type { TTRPCSearchPublishedPost } from "~/types/prisma.types";
 import { getKebabCaseFromSentenceCase } from "~/utils/get-kebab-case-from-sentence-case";
 
 export const OmniSearch: FC = () => {
@@ -74,26 +75,28 @@ export const OmniSearch: FC = () => {
           className="top-full bg-background text-copy absolute m-0 w-full right-0 left-0 items-center justify-center flex drop-shadow-lg"
         >
           <ul className="bg-background-light top-full w-full text-sm">
-            {searchedPublishedPostsData?.map(({ id, title, versions }) => {
-              const { fileUnder, slug } = versions.at(-1) ?? {};
-              const category = getKebabCaseFromSentenceCase(fileUnder ?? "");
-              return (
-                <div key={id} className="flex gap-2 text-copy p-2">
-                  <LinkText
-                    href={`/${category}/${slug}`}
-                    className="p-2 w-full gap-2 flex justify-between"
-                  >
-                    <span>{title}</span>
-                    {fileUnder ? (
-                      <span className="flex gap-1 items-center">
-                        <IconArchive />
-                        {fileUnder}
-                      </span>
-                    ) : null}
-                  </LinkText>
-                </div>
-              );
-            })}
+            {searchedPublishedPostsData?.map(
+              ({ id, title, versions }: TTRPCSearchPublishedPost) => {
+                const { fileUnder, slug } = versions.at(-1) ?? {};
+                const category = getKebabCaseFromSentenceCase(fileUnder ?? "");
+                return (
+                  <div key={id} className="flex gap-2 text-copy p-2">
+                    <LinkText
+                      href={`/${category}/${slug}`}
+                      className="p-2 w-full gap-2 flex justify-between"
+                    >
+                      <span>{title}</span>
+                      {fileUnder ? (
+                        <span className="flex gap-1 items-center">
+                          <IconArchive />
+                          {fileUnder}
+                        </span>
+                      ) : null}
+                    </LinkText>
+                  </div>
+                );
+              }
+            )}
           </ul>
         </dialog>
       ) : null}

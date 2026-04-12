@@ -1,4 +1,4 @@
-import type { Prisma, TagName, User } from "@prisma/client";
+import type { Prisma, TagName, User } from "~/generated/prisma/client";
 
 import type { TPost } from "~/schemas/post/post.schema";
 

@@ -19,8 +19,7 @@ export const PostShort: FC<IPostShort> = ({
   postData,
   className,
 }) => {
-  const { versions } = postData ?? {};
-  const latestVersion = versions?.at(-1);
+  const latestVersion = postData?.versions?.at(-1);
 
   if (!latestVersion && !isLoading) {
     return (
@@ -40,6 +39,10 @@ export const PostShort: FC<IPostShort> = ({
 
   const { abbreviation, acronym, body, fileUnder, initialism, title, slug } =
     latestVersion;
+
+  if (!fileUnder || !slug) {
+    return null;
+  }
 
   const smallTextStyles = "text-[0.5rem] opacity-50 uppercase";
 

@@ -1,4 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaMariaDb } from "@prisma/adapter-mariadb";
+import { PrismaClient } from "../generated/prisma/client";
 
 // Create a singleton Prisma Client to avoid exhausting connections during
 // development with Hot Module Replacement. See https://www.prisma.io/docs/guides
@@ -7,7 +8,12 @@ declare global {
   var __prisma: PrismaClient | undefined;
 }
 
-const prisma = global.__prisma ?? new PrismaClient();
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL is required to initialize Prisma");
+}
+
+const adapter = new PrismaMariaDb(process.env.DATABASE_URL);
+const prisma = global.__prisma ?? new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV !== "production") global.__prisma = prisma;
 

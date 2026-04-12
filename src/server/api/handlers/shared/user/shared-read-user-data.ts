@@ -1,4 +1,4 @@
-import type { PrismaClient, User } from "@prisma/client";
+import type { PrismaClient, User } from "~/generated/prisma/client";
 
 import { errorMessage } from "~/server/api/utils/error-message";
 

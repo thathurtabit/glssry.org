@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import type { TagName } from "@prisma/client";
+import type { TagName } from "~/generated/prisma/enums";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import type {
   GetStaticPaths,

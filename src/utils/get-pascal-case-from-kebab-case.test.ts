@@ -1,4 +1,4 @@
-import { TagName } from "@prisma/client";
+import { TagName } from "~/generated/prisma/enums";
 import { describe, expect, it } from "vitest";
 
 import { getPascalCaseFromKebabCase } from "./get-pascal-case-from-kebab-case";

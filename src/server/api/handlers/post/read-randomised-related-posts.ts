@@ -1,4 +1,4 @@
-import type { TagName } from "@prisma/client";
+import type { TagName } from "~/generated/prisma/enums";
 import { TRPCError } from "@trpc/server";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 

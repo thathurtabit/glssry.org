@@ -1,5 +1,5 @@
 import { PrismaAdapter as prismaAdapter } from "@next-auth/prisma-adapter";
-import type { UserRole } from "@prisma/client";
+import type { UserRole } from "~/generated/prisma/enums";
 import { type GetServerSidePropsContext } from "next";
 import {
   getServerSession,

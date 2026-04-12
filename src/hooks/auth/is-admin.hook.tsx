@@ -1,4 +1,4 @@
-import { UserRole } from "@prisma/client";
+import { UserRole } from "~/generated/prisma/enums";
 import { useSession } from "next-auth/react";
 
 export const useIsAdmin = (): boolean => {

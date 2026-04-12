@@ -2,9 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["fullTextSearch", "fullTextIndex"]
-    binaryTargets = ["native", "rhel-openssl-3.0.x"]
+    provider = "prisma-client"
+    output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -13,7 +12,6 @@ datasource db {
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url          = env("DATABASE_URL")
     // https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode#how-to-set-the-relation-mode-in-your-prisma-schema
     relationMode = "prisma"
 }
@@ -91,9 +89,9 @@ model Post {
     createdAt    DateTime      @default(now())
     title        String        @unique
     slug         String        @unique
-    abbreviation String        @db.VarChar(30) @default("")
-    acronym      String        @db.VarChar(20) @default("")
-    initialism   String        @db.VarChar(10) @default("")
+    abbreviation String        @default("") @db.VarChar(30)
+    acronym      String        @default("") @db.VarChar(20)
+    initialism   String        @default("") @db.VarChar(10)
     author       User          @relation(fields: [authorId], references: [id])
     authorId     String
     versions     PostVersion[]
@@ -103,7 +101,7 @@ model Post {
     @@fulltext([abbreviation])
     @@fulltext([acronym])
     @@fulltext([initialism])
-    @@fulltext([title, abbreviation, acronym, initialism ])
+    @@fulltext([title, abbreviation, acronym, initialism])
 }
 
 model PostVersion {
