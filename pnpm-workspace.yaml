@@ -1,0 +1,9 @@
+allowBuilds:
+  '@prisma/engines': true
+  bufferutil: true
+  core-js: true
+  esbuild: true
+  prisma: true
+  sharp: true
+  unrs-resolver: true
+  utf-8-validate: true
