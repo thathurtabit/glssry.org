@@ -1,4 +1,3 @@
-import prisma from "~/server/prisma";
 import type { GetStaticPropsResult } from "next";
 
 import { SectionSubtitle } from "~/components/atoms/section-subtitle/section-subtitle";
@@ -10,6 +9,7 @@ import { PostRowsLinks } from "~/components/molecules/post-rows-links/post-rows-
 import { PostShort } from "~/components/molecules/post-short/post-short";
 import { SharedHead } from "~/components/molecules/shared-head/shared-head";
 import { tagKeys } from "~/schemas/post/post.schema";
+import { database } from "~/server/database";
 import { appDescription, appDomain, appStrapline } from "~/settings/constants";
 import type { IHomePageProperties } from "~/types/page.types";
 import { getShuffledArray } from "~/utils/get-shuffled-array";
@@ -54,7 +54,7 @@ export default function Home({
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<IHomePageProperties>
 > => {
-  const allPublishedPostsData = await prisma.post.findMany({
+  const allPublishedPostsData = await database.post.findMany({
     where: {
       versions: {
         some: {
@@ -98,7 +98,7 @@ export const getStaticProps = async (): Promise<
   const latestPostsData: IHomePageProperties["latestPostsData"] =
     allPublishedPostsData.slice(0, 10);
 
-  const allPostsWithAuthor = await prisma.post.findMany({
+  const allPostsWithAuthor = await database.post.findMany({
     include: {
       author: {
         select: {
@@ -128,7 +128,7 @@ export const getStaticProps = async (): Promise<
     },
   });
 
-  const categoryPosts = await prisma.post.findMany({
+  const categoryPosts = await database.post.findMany({
     orderBy: {
       createdAt: "desc",
     },

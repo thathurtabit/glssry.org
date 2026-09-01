@@ -1,6 +1,13 @@
 packages:
   - .
 
+overrides:
+  mariadb: ^3.5.3
+  deepmerge-ts: ^8.0.2
+  tmp: ^0.2.7
+  rollup: ^4.63.1
+  yaml: ^2.9.0
+
 onlyBuiltDependencies:
   - "@prisma/client"
   - "@prisma/engines"

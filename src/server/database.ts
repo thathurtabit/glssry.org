@@ -14,7 +14,13 @@ if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL is required to initialize Prisma");
 }
 
-const adapter = new PrismaMariaDb(process.env.DATABASE_URL);
+// Keep the pool well under the hosting account's max_user_connections (10).
+const connectionUrl = new URL(process.env.DATABASE_URL);
+if (!connectionUrl.searchParams.has("connectionLimit")) {
+  connectionUrl.searchParams.set("connectionLimit", "3");
+}
+
+const adapter = new PrismaMariaDb(connectionUrl.toString());
 
 export const database =
   globalForPrisma.prisma ??
